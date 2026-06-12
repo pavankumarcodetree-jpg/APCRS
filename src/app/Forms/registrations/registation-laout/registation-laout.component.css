@@ -1,0 +1,41 @@
+::ng-deep .footer {
+    position: relative !important;
+    height: auto !important;
+    display: block !important;
+}
+
+::ng-deep .main-menu-right-button .btn-primary {
+    background: #ef8b00 !important;
+    border-color: #ef8b00;
+}
+
+/* Menu Bar Css */
+.topbar-section {
+    background: rgb(0, 51, 102) !important;
+    background: linear-gradient(90deg, rgba(0, 51, 102, 1) 0%, rgba(255, 111, 97, 1) 100%) !important;
+}
+
+.top-login-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+
+.top-login-btn:hover {
+    background-color: #ffcc00;
+    color: #000;
+    border: 0px solid #ccc;
+    border-radius: 20px;
+}
+
+.cm-imgblk p {
+    line-height: 20px;
+}
+
+.topnav {
+    padding: 7px;
+}

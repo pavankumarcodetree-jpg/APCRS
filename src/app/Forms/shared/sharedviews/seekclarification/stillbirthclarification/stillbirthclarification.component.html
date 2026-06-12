@@ -1,0 +1,926 @@
+<div class="col-xl-12 col-lg-12" >
+    <div class="row align-items-center justify-content-center">
+        <div class="col-xl-12 col-12">
+
+
+            <ul class="nav nav-pills wizard-pills mb-2" id="pills-tab" role="tablist">
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-confirmlegal-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-confirmlegal" type="button" role="tab"
+                        aria-controls="pills-confirmlegal" [disabled]="!isConfirmLegalEnabled" aria-selected="false"><img
+                            src="assets/images/compliant.png" style="width:40px; height:40px;">Legal Information
+                        Confirmation</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-confirmstatistic-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-confirmstatistic"  [disabled]="!isConfirmStatisticalEnabled" type="button" role="tab"
+                        aria-controls="pills-confirmstatistic" aria-selected="false"><img
+                            src="assets/images/confirmation.png" style="width:40px; height:40px;">Statistic
+                        Information Confirmation</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+                  <!-- confirmlegal -->
+                  <div class="tab-pane fade show active" id="pills-confirmlegal" role="tabpanel"
+                  aria-labelledby="pills-confirmlegal-tab" tabindex="0">
+
+                 <div class="container-fluid">
+                     <h5>Child's Information / శిశువు సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Date of Birth / పుట్టిన తేదీ
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong
+                                     class="">{{draft_details_array?.childinformation?.dateofbirth}}</strong>
+                             </div>
+                         </div>
+
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                Sex / లింగ భేదము
+                             </div>
+                             <div class="col-xl-4 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.childinformation?.selgender_val
+                                     }}</strong>
+
+                             </div>
+                             <div class="col-xl-4">
+                                <input pInputText *ngIf="draft_details_array.childinformation.selgendercheck=='1'" [(ngModel)]="draft_details_array.childinformation.selgenderremarks"  type="text" placeholder="Remarks" />
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1" *ngIf="gendershow">
+                            <div class="col-xl-4 col-12"></div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <ng-select name="selgender" id="selgender" required="" tabindex="1"
+                                        [(ngModel)]="new_draft_details_array.childinformation.new_selgender"
+                                        #sel_gender="ngModel" placeholder="Sex/ లింగ బేధము"
+                                        [ngClass]="{'is-invalid':sel_gender.invalid && (sel_gender.dirty || sel_gender.touched),
+                                                                               'is-valid':sel_gender.value!='' && (sel_gender.touched || sel_gender.dirty)}">
+                                        <ng-option value="" disabled="">--Select--</ng-option>
+                                        <ng-option value="Male">Male / పురుషుడు</ng-option>
+                                        <ng-option value="Female">Female / మహిళ</ng-option>
+                                        <ng-option value="Transgender Person">Transgender Person/ లింగమార్పిడి వ్యక్తి
+
+                                            </ng-option>
+                                    </ng-select>
+                                    <div *ngIf="sel_gender.invalid && (sel_gender.dirty || sel_gender.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="sel_gender.errors">
+                                            <div *ngIf="sel_gender.errors['required']">
+                                                Gender/ లింగ
+                                                బేధము is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+
+
+                     <h5>Father’s Information / తండ్రి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-4 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.fathername_value
+                                     }}</strong>
+                             </div>
+                             <div class="col-xl-4">
+                                <input pInputText *ngIf="draft_details_array.fatherInformation.father_full_namercheck=='1'" [(ngModel)]="draft_details_array.fatherInformation.father_full_namerremarks"  type="text" placeholder="Remarks" />
+                             </div>
+                         </div>
+                         <div class="row" *ngIf="fatherfullname">
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">First
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_full_namer"
+                                                id="father__full_namer" name="father__full_namer"
+                                                placeholder="First Name" required=""
+                                                #Father__full_namer="ngModel" autocomplete="off"
+                                                appUppercase appAlphabetsonly minlength="3"
+                                                maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.fatherInformation.new_father_full_namer,'father_full_name')"
+                                                [ngClass]="{'is-invalid':Father__full_namer.invalid && (Father__full_namer.dirty ),
+                                               'is-valid':Father__full_namer.value!='' && (Father__full_namer.dirty)}">
+                                            <div *ngIf="Father__full_namer.invalid && (Father__full_namer.dirty)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="Father__full_namer.errors">
+                                                    <div
+                                                        *ngIf="Father__full_namer.errors['required']">
+                                                        First Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">
+                                                మొదటి పేరు</label>
+                                            <input type="text" class="form-control border-warning"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_full_namer_t"
+                                                oncopy="return false" onpaste="return false"
+                                                oncut="return false" autocomplete="off"
+                                                placeholder="మొదటి పేరు"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.fatherInformation.new_father_full_namer_t,'father_full_name_tel')"
+                                                id="father_full_namer_t" autocomplete="off"
+                                                appUppercase appAlphabetsonly minlength="3"
+                                                maxlength="100" name="father_full_namer_t"
+                                                required="" #father_full_namer_t="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">Middle
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_middlename"
+                                                id="fathermiddlename" name="fathermiddlename"
+                                                placeholder="Middle Name" required=""
+                                                autocomplete="off" appUppercase appAlphabetsonly
+                                                minlength="3" maxlength="100"
+                                                #ngfathermiddlename="ngModel"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.fatherInformation.new_father_middlename,'father_middlename')"
+                                                [ngClass]="{'is-invalid':ngfathermiddlename.invalid && (ngfathermiddlename.dirty),
+                                                    'is-valid':ngfathermiddlename.value!='' && (ngfathermiddlename.dirty)}">
+                                            <div *ngIf="ngfathermiddlename.invalid && (ngfathermiddlename.dirty)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="ngfathermiddlename.errors">
+                                                    <div
+                                                        *ngIf="ngfathermiddlename.errors['required']">
+                                                        Middle Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">మధ్య
+                                                పేరు</label>
+                                            <input type="text" autocomplete="off"                                                                    appAlphabetsonly minlength="3" oncopy="return false"
+                                                onpaste="return false" oncut="return false"
+                                                autocomplete="off" placeholder="మధ్య పేరు"
+                                                maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.fatherInformation.new_father_middlename_t,'father_middlename_t')"
+                                                class="form-control border-warning"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_middlename_t"
+                                                id="fathermiddlenametel" name="fathermiddlenametel"
+                                                required="" #ngfathermiddlenametel="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">Last
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_surname"
+                                                id="father_surname" name="father_surname"
+                                                placeholder="Last Name" required=""
+                                                #Father_surname="ngModel" autocomplete="off"
+                                                appUppercase appAlphabetsonly minlength="3"
+                                                maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.fatherInformation.new_father_surname,'father_surname')"
+                                                [ngClass]="{'is-invalid':Father_surname.invalid && (Father_surname.dirty),
+                                               'is-valid':Father_surname.value!='' && (Father_surname.dirty)}">
+                                            <div *ngIf="Father_surname.invalid && (Father_surname.dirty)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="Father_surname.errors">
+                                                    <div *ngIf="Father_surname.errors['required']">
+                                                        Last Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">చివరి
+                                                పేరు</label>
+                                            <input type="text" autocomplete="off"                                                                    appAlphabetsonly minlength="3" maxlength="100"
+                                                class="form-control border-warning"
+                                                oncopy="return false" onpaste="return false"
+                                                oncut="return false" autocomplete="off"
+                                                placeholder="చివరి పేరు"
+                                                [(ngModel)]="new_draft_details_array.fatherInformation.new_father_surname_t"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.new_fatherInformation.new_father_surname_t,'father_surname_tel')"
+                                                id="father_surname_t" name="father_surname_t"
+                                                required="" #father_surname_t="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-4 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_aadhhar_number
+                                     }}</strong>
+                             </div>
+                             <div class="col-xl-4">
+                                <input pInputText *ngIf="draft_details_array.fatherInformation.father_aadhhar_numbercheck=='1'" [(ngModel)]="draft_details_array.childinformation.father_aadhhar_numberremarks"  type="text" placeholder="Remarks" />
+                             </div>
+                         </div>
+                         <div class="row" *ngIf="fatheraadharnumber">
+                            <div class="col-xl-3 col-12">
+                                <div class="form-group position-relative">
+                                    <label for="form-label" class="form-label">Aadhar Number/
+                                        ఆధార్ సంఖ్య</label>
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="new_draft_details_array.fatherInformation.new_father_aadhhar_number_mask"
+                                        id="father_aadhhar_number_mask"
+                                        name="father_aadhhar_number_mask"
+                                        placeholder="Aadhar Number/ ఆధార్ సంఖ్య" required=""
+                                        (change)="validateaadhaar($event.target.value,'fatheraadhaar')"
+                                        maxlength="12" minlength="12" appNumericsOnlyEnter
+                                        autocomplete="off" #Father_aadhhar_number="ngModel"
+                                        [ngClass]="{'is-invalid':Father_aadhhar_number.invalid && (Father_aadhhar_number.dirty || Father_aadhhar_number.touched),
+                                                'is-valid':Father_aadhhar_number.value!='' && (Father_aadhhar_number.touched || Father_aadhhar_number.dirty)}">
+                                    <div *ngIf="Father_aadhhar_number.invalid && (Father_aadhhar_number.dirty || Father_aadhhar_number.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="Father_aadhhar_number.errors">
+                                            <div *ngIf="Father_aadhhar_number.errors['required']">
+                                                Aadhar Number/ ఆధార్ సంఖ్య</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     <h5>Mother’s Information / తల్లి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-4 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mothername_value
+                                     }}</strong>
+                             </div>
+                             <div class="col-xl-4">
+                                <input pInputText *ngIf="draft_details_array.motherInformation.mother_full_namercheck=='1'" [(ngModel)]="draft_details_array.motherInformation.mother_full_namerremarks"  type="text" placeholder="Remarks" />
+                             </div>
+                         </div>
+                         <div class="row" *ngIf="motherfullname">
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">First
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_full_namer"
+                                                id="mother_full_name" name="mother_full_name"
+                                                placeholder="First Name" required=""
+                                                #Mother_full_name="ngModel" appUppercase appAlphanumericOnly
+                                                autocomplete="off" minlength="3" maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_full_namer,'mother_full_name')"
+                                                [ngClass]="{'is-invalid':Mother_full_name.invalid && (Mother_full_name.dirty || Mother_full_name.touched),
+                                                'is-valid':Mother_full_name.value!='' && (Mother_full_name.touched || Mother_full_name.dirty)}">
+                                            <div *ngIf="Mother_full_name.invalid && (Mother_full_name.dirty || Mother_full_name.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="Mother_full_name.errors">
+                                                    <div
+                                                        *ngIf="Mother_full_name.errors['required']">
+                                                        First Name is required</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">మొదటి
+                                                పేరు</label>
+                                            <input type="text" appAlphanumericOnly
+                                                autocomplete="off" minlength="3" maxlength="100"
+                                                oncopy="return false" onpaste="return false"
+                                                oncut="return false" autocomplete="off"
+                                                placeholder="మొదటి పేరు"
+                                                class="form-control border-warning"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_full_namer_t"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_full_namer_t,'mother_full_name_tel')"
+                                                id="mother_full_name_t" name="mother_full_name_t"
+                                                required="" #mother_full_name_t="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">Middle
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_middle_name"
+                                                id="mother_middle_name" name="mother_middle_name"
+                                                placeholder="Middle Name" required=""
+                                                autocomplete="off" appUppercase appAlphabetsonly
+                                                minlength="3" maxlength="100"
+                                                #ngmother_middle_name="ngModel"  (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_middle_name,'mother_middle_name')"
+                                                [ngClass]="{'is-invalid':ngmother_middle_name.invalid && (ngmother_middle_name.dirty || ngmother_middle_name.touched),
+                                                     'is-valid':ngmother_middle_name.value!='' && (ngmother_middle_name.touched || ngmother_middle_name.dirty)}">
+                                            <div *ngIf="ngmother_middle_name.invalid && (ngmother_middle_name.dirty || ngmother_middle_name.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="ngmother_middle_name.errors">
+                                                    <div
+                                                        *ngIf="ngmother_middle_name.errors['required']">
+                                                        Middle Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">మధ్య
+                                                పేరు</label>
+                                            <input type="text" autocomplete="off"                                                                    appAlphabetsonly minlength="3" oncopy="return false"
+                                                onpaste="return false" oncut="return false"
+                                                autocomplete="off" placeholder="మధ్య పేరు"
+                                                maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_middle_name_t,'mother_middle_name_t')"
+                                                class="form-control border-warning"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_middle_name_t"
+                                                id="mother_middle_name_t"
+                                                name="mother_middle_name_t" required=""
+                                                #ngmother_middle_name_t="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-xl-3 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group position-relative">
+                                            <label for="form-label" class="form-label">Last
+                                                Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_surname"
+                                                id="mother_surname_name" name="mother_surname_name"
+                                                placeholder="Last Name" required=""
+                                                #Mother_surname_name="ngModel" appUppercase appAlphanumericOnly
+                                                autocomplete="off" minlength="3" maxlength="100"
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_surname,'mother_surname_name')"
+                                                [ngClass]="{'is-invalid':Mother_surname_name.invalid && (Mother_surname_name.dirty || Mother_surname_name.touched),
+                                                'is-valid':Mother_surname_name.value!='' && (Mother_surname_name.touched || Mother_surname_name.dirty)}">
+                                            <div *ngIf="Mother_surname_name.invalid && (Mother_surname_name.dirty || Mother_surname_name.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="Mother_surname_name.errors">
+                                                    <div
+                                                        *ngIf="Mother_surname_name.errors['required']">
+                                                        Last Name is required</div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">చివరి
+                                                పేరు</label>
+                                            <input type="text" class="form-control border-warning"
+                                                oncopy="return false" onpaste="return false"
+                                                oncut="return false" autocomplete="off"
+                                                placeholder="చివరి పేరు"
+                                                [(ngModel)]="new_draft_details_array.motherInformation.new_mother_surname_t"
+                                                id="mother_surname_name_t" appAlphanumericOnly
+                                                (change)="Teluglanguageconvrt(new_draft_details_array.motherInformation.new_mother_surname_t,'mother_surname_name_tel')"
+                                                autocomplete="off" minlength="3" maxlength="100"
+                                                name="mother_surname_name_t" required=""
+                                                #mother_surname_name_t="ngModel">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-4 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_aadhhar_number
+                                     }}</strong>
+                             </div>
+                             <div class="col-xl-4">
+                                <input pInputText *ngIf="draft_details_array.motherInformation.mother_aadhhar_numbercheck=='1'" [(ngModel)]="draft_details_array.motherInformation.mother_aadhhar_numberremarks"  type="text" placeholder="Remarks" />
+                             </div>
+                         </div>
+                         <div class="row" *ngIf="motheraadhar">
+                            <div class="col-xl-3 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Aadhar Number/
+                                        ఆధార్ సంఖ్య</label>
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="new_draft_details_array.motherInformation.new_mother_aadhaar_number_mask"
+                                        id="mother_aadhaar_number_mask"
+                                        name="mother_aadhaar_number_mask"
+                                        placeholder="Aadhar Number/ ఆధార్ సంఖ్య" required=""
+                                        #Mother_aadhaar_no="ngModel"
+                                        (change)="validateaadhaar($event.target.value,'motheraadhaar')"
+                                        maxlength="12" minlength="12" appNumericsOnlyEnter
+                                        autocomplete="off"
+                                        [ngClass]="{'is-invalid':Mother_aadhaar_no.invalid && (Mother_aadhaar_no.dirty || Mother_aadhaar_no.touched),
+                                        'is-valid':Mother_aadhaar_no.value!='' && (Mother_aadhaar_no.touched || Mother_aadhaar_no.dirty)}">
+                                    <div *ngIf="Mother_aadhaar_no.invalid && (Mother_aadhaar_no.dirty || Mother_aadhaar_no.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="Mother_aadhaar_no.errors">
+                                            <div *ngIf="Mother_aadhaar_no.errors['required']">
+                                                Aadhar Number/ ఆధార్ సంఖ్య ID is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     
+                     <h5>Place of birth / పుట్టిన స్థలము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Place of birth / పుట్టిన స్థలము
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.placeofbirth?.placeofbirth_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Informant’s Information / సమాచారమిచ్చిన వ్యక్తి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.information_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_email_id
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_mobile_no
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_aadhhar_no
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Address / చిరునామా
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_address_val
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="text-end">
+
+                         <button type="submit" class="btn btn-success my-2"
+                             (click)="enableConfirmStatisticalTab()"><i
+                                 class="fa-solid fa-angles-right ps-2"></i>Next</button>
+
+                     </div>
+                 </div>
+             </div>
+             <!-- confirm statical -->
+             <div class="tab-pane fade" id="pills-confirmstatistic" role="tabpanel"
+                aria-labelledby="pills-confirmstatistic-tab"
+                 tabindex="0">
+                 <div class="">
+
+                     <div class="container-fluid">
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Address / చిరునామా
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_residence_value}}</strong>
+                                 </div>
+                             </div>
+                         </div>
+                         <h5>Father’s & Mother’s Information / తండ్రి యొక్క & తల్లి యొక్క సమాచారము</h5>
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s religion / తండ్రి యొక్క మతము
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_religion_val}}</strong>
+                                 </div>
+                             </div>
+
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s level of education / తండ్రి యొక్క విద్యా స్థాయి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_education_val}}</strong>
+
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s occupation / తండ్రి యొక్క వృత్తి
+
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_occupation_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s religion / తల్లి యొక్క మతము
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_religion_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s level of education / తల్లి యొక్క విద్యా స్థాయి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_eduaction_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s occupation / తల్లి యొక్క వృత్తి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_occupation_val}}</strong>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <h5>Other Information / ఇతర సమాచారము</h5>
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Age of the mother (in completed years) at the time of marriage : (If
+                                     married more than once, age at first marriage may
+                                     be entered) / వివాహ సమయంలో తల్లి వయస్సు (పూర్తైన సంవత్సరాలలో) :(ఒకవేళ
+                                     ఒకటి కంటే ఎక్కువసార్లు వివాహం చేసుకున్నట్లయితే,
+                                     మొదటి వివాహా సమయానికి ఉన్న వయస్సును నమోదు చేయవలెను)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.age_of_the_mother}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Age of the mother (in completed years) at the time of this birth / ఈ
+                                     జననం సమయమునకు తల్లి వయస్సు (పూర్తయిన సంవత్సరములలో)
+
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.age_of_the_mother_birth_time}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Number of children born alive to the mother so far including this child
+                                     : (Number of children born alive to include also
+                                     those from earlier marriage(s), if any) / ఇప్పటి వరకు తల్లికి ఈ శిశువుతో
+                                     సహా సజీవంగా పుట్టిన పిల్లల సంఖ్య : (మునుపటి
+                                     వివాహము(ల) ద్వారా సజీవంగా పుట్టిన పిల్లలు ఉన్నట్లైతే, ఆ సంఖ్యను కూడా
+                                     చేర్చ వలెను.)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.number_of_children}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                    Type of attention at delivery / ప్రసవ సమయములో తీసుకొన్న జాగ్రత్త విధానం
+
+                                 </div>
+                                 <div class="col-xl-4 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.type_of_attention_val}}</strong>
+                                 </div>
+                                 <div class="col-xl-4">
+                                    <input pInputText  *ngIf="draft_details_array.legal.type_of_attention_valcheck=='1'" [(ngModel)]="draft_details_array.legal.type_of_attention_valremarks"  type="text" placeholder="Remarks" />
+                                 </div>
+                             </div>
+                             <div class="col-xl-12 col-12" *ngIf="typeofattention">
+                                <div class="form-group mb-2 position-relative">
+                                    <div class="row">
+                                        <div class="col-xl-8 col-10">
+                                            <label for="form-label" class="form-label">Type of
+                                                attention
+                                                at delivery/ ప్రసవ సమయంలో అందించిన సేవా
+                                                రకం<span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-xl-4 col-2">
+                                            <ng-select placeholder="Type of attention
+                                                                    at delivery"
+                                                [(ngModel)]="new_draft_details_array.legal.new_type_of_attention"
+                                                id="type_of_attention" name="type_of_attention"
+                                                title="type_of_attention" required=""
+                                                #Type_of_attention="ngModel"
+                                                [ngClass]="{'is-invalid': Type_of_attention.invalid && (Type_of_attention.dirty || Type_of_attention.touched),
+                                                                    'is-valid': Type_of_attention.value!='' && (Type_of_attention.dirty || Type_of_attention.touched)}">
+                                                <ng-option value="" disabled="">--Select Type of
+                                                    attention--</ng-option>
+                                                <ng-option
+                                                    *ngFor="let loc of Typeofattention_master_array"
+                                                    [value]="loc.ATTENTION_CODE">{{loc.ATTENTION_DD}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="Type_of_attention.invalid && (Type_of_attention.dirty || Type_of_attention.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="Type_of_attention.errors">
+                                                    <div
+                                                        *ngIf="Type_of_attention.errors['required']">
+                                                        Type of attention
+                                                        at delivery is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <!-- <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Method of delivery / ప్రసవ విధానం
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.method_of_delivery_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Birth weight (in kgs.) / జనన సమయములో శిశువు బరువు (కిలోలలో)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong class="">{{draft_details_array?.legal?.birth_weight}}</strong>
+                                 </div>
+                             </div> -->
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Duration of Pregnancy (in weeks) / గర్భధారణ కాలము (వారాలలో)
+                                 </div>
+                                 <div class="col-xl-4 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.duration_of_pregency}}</strong>
+                                 </div>
+                                 <div class="col-xl-4">
+                                    <input pInputText  *ngIf="draft_details_array.legal.DurationofPregnancycheck=='1'" [(ngModel)]="draft_details_array.legal.DurationofPregnancyremarks"  type="text" placeholder="Remarks" />
+                                 </div>
+                                 <div class="col-xl-4 col-2" *ngIf="durationofpregency">
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="new_draft_details_array.legal.new_duration_of_pregency"
+                                        id="duration_of_pregency" appNumericsOnlyEnter
+                                        autocomplete="off" minlength="1" maxlength="2"
+                                        name="duration_of_pregency"
+                                        (change)="DurationofPregnancycheck()"
+                                        placeholder="Duration of pregnancy(in weeks)"
+                                        required="" #Duration_of_pregency="ngModel"
+                                        [ngClass]="{'is-invalid':Duration_of_pregency.invalid && (Duration_of_pregency.dirty || Duration_of_pregency.touched),'is-valid':Duration_of_pregency.value!='' && (Duration_of_pregency.touched || Duration_of_pregency.dirty)}">
+                                    <div *ngIf="Duration_of_pregency.invalid && (Duration_of_pregency.dirty || Duration_of_pregency.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="Duration_of_pregency.errors">
+                                            <div
+                                                *ngIf="Duration_of_pregency.errors['required']">
+                                                Duration of
+                                                pregnancy(in weeks)
+
+                                                is required</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                    Cause of foetal death/ భ్రూణ మరణమునకు గల కారణము
+                                </div>
+                                <div class="col-xl-4 col-6">
+                                    <strong
+                                        class="">{{draft_details_array?.legal?.causeoffoetaldeath}}</strong>
+                                </div>
+                                <div class="col-xl-4">
+                                    <input pInputText  *ngIf="draft_details_array.legal.causeoffoetaldeathcheck=='1'" [(ngModel)]="draft_details_array.legal.causeoffoetaldeathremarks"  type="text" placeholder="Remarks" />
+                                 </div>
+                            </div>
+                            <div class="row" *ngIf="causeoffoetaldeath">
+                                <div class="col-xl-4 col-2">
+                                    <ng-select placeholder="Cause of foetal death / భ్రూణ మరణమునకు గల కారణము"
+                                        [(ngModel)]="new_draft_details_array.legal.new_causeoffoetaldeath"
+                                        id="causeoffoetaldeath" name="causeoffoetaldeath"
+                                        title="method_of_delivery" required=""
+                                        #ngcauseoffoetaldeath="ngModel"
+                                        [ngClass]="{'is-invalid': ngcauseoffoetaldeath.invalid && (ngcauseoffoetaldeath.dirty || ngcauseoffoetaldeath.touched),
+                                                                'is-valid': ngcauseoffoetaldeath.value!='' && (ngcauseoffoetaldeath.dirty || ngcauseoffoetaldeath.touched)}">
+                                        <ng-option value="" disabled>--Select Cause of foetal death--</ng-option>
+                                        <ng-option
+                                            *ngFor="let loc of nameofdisease_master_array"
+                                            [value]="loc.CAUSE_CODE">{{loc.CAUSE_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="ngcauseoffoetaldeath.invalid && (ngcauseoffoetaldeath.dirty || ngcauseoffoetaldeath.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="ngcauseoffoetaldeath.errors">
+                                            <div
+                                                *ngIf="ngcauseoffoetaldeath.errors['required']">
+                                                Cause of foetal death / భ్రూణ మరణమునకు గల కారణము is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                         <div class="text-end">
+
+                    <!-- <div class="row justify-content-start">
+                    <div class="col-xl-3 col-12">
+                        <div class="card border-dashed rounded-0 pdf-thumb" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">
+                            <div class="card-body text-center p-0">
+                                <i class="fa fa-eye"></i>
+                                <iframe id="ifrm" width="100%"  height="300px" frameborder="0"></iframe>
+                                <p>Text here</p>
+                            </div>
+                        </div>
+                    </div>
+                    </div> -->
+                    <div class="col-xl-12 col-12">
+
+                        <div class="form-group position-relative">
+                            <label for="form-label" class="form-label">Remarks / వ్యాఖ్యలు</label>
+                            <textarea class="form-control" [(ngModel)]="userremarks" id="remarks"
+                                name="remarks" rows="3"
+                                placeholder="Enter remarks here / వ్యాఖ్యలను ఇక్కడ నమోదు చేయండి" required=""
+                                appAlphanumericOnly autocomplete="off" minlength="3" maxlength="300"
+                                #ngremarks="ngModel"
+                                [ngClass]="{'is-invalid':ngremarks.invalid && (ngremarks.dirty || ngremarks.touched),
+                                'is-valid':ngremarks.value!='' && (ngremarks.touched || ngremarks.dirty)}"></textarea>
+                            <div *ngIf="ngremarks.invalid && (ngremarks.dirty || ngremarks.touched)"
+                                class="error-message text-danger">
+                                <div *ngIf="ngremarks.errors">
+                                    <div *ngIf="ngremarks.errors['required']">
+                                        Enter remarks is required</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="text-end">
+
+
+                        <button type="submit" class="btn btn-primary my-2 me-2"
+                            (click)="openTab('pills-confirmlegal-tab')"><i
+                                class="fa-solid fa-angles-left pe-2"></i>Back</button>
+                                
+                                <button type="submit"  class="btn btn-primary my-2 me-2"
+                                (click)="Application_final_submit()">Approve
+                                <i class="fa-solid fa-save ps-2"></i></button>
+                                
+                    </div>
+                   
+                         </div>
+
+                     </div>
+                 </div>
+             </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+    <!--begin::Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content" style="width:980px;">
+                <div class="modal-header">
+                    <!--<h5 class="modal-title" id="">Title</h5>-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right">
+                    <div class="modal-body" style="width:980px;">
+                        <!--<ngx-doc-viewer [url]="pdfSrc" viewer="google"  style="width:100%;height:73vh;"
+                        >
+                        <div>Loading</div>
+                        </ngx-doc-viewer>-->
+                        <iframe src="assets/images/BA202328150080000734.pdf#toolbar=0&view=FitH&navpanes=0&scrollbar=0" width="100%" height="600px" frameborder="0"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!--end::Modal-->

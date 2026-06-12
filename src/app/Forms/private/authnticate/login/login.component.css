@@ -1,0 +1,17 @@
+::ng-deep header{
+    position: relative !important;
+    top: 0 !important;
+    width: 100%;
+    z-index: 99;
+}
+/* ::ng-deep header.main-header{
+    position: absolute !important;
+    top: 0 !important;
+} */
+::ng-deep .content-page.creative-style {
+    min-height: calc(100vh - 94px) !important;
+}
+
+.captcha-text{
+    font-size: clamp(10px, 2vw, 13px) !important;
+}

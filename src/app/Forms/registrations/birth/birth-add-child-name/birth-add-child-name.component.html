@@ -1,0 +1,215 @@
+
+<div class="background-img align-items-center"
+    style="background-image: url(/assets/images/bg-img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <section class="register-section">
+        <div class="container-fluid">
+            <div class="row mb-2 align-items-center">
+                <div class="col-12 col-xl-3">
+                    <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                        <h5 class="page-title"><i class="fa-solid fa-baby"></i> Add Child Name
+                        </h5>
+
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-12 col-12">
+
+                            <div class="row">
+                                <div class="col-xl-12 col-12">
+                                    <div class="card reg-card mb-1">
+                                        
+                                        <div class="card-body p-2">
+                                            <div class="alert alert-info text-center">
+                                                Please select at least "Application Reference Number" / "Registration Number" of child to search a record.
+                                            </div>
+                                            <!-- language -->
+                                            <div class="row">
+                                                <div class="col-xl-4 col-12 mt-1">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Application Ref Number</label>
+                                                        <input type="text" class="form-control" [(ngModel)]="add_name.applicationnumber"
+                                                            id="applicationnumber" maxlength="10" name="applicationnumber"
+                                                            placeholder="Application Ref Number" required="" #applicationnumber="ngModel"
+                                                            [ngClass]="{'is-invalid':applicationnumber.invalid && (applicationnumber.dirty || applicationnumber.touched),
+                                                        'is-valid':applicationnumber.value!='' && (applicationnumber.touched || applicationnumber.dirty)}">
+                                                        <div *ngIf="applicationnumber.invalid && (applicationnumber.dirty || applicationnumber.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="applicationnumber.errors">
+                                                                <div *ngIf="applicationnumber.errors['required']">
+                                                                    Application Ref Number is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12 mt-1">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Registration Number</label>
+                                                        <input type="text" class="form-control" [(ngModel)]="add_name.registrationnumber"
+                                                            id="registrationnumber" maxlength="10" name="registrationnumber"
+                                                            placeholder="Registration Number" required="" #registrationnumber="ngModel"
+                                                            [ngClass]="{'is-invalid':registrationnumber.invalid && (registrationnumber.dirty || registrationnumber.touched),
+                                                        'is-valid':registrationnumber.value!='' && (registrationnumber.touched || registrationnumber.dirty)}">
+                                                        <div *ngIf="registrationnumber.invalid && (registrationnumber.dirty || registrationnumber.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="registrationnumber.errors">
+                                                                <div *ngIf="registrationnumber.errors['required']">
+                                                                    Registration Number is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12" ></div>
+                                                <div class="col-xl-3 col-12" >
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="fromdate" class="form-label">From Year Of Registration</label>
+                                                        <ng-select name="fromyear" id="fromyear" required="" [(ngModel)]="add_name.fromyear"
+                                                            #fromyear="ngModel" placeholder="From" [ngClass]="{'is-invalid':fromyear.invalid && (fromyear.dirty || fromyear.touched),
+                                                                'is-valid':fromyear.value!='' && (fromyear.touched || fromyear.dirty)}">
+                                                            <ng-option value="">--Select From--</ng-option>
+                                                            <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                                                        </ng-select>
+                                                        <div *ngIf="fromyear.invalid && (fromyear.dirty || fromyear.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="fromyear.errors">
+                                                                <div *ngIf="fromyear.errors['required']">
+                                                                    From Year is
+                                                                    required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-12 mt-1" >
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="fromdate" class="form-label">To Year Of Registration</label>
+                                                        <ng-select name="toyear" id="toyear" required="" [(ngModel)]="add_name.toyear"
+                                                            #toyear="ngModel" placeholder="From" [ngClass]="{'is-invalid':toyear.invalid && (toyear.dirty || toyear.touched),
+                                                            'is-valid':toyear.value!='' && (toyear.touched || toyear.dirty)}">
+                                                            <ng-option value="">--Select To--</ng-option>
+                                                            <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                                                        </ng-select>
+                                                        <div *ngIf="toyear.invalid && (toyear.dirty || toyear.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="toyear.errors">
+                                                                <div *ngIf="toyear.errors['required']">
+                                                                    To Year is
+                                                                    required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-12">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Gender/ లింగ
+                                                            బేధము<span class="text-danger">*</span></label>
+                                                        <ng-select name="selgender" id="selgender" required="" tabindex="1"
+                                                            [(ngModel)]="add_name.Gender"
+                                                            #sel_gender="ngModel" placeholder="Sex/ లింగ బేధము"
+                                                            [ngClass]="{'is-invalid':sel_gender.invalid && (sel_gender.dirty || sel_gender.touched),
+                                                                                                   'is-valid':sel_gender.value!='' && (sel_gender.touched || sel_gender.dirty)}">
+                                                            <ng-option value="" disabled="">--Select--</ng-option>
+                                                            <ng-option value="Male">Male / పురుషుడు</ng-option>
+                                                            <ng-option value="Female">Female / మహిళ</ng-option>
+                                                            <ng-option value="Transgender Person">Transgender Person/ లింగమార్పిడి వ్యక్తి
+
+                                                                </ng-option>
+                                                        </ng-select>
+                                                        <div *ngIf="sel_gender.invalid && (sel_gender.dirty || sel_gender.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="sel_gender.errors">
+                                                                <div *ngIf="sel_gender.errors['required']">
+                                                                    Gender/ లింగ
+                                                                    బేధము is
+                                                                    required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-3 col-12">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Date of Birth
+                                                            /పుట్టిన తేదీ<span class="text-danger">*</span></label>
+                                                        <div class="input-group">
+                                                             <input type="text" placeholder="DD-MM-YYYY" #dateinput tabindex="0"
+                                                                class="form-control" oncut="return false;"
+                                                                oncopy="return false;" onpaste="return false;"
+                                                                maxlength="15" autocomplete="off" id="dateofbirth"
+                                                                name="dateofbirth" bsDatepicker
+             [bsConfig]="bsConfig"
+                                                                #dp1="bsDatepicker" appDateFormatDirective
+                                                                [(ngModel)]="add_name.Date_of_birth"
+                                                                aria-describedby="basic-addon2" required=""
+                                                                #dateofbirth="ngModel" #dateofbirthInput
+                                                                [ngClass]="{'is-invalid':dateofbirth.invalid && (dateofbirth.dirty || dateofbirth.touched),
+                                                                'is-valid': dateofbirth.value!='' && (dateofbirth.dirty || dateofbirth.touched)}">
+                                                            <span class="input-group-text" id="basic-addon23"
+                                                                (click)="dp1.toggle()" type="button">
+                                                                <i class="fa fa-calendar"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div *ngIf="dateofbirth.invalid && (dateofbirth.dirty || dateofbirth.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="dateofbirth.errors">
+                                                                <div *ngIf="dateofbirth.errors['required']">
+                                                                    Date of Birth /పుట్టిన తేదీ is required
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12 mt-1" >
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="fromdate" class="form-label">Name Of Mother</label>
+                                                        <input type="text" class="form-control" [(ngModel)]="add_name.mothername" id="mothername"
+                                                            maxlength="10" name="mothername" placeholder="Name Of Mother" required=""
+                                                            #mothername="ngModel" [ngClass]="{'is-invalid':mothername.invalid && (mothername.dirty || mothername.touched),
+                                                    'is-valid':mothername.value!='' && (mothername.touched || mothername.dirty)}">
+                                                        <div *ngIf="mothername.invalid && (mothername.dirty || mothername.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="mothername.errors">
+                                                                <div *ngIf="mothername.errors['required']">
+                                                                    Mother Name is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12 mt-1" >
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="fromdate" class="form-label">Name Of Father</label>                                                        <input type="text" class="form-control" [(ngModel)]="add_name.fathername" id="fathername"
+                                                            maxlength="10" name="fathername" placeholder="Name Of Father" required=""
+                                                            #fathername="ngModel" [ngClass]="{'is-invalid':fathername.invalid && (fathername.dirty || fathername.touched),
+                                                    'is-valid':fathername.value!='' && (fathername.touched || fathername.dirty)}">
+                                                        <div *ngIf="fathername.invalid && (fathername.dirty || fathername.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="fathername.errors">
+                                                                <div *ngIf="fathername.errors['required']">
+                                                                    Father Name is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-secondary my-2 me-2"
+                                            >Reset </button>
+
+                                        <button type="submit" class="btn btn-primary my-2 me-2"
+                                            >Request for Search </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+ 

@@ -1,0 +1,369 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>B-6 Live Births by Method of
+                    Delivery and Type of
+                    Institution for
+                    Institutional Births (Rural &amp;
+                    Urban)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="statetbl" [value]="state_levle_array_b6" *ngIf="report_dispaly_level=='state'" rowGroupMode="rowspan" groupRowsBy="DISTRICT_NAME"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt2 [rows]="state_levle_array_b6.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DELIVERY']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig" #dp="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="to_date" name="to_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig" #dp2="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="to_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('statetbl','b6 state Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('statetbl','b6 state Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+
+
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th rowspan="3">SNO</th>
+                                        <th rowspan="3">District Name</th>
+                                        <th colspan="12" style="text-align: center;">Type of Institution</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th colspan="3">Government Hospital</th>
+                                        <th colspan="3">Private and Non-Government</th>
+                                        <th colspan="3">Not Stated</th>
+                                        <th colspan="3">Total</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th pSortableColumn="GOVT_RURAL"> Rural</th>
+                                        <th pSortableColumn="GOVT_URBAN"> Urban</th>
+                                        <th pSortableColumn="GOVT_TOTAL"> Total</th>
+                                        <th pSortableColumn="NOT_STATED_RURAL"> Rural</th>
+                                        <th pSortableColumn="NOT_STATED_TOTAL"> Total</th>
+                                        <th pSortableColumn="NOT_STATED_URBAN"> Urban</th>
+                                        <th pSortableColumn="PVT_RURAL"> Rural</th>
+                                        <th pSortableColumn="PVT_TOTAL"> Total</th>
+                                        <th pSortableColumn="PVT_URBAN"> Urban</th>
+                                        <th pSortableColumn="RURAL_TOTAL">Rural </th>
+                                        <th pSortableColumn="URBAN_TOTAL">Urban </th>
+                                        <th pSortableColumn="TOTAL">Total</th>
+
+                                    </tr>
+                                </ng-template>
+
+
+                                <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                                let-rowspan="rowspan">
+                                    <tr>
+                                        <td *ngIf="rowgroup" [attr.rowspan]="rowspan">{{ report.SNO }}</td>
+                                        <td class="text-center" *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                                            <a (click)="get_districtlevel(report)"
+                                                class="text-success fw-bold">{{report.DISTRICT_NAME}}</a>
+                                        </td>
+                                        <td>{{ report.GOVT_RURAL }}</td>
+                                        <td>{{ report.GOVT_URBAN }}</td>
+                                        <td>{{ report.GOVT_TOTAL }}</td>
+                                        <td>{{ report.NOT_STATED_RURAL }}</td>
+                                        <td>{{ report.NOT_STATED_URBAN }}</td>
+                                        <td>{{ report.NOT_STATED_TOTAL }}</td>
+                                        <td>{{ report.PVT_RURAL }}</td>
+                                        <td>{{ report.PVT_URBAN }}</td>
+                                        <td>{{ report.PVT_TOTAL }}</td>
+                                        <td>{{ report.RURAL_TOTAL }}</td>
+                                        <td>{{ report.URBAN_TOTAL }}</td>
+                                        <td>{{ report.TOTAL }}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+
+                            <p-table id="distrcittbl" [value]="district_levle_array" *ngIf="report_dispaly_level=='district'"
+                             rowGroupMode="rowspan" groupRowsBy="MMC_NAME"
+                            styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                            #dt2 [rows]="district_levle_array.length"
+                            [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                            sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','MMC_NAME','RURAL_URBAN']"
+                            [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                            scrollHeight="560px">
+
+                            <ng-template pTemplate="caption">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <a href="javascript:void()" (click)="backstate()"><i
+                                                class="fa-solid fa-arrow-left pe-2"></i></a>
+
+                                    </div>
+                                    <div class="col-md-3">
+                                        <h5 class="page-title"><span class="text-success">District Name</span> : {{district_name}}</h5>
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+
+                                    <div class="col-md-6 text-end mt-2">
+                                        <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                            (click)="exportTable_toexcel('distrcittbl','b6 district livel Report')"
+                                            class="p-button-success me-1" pTooltip="XLS"
+                                            tooltipPosition="bottom"></button>
+                                        <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                            (click)="exportTable_ToPDF('distrcittbl','b6 district livel Report')"
+                                            class="p-button-warning me-1" pTooltip="PDF"
+                                            tooltipPosition="bottom"></button>
+                                        <span class="p-input-icon-left">
+                                            <i class="pi pi-search"></i>
+                                            <input pInputText type="text"
+                                                (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                placeholder="Search keyword" />
+                                        </span>
+                                    </div>
+                                     
+                                </div>
+
+
+                            </ng-template>
+
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th rowspan="3">SNO</th>
+                                    <th rowspan="3">Mandal Name</th>
+                                    <th colspan="12" style="text-align: center;">Type of Institution</th>
+                                </tr>
+                                <tr>
+
+                                    <th colspan="3">Government Hospital</th>
+                                    <th colspan="3">Private and Non-Government</th>
+                                    <th colspan="3">Not Stated</th>
+                                    <th colspan="3">Total</th>
+                                </tr>
+                                <tr>
+
+                                    <th pSortableColumn="GOVT_RURAL"> Rural</th>
+                                    <th pSortableColumn="GOVT_URBAN"> Urban</th>
+                                    <th pSortableColumn="GOVT_TOTAL"> Total</th>
+                                    <th pSortableColumn="NOT_STATED_RURAL"> Rural</th>
+                                    <th pSortableColumn="NOT_STATED_TOTAL"> Total</th>
+                                    <th pSortableColumn="NOT_STATED_URBAN"> Urban</th>
+                                    <th pSortableColumn="PVT_RURAL"> Rural</th>
+                                    <th pSortableColumn="PVT_TOTAL"> Total</th>
+                                    <th pSortableColumn="PVT_URBAN"> Urban</th>
+                                    <th pSortableColumn="RURAL_TOTAL">Rural </th>
+                                    <th pSortableColumn="URBAN_TOTAL">Urban </th>
+                                    <th pSortableColumn="TOTAL">Total</th>
+
+                                </tr>
+                            </ng-template>
+
+
+                            <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                            let-rowspan="rowspan">
+                                <tr>
+                                    <td *ngIf="rowgroup" [attr.rowspan]="rowspan">{{ report.SNO }}</td>
+                                    <td class="text-center" *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                                        <a (click)="get_mandallevel(report)"
+                                            class="text-success fw-bold">{{report.MMC_NAME}}</a>
+                                    </td>
+                                    <td>{{ report.GOVT_RURAL }}</td>
+                                    <td>{{ report.GOVT_URBAN }}</td>
+                                    <td>{{ report.GOVT_TOTAL }}</td>
+                                    <td>{{ report.NOT_STATED_RURAL }}</td>
+                                    <td>{{ report.NOT_STATED_URBAN }}</td>
+                                    <td>{{ report.NOT_STATED_TOTAL }}</td>
+                                    <td>{{ report.PVT_RURAL }}</td>
+                                    <td>{{ report.PVT_URBAN }}</td>
+                                    <td>{{ report.PVT_TOTAL }}</td>
+                                    <td>{{ report.RURAL_TOTAL }}</td>
+                                    <td>{{ report.URBAN_TOTAL }}</td>
+                                    <td>{{ report.TOTAL }}</td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+
+                        <p-table id="mandaltbl" [value]="mandal_levle_array" *ngIf="report_dispaly_level=='Mandal'"
+                         rowGroupMode="rowspan" groupRowsBy="DELIVERY"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                        #dt2 [rows]="mandal_levle_array.length"
+                        [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                        sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','MMC_NAME','RURAL_URBAN']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                        scrollHeight="560px">
+
+                        <ng-template pTemplate="caption">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <a href="javascript:void()" (click)="backdistrict()"><i
+                                            class="fa-solid fa-arrow-left pe-2"></i></a>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="page-title"><span class="text-success">District Name</span> : {{district_name}}</h5>
+                                </div>
+                                <div class="col-md-3">
+                                    <h5 class="page-title"><span class="text-success">Mandal Name </span>: {{mandal_name}}</h5>
+                                </div>
+
+                                 
+                                <div class="col-md-5 text-end mt-2">
+                                    <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                        (click)="exportTable_toexcel('mandaltbl','b6 mandal livel Report')"
+                                        class="p-button-success me-1" pTooltip="XLS"
+                                        tooltipPosition="bottom"></button>
+                                    <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                        (click)="exportTable_ToPDF('mandaltbl','b6 mandal livel Report')"
+                                        class="p-button-warning me-1" pTooltip="PDF"
+                                        tooltipPosition="bottom"></button>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+
+                                
+                            </div>
+
+
+                        </ng-template>
+
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th rowspan="3">SNO</th>
+                                <th rowspan="3">Method of Delivery </th>
+                                <th colspan="12" style="text-align: center;">Type of Institution</th>
+                            </tr>
+                            <tr>
+
+                                <th colspan="3">Government Hospital</th>
+                                <th colspan="3">Private and Non-Government</th>
+                                <th colspan="3">Not Stated</th>
+                                <th colspan="3">Total</th>
+                            </tr>
+                            <tr>
+
+                                <th pSortableColumn="GOVT_RURAL"> Rural</th>
+                                <th pSortableColumn="GOVT_URBAN"> Urban</th>
+                                <th pSortableColumn="GOVT_TOTAL"> Total</th>
+                                <th pSortableColumn="NOT_STATED_RURAL"> Rural</th>
+                                <th pSortableColumn="NOT_STATED_TOTAL"> Total</th>
+                                <th pSortableColumn="NOT_STATED_URBAN"> Urban</th>
+                                <th pSortableColumn="PVT_RURAL"> Rural</th>
+                                <th pSortableColumn="PVT_TOTAL"> Total</th>
+                                <th pSortableColumn="PVT_URBAN"> Urban</th>
+                                <th pSortableColumn="RURAL_TOTAL">Rural </th>
+                                <th pSortableColumn="URBAN_TOTAL">Urban </th>
+                                <th pSortableColumn="TOTAL">Total</th>
+
+                            </tr>
+                        </ng-template>
+
+
+                        <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                        let-rowspan="rowspan">
+                            <tr>
+                                <td>{{ report.SNO }}</td>
+                                <td class="text-center" *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                                    {{report.DELIVERY}}
+                                </td>
+                                <td>{{ report.GOVT_RURAL }}</td>
+                                <td>{{ report.GOVT_URBAN }}</td>
+                                <td>{{ report.GOVT_TOTAL }}</td>
+                                <td>{{ report.NOT_STATED_RURAL }}</td>
+                                <td>{{ report.NOT_STATED_URBAN }}</td>
+                                <td>{{ report.NOT_STATED_TOTAL }}</td>
+                                <td>{{ report.PVT_RURAL }}</td>
+                                <td>{{ report.PVT_URBAN }}</td>
+                                <td>{{ report.PVT_TOTAL }}</td>
+                                <td>{{ report.RURAL_TOTAL }}</td>
+                                <td>{{ report.URBAN_TOTAL }}</td>
+                                <td>{{ report.TOTAL }}</td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

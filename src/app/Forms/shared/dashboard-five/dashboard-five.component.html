@@ -1,0 +1,960 @@
+ <header class="sticky-top">
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background: #252629;">
+    <div class="container-fluid px-1">
+        <a class="navbar-brand" href="#"><img src="assets/images/aplogo.png" height="30px"> APCRS Dashboard</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation"></button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" routerLink="/shared/welcome" aria-current="page">Home <span
+                            class="visually-hidden">(current)</span></a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="#">Summary</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Reports</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">Action 1</a>
+                        <a class="dropdown-item" href="#">Action 2</a>
+                    </div>
+                </li> -->
+            </ul>
+            <form class="d-flex my-2 my-lg-0">
+                <ul class="navbar-nav me-auto mt-2 mt-lg-0">
+                    <!-- <li class="nav-item d-flex justify-content-center">
+                        <a class="nav-link me-1" href="#"><i class="mdi mdi-square text-white"></i></a>
+                        <a class="nav-link" href="#"><i class="mdi mdi-square text-black"></i></a>
+                    </li> -->
+                <li class="nav-item">
+                    <p class="mb-0 lh-1 fs-6 fw-bold text-light py-1"><i class="mdi mdi-information"></i> Last Updated 17:30 PM<br>15-01-2025</p>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-account"></i> User</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownId">
+                        <a class="dropdown-item" href="#">Logout</a>
+                    </div>
+                </li></ul>
+            </form>
+        </div></div>
+    </nav>
+
+</header>
+
+<main>
+    <div class="container-fluid my-2 px-2">
+        <div class="row">
+            <div class="col-xl-3 position-relative">
+                <div class="position-fixed leftscroll">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <p class="title">Daily Births and Deaths</p>
+                            <div class="row">
+                                <div class="col-xl-7 col-6 text-center">
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>Today Births</p>
+                                        <h2 style="color:#92da43">{{summary_treads_array[0]?.TODAY_BIRTHS}}</h2>
+                                    </div>
+                                    <div class="">
+                                        <p>Today Deaths</p>
+                                        <h2 style="color:#dc3545">{{summary_treads_array[0]?.TODAY_DEATHS}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-6 border-start border-dark">
+                                    <!-- <div id="chart">
+                                        <apx-chart
+                                          [series]="dailybirth.series"
+                                          [chart]="dailybirth.chart"
+                                          [labels]="dailybirth.labels"
+                                          [responsive]="dailybirth.responsive"
+                                          [legend]="dailybirth.legend"
+                                        ></apx-chart>
+                                      </div> -->
+
+                                    <circle-progress [percent]="summary_treads_array[0]?.TODAY_BIRTHS_PER" [radius]="55" [title]="" [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="6" [outerStrokeColor]="'#78C000'" [innerStrokeColor]="'#C7E596'"
+                                        [animation]="true" [animationDuration]="300"></circle-progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <p class="title">Age Structure</p>
+                            <div class="row">
+                                <div class="col-xl-12 col-6 text-center">
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>0-6 Years</p>
+                                        <h2 style="color:#92da43">{{summary_Age_array[0]?.AGE_0_6_YEARS_POPULATION}}</h2>
+                                    </div>
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>7-14 Years</p>
+                                        <h2 style="color:#dc3545">{{summary_Age_array[0]?.AGE_7_14_YEARS_POPULATION}}</h2>
+                                    </div>
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>15-59 Years</p>
+                                        <h2 style="color:#46c2f2">{{summary_Age_array[0]?.AGE_15_59_YEARS_POPULATION}}</h2>
+                                    </div>
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>60+ Years</p>
+                                        <h2 style="color:#ff8f00">{{summary_Age_array[0]?.AGE_60_PLUS_YEARS_POPULATION}}</h2>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-xl-5 col-6 border-start border-dark d-flex align-items-center">
+                                  
+
+                                    <circle-progress [percent]="summary_treads_array[0]?.THIS_MONTHS_DEATH_PER" [radius]="55" [title]="" [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="6" [outerStrokeColor]="'#dc3545'" [innerStrokeColor]="'#C7E596'"
+                                        [animation]="true" [animationDuration]="300"></circle-progress>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <p class="title">Births This Year vs Last Year</p>
+                            <div class="row">
+                                <div class="col-xl-7 col-6 text-center">
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>This Year <span class="fs-6">(2024 - Present)</span></p>
+                                        <h2 style="color:#92da43">{{summary_treads_array[0]?.THIS_YEAR_BIRTHS}}</h2>
+                                    </div>
+                                    <div class="">
+                                        <p>Last Year <span class="fs-6">(2023 - 2024)</span></p>
+                                        <h2 style="color:#92da43">{{summary_treads_array[0]?.LAST_YEAR_BIRTHS}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-6 border-start border-dark">
+
+                                    <circle-progress [percent]="summary_treads_array[0]?.THIS_YEAR_BIRTH_PER" [radius]="55" [title]="" [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="6" [outerStrokeColor]="'#92da43'" [innerStrokeColor]="'#92da43'"
+                                        [animation]="true" [animationDuration]="300"></circle-progress>
+                                </div>
+                            </div>
+
+                            <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="ageGenderChart"
+                                    style="width: 100%; height: 100px; display: block;"></highcharts-chart>
+
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="ageDistributionChart"
+                                    style="width: 100%; height: 100px; display: block;"></highcharts-chart> -->
+                        </div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <p class="title">Death This Year vs Last Year</p>
+                            <div class="row">
+                                <div class="col-xl-7 col-6 text-center">
+                                    <div class="border-bottom border-dark mb-1 pb-1">
+                                        <p>This Year <span class="fs-6">(2024 - Present)</span></p>
+                                        <h2 style="color:#dc3545">{{summary_treads_array[0]?.THIS_YEAR_DEATHS}}</h2>
+                                    </div>
+                                    <div class="">
+                                        <p>Last Year <span class="fs-6">(2023 - 2024)</span></p>
+                                        <h2 style="color:#dc3545">{{summary_treads_array[0]?.LAST_YEAR_DEATHS}}</h2>
+                                    </div>
+                                </div>
+                                <div class="col-xl-5 col-6 border-start border-dark">
+                                    <circle-progress [percent]="summary_treads_array[0]?.LAST_YEAR_DEATH_PER" [radius]="55" [title]="" [outerStrokeWidth]="10"
+                                        [innerStrokeWidth]="6" [outerStrokeColor]="'#dc3545'" [innerStrokeColor]="'#dc3545'"
+                                        [animation]="true" [animationDuration]="300"></circle-progress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- <div class="card w-100">
+                        <div class="card-body">
+                            <p>Births by Region/City</p>
+                            <h2>1234</h2>
+                        </div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <p>Deaths by Region/City</p>
+                            <h2>1234</h2>
+                        </div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body"></div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body"></div>
+                    </div>
+
+                    <div class="card w-100">
+                        <div class="card-body"></div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="col-xl-9">
+                <div class="row row-cols-2 row-cols-xl-5">
+                    <div class="col">
+                        <div class="card birth">
+                            <div class="card-body">
+                                <i class="fa-solid fa-baby icon"></i>
+                                <p>Total Births</p>
+                                <h2>{{total_birth_death_array[0]?.TOT_BIRTH}}</h2>
+                                <div class="row border-1 border-top border-dark smallcount">
+                                    <div class="col-xl-6 col-6">
+                                        <p>Male</p>
+                                        <h2>{{total_birth_death_array[0]?.TOT_BIRTH_MALES}}</h2>
+                                    </div>
+                                    <div class="col-xl-6 col-6">
+                                        <p>Female</p>
+                                        <h2>{{total_birth_death_array[0]?.TOT_BIRTH_FEMALES}}</h2>
+                                    </div>
+                                </div>
+                                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions4"
+                                    style="width: 100%; height: 60px; display: block;"></highcharts-chart>
+                                <p class="fs-6 position-absolute bottom-0 start-0 end-0"><i class="mdi mdi-trending-up text-success"></i> {{total_birth_death_array[0]?.BIRTH_PER}} % of Month</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card death">
+                            <div class="card-body">
+                                <i class="mdi mdi-grave-stone icon"></i>
+                            <p>Total Deaths</p>
+                            <h2>{{total_birth_death_array[0]?.TOT_DEATH}}</h2>
+                            <div class="row border-1 border-top border-dark smallcount">
+                                <div class="col-xl-6 col-6">
+                                    <p>Male</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_DEATH_MALES}}</h2>
+                                </div>
+                                <div class="col-xl-6 col-6">
+                                    <p>Female</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_DEATH_FEMALES}}</h2>
+                                </div>
+                            </div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions5"
+                                style="width: 100%; height: 60px; display: block;"></highcharts-chart>
+                            <p class="fs-6 position-absolute bottom-0 start-0 end-0"><i class="mdi mdi-trending-up text-success"></i> {{total_birth_death_array[0]?.DEATH_PER}} % of Month</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card rate">
+                            <div class="card-body">
+                                <i class="fa-solid fa-baby icon"></i>
+                            <p>Birth Rate</p>
+                            <h2>{{total_birth_death_array[0]?.TOT_BR_RATE}}</h2>
+                            <div class="row border-1 border-top border-dark smallcount">
+                                <div class="col-xl-6 col-6">
+                                    <p>Male</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_BR_MALES}}</h2>
+                                </div>
+                                <div class="col-xl-6 col-6">
+                                    <p>Female</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_BR_FEMALES}}</h2>
+                                </div>
+                            </div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions6"
+                                style="width: 100%; height: 60px; display: block;"></highcharts-chart>
+                            <p class="fs-6 position-absolute bottom-0 start-0 end-0"><i class="mdi mdi-trending-up text-success"></i> {{total_birth_death_array[0]?.BR_RATE_PER}} % of Month</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card rate">
+                            <div class="card-body">
+                                <i class="mdi mdi-grave-stone icon"></i>
+                            <p>Death Rate</p>
+                            <h2>{{total_birth_death_array[0]?.TOT_DR_RATE}}</h2>
+                            <div class="row border-1 border-top border-dark smallcount">
+                                <div class="col-xl-6 col-6">
+                                    <p>Male</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_DR_MALES}}</h2>
+                                </div>
+                                <div class="col-xl-6 col-6">
+                                    <p>Female</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_DR_FEMALES}}</h2>
+                                </div>
+                            </div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions6"
+                                style="width: 100%; height: 60px; display: block;"></highcharts-chart>
+                            <p class="fs-6 position-absolute bottom-0 start-0 end-0"><i class="mdi mdi-trending-up text-success"></i> {{total_birth_death_array[0]?.DR_RATE_PER}} % of Month</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card pop">
+                            <div class="card-body">
+                            <i class="far fa-family-pants icon"></i>
+                            <p>Net Population Change</p>
+                            <h2>{{total_birth_death_array[0]?.TOT_NET_POPULATION}}</h2>
+                            <div class="row border-1 border-top border-dark smallcount">
+                                <div class="col-xl-6 col-6">
+                                    <p>Male</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_NP_MALES}}</h2>
+                                </div>
+                                <div class="col-xl-6 col-6">
+                                    <p>Female</p>
+                                    <h2>{{total_birth_death_array[0]?.TOT_NP_FEMALES}}</h2>
+                                </div>
+                            </div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions7"
+                                style="width: 100%; height: 60px; display: block;"></highcharts-chart>
+                            <p class="fs-6 position-absolute bottom-0 start-0 end-0"><i class="mdi mdi-trending-up text-success"></i> {{total_birth_death_array[0]?.NP_PER}} % of Month</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xl-12 col-12">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs justify-content-end border-dark mt-1" id="myTab" role="tablist">
+                                <li role="presentation" class="nav-item text-white fw-bold" style="float: left;position: absolute;left: 0;padding: 7px 5px;font-size: 1.2rem;">Birth Summary</li>
+                                <li class="nav-item" role="presentation">
+                                    <button
+                                        class="nav-link active"
+                                        id="home-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#home"
+                                        type="button"
+                                        role="tab" (click)="get_summary_birth_death()"
+                                        aria-controls="home"
+                                        aria-selected="true"
+                                    >
+                                        State
+                                    </button>
+                                </li>
+                                <!-- <li class="nav-item"  role="presentation">
+                                    <button 
+                                        class="nav-link"
+                                        id="profile-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#profile"
+                                        type="button"
+                                        role="tab" (click)="get_all_state_summary_birth_death()"
+                                        aria-controls="profile"
+                                        aria-selected="false"
+                                    >
+                                        All States
+                                    </button>
+                                </li>
+                                <li class="nav-item"  role="presentation">
+                                    <button 
+                                        class="nav-link"
+                                        id="messages-tab"
+                                        data-bs-toggle="tab"
+                                        data-bs-target="#messages"
+                                        type="button"
+                                        role="tab" (click)="get_world_summary_birth_death()"
+                                        aria-controls="messages"
+                                        aria-selected="false"
+                                    >
+                                        World Wide
+                                    </button>
+                                </li> -->
+                            </ul>
+
+
+
+                            <div class="card-body">
+<!-- Tab panes -->
+<div class="tab-content">
+    <div
+        class="tab-pane active"
+        id="home"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+    >
+    <div class="row">
+        <div class="col-xl-6 col-12 position-relative">
+
+                                                
+            <div class="">
+              
+                
+                <svg
+                version="1.1"
+                id="andhrapradeshMap"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 1200 900"
+                xml:space="preserve"
+                style="enable-background: new 0 0 1200 900;"
+              >
+              <style type="text/css">
+                #andhrapradeshMap {
+                    transform: scale(1);
+                    width: 100%;
+                    z-index: 9;
+                    position: relative;
+                }
+
+                text {
+                    font-family: 'Inter', 'sans-serif';
+                    font-size: 14px;
+                    cursor: pointer;
+                }
+
+                .st0 {
+                    enable-background: new;
+                }
+
+                .st1 {
+                    fill: #eabb0c;
+                }
+
+                .st2 {
+                    fill: none;
+                    stroke: #FDFDFF;
+                    stroke-miterlimit: 2;
+                }
+
+                .st3 {
+                    fill: #85B135;
+                }
+
+                .st1:hover,
+                .st2:hover,
+                .st3:hover,
+                .st4:hover,
+                .st5:hover,
+                .st6:hover,
+                .st7:hover,
+                .st8:hover,
+                .st9:hover,
+                .st10:hover,
+                .st11:hover,
+                .st12:hover,
+                .st13:hover,
+                .st14:hover,
+                .st15:hover,
+                .st16:hover,
+                .st17:hover,
+                .st18:hover,
+                .st19:hover,
+                .st20:hover,
+                .st21:hover,
+                .st22:hover,
+                .st23:hover,
+                .st24:hover,
+                .st25:hover,
+                .st26:hover,
+                .st27:hover,
+                .st28:hover,
+                .st29:hover,
+                .st30:hover {
+                    fill: #eabb0c;
+                    filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.8));
+                }
+
+                .st4 {
+                    fill: #abc439;
+                }
+
+                .st5 {
+                    fill: none;
+                    stroke: #FFFFFF;
+                    stroke-miterlimit: 2;
+                }
+
+                .st6 {
+                    fill: #B6CB32;
+                }
+
+                .st7 {
+                    fill: #f72621;
+                }
+
+                .st8 {
+                    fill: #abc439;
+                }
+
+                .st9 {
+                    fill: #abc439;
+                }
+
+                .st10 {
+                    fill: #abc439;
+                }
+
+                .st11 {
+                    fill: #abc439;
+                }
+
+                .st12 {
+                    fill: #f72621;
+                }
+
+                .st13 {
+                    fill: #abc439;
+                }
+
+                .st14 {
+                    fill: #f72621;
+                }
+
+                .st15 {
+                    fill: #7DAE38;
+                }
+
+                .st16 {
+                    fill: #f72621;
+                }
+
+                .st17 {
+                    fill: #abc439;
+                }
+
+                .st18 {
+                    fill: #abc439;
+                }
+
+                .st19 {
+                    fill: #f72621;
+                }
+
+                .st20 {
+                    fill: #abc439;
+                }
+
+                .st21 {
+                    fill: #eabb0c;
+                }
+
+                .st22 {
+                    fill: #abc439;
+                }
+
+                .st23 {
+                    fill: #abc439;
+                }
+
+                .st24 {
+                    fill: #eabb0c;
+                }
+
+                .st25 {
+                    fill: #eabb0c;
+                }
+
+                .st26 {
+                    fill: #abc439;
+                }
+
+                .st27 {
+                    fill: #f72621;
+                }
+
+                .st28 {
+                    fill: #B7CB38;
+                }
+
+                .st29 {
+                    font-family: 'Inter';
+                }
+
+                .st30 {
+                    fill: #FFFFFF;
+                    font-size: 18px;
+                    font-weight: 700;
+                    font-family: "Inter", sans-serif !important;
+                }
+
+                .st30:hover {
+                    text-decoration: none;
+                }
+
+                text {
+                    font-family: "Inter", sans-serif !important;
+                    font-size: 18px;
+                    fill: #fff;
+                }
+
+                title {
+                    fill: #fff !important;
+                    color: #fff;
+                }
+            </style>
+            <g id="Layer_1_xA0_Image_1_">
+                <image width="1200" height="900" id="Layer_1_xA0_Image"
+                    xlink:href="72C3C8B1.png"
+                    transform="matrix(1 0 0 1 3.4693 1143.3256)"
+                    style="overflow: visible;"></image>
+            </g>
+                <path
+                  *ngFor="let district of districts"
+                  [attr.id]="district.id"
+                  [attr.d]="district.path"
+                  [style.fill]="district.area >1000 ? '#eabb0c' : '#abc439' && district.area >3000 ? '#f72621' : '#abc439'"
+                  [attr.title]="district.name"
+                  (mouseover)="onHover(district)"
+                  (mouseleave)="onLeave()"
+                  (click)="onSelect(district)"
+                  style="cursor: pointer; stroke: #000; stroke-width: 0.5px;"
+                >    
+            </path>
+            <g id="guntur_1_" class="st0"><a title="Annamayya"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 302.0426 737.5057)"
+                    class="st29 st30">Annamayya</text></a><a
+                title="Sri Sathya Sai" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 278.0512 671.4259)"
+                    class="st29 st30">Satyasai</text></a><a
+                title="Ananthapuramu" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 220.5831 581.5536)"
+                    class="st29 st30">Ananthpuramu</text></a><a
+                title="Kurnool" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 234.9448 491.9276)"
+                    class="st29 st30">Kurnool</text></a><a
+                title="Nandyal" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 339.9661 514.4595)"
+                    class="st29 st30">Nandyal</text></a><a
+                title="Prakasam" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 439.6124 484.8422)"
+                    class="st29 st30">Prakasam</text></a><a
+                title="Palnadu" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 491.0925 376.111)"
+                    class="st29 st30">Palnadu</text></a><a
+                title="Bapatla" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 569.4443 467.3029)"
+                    class="st29 st30">Bapatla</text></a><a
+                title="Guntur" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 604.6271 392.3386)"
+                    class="st29 st30">Guntur</text></a><a
+                title="Krishna" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 677.7847 407.4884)"
+                    class="st29 st30">Krishna</text></a><a title="NTR"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 572.5151 327.3701)"
+                    class="st29 st30">NTR</text></a><a title="Eluru"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 658.2053 283.8774)"
+                    class="st29 st30">Eluru</text></a><a
+                title="West Godavari" href="javascript:void(0)"> <text
+                    transform="matrix(1 0 0 1 732.503 376.1109)"
+                    class="st29 st30">West Godavari</text></a><a
+                title="Konaseema" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 803.0947 346.4739)"
+                    class="st29 st30">Konaseema</text></a><a
+                title="East Godavai" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 726.6307 302.0483)"
+                    class="st29 st30">East Godavari</text></a><a
+                title="Kakinada" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 812.2289 283.8773)"
+                    class="st29 st30">Kakinada</text></a><a
+                title="Anakapalli" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 873.9338 229.7954)"
+                    class="st29 st30">Anakapalli</text></a><a
+                title="Visakhapatnam" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 935.2104 190.2209)"
+                    class="st29 st30">Visakhapatnam</text></a><a
+                title="Vizianagaram" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 956.7194 147.3274)"
+                    class="st29 st30">Vizianagaram</text></a><a
+                title="Srikakulam" href="javascript:void(0)"> <text
+                    transform="matrix(1 0 0 1 1024.8148 99.121)"
+                    class="st29 st30">Srikakulam</text></a><a
+                title="Parvathipuram Manyam"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 807.1726 64.605)"
+                    class="st29 st30">Parvathipuram Manyam</text></a><a
+                title="Alluri Sitharama Raju"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 712.9728 158.5615)"
+                    class="st29 st30">Alluri Seetarama Raju</text></a><a
+                title="Y.S.R." href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 375.5831 608.1068)"
+                    class="st29 st30">YSR</text></a><a
+                title="Tirupati" href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 532.115 699.903)"
+                    class="st29 st30">Tirupati</text></a><a
+                title="SRI Potti Sriramulu Nellore"
+                href="javascript:void(0)"><text
+                    transform="matrix(1 0 0 1 500.8115 595.2191)"
+                    class="st29 st30">SRI Potti Sriramulu
+                    Nellore</text></a><a title="Chittoor"
+                href="javascript:void(0)"> <text
+                    transform="matrix(1 0 0 1 446.5532 798.4251)"
+                    class="st29 st30">Chittor</text></a></g>
+              </svg>
+              
+                
+                <div class="counts">
+                    <ul>
+                        <div *ngIf="selectedDistrict" >
+                            <strong  style="color: #f67015;">{{ selectedDistrict.name }}</strong><br>
+                           
+                          </div> 
+                        <li>Total<h4 class="my-1" style="color: #f67015;">
+                                {{totalbirthcount}}</h4>
+                        </li>
+                        <li>Male<h4 class="my-1" style="color: #46c2f2;">
+                            {{male_count}}</h4>
+                        </li>
+                        <li>Female<h4 class="my-1" style="color: #b73377;">
+                                {{female_count}}</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-12">
+            <div class="table-responsive headertable">
+                <table class="table table-borderedless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>District</th>
+                            <th>Total</th>
+                            <th>Male</th>
+                            <th>Female</th>
+                            <!-- <th>Twin</th> -->
+                            <th>Birth Rate (per 1,000)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let dis of summary_birth_death_array">
+                            <td>{{dis.DISTRICT_NAME}}</td>
+                            <td>{{dis.TOT_BIRTH}}</td>
+                            <td>{{dis.TOT_BIRTH_MALES}}</td>
+                            <td>{{dis.TOT_BIRTH_FEMALES}}</td>
+                            <td>{{dis.TOT_BIRTH_RATE}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <div
+        class="tab-pane"
+        id="profile"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+    ><div class="row">
+        <div class="col-xl-6 col-12 position-relative">
+
+            <div class="heatmap">
+                <ul>
+                    <li>
+                        1-1000
+                        <span></span>
+                    </li>
+                    <li>
+                        1001-3000
+                        <span></span>
+                    </li>
+                    <li>
+                        3000+
+                        <span></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="">
+
+                <img src="assets/images/India_grey.svg" class="img-fluid">
+
+
+
+        <div class="counts">
+            <ul>
+                <!-- <li>Total<h4 class="my-1" style="color: #f67015;">123</h4></li>
+                <li>Male<h4 class="my-1" style="color: #46c2f2;">123</h4></li>
+                <li>Female<h4 class="my-1" style="color: #b73377;">123</h4></li> -->
+                   <li>Total<h4 class="my-1" style="color: #f67015;">0</h4></li>
+                <li>Male<h4 class="my-1" style="color: #46c2f2;">0</h4></li>
+                <li>Female<h4 class="my-1" style="color: #b73377;">0</h4></li>
+            </ul>
+        </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-12">
+            <div class="table-responsive headertable">
+                <table class="table table-borderedless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>State/UT</th>
+                            <th>Male Births</th>
+                            <th>Female Births</th>
+                            <th>Total Births</th>
+                            <th>Birth Rate (per 1,000)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let st of all_state_summary_birth_death_array">
+                            <td>{{st.STATE_NAME}}</td>
+                            <td>{{st.TOT_MALE_BIRTHS}}</td>
+                            <td>{{st.TOT_FEMALE_BIRTS}}</td>
+                            <td>{{st.TOT_BIRTHS}}</td>
+                            <td>{{st.BIRTH_RATE}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    </div>
+    <div
+        class="tab-pane"
+        id="messages"
+        role="tabpanel"
+        aria-labelledby="messages-tab"
+    >
+    <div class="row">
+        <div class="col-xl-6 col-12 position-relative">
+
+            <div class="heatmap">
+                <ul>
+                    <li>
+                        1-1000
+                        <span></span>
+                    </li>
+                    <li>
+                        1001-3000
+                        <span></span>
+                    </li>
+                    <li>
+                        3000+
+                        <span></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="">
+
+                <img src="assets/images/world.svg" class="img-fluid">
+
+
+
+        <div class="counts">
+            <ul>
+                <!-- <li>Total<h4 class="my-1" style="color: #f67015;">123</h4></li>
+                <li>Male<h4 class="my-1" style="color: #46c2f2;">123</h4></li>
+                <li>Female<h4 class="my-1" style="color: #b73377;">123</h4></li> -->
+
+                 <li>Total<h4 class="my-1" style="color: #f67015;">0</h4></li>
+                <li>Male<h4 class="my-1" style="color: #46c2f2;">0</h4></li>
+                <li>Female<h4 class="my-1" style="color: #b73377;">0</h4></li>
+            </ul>
+        </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-12">
+            <div class="table-responsive headertable">
+                <table class="table table-borderedless">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>State/UT</th>
+                            <th>Male Births</th>
+                            <th>Female Births</th>
+                            <th>Total Births</th>
+                            <th>Birth Rate (per 1,000)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let st of world_summary_birth_death_array">
+                            <td>{{st.COUNTRY_NAME}}</td>
+                            <td>{{st.TOT_MALE_BIRTHS}}</td>
+                            <td>{{st.TOT_FEMALE_BIRTS}}</td>
+                            <td>{{st.TOT_BIRTHS}}</td>
+                            <td>{{st.BIRTH_RATE}}</td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xl-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="birth-death-treads-comparison-chart"></div>
+
+<!-- <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions3"
+                                    style="width: 100%; height: 400px; display: block;"></highcharts-chart> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 border-end border-dark">
+                                        <div class="d-flex flex-column pt-2 text-center align-items-center">
+                                            <div class="d-flex flex-column border-bottom border-dark py-2">
+                                                <img src="assets/images/female.svg" width="60px" class="m-auto">
+                                                <h4 style="color:#b73377">{{summary_gender_array[0]?.TOT_FEMALE_PER}}%</h4>
+                                            </div>
+                                            <div class="d-flex flex-column py-2">
+                                                <img src="assets/images/male.svg" width="60px" class="m-auto">
+                                                <h4 style="color:#2da9d9">{{summary_gender_array[0]?.TOT_MALE_PER}}%</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div id="gender-chart"></div>
+                                        <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                                    style="width: 100%; height: 400px; display: block;"></highcharts-chart> -->
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--charts all-->
+                <div class="row bg-success">
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="age-gender-chart"></div>
+                                <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="ageGenderChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="age-gender-percantage-chart"></div>
+                                <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="ageDistributionChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart> -->
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="cause-Of-Death-chart"></div>
+
+                                <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="causeOfDeathChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart> -->
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

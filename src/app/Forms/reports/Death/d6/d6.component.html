@@ -1,0 +1,193 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>D-6 Deaths by Age, Sex and
+                    Religion of the Deceased
+                    (Rural &amp;
+                    Urban)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="stattbl" [value]="state_levle_array"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt1 [rows]="state_levle_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['BR_APPLICATION_ID']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [bsConfig]="bsConfig" #dp="bsDatepicker" appDateFormatDirective
+                                                        [maxDate]="cureent_date" [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="to_date" name="to_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig" #dp2="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="to_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            
+                                        </div> -->
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('stattbl','d2 Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('stattbl','d2 Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th rowspan="3" pSortableColumn="BR_APPLICATION_ID">Sno.</th>
+                                        <th rowspan="3">Age </th>
+                                        <th rowspan="3">Rural/Urban</th>
+                                        <th colspan="28" style="text-align: center;">Religion of Deceased</th>
+                                    </tr>
+                                    <tr>
+
+                                        <th colspan="4" style="text-align: center;">Hindu </th>
+                                        <th colspan="4" style="text-align: center;">Muslim </th>
+                                        <th colspan="4" style="text-align: center;">Christian </th>
+                                        <th colspan="4" style="text-align: center;">Sikh </th>
+                                        <th colspan="4" style="text-align: center;">Jain </th>
+                                        <th colspan="4" style="text-align: center;">Other </th>
+                                        <th colspan="4" style="text-align: center;"> Not Stated</th>
+
+                                    </tr>
+                                    <tr>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                        <th>Male</th>
+                                        <th>Female</th>
+                                        <th>Transgender</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report>
+                                    <tr [ngClass]="report.AGE_GROUP=='TOTAL' ? 'totalclass' : ''">
+                                        <td>{{report.SNO }}</td>
+                                        <td>{{ report.AGE_GROUP }}</td>
+                                        <td>{{ report.RURAL_URBAN }}</td>
+                                        <td>{{ report.HINDU_MALE }}</td>
+                                        <td>{{ report.HINDU_FEMALE }}</td>
+                                        <td>{{ report.HINDU_TRANSGENDER }}</td>
+                                        <td>{{ report.HINDU_TOTAL }}</td>
+                                        <td>{{ report.MUSLIM_MALE }}</td>
+                                        <td>{{ report.MUSLIM_FEMALE }}</td>
+                                        <td>{{ report.MUSLIM_TRANSGENDER }}</td>
+                                        <td>{{ report.MUSLIM_TOTAL }}</td>
+                                        <td>{{ report.CHRISTIAN_MALE }}</td>
+                                        <td>{{ report.CHRISTIAN_FEMALE }}</td>
+                                        <td>{{ report.CHRISTIAN_TRANSGENDER }}</td>
+                                        <td>{{ report.CHRISTIAN_TOTAL }}</td>
+                                        <td>{{ report.SIKH_MALE }}</td>
+                                        <td>{{ report.SIKH_FEMALE }}</td>
+                                        <td>{{ report.SIKH_TRANSGENDER }}</td>
+                                        <td>{{ report.SIKH_TOTAL }}</td>
+                                        <td>{{ report.JAIN_MALE }}</td>
+                                        <td>{{ report.JAIN_FEMALE }}</td>
+                                        <td>{{ report.JAIN_TRANSGENDER }}</td>
+                                        <td>{{ report.JAIN_TOTAL }}</td>
+                                        <td>{{ report.OTHER_MALE }}</td>
+                                        <td>{{ report.OTHER_FEMALE }}</td>
+                                        <td>{{ report.OTHER_TRANSGENDER }}</td>
+                                        <td>{{ report.OTHER_TOTAL }}</td>
+                                        <td>{{ report.MALE_NOT_STATED }}</td>
+                                        <td>{{ report.FEMALE_NOT_STATED }}</td>
+                                        <td>{{ report.TRANSGENDER_NOT_STATED }}</td>
+                                        <td>{{ report.NOT_STATED_TOTAL }}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

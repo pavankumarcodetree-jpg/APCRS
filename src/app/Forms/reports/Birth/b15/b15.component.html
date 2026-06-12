@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>B-15 Live Births by Age of the
+                    Mother, Birth Order
+                    and
+                    Religion of the Family (Rural)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="stattbl" [value]="state_levle_array"  rowGroupMode="rowspan" groupRowsBy="RELIGION"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt1 [rows]="state_levle_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['RELIGION','AGE_GROUP','AGE_NOT_STATED','BIRTH_ORDER_1','BIRTH_ORDER_2','BIRTH_ORDER_3','BIRTH_ORDER_4','BIRTH_ORDER_5','BIRTH_ORDER_6','BIRTH_ORDER_7','BIRTH_ORDER_8']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [bsConfig]="bsConfig" #dp="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="to_date" name="to_date" bsDatepicker
+                                                        [bsConfig]="bsConfig" #dp2="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="to_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            
+                                        </div> -->
+                                        
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                            (click)="exportTable_toexcel('stattbl','b15 Report')"
+                                            class="p-button-success me-1" pTooltip="XLS"
+                                            tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                            (click)="exportTable_ToPDF('stattbl','b15 Report')"
+                                            class="p-button-warning me-1" pTooltip="PDF"
+                                            tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th rowspan="2" pSortableColumn="SNO">S.No</th>
+                                        <th rowspan="2" pSortableColumn="RELIGION">Religion</th>
+                                        <th rowspan="2" pSortableColumn="AGE_GROUP">Age of Mother</th>
+                                        <th colspan="15" style="text-align: center;" >Birth Order</th>
+                                    </tr>
+                                    <tr>
+                                        
+                                        
+                                        <th pSortableColumn="BIRTH_ORDER_1"> 1</th>
+                                        <th pSortableColumn="BIRTH_ORDER_2"> 2</th>
+                                        <th pSortableColumn="BIRTH_ORDER_3"> 3</th>
+                                        <th pSortableColumn="BIRTH_ORDER_4"> 4</th>
+                                        <th pSortableColumn="BIRTH_ORDER_5"> 5</th>
+                                        <th pSortableColumn="BIRTH_ORDER_6"> 6</th>
+                                        <th pSortableColumn="BIRTH_ORDER_7"> 7</th>
+                                        <th pSortableColumn="BIRTH_ORDER_8"> 8</th>
+                                        <th pSortableColumn="BIRTH_ORDER_9"> 9</th>
+                                        <th pSortableColumn="BIRTH_ORDER_10">  10</th>
+                                        <th pSortableColumn="BIRTH_ORDER_11">  11</th>
+                                        <th pSortableColumn="BIRTH_ORDER_12">  12</th>
+                                        <th pSortableColumn="BIRTH_ORDER_13_AND_ABOVE"> 13 & Above</th> 
+                                        <th pSortableColumn="BIRTH_ORDER_NOT_STATED">Age Not Stated</th>                                       
+                                        <th pSortableColumn="TOTAL">Total</th>
+                                         
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report let-i="rowIndex" let-rowIndex="rowIndex"
+                                let-rowgroup="rowgroup" let-rowspan="rowspan">
+                                    <tr [ngClass]="report.AGE_GROUP=='TOTAL' ? 'totalclass' : ''">
+                                        <td>{{report.SNO}}</td>
+                                        <td *ngIf="rowgroup" [attr.rowspan]="rowspan">{{report.RELIGION}}</td>
+                                        <td>{{report.AGE_GROUP}}</td>                                        
+                                        <td>{{report.BIRTH_ORDER_1}}</td>
+                                        <td>{{report.BIRTH_ORDER_2}}</td>
+                                        <td>{{report.BIRTH_ORDER_3}}</td>
+                                        <td>{{report.BIRTH_ORDER_4}}</td>
+                                        <td>{{report.BIRTH_ORDER_5}}</td>
+                                        <td>{{report.BIRTH_ORDER_6}}</td>
+                                        <td>{{report.BIRTH_ORDER_7}}</td>
+                                        <td>{{report.BIRTH_ORDER_8}}</td>
+                                        <td>{{report.BIRTH_ORDER_9}}</td>
+                                        <td>{{report.BIRTH_ORDER_10}}</td>
+                                        <td>{{report.BIRTH_ORDER_11}}</td>
+                                        <td>{{report.BIRTH_ORDER_12}}</td>
+                                        <td>{{report.BIRTH_ORDER_13_AND_ABOVE}}</td> 
+                                        <td>{{report.BIRTH_ORDER_NOT_STATED}}</td>                                      
+                                        <td>{{report.TOTAL}}</td>
+                                        
+                                                                            </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

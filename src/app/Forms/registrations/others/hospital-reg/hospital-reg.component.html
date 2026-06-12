@@ -1,0 +1,836 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i> Hospital Master List</h5>
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#masterModal"
+                        (click)="modal_open()">
+                        <i class="fa-solid fa-plus pe-2 text-white"></i>Add
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+
+            <div class="row mt-2">
+                <div class="col-xl-12 col-12">
+                    <p-table id="tblbirthdepthtable" [value]="hospital_details_arrau"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" #dt2
+                        [rows]="hospital_details_arrau.length" [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                        sortMode="multiple"
+                        [globalFilterFields]="['SNO','SNO','ISACTIVE','HOSPITAL_CATEGORY','HOSPITAL_NAME','REGISTRATION_UNIT','DISTRICT_NAME','MMC_NAME','VW_NAME','HOSPITAL_EMAILID','HOSPITAL_MOBILE_NO','HOSPITAL_PINCODE','HOSPITAL_ADDRESS','HOSPITAL_AUTH_NAME','HOSPITAL_AUTH_MOBILE_NO','HOSPITAL_AUTH_EMAILID']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true" scrollHeight="560px">
+                        <ng-template pTemplate="caption">
+                            <div class="row">
+                                <div class="col-md-10">
+                                </div>
+                                <div class="col-md-2 text-end mt-2">
+                                    <span class="p-input-icon-left" style="margin-left: -16px;">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')" style="margin-left: -9px;"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="SNO">Sno<p-sortIcon field="SNO" /><p-columnFilter type="text" field="SNO"
+                                        display="menu" />
+                                </th>
+                                <th pSortableColumn="SNO">Action<p-sortIcon field="SNO" /><p-columnFilter type="text" field="SNO"
+                                        display="menu" />
+                                </th>
+                                <th pSortableColumn="ISACTIVE">Current Status<p-sortIcon field="ISACTIVE" /><p-columnFilter type="text"
+                                        field="ISACTIVE" display="menu" /></th>
+                                <th pSortableColumn="HOSPITAL_CATEGORY">Hospital Category<p-sortIcon
+                                        field="HOSPITAL_CATEGORY" /><p-columnFilter type="text" field="HOSPITAL_CATEGORY" display="menu" />
+                                </th>
+
+                                <!-- <th pSortableColumn="RU_NAME">Hospital Code <p-sortIcon field="RU_NAME" /><p-columnFilter type="text"
+                                        field="RU_NAME" display="menu" /></th> -->
+                                <th pSortableColumn="HOSPITAL_NAME">Hospital Name<p-sortIcon field="HOSPITAL_NAME" /><p-columnFilter
+                                        type="text" field="HOSPITAL_NAME" display="menu" /></th>
+                                <th pSortableColumn="REGISTRATION_UNIT">Registration Unit<p-sortIcon
+                                        field="REGISTRATION_UNIT" /><p-columnFilter type="text" field="REGISTRATION_UNIT" display="menu" />
+                                </th>
+                                <th pSortableColumn="DISTRICT_NAME">District<p-sortIcon field="DISTRICT_NAME" /><p-columnFilter type="text"
+                                        field="DISTRICT_NAME" display="menu" /></th>
+                                <!-- <th pSortableColumn="RURAL_URBAN">Rural / Urban<p-sortIcon field="RURAL_URBAN" /><p-columnFilter type="text"
+                                        field="RURAL_URBAN" display="menu" /></th> -->
+                                <th pSortableColumn="MMC_NAME">Mandal / Muncipality<p-sortIcon field="MMC_NAME" /><p-columnFilter
+                                        type="text" field="MMC_NAME" display="menu" /></th>
+                                <th pSortableColumn="VW_NAME">Village/Ward<p-sortIcon field="VW_NAME" /><p-columnFilter type="text"
+                                        field="VW_NAME" display="menu" /></th>
+                                <th pSortableColumn="HOSPITAL_EMAILID">eMail Id<p-sortIcon field="HOSPITAL_EMAILID" /><p-columnFilter
+                                        type="text" field="HOSPITAL_EMAILID" display="menu" /></th>
+                                <th pSortableColumn="HOSPITAL_MOBILE_NO">Mobile<p-sortIcon field="HOSPITAL_MOBILE_NO" /><p-columnFilter
+                                        type="text" field="HOSPITAL_MOBILE_NO" display="menu" /></th>
+
+                                <th pSortableColumn="HOSPITAL_PINCODE">Pincode<p-sortIcon field="HOSPITAL_PINCODE" /><p-columnFilter
+                                        type="text" field="HOSPITAL_PINCODE" display="menu" />
+                                </th>
+                                <th pSortableColumn="HOSPITAL_ADDRESS">Address<p-sortIcon field="HOSPITAL_ADDRESS" /><p-columnFilter
+                                        type="text" field="HOSPITAL_ADDRESS" display="menu" />
+                                </th>
+                                <th pSortableColumn="HOSPITAL_AUTH_NAME">Authorization Name<p-sortIcon
+                                        field="HOSPITAL_AUTH_NAME" /><p-columnFilter type="text" field="HOSPITAL_AUTH_NAME"
+                                        display="menu" />
+                                </th>
+                                <th pSortableColumn="HOSPITAL_AUTH_MOBILE_NO">Authorization Mobile<p-sortIcon
+                                        field="HOSPITAL_AUTH_MOBILE_NO" /><p-columnFilter type="text" field="HOSPITAL_AUTH_MOBILE_NO"
+                                        display="menu" />
+                                </th>
+                                <th pSortableColumn="HOSPITAL_AUTH_EMAILID">Authorization eMail Id<p-sortIcon
+                                        field="HOSPITAL_AUTH_EMAILID" /><p-columnFilter type="text" field="HOSPITAL_AUTH_EMAILID"
+                                        display="menu" />
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-obj>
+                            <tr>
+                                <td>{{obj.SNO}}</td>
+                                <td *ngIf="obj.ISACTIVE=='1'"><button class="btn btn-success me-2" data-bs-toggle="modal"
+                                        data-bs-target="#updatehospitalModal" (click)="update_modal_open(obj)">Update</button></td>
+                                <td *ngIf="obj.ISACTIVE=='0'"><span class="text-danger">Inactive</span></td>
+                                <td>
+                                    <div class="form-check form-checkbox-success form-switch text-center lg">
+                                        <input type="checkbox" class="form-check-input m-auto" id="customSwitch1" [(ngModel)]="obj.ISACTIVE"
+                                            (click)="update_active_status(obj)">
+                                    </div>
+                                </td>
+                                <!-- <td>{{obj.HOSPITAL_TYPE}}</td> -->
+                                <td>{{obj.HOSPITAL_CATEGORY}}</td>
+                                <td>{{obj.HOSPITAL_NAME}}/{{obj.HOSPITAL_NAME_TEL}}</td>
+                                <td>{{obj.REGISTRATION_UNIT}}</td>
+                                <!-- <td>{{obj.STATE_NAME}}</td> -->
+                                <td>{{obj.DISTRICT_NAME}}/{{obj.DISTRICT_NAME_TEL}}</td>
+                                <td>{{obj.MMC_NAME}}/{{obj.MMC_NAME_TEL}}</td>
+                                <td>{{obj.VW_NAME}}/ {{obj.VW_NAME_TEL}}</td>
+                                <td>{{obj.HOSPITAL_EMAILID}}</td>
+                                <td>{{obj.HOSPITAL_MOBILE_NO}}</td>
+                                <td>{{obj.HOSPITAL_PINCODE}}</td>
+                                <td>{{obj.HOSPITAL_ADDRESS}}</td>
+                                <td>{{obj.HOSPITAL_AUTH_NAME}}</td>
+                                <td>{{obj.HOSPITAL_AUTH_MOBILE_NO}}</td>
+                                <td>{{obj.HOSPITAL_AUTH_EMAILID}}</td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!-- Button trigger modal -->
+
+
+<!--Hospital Reg Modal -->
+<div class="modal fade" id="masterModal" tabindex="-1" aria-labelledby="masterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="masterModalLabel">New Hospital Master </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <form #hospitalregform="ngForm">
+                                <div class="row mb-2">
+                                    <div class="col-xl-6 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Hospital Category<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select class="" [(ngModel)]="crs_hosipatalreg_form.hosiatalcategory" id="hosiatalcategory"
+                                                name="hosiatalcategory" placeholder="Hospital Category" required=""
+                                                #hosiatalcategory="ngModel"
+                                                [ngClass]="{'is-invalid':hosiatalcategory.invalid && (hosiatalcategory.dirty || hosiatalcategory.touched),
+                                            'is-valid':hosiatalcategory.value!='' && (hosiatalcategory.touched || hosiatalcategory.dirty)}">
+                                                <ng-option value="" disabled="">--select--</ng-option>
+                                                <ng-option *ngFor="let obj of hospital_cate_array"
+                                                    [value]="obj.HOSPITAL_CATEGORY_CODE">{{obj.HOSPITAL_CATEGORY}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="hosiatalcategory.invalid && (hosiatalcategory.dirty || hosiatalcategory.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="hosiatalcategory.errors">
+                                                    <div *ngIf="hosiatalcategory.errors['required']">
+                                                        Hospital Code is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Hospital Code<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.hosiatalcode"
+                                                appAlphanumericOnly id="hosiatalcode" name="hosiatalcode" placeholder="Hospital Code"
+                                                required="" #hosiatalcode="ngModel" [ngClass]="{'is-invalid':hosiatalcode.invalid && (hosiatalcode.dirty || hosiatalcode.touched),
+                                                   'is-valid':hosiatalcode.value!='' && (hosiatalcode.touched || hosiatalcode.dirty)}">
+                                            <div *ngIf="hosiatalcode.invalid && (hosiatalcode.dirty || hosiatalcode.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="hosiatalcode.errors">
+                                                    <div *ngIf="hosiatalcode.errors['required']">
+                                                        Hospital Code is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row mb-2">
+                                            <div class="col-xl-12 col-12">
+                                                <div class="form-group mb-2 position-relative">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Hospital Name<span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="crs_hosipatalreg_form.hosiatalname" id="hosiatalname"
+                                                            (change)="Teluglanguageconvrt(crs_hosipatalreg_form.hosiatalname,'hosiatalname_tel')"
+                                                            name="hosiatalname" placeholder="Hospital Name" required=""
+                                                            #hosiatalname="ngModel"
+                                                            [ngClass]="{'is-invalid':hosiatalname.invalid && (hosiatalname.dirty || hosiatalname.touched),
+                                                                                                   'is-valid':hosiatalname.value!='' && (hosiatalname.touched || hosiatalname.dirty)}">
+                                                        <div *ngIf="hosiatalname.invalid && (hosiatalname.dirty || hosiatalname.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="hosiatalname.errors">
+                                                                <div *ngIf="hosiatalname.errors['required']">
+                                                                    Hospital Name is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 col-12">
+                                                <div class="form-group mb-2 position-relative">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Hospital Name (Telugu)<span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="crs_hosipatalreg_form.hosiatalname_tel" id="hosiatalname_tel"
+                                                            (change)="Teluglanguageconvrt(crs_hosipatalreg_form.hosiatalname_tel,'hosiatalname_tel')"
+                                                            name="hosiatalname_tel" placeholder="Hospital Name" required=""
+                                                            #hosiatalname_tel="ngModel"
+                                                            [ngClass]="{'is-invalid':hosiatalname_tel.invalid && (hosiatalname_tel.dirty || hosiatalname_tel.touched),
+                                                              'is-valid':hosiatalname_tel.value!='' && (hosiatalname_tel.touched || hosiatalname_tel.dirty)}">
+                                                        <div *ngIf="hosiatalname_tel.invalid && (hosiatalname_tel.dirty || hosiatalname_tel.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="hosiatalname_tel.errors">
+                                                                <div *ngIf="hosiatalname_tel.errors['required']">
+                                                                    Hospital Name (Telugu) is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    </div>
+
+
+                                
+                                <div class="row mb-2">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">District<span class="text-danger">*</span></label>
+                                            <ng-select name="district" id="district" required=""  [disabled]="detailsdisable"
+                                                [(ngModel)]="crs_hosipatalreg_form.district" (change)="MandalMuncipality()" #district="ngModel"
+                                                [(ngModel)]="crs_hosipatalreg_form.district" #districtt="ngModel" placeholder="District"
+                                                (change)="Addressof_districtchange()" [ngClass]="{'is-invalid':districtt.invalid && (districtt.dirty || districtt.touched),
+                                            'is-valid':districtt.value!='' && (districtt.touched || districtt.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    district--</ng-option>
+                                                <ng-option value="0">All</ng-option>
+                                                <ng-option *ngFor="let loc of Addressofparents_district_array"
+                                                    [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                            </ng-select>
+                                            <div *ngIf="districtt.invalid && (districtt.dirty || districtt.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="districtt.errors">
+                                                    <div *ngIf="districtt.errors['required']">
+                                                        District is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Urban/Rural/
+                                                పట్టణ/గ్రామీణ<span class="text-danger">*</span></label>
+                                            <ng-select placeholder="Select" [(ngModel)]="crs_hosipatalreg_form.rural_urban" id="rural_urban"
+                                                name="rural_urban" title="Urban Rural" required="" #rural_urban="ngModel" [disabled]="detailsdisable"
+                                                (change)="MandalMuncipality()" [ngClass]="{'is-invalid': rural_urban.invalid && (rural_urban.dirty || rural_urban.touched),
+                                                'is-valid': rural_urban.value!='' && (rural_urban.dirty || rural_urban.touched)}">
+                                                <ng-option value="" disabled>--Select
+                                                    urban/rural--</ng-option>
+                                                <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                                <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                            </ng-select>
+                                            <div *ngIf="rural_urban.invalid && (rural_urban.dirty || rural_urban.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="rural_urban.errors">
+                                                    <div *ngIf="rural_urban.errors['required']">
+                                                        Urban/Rural/ is required</div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">MMC Name<span class="text-danger">*</span></label>
+                                            <ng-select name="mandal" id="mandal" required="" [(ngModel)]="crs_hosipatalreg_form.mandal"  [disabled]="detailsdisable"
+                                                (change)="VillageWard()" #mandal="ngModel" placeholder="MMC Name" [ngClass]="{'is-invalid':mandal.invalid && (mandal.dirty || mandal.touched),
+            'is-valid':mandal.value!='' && (mandal.touched || mandal.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    mandal/muncipality--</ng-option>
+                                                <ng-option *ngFor="let loc of Addressofparents_MandalMuncipality_array"
+                                                    [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+
+                                            </ng-select>
+                                            <div *ngIf="mandal.invalid && (mandal.dirty || mandal.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="mandal.errors">
+                                                    <div *ngIf="mandal.errors['required']">
+                                                        MMC Name is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Village/Ward<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="village_ward" id="village_ward" required=""
+                                                [(ngModel)]="crs_hosipatalreg_form.village_ward" #village_ward="ngModel"
+                                                placeholder="Village/Town"  [disabled]="detailsdisable"
+                                                [ngClass]="{'is-invalid':village_ward.invalid && (village_ward.dirty || village_ward.touched),
+                                                                                'is-valid':village_ward.value!='' && (village_ward.touched || village_ward.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    village/ward--</ng-option>
+                                                <ng-option *ngFor="let loc of village_ward_array"
+                                                    [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="village_ward.invalid && (village_ward.dirty || village_ward.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="village_ward.errors">
+                                                    <div *ngIf="village_ward.errors['required']">
+                                                        Village/Ward is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Email</label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.email" id="email"
+                                                name="email" placeholder="Email" required="" #email="ngModel" #village_ward="ngModel"
+                                                appEmailFormat [ngClass]="{'is-invalid':email.invalid && (email.dirty || email.touched),
+                                            'is-valid':email.value!='' && (email.touched || email.dirty)}">
+                                            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message text-danger">
+                                                <div *ngIf="email.errors">
+                                                    <div *ngIf="email.errors['required']">
+                                                        Email is
+                                                        required</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Mobile No<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.mobileno"
+                                                appMobileFirstFiveNotAllowedDirective appNumericOnlyDirective appNumericsOnlyEnter
+                                                id="mobileno" name="mobileno" placeholder="Mobile No" required="" #mobileno="ngModel"
+                                                maxlength="10" [ngClass]="{'is-invalid':mobileno.invalid && (mobileno.dirty || mobileno.touched),
+                                                'is-valid':mobileno.value!='' && (mobileno.touched || mobileno.dirty)}">
+                                            <div *ngIf="mobileno.invalid && (mobileno.dirty || mobileno.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="mobileno.errors">
+                                                    <div *ngIf="mobileno.errors['required']">
+                                                        Mobile No is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Pincode<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.pincode" id="pincode"
+                                                Pincodevalidation name="pincode" placeholder="Pincode" required="" #pincode="ngModel"
+                                                [ngClass]="{'is-invalid':pincode.invalid && (pincode.dirty || pincode.touched),
+                                                                                                                'is-valid':pincode.value!='' && (pincode.touched || pincode.dirty)}">
+                                            <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="pincode.errors">
+                                                    <div *ngIf="pincode.errors['required']">
+                                                        Pincode is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Address<span class="text-danger">*</span></label>
+                                            <textarea rows="1" class="form-control" [(ngModel)]="crs_hosipatalreg_form.address" id="address"
+                                                name="address" placeholder="Address" required="" #address="ngModel" [ngClass]="{'is-invalid':address.invalid && (address.dirty || address.touched),
+                                                'is-valid':address.value!='' && (address.touched || address.dirty)}">
+                                             </textarea>
+                                            <div *ngIf="address.invalid && (address.dirty || address.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="address.errors">
+                                                    <div *ngIf="address.errors['required']">
+                                                        Address is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization Name<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.auth_name"
+                                                id="auth_name" name="auth_name" placeholder="Authorization Name" required=""
+                                                #auth_name="ngModel" [ngClass]="{'is-invalid':auth_name.invalid && (auth_name.dirty || auth_name.touched),
+                                            'is-valid':auth_name.value!='' && (auth_name.touched || auth_name.dirty)}">
+                                            <div *ngIf="auth_name.invalid && (auth_name.dirty || auth_name.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_name.errors">
+                                                    <div *ngIf="auth_name.errors['required']">
+                                                        Authorization Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization Mobile No<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.auth_mobileno"
+                                                id="auth_mobileno" name="auth_mobileno" placeholder="Authorization Mobile No No"
+                                                appMobileFirstFiveNotAllowedDirective appNumericsOnlyEnter appNumericOnlyDirective
+                                                maxlength="10" required="" #auth_mobileno="ngModel" [ngClass]="{'is-invalid':auth_mobileno.invalid && (auth_mobileno.dirty || auth_mobileno.touched),
+                                                  'is-valid':mobileno.value!='' && (auth_mobileno.touched || auth_mobileno.dirty)}">
+                                            <div *ngIf="auth_mobileno.invalid && (auth_mobileno.dirty || auth_mobileno.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_mobileno.errors">
+                                                    <div *ngIf="auth_mobileno.errors['required']">
+                                                        Authorization Mobile No is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization eMail Id<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="crs_hosipatalreg_form.auth_email"
+                                                appEmailFormat id="auth_email" name="auth_email" placeholder="Authorization eMail Id"
+                                                required="" #auth_email="ngModel" [ngClass]="{'is-invalid':auth_email.invalid && (auth_email.dirty || auth_email.touched),
+                                               'is-valid':auth_email.value!='' && (auth_email.touched || auth_email.dirty)}">
+
+                                            <div *ngIf="auth_email.invalid && (auth_email.dirty || auth_email.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_email.errors">
+                                                    <div *ngIf="auth_email.errors['required']">
+                                                        Authorization eMail Id is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 text-end">
+                                        <button class="btn btn-success me-2" [disabled]="!hospitalregform.form.valid"
+                                            (click)="Submithealthmaster()">Save</button><!--  <i class="fa-solid fa-plus pe-2 text-white"></i> -->
+                                        <button class="btn btn-danger">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Hospital Update Modal -->
+<div class="modal fade" id="updatehospitalModal" tabindex="-1" aria-labelledby="updatehospitalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="updatehospitalModalLabel">Update Hosipatal Master </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <form #update_hospitalregform="ngForm">
+                                <div class="row mb-2">
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Hosipatal Category<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select class="" [(ngModel)]="update_crs_hosipatalreg_form.hosiatalcategory_upd"
+                                                id="hosiatalcategory_upd" name="hosiatalcategory_upd" placeholder="Hosipatal Category"
+                                                required="" #hosiatalcategory_upd="ngModel"
+                                                [ngClass]="{'is-invalid':hosiatalcategory_upd.invalid && (hosiatalcategory_upd.dirty || hosiatalcategory_upd.touched),
+                                            'is-valid':hosiatalcategory_upd.value!='' && (hosiatalcategory_upd.touched || hosiatalcategory_upd.dirty)}">
+                                                <ng-option value="" disabled="">--select--</ng-option>
+                                                <ng-option *ngFor="let obj of update_hospital_cate_array"
+                                                    [value]="obj.HOSPITAL_CATEGORY_CODE">{{obj.HOSPITAL_CATEGORY}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="hosiatalcategory_upd.invalid && (hosiatalcategory_upd.dirty || hosiatalcategory_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="hosiatalcategory_upd.errors">
+                                                    <div *ngIf="hosiatalcategory_upd.errors['required']">
+                                                        Hosipatal Code is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Hosipatal Code<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="update_crs_hosipatalreg_form.hosiatalcode_upd" id="hosiatalcode_upd" readonly
+                                                appAlphanumericOnly name="hosiatalcode_upd" placeholder="Hosipatal Code" required=""
+                                                #hosiatalcode_upd="ngModel"
+                                                [ngClass]="{'is-invalid':hosiatalcode_upd.invalid && (hosiatalcode_upd.dirty || hosiatalcode_upd.touched),
+                                                   'is-valid':hosiatalcode_upd.value!='' && (hosiatalcode_upd.touched || hosiatalcode_upd.dirty)}">
+                                            <div *ngIf="hosiatalcode_upd.invalid && (hosiatalcode_upd.dirty || hosiatalcode_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="hosiatalcode_upd.errors">
+                                                    <div *ngIf="hosiatalcode_upd.errors['required']">
+                                                        Hosipatal Code is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-12">
+                                            <div class="col-xl-12 col-12">
+                                                <div class="form-group mb-2 position-relative">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Hosipatal Name<span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="update_crs_hosipatalreg_form.hosiatalname_upd"
+                                                            id="hosiatalname_upd" name="hosiatalname_upd" placeholder="Hosipatal Name"
+                                                            required="" #hosiatalname_upd="ngModel"
+                                                            (change)="Teluglanguageconvrt(update_crs_hosipatalreg_form.hosiatalname_upd,'hosiatalname_tel_upd')"
+                                                            [ngClass]="{'is-invalid':hosiatalname_upd.invalid && (hosiatalname_upd.dirty || hosiatalname_upd.touched),
+                                                              'is-valid':hosiatalname_upd.value!='' && (hosiatalname_upd.touched || hosiatalname_upd.dirty)}">
+                                                        <div *ngIf="hosiatalname_upd.invalid && (hosiatalname_upd.dirty || hosiatalname_upd.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="hosiatalname_upd.errors">
+                                                                <div *ngIf="hosiatalname_upd.errors['required']">
+                                                                    Hosipatal Name is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xl-12 col-12">
+                                                <div class="form-group mb-2 position-relative">
+                                                    <div class="form-group mb-2 position-relative">
+                                                        <label for="form-label" class="form-label">Hosipatal Name (Telugu)<span
+                                                                class="text-danger">*</span></label>
+                                                        <input type="text" class="form-control"
+                                                            [(ngModel)]="update_crs_hosipatalreg_form.hosiatalname_tel_upd"
+                                                            id="hosiatalname_tel_upd" name="hosiatalname_tel_upd"
+                                                            (change)="Teluglanguageconvrt(update_crs_hosipatalreg_form.hosiatalname_tel_upd,'hosiatalname_tel_upd')"
+                                                            placeholder="Hosipatal Name" required="" #hosiatalname_tel_upd="ngModel"
+                                                            [ngClass]="{'is-invalid':hosiatalname_tel_upd.invalid && (hosiatalname_tel_upd.dirty || hosiatalname_tel_upd.touched),
+                                                             'is-valid':hosiatalname_tel_upd.value!='' && (hosiatalname_tel_upd.touched || hosiatalname_tel_upd.dirty)}">
+                                                        <div *ngIf="hosiatalname_tel_upd.invalid && (hosiatalname_tel_upd.dirty || hosiatalname_tel_upd.touched)"
+                                                            class="error-message text-danger">
+                                                            <div *ngIf="hosiatalname_tel_upd.errors">
+                                                                <div *ngIf="hosiatalname_tel_upd.errors['required']">
+                                                                    Hosipatal Name (Telugu) is required</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row mb-2">
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">District<span class="text-danger">*</span></label>
+                                            <ng-select name="district" id="district" required=""
+                                                [(ngModel)]="update_crs_hosipatalreg_form.district_upd" #district_updt="ngModel"
+                                                (change)="update_of_districtchange()" placeholder="district_upd" [ngClass]="{'is-invalid':district_updt.invalid && (district_updt.dirty || district_updt.touched),
+                                            'is-valid':district_updt.value!='' && (district_updt.touched || district_updt.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    district--</ng-option>
+                                                <ng-option value="0">All</ng-option>
+                                                <ng-option *ngFor="let loc of update_district_array"
+                                                    [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                            </ng-select>
+                                            <div *ngIf="district_updt.invalid && (district_updt.dirty || district_updt.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="district_updt.errors">
+                                                    <div *ngIf="district_updt.errors['required']">
+                                                        District is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Urban/Rural/
+                                                పట్టణ/గ్రామీణ<span class="text-danger">*</span></label>
+                                            <ng-select placeholder="Select" [(ngModel)]="update_crs_hosipatalreg_form.rural_urban_upd"
+                                                id="rural_urban_upd" name="rural_urban_upd" title="Urban Rural" required=""
+                                                #rural_urban_upd="ngModel" (change)="get_update_MandalMuncipality()"
+                                                [ngClass]="{'is-invalid': rural_urban_upd.invalid && (rural_urban_upd.dirty || rural_urban_upd.touched),
+                                                'is-valid': rural_urban_upd.value!='' && (rural_urban_upd.dirty || rural_urban_upd.touched)}">
+                                                <ng-option value="" disabled>--Select
+                                                    urban/rural--</ng-option>
+                                                <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                                <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                            </ng-select>
+                                            <div *ngIf="rural_urban_upd.invalid && (rural_urban_upd.dirty || rural_urban_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="rural_urban_upd.errors">
+                                                    <div *ngIf="rural_urban_upd.errors['required']">
+                                                        Urban/Rural/ is required</div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">MMC Name<span class="text-danger">*</span></label>
+                                            <ng-select name="mandal" id="mandal" required=""
+                                                [(ngModel)]="update_crs_hosipatalreg_form.mandal_upd" (change)="update_VillageWard()"
+                                                #mandal_upd="ngModel" placeholder="MMC Name" [ngClass]="{'is-invalid':mandal_upd.invalid && (mandal_upd.dirty || mandal_upd.touched),
+            'is-valid':mandal_upd.value!='' && (mandal_upd.touched || mandal_upd.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    mandal/muncipality--</ng-option>
+                                                <ng-option *ngFor="let loc of update_MandalMuncipality_array"
+                                                    [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+
+                                            </ng-select>
+                                            <div *ngIf="mandal_upd.invalid && (mandal_upd.dirty || mandal_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="mandal_upd.errors">
+                                                    <div *ngIf="mandal_upd.errors['required']">
+                                                        MMC Name is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Village/Ward<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="village_ward_upd" id="village_ward_upd" required=""
+                                                [(ngModel)]="update_crs_hosipatalreg_form.village_ward_upd" #village_ward_upd="ngModel"
+                                                placeholder="Village/Town"
+                                                [ngClass]="{'is-invalid':village_ward_upd.invalid && (village_ward_upd.dirty || village_ward_upd.touched),
+                                                                                'is-valid':village_ward_upd.value!='' && (village_ward_upd.touched || village_ward_upd.dirty)}">
+                                                <ng-option value="" disabled>--Select
+                                                    village/ward--</ng-option>
+                                                <ng-option *ngFor="let loc of update_village_ward_array"
+                                                    [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="village_ward_upd.invalid && (village_ward_upd.dirty || village_ward_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="village_ward_upd.errors">
+                                                    <div *ngIf="village_ward_upd.errors['required']">
+                                                        Village/Ward is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Email</label>
+                                            <input type="text" class="form-control" [(ngModel)]="update_crs_hosipatalreg_form.email_upd"
+                                                id="email_upd" name="email_upd" placeholder="email_upd" required="" #email_upd="ngModel"
+                                                appEmailFormat #village_ward="ngModel" [ngClass]="{'is-invalid':email_upd.invalid && (email_upd.dirty || email_upd.touched),
+                                            'is-valid':email_upd.value!='' && (email_upd.touched || email_upd.dirty)}">
+                                            <div *ngIf="email_upd.invalid && (email_upd.dirty || email_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="email_upd.errors">
+                                                    <div *ngIf="email_upd.errors['required']">
+                                                        Email is
+                                                        required</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Mobile No<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="update_crs_hosipatalreg_form.mobileno_upd"
+                                                appNumericsOnlyEnter appMobileFirstFiveNotAllowedDirective appNumericOnlyDirective
+                                                id="mobileno_upd" name="mobileno_upd" placeholder="Mobile No" required="" maxlength="10"
+                                                #mobileno_upd="ngModel" [ngClass]="{'is-invalid':mobileno_upd.invalid && (mobileno_upd.dirty || mobileno_upd.touched),
+                                                'is-valid':mobileno_upd.value!='' && (mobileno_upd.touched || mobileno_upd.dirty)}">
+                                            <div *ngIf="mobileno_upd.invalid && (mobileno_upd.dirty || mobileno_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="mobileno_upd.errors">
+                                                    <div *ngIf="mobileno_upd.errors['required']">
+                                                        Mobile No is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Pincode<span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="update_crs_hosipatalreg_form.pincode_upd"
+                                                Pincodevalidation id="pincode_upd" name="pincode_upd" placeholder="pincode_upd" required=""
+                                                #pincode_upd="ngModel"
+                                                [ngClass]="{'is-invalid':pincode_upd.invalid && (pincode_upd.dirty || pincode_upd.touched),
+                                                                                                                'is-valid':pincode_upd.value!='' && (pincode_upd.touched || pincode_upd.dirty)}">
+                                            <div *ngIf="pincode_upd.invalid && (pincode_upd.dirty || pincode_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="pincode_upd.errors">
+                                                    <div *ngIf="pincode_upd.errors['required']">
+                                                        Pincode is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Address<span class="text-danger">*</span></label>
+                                            <textarea rows="1" class="form-control" [(ngModel)]="update_crs_hosipatalreg_form.address_upd"
+                                                id="address_upd" name="address_upd" placeholder="address_upd" required=""
+                                                #address_upd="ngModel"
+                                                [ngClass]="{'is-invalid':address_upd.invalid && (address_upd.dirty || address_upd.touched),
+                                                                                'is-valid':address_upd.value!='' && (address_upd.touched || address_upd.dirty)}">
+                                                                                </textarea>
+                                            <div *ngIf="address_upd.invalid && (address_upd.dirty || address_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="address_upd.errors">
+                                                    <div *ngIf="address_upd.errors['required']">
+                                                        Address is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization Name<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" [(ngModel)]="update_crs_hosipatalreg_form.auth_name_upd"
+                                                id="auth_name_upd" name="auth_name_upd" placeholder="Authorization Name" required=""
+                                                #auth_name_upd="ngModel" [ngClass]="{'is-invalid':auth_name_upd.invalid && (auth_name_upd.dirty || auth_name_upd.touched),
+                                            'is-valid':auth_name_upd.value!='' && (auth_name_upd.touched || auth_name_upd.dirty)}">
+                                            <div *ngIf="auth_name_upd.invalid && (auth_name_upd.dirty || auth_name_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_name_upd.errors">
+                                                    <div *ngIf="auth_name_upd.errors['required']">
+                                                        Authorization Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization Mobile No<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="update_crs_hosipatalreg_form.auth_mobileno_upd" id="auth_mobileno_upd"
+                                                name="auth_mobileno_upd" placeholder="Authorization Mobile No No" required="" maxlength="10"
+                                                appNumericsOnlyEnter appMobileFirstFiveNotAllowedDirective appNumericOnlyDirective
+                                                #auth_mobileno_upd="ngModel"
+                                                [ngClass]="{'is-invalid':auth_mobileno_upd.invalid && (auth_mobileno_upd.dirty || auth_mobileno_upd.touched),
+                                                                            'is-valid':mobileno.value!='' && (auth_mobileno_upd.touched || auth_mobileno_upd.dirty)}">
+                                            <div *ngIf="auth_mobileno_upd.invalid && (auth_mobileno_upd.dirty || auth_mobileno_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_mobileno_upd.errors">
+                                                    <div *ngIf="auth_mobileno_upd.errors['required']">
+                                                        Authorization Mobile No is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Authorization eMail Id<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="update_crs_hosipatalreg_form.auth_email_upd" id="auth_email_upd"
+                                                name="auth_email_upd" placeholder="Authorization eMail Id" required="" appEmailFormat
+                                                #auth_email_upd="ngModel" [ngClass]="{'is-invalid':auth_email_upd.invalid && (auth_email_upd.dirty || auth_email_upd.touched),
+                                               'is-valid':auth_email_upd.value!='' && (auth_email_upd.touched || auth_email_upd.dirty)}">
+
+                                            <div *ngIf="auth_email_upd.invalid && (auth_email_upd.dirty || auth_email_upd.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="auth_email_upd.errors">
+                                                    <div *ngIf="auth_email_upd.errors['required']">
+                                                        Authorization eMail Id is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12 text-end">
+                                        <button class="btn btn-success me-2" [disabled]="!update_hospitalregform.form.valid"
+                                            (click)="update_hopital_master()">Save</button><!--  <i class="fa-solid fa-plus pe-2 text-white"></i> -->
+                                        <button class="btn btn-danger" (click)="getcancel()">Clear</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

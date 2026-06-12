@@ -1,0 +1,97 @@
+<div class="container-fluid py-4">
+
+    
+
+  <!-- HEADER CARD -->
+  <div class="card gsws-card">
+    <div class="card-body text-center">
+      <h2 class="page-title" style="color: #fff;">GSWS vs Birth Data</h2>
+     
+    </div>
+  </div>
+
+  <!-- ROW 1 -->
+  <div class="row justify-content-center mb-3">
+    <div class="col-md-4">
+      <div class="stat-card gsws-vs-actual">
+        <i class="mdi mdi-seat-flat stat-icon"></i> <!-- icon positioned -->
+        <h5 class="card-header">GSWS SURVEYED VS ACTUAL Birth</h5>
+        <div class="card-body">
+          <div class="stat-row"> 
+            <span class="label">GSWS</span>
+            <span class="label">Actual</span>
+          </div>
+          <div class="stat-row values">
+            <span class="highlight">{{this.DashBoardList[0]?.GSWS_SURVEYED_CNT  | number:'1.0-0':'en-IN'}}</span>
+            <span class="highlight">{{this.DashBoardList[0]?.BIRTH_DATA_CNT  | number:'1.0-0':'en-IN'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="stat-card death-vs-hh">
+        <i class="mdi mdi-gender-male-female stat-icon"></i>
+        <h5 class="card-header">BIRTH PARENTS VS GSWS HH</h5>
+        <div class="card-body">
+          <div class="stat-row">
+            <span class="label">GSWS HH</span>
+            <span class="label">Parents</span>
+          </div>
+          <div class="stat-row values">
+            <span class="highlight">{{this.DashBoardList[0]?.BIRTH_COUNT_HH  | number:'1.0-0':'en-IN'}}</span>
+            <span class="highlight">{{this.DashBoardList[0]?.GSWS_PARENTS_HH  | number:'1.0-0':'en-IN'}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROW 2 -->
+  <div class="row mb-4">
+    <div class="col-md-4">
+      <div class="stat-card child-missing">
+        <i class="mdi mdi-baby stat-icon"></i>
+        <h5 class="card-header">CHILD DATA NOT MAPPED</h5>
+        <div class="card-body">
+          <span class="count-count">{{this.DashBoardList[0]?.CHILD_DATA_NOT_MAPPED  | number:'1.0-0':'en-IN'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="stat-card father-missing">
+        <i class="mdi mdi-account stat-icon"></i>
+        <h5 class="card-header">FATHER DATA NOT MAPPED</h5>
+        <div class="card-body">
+          <span class="count-count">{{this.DashBoardList[0]?.FATHER_DATA_NOT_MAPPED  | number:'1.0-0':'en-IN'}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="stat-card mother-missing">
+        <i class="mdi mdi-account-circle stat-icon"></i>
+        <h5 class="card-header">MOTHER DATA NOT MAPPED</h5>
+        <div class="card-body">
+          <span class="count-count">{{this.DashBoardList[0]?.MOTHER_DATA_NOT_MAPPED  | number:'1.0-0':'en-IN'}}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ROW 3 -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card bar-chart-card text-center">
+        <div class="card-body">
+   
+          <div id="birth-vs-gsws-chart" style="width: 100%; height: 300px;"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

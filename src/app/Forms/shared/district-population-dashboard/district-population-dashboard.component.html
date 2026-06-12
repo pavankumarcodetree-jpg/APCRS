@@ -1,0 +1,710 @@
+<div class="container-fluid px-0">
+    <div class="header d-flex align-items-center p-2 ">
+  
+  <!-- Left Image -->
+  <img src="assets/images/f-logo.svg" alt="Logo">
+
+  <!-- Center District Name -->
+  <div class="header-title text-white">
+    {{selectedDistrictName}} Population Dashboard
+  </div>
+
+    <div class="ms-auto">
+      <select [(ngModel)]="selectedDistrictName" class="form-select district-select"  (change)="onDistrictChange($event)">
+        <option value="">Select District</option>
+        <option
+          *ngFor="let district of districts"
+          [value]="district">
+          {{ district }}
+        </option>
+      </select>
+      
+        <!-- <select
+          class="form-select district-select"
+          [(ngModel)]="selectedYear"
+          (change)="onYearChange($event)">
+          <option *ngFor="let year of yearList" [value]="year">
+            {{ year }}
+          </option>
+        </select> -->
+  </div>
+
+</div>
+</div>
+
+<div class="container-fluid">
+<div class="row mt-2 mb-2">
+  <div class="col-12 d-flex justify-content-end">
+    
+    <button class="btn btn-sm btn-primary d-flex align-items-center gap-2 rounded-pill" (click)="goBack()">
+      <i class="pi pi-arrow-left"></i>
+      Back
+    </button>
+
+  </div>
+
+</div>
+
+<div class=" py-4 d-none">
+  <div class="row g-4 justify-content-center">
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card primary ">
+        <!-- <div class="img-box bg-primary">
+          <img src="assets/images/people1.png" alt="">
+        </div> -->
+
+         <div class="card-icon">
+          <i class=" mdi mdi-account-group black-icon"></i>
+        </div>
+        <div>
+          <p>Total Population</p>
+          <h3>{{ dashboardSummary?.totalPopulation | number }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card success"> 
+
+           <div class="card-icon bg-success">
+          <i class="   mdi mdi-baby-carriage black-icon"></i>
+        </div>
+
+        
+
+        <!-- <div class="img-box bg-success">
+
+         
+          <img src="assets/images/pediatrics.png" alt="">
+        </div> -->
+        <!-- <div class="card-icon">
+          <i class="mdi mdi-baby-face-outline"></i>
+        </div> -->
+        <div>
+          <p>Total Births</p>
+          <h3>{{ dashboardSummary?.totalBirths | number }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card danger">
+             <div class="img-box bg-danger">
+          <img src="assets/images/death.png" alt="">
+        </div>
+        <!-- <div class="card-icon">
+          <i class="mdi mdi-heart-broken-outline"></i>
+        </div> -->
+        <div>
+          <p>Total Deaths </p>
+          <h3>{{ dashboardSummary?.totalDeaths | number }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card info">
+        <div class="card-icon">
+          <i class="mdi mdi-trending-up black-icon"></i>
+        </div>
+        <div>
+          <p>Birth Rate</p>
+          <h3>{{ dashboardSummary?.birthRate }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card warning">
+        <div class="card-icon">
+          <i class="mdi mdi-trending-down black-icon"></i>
+        </div>
+        <div>
+          <p>Death Rate</p>
+          <h3>{{ dashboardSummary?.deathRate }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card success">
+        <div class="card-icon">
+          <i class="mdi mdi-baby"></i>
+        </div>
+        <div>
+          <p>TFR</p>
+          <h3>{{ dashboardSummary?.tfr  }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+      <div class="stat-card danger">
+        <div class="card-icon">
+          <i class="mdi mdi-human-male-female"></i>
+        </div>
+        <div>
+          <p>Gender Ratio</p>
+          <h3>{{ dashboardSummary?.sexRatio  }}</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row g-4 justify-content-center">
+         <div class="col-lg-3 col-md-6">
+      <div class="stat-card primary ">
+        <!-- <div class="img-box bg-primary">
+          <img src="assets/images/people1.png" alt="">
+        </div> -->
+
+         <div class="card-icon">
+          <i class=" mdi mdi-account-group black-icon"></i>
+        </div>
+        <div>
+          <p>Total Population</p>
+          <h3>{{ dashboardSummary?.totalPopulation | number }}</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row d-none">
+<div class="card custom-card">
+    <div class="card-body">
+     <div class="row align-items-center">
+  <h4 class="custom-title" >
+    Mandal
+  </h4>
+</div>
+<div class="row">
+  <div
+    class="col-md-2 col-6"
+    *ngFor="let mandal of mandalList">
+    <div class="form-check">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [id]="mandal.mandalName"
+        (change)="onMandalChange($event, mandal)">
+      <label class="form-check-label" [for]="mandal.mandalName"> {{ mandal.mandalName }}</label>
+    </div>
+  </div>
+</div>
+    <!-- <div class="row">
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m1">
+          <label class="form-check-label" for="m1">Anaparthy</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m2">
+          <label class="form-check-label" for="m2">Biccavolu</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m3">
+          <label class="form-check-label" for="m3">Chagallu</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m4">
+          <label class="form-check-label" for="m4">Devarapalle</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m5">
+          <label class="form-check-label" for="m5">Gokavaram</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m6">
+          <label class="form-check-label" for="m6">Gopalapuram</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m7">
+          <label class="form-check-label" for="m7">Kadiam</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m8">
+          <label class="form-check-label" for="m8">Korukonda</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m9">
+          <label class="form-check-label" for="m9">Kovvur</label>
+        </div>
+      </div>
+
+      <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m10">
+          <label class="form-check-label" for="m10">Nallajerla</label>
+        </div>
+      </div>
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m11">
+          <label class="form-check-label" for="m11">Nidadavole</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m12">
+          <label class="form-check-label" for="m12">peravali</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m13">
+          <label class="form-check-label" for="m13">Rajahmundry Rural</label>
+        </div>
+      </div>
+
+       <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m14">
+          <label class="form-check-label" for="m14">Rajahmundry Urban</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m15">
+          <label class="form-check-label" for="m15">Rajanagaram</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m16">
+          <label class="form-check-label" for="m16">Rangampeta</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m17">
+          <label class="form-check-label" for="m17">Seethanagaram</label>
+        </div>
+      </div>
+
+           <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m18">
+          <label class="form-check-label" for="m18">Tallapudi</label>
+        </div>
+      </div>
+
+            <div class="col-md-2 col-6">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="m19">
+          <label class="form-check-label" for="m19">Undrajavaram</label>
+        </div>
+      </div>
+
+    </div> -->
+  </div>
+</div>
+</div>
+
+<div class="row d-none">
+    <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Mandal-wise Total Births and Deaths </h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="barChartOptions"
+              style="width: 100%; height: 350px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+</div>
+
+<div class="row d-none">
+    <div class="card custom-card">
+        <div class="card-body">
+              <h4 class="custom-title mb-3">Year-wise Births & Deaths</h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="lineChartOptions"
+              style="width: 100%; height: 320px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+</div>
+
+
+
+  <div class="row g-4 d-none">
+
+    <!-- Sidebar -->
+    <div class="col-lg-2">
+      <div class="sidebar-card fade-in">
+        <h6 class="sidebar-title">MANDAL</h6>
+
+       
+        <div class="mandal-list">
+          <button class="mandal-btn active">Anaparthy</button>
+          <button class="mandal-btn">Biccavolu</button>
+          <button class="mandal-btn">Chagallu</button>
+          <button class="mandal-btn">Devarapalle</button>
+          <button class="mandal-btn">Gokavaram</button>
+          <button class="mandal-btn">Gopalapuram</button>
+          <button class="mandal-btn">Kadiam</button>
+          <button class="mandal-btn">Korukonda</button>
+          <button class="mandal-btn">Kovvur</button>
+          <button class="mandal-btn">Nallajerla</button>
+       
+        </div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="col-lg-10">
+
+      <div class="row g-4">
+
+        <!-- Year -->
+        <div class="col-lg-3">
+          <div class="glass-card slide-up"
+               [style.animationDelay]="'0.2s'">
+
+            <h6 class="card-title">Year</h6>
+
+            <button class="year-btn">2026</button>
+            <button class="year-btn">2025</button>
+            <button class="year-btn">2024</button>
+            <button class="year-btn active">2023</button>
+
+          </div>
+        </div>
+
+        <!-- Line Chart -->
+        <div class="col-lg-9">
+          <div class="glass-card slide-up"
+               [style.animationDelay]="'0.4s'">
+
+            <h5 class="mb-3">Births & Deaths</h5>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="lineChartOptions"
+              style="width: 100%; height: 320px; display: block;">
+            </highcharts-chart>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bar Chart -->
+      <div class="row g-4 mt-1">
+        <div class="col-lg-12">
+          <div class="glass-card slide-up"
+               [style.animationDelay]="'0.6s'">
+
+            <h5 class="mb-3">Total Births & Deaths (2023)</h5>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="barChartOptions"
+              style="width: 100%; height: 350px; display: block;">
+            </highcharts-chart>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="container-fluid px-0">
+
+    <!-- TOP CARDS -->
+<div class="row g-3 mb-3">
+
+    <!-- Total Population -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card population-card">
+            <div class="stats-title">Total Population</div>
+            <div class="stats-subtitle">Year {{ selectedYear }}</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.totalPopulation | number }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Population Growth Rate -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card success-card">
+            <div class="stats-title">Population Growth Rate</div>
+            <div class="stats-subtitle">Annual Growth (%)</div>
+            <div class="stats-count">
+              {{
+                dashboardSummary?.populationGrowthRate != null
+                  ? (dashboardSummary.populationGrowthRate | number:'1.2-2') + '%'
+                  : ''
+              }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Births -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card births-card">
+            <div class="stats-title">Total Births</div>
+            <div class="stats-subtitle">Year {{ selectedYear }}</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.totalBirths | number }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Deaths -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card deaths-card">
+            <div class="stats-title">Total Deaths</div>
+            <div class="stats-subtitle">Year {{ selectedYear }}</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.totalDeaths | number }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Crude Birth Rate -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card births-card">
+            <div class="stats-title">Crude Birth Rate (CBR)</div>
+            <div class="stats-subtitle">Per 1000 Population</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.birthRate }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Crude Death Rate -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card deaths-card">
+            <div class="stats-title">Crude Death Rate (CDR)</div>
+            <div class="stats-subtitle">Per 1000 Population</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.deathRate }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Total Fertility Rate -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card success-card">
+            <div class="stats-title">Total Fertility Rate (TFR)</div>
+            <div class="stats-subtitle">Year {{ selectedYear }}</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.tfr }}
+            </div>
+        </div>
+    </div>
+
+        <!-- Sex Ratio Fertility Rate -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card success-card">
+            <div class="stats-title">Sex Ratio</div>
+            <div class="stats-subtitle">Year {{ selectedYear }}</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.sexRatio }}
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row g-3 mb-3">
+
+    <!-- Child Dependency  -->
+    <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card population-card">
+            <div class="stats-title">Child Dependency</div>
+            <div class="stats-subtitle">0-14 vs Working Age</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.childDependency  }}
+            </div>
+        </div>
+    </div>
+    <!-- Old-age Dependency  -->
+        <div class="col-xl col-lg-4 col-md-6">
+        <div class="stats-card population-card">
+            <div class="stats-title">Old-age Dependency</div>
+            <div class="stats-subtitle">60+ vs Working Age</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.oldAgeDependency  }}
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div class="row">
+
+        <!-- MANDAL -->
+        <div class="col-xl-2 col-lg-3 mb-3">
+
+            <div class="sidebar-card mandal-card">
+
+                <div class="sidebar-title">
+                    MANDALS / SUB-DISTRICTS
+                </div>
+
+                <div class="sidebar-scroll">
+                    <button
+                  *ngFor="let mandal of mandalList"
+                  class="sidebar-btn"
+                  [class.active]="selectedMandal === mandal.mandalName"
+                  (click)="selectMandal(mandal)"
+                >
+                  {{ mandal.mandalName }}
+                </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        
+
+        <!-- YEAR -->
+         <div class="col-xl-10 col-lg-9">
+         <div class="row">
+        <div class="col-xl-2 col-lg-3 mb-3">
+
+          <div class="year-card">
+
+    <div class="sidebar-title">
+        YEARS
+    </div>
+
+    <div class="year-scroll">
+        <button
+             (click)="onYearChange(year)"
+            *ngFor="let year of years"
+            class="year-btn"
+            [class.active]="selectedYear === year">
+            {{year}}
+        </button>
+
+    </div>
+
+</div>
+
+        </div>
+
+        <!-- CHART -->
+        <div class="col-xl-10 col-lg-9">
+
+
+      <div class="card custom-card">
+        <div class="card-body">
+              <h4 class="custom-title mb-3">Year-wise Births & Deaths</h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="lineChartOptions"
+              style="width: 100%; height: 320px; display: block;">
+            </highcharts-chart>
+        </div>
+
+        </div>
+
+    </div>
+    </div>
+  <div class="row mt-4">
+    <div class="col-lg-6">
+        <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Mandal-wise Total Births and Deaths </h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="barChartOptions"
+              style="width: 100%; height: 320px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+    </div>
+        <div class="col-lg-6">
+        <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Median age at death</h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="medianAgeChartOptions"
+              style="width: 100%; height: 320px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+
+</div>
+                <div class="row align-items-strech">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+    <div class="card h-100">
+        
+        <!-- Added flex classes -->
+        <div class="card-body d-flex align-items-center justify-content-center">
+            
+            <div id="chart" class="w-100">
+                <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="ageWiseChartOptions"
+              style="width:100%; height:450px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="row">
+                                      <highcharts-chart
+                                  [Highcharts]="Highcharts"
+                                  [options]="sexRatioChartOptions"
+                                  style="width:100%; height:550px; display:block;">
+                                </highcharts-chart>
+                                  
+                </div>
+
+
+</div>

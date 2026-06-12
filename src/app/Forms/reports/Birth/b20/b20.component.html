@@ -1,0 +1,183 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>B-20 Live Births by duration of
+                    Pregnancy and Birth
+                    Weight (Rural
+                    &amp; Urban)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="tbl20table" [value]="state_levle_array" rowGroupMode="rowspan"
+                                groupRowsBy="DISTRICT_NAME"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt2 [rows]="state_levle_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['PREGNANCY_WEEKS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig"
+                                                        #dp="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="to_date" name="to_date" bsDatepicker
+                                                        [bsConfig]="bsConfig" [maxDate]="cureent_date"
+                                                        #dp2="bsDatepicker" appDateFormatDirective [(ngModel)]="to_date"
+                                                        aria-describedby="basic-addon2" required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tbl20table','b20 Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tbl20table','b20 Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="SNO" rowspan="3">SNO</th>
+                                        <th pSortableColumn="SNO" rowspan="3">Duration of Pregnancy</th>
+                                        <th pSortableColumn="PREGNANCY_WEEKS" style="text-align: center;" colspan="21">
+                                            Birth Weight (in Kgs)</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th pSortableColumn="RURAL_BTW_1_TO_1.5" colspan="3">Less than 1.500</th>
+                                        <th pSortableColumn="RURAL_BTW_1.5_TO_2" colspan="3"> 1.500-2.000</th>
+                                        <th pSortableColumn="RURAL_BTW_2_TO_3" colspan="3"> 2.000-3.000</th>
+                                        <th pSortableColumn="RURAL_BTW_3_TO_4" colspan="3"> 3.000-4.000</th>
+                                        <th pSortableColumn="RURAL_ABOVE_4" colspan="3">4.000+</th>
+                                        <th pSortableColumn="RURAL_NOT_STATED" colspan="3"> Not Stated</th>
+                                        <th pSortableColumn="RURAL_TOTAL" colspan="3">Total</th>
+
+
+                                    </tr>
+                                    <tr>
+
+
+
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Rural</th>
+                                        <th pSortableColumn="URBAN" style="text-align: center;">Urban</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-b20_levle_array let-rowIndex="rowIndex"
+                                    let-rowgroup="rowgroup" let-rowspan="rowspan">
+                                    <tr>
+                                        <td>{{ b20_levle_array['SNO'] }}</td>
+
+                                        <td>{{ b20_levle_array['PREGNANCY_WEEKS'] }}</td>
+
+                                        <td>{{ b20_levle_array['RURAL_BTW_1_TO_1.5'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_BTW_1_TO_1.5'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_BTW_1_TO_1.5'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_BTW_1.5_TO_2'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_BTW_1.5_TO_2'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_BTW_1.5_TO_2'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_BTW_2_TO_3'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_BTW_2_TO_3'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_BTW_2_TO_3'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_BTW_3_TO_4'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_BTW_3_TO_4'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_BTW_3_TO_4'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_ABOVE_4'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_ABOVE_4'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_ABOVE_4'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_NOT_STATED'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_NOT_STATED'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL_NOT_STATED'] }}</td>
+                                        <td>{{ b20_levle_array['RURAL_TOTAL'] }}</td>
+                                        <td>{{ b20_levle_array['URBAN_TOTAL'] }}</td>
+                                        <td>{{ b20_levle_array['TOTAL'] }}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

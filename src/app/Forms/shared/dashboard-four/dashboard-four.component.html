@@ -1,0 +1,133 @@
+<div class="container py-4">
+  <!-- Header -->
+
+  <li class="nav-item">
+    <a class="nav-link active" routerLink="/shared/welcome" aria-current="page">Home <span
+        class="visually-hidden">(current)</span></a>
+  </li>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h3 class="fw-bold text-primary">Andhra Pradesh Population Dashboard</h3>
+      <p class="text-muted">Real Time Governance Society - Government of Andhra Pradesh</p>
+    </div>
+    <div class="d-flex gap-2">
+      <select class="form-select form-select-sm">
+        <option selected>All Districts</option>
+        <option>Krishna</option>
+        <option>Guntur</option>
+        <option>Chittoor</option>
+      </select>
+      <select class="form-select form-select-sm">
+        <option selected>2024</option>
+        <option>2023</option>
+        <option>2022</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <ul class="nav nav-pills mb-4 bg-light rounded px-2 py-2">
+    <li class="nav-item" *ngFor="let tab of tabs">
+      <a class="nav-link px-3 py-2 me-2" [class.active]="activeTab === tab.key" href="#"
+        (click)="$event.preventDefault(); activeTab = tab.key">
+        <i *ngIf="tab.icon" class="me-1 animate__animated animate__pulse animate__infinite" [ngClass]="tab.icon"></i>
+        {{ tab.label }}
+      </a>
+    </li>
+  </ul>
+
+  <!-- Shared Stat Card Template -->
+  <ng-template #statCard let-statData="stat" let-color="color" let-icon="icon">
+
+    <div class="card border-0 shadow h-100 rounded-4 text-white bg-{{color}} position-relative overflow-hidden">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <div class="small fw-semibold">{{ statData.label }}</div>
+            <div class="fs-3 fw-bold">{{ statData.value }}</div>
+            <div class="small fst-italic" *ngIf="statData.subtext">{{ statData.subtext }}</div>
+          </div>
+          <i class="{{ icon }} fs-1 opacity-50 animate__animated animate__zoomIn"></i>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <!-- Loop Through Each Tab's Stats -->
+  <div *ngIf="activeTab === 'population'">
+
+    <!-- Basic Demographics -->
+    <h5 class="text-center mb-3 fw-bold text-primary">Population Overview</h5>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6 col-lg-4" *ngFor="let stat of populationStatsArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: populationColors[i], icon: populationIcons[i] }"></ng-container>
+      </div>
+    </div>
+
+    <!-- Age Structure -->
+    <h5 class="text-center mb-3 fw-bold text-success">Age Structure</h5>
+    <div class="row g-3 mb-4">
+      <div class="col-md-6 col-lg-3" *ngFor="let stat of ageStructureArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: ageStructureColors[i], icon: ageStructureIcons[i] }"></ng-container>
+      </div>
+    </div>
+
+    <!-- Dependency Ratio -->
+    <h5 class="text-center mb-3 fw-bold text-warning">Dependency Ratio</h5>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-6" *ngFor="let stat of dependencyRatioArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: dependencyColors[i], icon: dependencyIcons[i] }"></ng-container>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="activeTab === 'migration'">
+    <h5 class="text-center mb-3 fw-bold text-info">Migration & Mobility</h5>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4" *ngFor="let stat of migrationStatsArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: migrationColors[i], icon: migrationIcons[i] }"></ng-container>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="activeTab === 'vulnerable'">
+    <h5 class="text-center mb-3 fw-bold text-secondary">Vulnerability & Inclusion</h5>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4" *ngFor="let stat of vulnerableStatsArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: vulnerableColors[i], icon: vulnerableIcons[i] }"></ng-container>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="activeTab === 'health'">
+    <h5 class="text-center mb-3 fw-bold text-danger">Health & Nutrition</h5>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4" *ngFor="let stat of healthStatsArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: healthColors[i], icon: healthIcons[i] }"></ng-container>
+      </div>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="activeTab === 'fertility'">
+    <h5 class="text-center mb-3 fw-bold text-warning">Fertility & Family Planning</h5>
+    <div class="row g-3">
+      <div class="col-md-6 col-lg-4" *ngFor="let stat of fertilityStatsArray; let i = index">
+        <ng-container
+          *ngTemplateOutlet="statCard; context: { stat: stat, color: fertilityColors[i], icon: fertilityIcons[i] }"></ng-container>
+      </div>
+    </div>
+  </div>
+
+</div>

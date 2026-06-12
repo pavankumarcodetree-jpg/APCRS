@@ -1,0 +1,137 @@
+<div class="wrapper">
+
+    <!-- Layout -->
+    <div class="navbar-custom">
+        <div class="topbar container-fluid">
+            <div class="d-block d-lg-flex align-items-center gap-lg-5 gap-1 w-100">
+
+                <div class="col-xl-8 col-8">
+                    <div class="logo-topbar">
+
+                        <a href="" class="logo-light d-flex align-items-center">
+                            <span class="logo-lg">
+                                <img src="assets/images/logo-sm.png" alt="logo">
+                            </span>
+                            <div class="text ps-2">
+                                <h3 class="mb-0">APCRS</h3>
+                                <p class="mb-0">Andhra Pradesh Civil Registration System</p>
+                            </div>
+                            <!-- <span class="logo-sm">
+                                    <img src="assets/images/aplogo.png" alt="small logo">
+                                </span> -->
+                        </a>
+
+                        <!-- 
+                            <a href="" class="logo-dark d-flex">
+                                <span class="logo-lg">
+                                    <img src="assets/image/crs-logo-light.png" alt="dark logo">
+                                </span>
+                                <span class="logo-lg">
+                                    <img src="assets/images/logo-sm.png" alt="logo">
+                                </span>
+                                <div class="text">
+                                    <h3 class="title">APCRS</h3>
+                                    <p class="subtitle mb-0">Andhra Pradesh Civil Registration System</p>
+                                  </div>
+                            </a> -->
+                    </div>
+                </div>
+                <div class="col-xl-4 col-4">
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn top-login-btn">Login <i class="mdi mdi-login"></i></button>
+                        <!-- routerLink="/auth/login" -->
+                    </div>
+                </div>
+
+                <button class="button-toggle-menu">
+                    <i class="mdi mdi-menu"></i>
+                </button>
+                <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+
+            </div>
+        </div>
+        <div class="topnav">
+            <div class="container-fluid">
+                <nav class="navbar navbar-expand-lg">
+                    <div class="collapse navbar-collapse" id="topnav-menu-content">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" routerLink="/home/index" id="topnav-dashboards" role="button">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    About CRS
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    RBD Act and Model Rules
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    Circulars
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    Form
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    FAQ
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link" id="topnav-dashboards" role="button">
+                                    How To Apply
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+ 
+    <div class="content-page creative-style">
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+
+
+    </div>
+    <!-- Footer Start -->
+    <section class="footer-section">
+        <div class="container-fluid">
+          
+            <div class="row align-items-center">
+                <div class="col-xl-6 col-12">
+                    <div class="copy-text">
+                        <p class="mb-0 text-white fs-6">©2024 Govt of Andhra Pradesh (Civil Resgistration System) . All
+                            Rights
+                            Reserved</p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-12">
+                    <div class="realtime-img">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <p class="mb-0 text-white me-2 fs-6">Design and Developed by</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end Footer -->
+</div>

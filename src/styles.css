@@ -1,0 +1,283 @@
+@import "~@ng-select/ng-select/themes/default.theme.css";
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css"; */
+
+@import "~ag-grid-community/styles/ag-grid.css";
+@import "~ag-grid-community/styles/ag-theme-alpine.css";
+@import "~ag-grid-community/styles/ag-theme-balham.css";
+@import "~ag-grid-community/styles/ag-theme-material.css";
+@import "~ag-grid-community/styles/ag-theme-quartz.css";
+@import '~node_modules/@mdi/font/css/materialdesignicons.min.css';
+@import '~node_modules/remixicon/fonts/remixicon.css';
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+:root{
+    --mat-form-field-container-height: 37px;
+    --mat-form-field-filled-label-display: block;
+    --mat-form-field-container-vertical-padding: 7px;
+    --mat-form-field-filled-with-label-container-padding-top: 10px;
+    --mat-form-field-filled-with-label-container-padding-bottom: 10px;
+}
+.mat-mdc-form-field-flex {
+    display: inline-flex;
+    align-items: baseline;
+    box-sizing: border-box;
+    width: 100%;
+    height: 37px;
+}
+
+.custom-table {
+    border: 1px solid #ccc;
+}
+
+.custom-table .p-datatable-caption {
+    border-bottom: 1px solid #ccc;
+}
+
+.custom-table th,
+.custom-table td {
+    font-size: 14px;
+}
+
+
+.wrap-text {
+    white-space: normal !important;
+    word-wrap: break-word;
+}
+
+.p-datatable .p-datatable-tbody>tr>td {
+    text-align: left;
+    border: 1px solid #e5e7eb !important;
+    /* border-width: 0 0 1px 0; */
+    padding: 0.25rem 0.75rem !important;
+    font-size: 14px !important;
+    font-weight: 600;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    border: 1px solid #e5e7eb !important;
+    /* border-width: 0 0 1px 0 !important; */
+    color: #fff !important;
+    background: #234a7d !important;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+    white-space: nowrap;
+    font-size: 14px !important;
+    padding: 0.25rem 0.75rem !important;
+}
+
+.p-datatable.p-datatable-gridlines .p-datatable-tbody>tr>td {
+    border-width: 1px 0 0 1px !important;
+}
+
+.p-datatable .p-sortable-column .p-sortable-column-icon,
+.p-column-filter-menu-button {
+    color: #ffffff !important;
+}
+
+:host .p-button {
+    margin-right: .5rem;
+}
+
+:host .p-buttonset {
+    .p-button {
+        margin-right: 0;
+    }
+}
+
+:host .sizes {
+    .button {
+        margin-bottom: .5rem;
+        display: block;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .p-button {
+        margin-bottom: .5rem;
+
+        &:not(.p-button-icon-only) {
+            display: flex;
+            width: 100%;
+        }
+    }
+
+    .p-buttonset {
+        .p-button {
+            margin-bottom: 0;
+        }
+    }
+}
+
+::ng-deep .creative-style .ng-select .ng-select-container {
+    border: var(--ct-border-width) solid var(--ct-border-color) !important;
+}
+
+::ng-deep .manualalot.p-datatable.p-datatable-sm .p-datatable-thead>tr>th {
+    white-space: nowrap;
+    font-size: 13px !important;
+    padding: 0.25rem 0.25rem !important;
+}
+
+::ng-deep .manualalot.p-datatable.p-datatable-sm .p-datatable-tbody>tr>td {
+    padding: 0.25rem 0.25rem !important;
+    font-size: 13px !important;
+}
+
+::ng-deep .manualalot.p-datatable.p-datatable-sm .p-datatable-tfoot>tr>td {
+    padding: 0.25rem 0.25rem;
+    font-size: 14px;
+}
+
+/* .error-message {
+    position: relative;
+    z-index: 1049;
+} */
+.p-dialog {
+    z-index: 1050 !important;
+}
+
+.p-dialog-mask {
+    z-index: 1049 !important;
+}
+.inbox{
+    position: relative;
+}
+
+.inbox .card .card-body{
+    padding: 1rem;
+}
+.inbox .card.active{
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border:2px solid #007bff;
+}
+.inbox .bg-1{
+    background-image: linear-gradient(90deg, #4481eb 0%, #04befe 100%);
+    color: #fff;
+}
+.inbox .bg-2{
+    background-image: linear-gradient(90deg, #cf4e2b 0%, #dc6e50 100%);
+    color: #fff;
+}
+.inbox .bg-3{
+    background-image: linear-gradient(90deg, #27ab51 0%, #44b267 100%);
+    color: #fff;
+}
+.inbox .bg-4{
+    background-image: linear-gradient(90deg, #672eb1 0%, #7e4ebd 100%);
+    color: #fff;
+}
+.inbox .bg-5{
+    background-image: linear-gradient(90deg, #209cff 0%, #68e0cf 100%);
+    color: #fff;
+}
+
+.inbox .icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    border:2px dotted #eee;
+}
+.inbox .card-title{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+}
+
+::ng-deep .p-inputtext {
+    padding: 0.25rem 0.25rem !important;
+    padding-left: 2.5rem !important;
+}
+
+.step {
+    position: relative;
+    min-height: 1em;
+    color: gray;
+  }
+  .step + .step {
+    margin-top: 1.5em
+  }
+  .step > div:first-child {
+    position: static;
+    height: 0;
+  }
+  .step > div:not(:first-child) {
+    margin-left: 1.5em;
+    padding-left: 1em;
+  }
+  .step.step-active {
+    color: #28a87f;
+  }
+  .step.step-active .circle {
+    background-color: #28a87f;
+  }
+
+  .circle {
+    background: gray;
+    position: relative;
+    width: 1.5em;
+    height: 1.5em;
+    line-height: 1.5em;
+    border-radius: 100%;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 0 0 3px #fff;
+  }
+
+  .circle:after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    top: 1px;
+    right: 50%;
+    bottom: 1px;
+    left: 50%;
+    height: 100%;
+    width: 1px;
+    transform: scale(1, 2);
+    transform-origin: 50% -100%;
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: 0;
+  }
+  .step:last-child .circle:after {
+    display: none
+  }
+
+  .title {
+    line-height: 1.5em;
+    font-weight: bold;
+  }
+  .caption {
+    font-size: 0.8em;
+  }
+
+  .cstmheader{
+    background: #fff !important;
+    padding: 0.75rem 0.75rem !important;
+    border-bottom: 1px solid #eee;
+  }
+  .cstmheader h4{
+    line-height: 1.2 !important ;
+    text-transform: capitalize;
+  }
+
+  .totalclass{
+    color: white;
+    background-color:#234a7d;
+}

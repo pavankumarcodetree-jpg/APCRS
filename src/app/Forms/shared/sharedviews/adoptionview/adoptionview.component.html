@@ -1,0 +1,699 @@
+<div class="col-xl-12 col-lg-12" >
+    <div class="row align-items-center justify-content-center">
+        <div class="col-xl-12 col-12">
+
+
+            <ul class="nav nav-pills wizard-pills mb-2" id="pills-tab" role="tablist">
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-confirmlegal-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-confirmlegal" type="button" role="tab"
+                        aria-controls="pills-confirmlegal" [disabled]="!isConfirmLegalEnabled" aria-selected="false"><img
+                            src="assets/images/compliant.png" style="width:40px; height:40px;">Legal Information
+                        Confirmation</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-confirmstatistic-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-confirmstatistic"  [disabled]="!isConfirmStatisticalEnabled" type="button" role="tab"
+                        aria-controls="pills-confirmstatistic" aria-selected="false"><img
+                            src="assets/images/confirmation.png" style="width:40px; height:40px;">Statistic
+                        Information Confirmation</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+
+                  <!-- confirmlegal -->
+                  <div class="tab-pane fade show active" id="pills-confirmlegal" role="tabpanel"
+                  aria-labelledby="pills-confirmlegal-tab" tabindex="0">
+
+                 <div class="container-fluid">
+                     <h5>Child's Information / శిశువు సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Date of Birth / పుట్టిన తేదీ
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong
+                                     class="">{{draft_details_array?.childinformation?.dateofbirth}}</strong>
+                             </div>
+                         </div>
+
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Sex / లింగ భేదము
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.childinformation?.selgender_val
+                                     }}</strong>
+
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 First Name / మొదటి పేరు
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong
+                                     class="">{{draft_details_array?.childinformation?.childname_value}}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1"
+                             *ngIf="draft_details_array?.childinformation?.selaadhar=='EID'">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 EID Number / EID నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.childinformation?.aadhaar
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1"
+                             *ngIf="draft_details_array?.childinformation?.selaadhar=='Aadhaar'">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.childinformation?.aadhaar
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+
+
+                     <h5>Birth Father’s Information / తండ్రి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.fathername_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.fatherInformation?.father_aadhhar_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Birth Mother’s Information / తల్లి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mothername_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.motherInformation?.mother_aadhhar_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Adoptive Father’s Information / తండ్రి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Full Name  / పూర్తి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionfatherInformation?.adoption_fathername_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionfatherInformation?.adoption_father_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionfatherInformation?.adoption_father_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionfatherInformation?.adoption_father_aadhhar_number_mask
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Adoptive Mother’s Information / తల్లి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Full Name  / పూర్తి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionmotherInformation?.adoption_mothername_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionmotherInformation?.adoption_mother_email_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionmotherInformation?.adoption_mother_mobile_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoptionmotherInformation?.adoption_mother_aadhaar_number_mask
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Date and Number of Adoption Deed / Order / దత్తత అంగీకార పత్రము యొక్క తేదీ మరియు సంఖ్య/ఆర్డర్</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Date of Adoption Deed / Order / దత్తత అంగీకార పత్రము యొక్క తేదీ/ఆర్డర్
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoption_deed_order_details?.adoption_deed_or_order_date
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Number of Adoption Deed / Order దత్తత అంగీకార పత్రము యొక్క తేదీ/ఆర్డర్
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.adoption_deed_order_details?.adoption_deed_or_order_number
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Address of adoptive parents as recorded in Adoption deed / దత్తత పత్రములో నమోదు చేయబడిన పెంపుడు తల్లిదండ్రుల చిరునామా
+                    </h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                Address of adoptive parents as recorded in Adoption deed / బిడ్డ జన్మించినప్పుడు తల్లిదండ్రుల చిరునామా
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.addressof_parents?.addressof_parents_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Permanent address of parents / తల్లిదండ్రుల శాశ్వత చిరునామా</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                Permanent address of adoptive parents / పెంపుడు తల్లిదండ్రుల శాశ్వత చిరునామా
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.Permanent_addressof_parents?.Permanent_addressof_parents_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Place of birth / పుట్టిన స్థలము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Place of birth / పుట్టిన స్థలము
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.placeofbirth?.placeofbirth_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <h5>Informant’s Information / సమాచారమిచ్చిన వ్యక్తి యొక్క సమాచారము</h5>
+                     <div class="col-xl-12 col-12">
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 First Name / మొదటి పేరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.information_value
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Email ID / ఈ మెయిల్ ID
+
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_email_id
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Mobile Number / మొబైలు నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_mobile_no
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Aadhaar Number / ఆధార్ నంబరు
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_aadhhar_no
+                                     }}</strong>
+                             </div>
+                         </div>
+                         <div class="row bg-light mb-1">
+                             <div class="col-xl-4 col-6 border-end border-white border-2">
+                                 Address / చిరునామా
+                             </div>
+                             <div class="col-xl-8 col-6">
+                                 <strong class="">{{
+                                     draft_details_array?.information?.Informant_address_val
+                                     }}</strong>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="text-end">
+                         <button type="submit" class="btn btn-success my-2"
+                             (click)="enableConfirmStatisticalTab()"><i
+                                 class="fa-solid fa-angles-right ps-2"></i>Next</button>
+
+                     </div>
+                 </div>
+             </div>
+             <!-- confirm statical -->
+             <div class="tab-pane fade" id="pills-confirmstatistic" role="tabpanel"
+                aria-labelledby="pills-confirmstatistic-tab"
+                 tabindex="0">
+                 <div class="">
+
+                     <div class="container-fluid">
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Address / చిరునామా
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_residence_value}}</strong>
+                                 </div>
+                             </div>
+                         </div>
+                         <h5>Adopted Father’s & Mother’s Information / తండ్రి యొక్క & తల్లి యొక్క సమాచారము</h5>
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s religion / తండ్రి యొక్క మతము
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_religion_val}}</strong>
+                                 </div>
+                             </div>
+
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s level of education / తండ్రి యొక్క విద్యా స్థాయి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_education_val}}</strong>
+
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Father’s occupation / తండ్రి యొక్క వృత్తి
+
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.father_occupation_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s religion / తల్లి యొక్క మతము
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_religion_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s level of education / తల్లి యొక్క విద్యా స్థాయి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_eduaction_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Mother’s occupation / తల్లి యొక్క వృత్తి
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.mother_occupation_val}}</strong>
+                                 </div>
+                             </div>
+                         </div>
+
+                         <h5>Other Information / ఇతర సమాచారము</h5>
+                         <div class="col-xl-12 col-12">
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Age of the mother (in completed years) at the time of marriage : (If
+                                     married more than once, age at first marriage may
+                                     be entered) / వివాహ సమయంలో తల్లి వయస్సు (పూర్తైన సంవత్సరాలలో) :(ఒకవేళ
+                                     ఒకటి కంటే ఎక్కువసార్లు వివాహం చేసుకున్నట్లయితే,
+                                     మొదటి వివాహా సమయానికి ఉన్న వయస్సును నమోదు చేయవలెను)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.age_of_the_mother}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Age of the mother (in completed years) at the time of this birth / ఈ
+                                     జననం సమయమునకు తల్లి వయస్సు (పూర్తయిన సంవత్సరములలో)
+
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.age_of_the_mother_birth_time}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Number of children born alive to the mother so far including this child
+                                     : (Number of children born alive to include also
+                                     those from earlier marriage(s), if any) / ఇప్పటి వరకు తల్లికి ఈ శిశువుతో
+                                     సహా సజీవంగా పుట్టిన పిల్లల సంఖ్య : (మునుపటి
+                                     వివాహము(ల) ద్వారా సజీవంగా పుట్టిన పిల్లలు ఉన్నట్లైతే, ఆ సంఖ్యను కూడా
+                                     చేర్చ వలెను.)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.number_of_children}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Type of attention at delivery / ప్రసవ సమయములో తీసుకొన్న జాగ్రత్త విధానం
+
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.type_of_attention_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Method of delivery / ప్రసవ విధానం
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.method_of_delivery_val}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Birth weight (in kgs.) / జనన సమయములో శిశువు బరువు (కిలోలలో)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong class="">{{draft_details_array?.legal?.birth_weight}}</strong>
+                                 </div>
+                             </div>
+                             <div class="row bg-light mb-1">
+                                 <div class="col-xl-4 col-6 border-end border-white border-2">
+                                     Duration of Pregnancy (in weeks) / గర్భధారణ కాలము (వారాలలో)
+                                 </div>
+                                 <div class="col-xl-8 col-6">
+                                     <strong
+                                         class="">{{draft_details_array?.legal?.duration_of_pregency}}</strong>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="text-end">
+
+                            <!-- <div class="row justify-content-start">
+                                <div class="col-xl-3 col-12">
+                                    <div class="card border-dashed rounded-0 pdf-thumb" data-bs-toggle="modal"
+                                        data-bs-target="#pdfviemodal">
+                                        <div class="card-body text-center p-0">
+                                            <i class="fa fa-eye"></i>
+                                                <iframe id="ifrm" width="100%"  height="200px" frameborder="0"></iframe>
+                                            <p>Text here</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="col-xl-12 col-12">
+
+                                <div class="form-group position-relative">
+                                    <label for="form-label" class="form-label">Remarks / వ్యాఖ్యలు</label>
+                                    <textarea class="form-control" [(ngModel)]="userremarks" id="remarks"
+                                        name="remarks" rows="3"
+                                        placeholder="Enter remarks here / వ్యాఖ్యలను ఇక్కడ నమోదు చేయండి" required=""
+                                        appAlphanumericOnly autocomplete="off" minlength="3" maxlength="300"
+                                        #ngremarks="ngModel"
+                                        [ngClass]="{'is-invalid':ngremarks.invalid && (ngremarks.dirty || ngremarks.touched),
+                                        'is-valid':ngremarks.value!='' && (ngremarks.touched || ngremarks.dirty)}"></textarea>
+                                    <div *ngIf="ngremarks.invalid && (ngremarks.dirty || ngremarks.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="ngremarks.errors">
+                                            <div *ngIf="ngremarks.errors['required']">
+                                                Enter remarks is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="text-end">
+
+
+                                <button type="submit" class="btn btn-primary my-2 me-2"
+                                    (click)="openTab('pills-confirmlegal-tab')"><i
+                                        class="fa-solid fa-angles-left pe-2"></i>Back</button>
+                                <button type="submit" class="btn btn-primary my-2 me-2"
+                                    (click)="eSignwindow_open()">Approve
+                                    <i class="fa-solid fa-save ps-2"></i></button>
+                                    <button type="submit" class="btn btn-danger my-2 me-2" (click)="inbox_Approve('Rejected')"
+                            >Rejected <i
+                                class="fa-solid fa-trash ps-2"></i></button>
+                                <!-- <button type="submit" class="btn btn-success my-2 me-2" (click)="inbox_Approve('Correction')"
+                            >Sent Back for Correction <i
+                                class="fa-solid fa-save ps-2"></i></button> -->
+                            </div>
+                        </div>
+                     </div>
+                 </div>
+             </div>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+    <!--begin::Modal-->
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content" style="width:980px;">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form class="m-form m-form--fit m-form--label-align-right">
+                    <div class="modal-body" style="width:980px;">
+                       
+                        <iframe src="assets/images/BA202328150080000734.pdf" width="100%" height="600px" frameborder="0"></iframe>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> -->
+    <div class="modal" tabindex="-1" aria-labelledby="allowLabel" [ngStyle]="{'display':displaymodal}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bolder" id="allowLabel">Application Number:{{applicationid}}</h5>
+                    <button type="button" class="btn-close" (click)="ModalCLose()" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12 col-xl-8">
+                                <div class="shadow-card">
+                                    <div class="container-fluid">
+                                        <div class="col-xl-12 col-12">
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox1'" (change)="onCheckboxChange($event,'checkbox1')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">E-Sign</strong>
+                                                </div>
+                                            </div>
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox2'" (change)="onCheckboxChange($event,'checkbox2')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">Scanned Signature</strong>
+                                                </div>
+                                            </div>
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox3'" (change)="onCheckboxChange($event,'checkbox3')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">Digital Key(DSC)</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+    
+    
+                                        <div class="text-end">
+    
+    
+                                            <button type="submit" class="btn btn-danger my-2 me-2" (click)="ModalCLose()"><i
+                                                    class="fa-solid fa-angles-left pe-2"></i>Cancel</button>
+                                            <button type="submit" [disabled]="!selectedCheckbox.value" class="btn btn-primary my-2" (click)="inbox_Approve('Approve')"
+                                                > <i
+                                                    class="fa-solid fa-save ps-2"></i>Approve</button>
+                                        </div>
+    
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- <div class="modal-footer text-center">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="ModalCLose()">Close</button>
+            </div> -->
+            </div>
+        </div>
+    </div>
+    <!--end::Modal-->

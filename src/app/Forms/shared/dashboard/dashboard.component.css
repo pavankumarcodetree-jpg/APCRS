@@ -1,0 +1,68 @@
+.dashboard-design2 .card{
+    border-radius: 1rem;
+    box-shadow: none;
+    border:none;
+
+    h5{
+        font-size: 13px;
+        color: #333;
+        margin: 0;
+        font-weight: 500;
+    }
+    h1{
+        font-size: 30px;
+        font-weight: bold;
+        color: #000;
+        margin: 0;
+    }
+}
+
+.dashboard-design2 .bg-1{
+    background: linear-gradient(90deg, #d2b3f4 10%,#ecdefc 90%) !important;
+    margin-bottom: 0 !important;
+}
+.dashboard-design2 .bg-2{
+    background: linear-gradient(90deg, #c2e8a7 10%,#e3f6d4 90%) !important;
+    margin-bottom: 0 !important;
+}
+.dashboard-design2 .bg-3{
+    background: linear-gradient(90deg, #f2e4a0 10%,#faf1c2 90%) !important;
+    margin-bottom: 0 !important;
+}
+.dashboard-design2 .bg-4{
+    background: linear-gradient(90deg, #f3ac82 10%,#fcd1b5 90%) !important;
+    margin-bottom: 0 !important;
+}
+.dashboard-design2 .bg-5{
+    background: linear-gradient(90deg, #f38282 10%,#fcb5b5 90%) !important;
+    margin-bottom: 0 !important;
+}
+
+.dashboard-design2 .bg-6{
+    background: linear-gradient(90deg, #5f78cc 10%,#8c9eda 90%) !important;
+}
+.dashboard-design2 .bg-7{
+    background: linear-gradient(90deg, #ff1515 10%,#ff4141 90%) !important;
+}
+.dashboard-design2 .bg-8{
+    background: linear-gradient(90deg, #00b26a 10%,#2fcf8e 90%) !important;
+}
+.dashboard-design2 .bg-9{
+    background: linear-gradient(90deg, #350f95 10%,#7856cd 90%) !important;
+}
+.dashboard-design2 .bg-10{
+    background: linear-gradient(90deg, #ff6815 10%,#ff8541 90%) !important;
+}
+
+.dashboard-design2 .bg-1{}
+.dashboard-design2 .bg-2{}
+.dashboard-design2 .bg-3{}
+.dashboard-design2 .bg-4{}
+.dashboard-design2 .bg-5{}
+
+
+
+.count{
+    background: #fff;
+    border-radius: 1rem;
+}

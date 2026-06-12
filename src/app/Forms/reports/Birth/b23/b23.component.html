@@ -1,0 +1,151 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>B-23 Live Births by Method of
+                    Delivery and Age of the
+                    Mother
+                    (Rural &amp; Urban)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="tbale23" [value]="state_levle_array"  rowGroupMode="rowspan" groupRowsBy="RURAL_URBAN"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt2 [rows]="state_levle_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['BR_APPLICATION_ID']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig"
+                                                        #dp="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        [maxDate]="cureent_date" autocomplete="off" id="to_date"
+                                                        name="to_date" bsDatepicker [bsConfig]="bsConfig"
+                                                        #dp2="bsDatepicker" appDateFormatDirective [(ngModel)]="to_date"
+                                                        aria-describedby="basic-addon2" required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tbale23','b23 Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tbale23','b23 Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th pSortableColumn="SNO" rowspan="2">SNO</th>
+                                        <th pSortableColumn="SNO" rowspan="2">Method of Delivery</th>
+                                        <th pSortableColumn="SNO" rowspan="2">Rural / Urban</th>
+                                        <th pSortableColumn="PREGNANCY_WEEKS" style="text-align: center;" colspan="10">
+                                            Age of Mother </th>
+                                    </tr>
+
+
+                                    <tr>
+
+
+
+                                        <th pSortableColumn="BELOW_15" style="text-align: center;">Below 15</th>
+                                        <th pSortableColumn="AGE_15_19" style="text-align: center;">15 - 19</th>
+                                        <th pSortableColumn="AGE_20_24" style="text-align: center;">20 - 24</th>
+                                        <th pSortableColumn="AGE_25_29" style="text-align: center;">25 - 29</th>
+                                        <th pSortableColumn="AGE_30_34" style="text-align: center;">30 - 34</th>
+                                        <th pSortableColumn="AGE_35_39" style="text-align: center;">35 - 39</th>
+                                        <th pSortableColumn="AGE_40_44" style="text-align: center;">40 - 44</th>                                       
+                                        <th pSortableColumn="ABOVE_45" style="text-align: center;">45 & Above</th>
+                                        <th pSortableColumn="RURAL" style="text-align: center;">Age Not Stated</th>
+                                        <th pSortableColumn="TOTAL" style="text-align: center;">Total</th>
+
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                                    let-rowspan="rowspan">
+                                    <tr [ngClass]="report.DELIVERY=='TOTAL' ? 'totalclass' : '' ">
+                                        <td >{{ report.SNO}}</td>
+                                        <td>{{ report.DELIVERY }}</td>
+                                        <td *ngIf="rowgroup" [attr.rowspan]="rowspan">{{ report.RURAL_URBAN }}</td>
+                                        <td>{{ report.BELOW_15 }}</td>
+                                        <td>{{ report.AGE_15_19}}</td>
+                                        <td>{{ report.AGE_20_24}}</td>
+                                        <td>{{ report.AGE_25_29}}</td>
+                                        <td>{{ report.AGE_30_34}}</td>
+                                        <td>{{ report.AGE_35_39}}</td>
+                                        <td>{{ report.AGE_40_44}}</td>
+                                        <td>{{ report.ABOVE_45 }}</td>
+                                        <td>{{ report.NOT_STATED }}</td>
+                                        <td>{{ report.TOTAL }}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

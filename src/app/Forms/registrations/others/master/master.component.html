@@ -1,0 +1,390 @@
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header">
+            <div class="row mt-2 mb-2 justify-content-between">
+                <div class="col-xl-4 col-6">
+                    <h5 class="text-white">Hospital Master List</h5>
+                </div>
+                <div class="col-xl-2 text-end">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#masterModal">
+                        <i class="fa-solid fa-plus pe-2 text-white"></i>Add
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                <!--  <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label">Secondary Language<span class="text-danger">*</span></label>
+                        <select class="form-select" name="" placeholder="" title="">
+                            <option value="" placeholder="">--Select--
+                            </option>
+                            <option value="">
+                            </option>
+        
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <div class="form-group mb-2 position-relative">
+                            <label for="form-label" class="form-label">Secondary Language<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" name="" placeholder="" title="">
+                                <option value="" placeholder="">--Select--
+                                </option>
+                                <option value="">
+                                </option>
+        
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label">Secondary Language<span class="text-danger">*</span></label>
+                        <select class="form-select" name="" placeholder="" title="">
+                            <option value="" placeholder="">--Select--
+                            </option>
+                            <option value="">
+                            </option>
+        
+                        </select>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row mb-2">
+                <!--  <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label">text<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label">text<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label">text<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div> -->
+            </div>
+            <div class="row align-items-center justify-content-end mt-2 mb-2">
+                <!--   <div  class="col-xl-2 text-end"><button class="btn btn-sm btn-primary"><i  class="uil-refresh"></i>Reset</button></div>
+                <div  class="col-xl-3"><input  type="text" id="" placeholder="Filter..." class="form-control"></div> -->
+            </div>
+            <div class="row mt-2">
+                <div class="col-xl-12 col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead class="bg-primary-subtle">
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Hospital Code</th>
+                                    <th>Hospital Name</th>
+                                    <th>Registration Unit</th>
+                                    <th>Village/town</th>
+                                    <th>Sub District</th>
+                                    <th>District</th>
+                                    <th>State</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                </tr>
+                                <!--  <tr>
+                                    <td>1</td>
+                                    <td>A</td>
+                                    <td><button class="btn btn-outline-success text-success p-1"><i class="fa-solid fa-pen pe-2 text-success"></i>Edit</button></td>
+                                    <td><button class="btn btn-outline-danger text-danger p-1"><i class="fa-solid fa-xmark pe-2 text-danger"></i>cancel</button></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>B</td>
+                                    <td><button class="btn btn-outline-success text-success p-1"><i class="fa-solid fa-pen pe-2 text-success"></i>Edit</button></td>
+                                    <td><button class="btn btn-outline-danger text-danger p-1"><i class="fa-solid fa-xmark pe-2 text-danger"></i>cancel</button></td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="masterModal" tabindex="-1" aria-labelledby="masterModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="masterModalLabel">New Hosipatal Master </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Hosipatal Code/ హాస్పిటల్ కోడ్<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"
+                                            [(ngModel)]="crs_hosipatalreg_form.hosiatalcode" id="hosiatalcode"
+                                            name="hosiatalcode" placeholder="Hosipatal Code" required=""
+                                            #hosiatalcode="ngModel"
+                                            [ngClass]="{'is-invalid':hosiatalcode.invalid && (hosiatalcode.dirty || hosiatalcode.touched),
+                                                   'is-valid':hosiatalcode.value!='' && (hosiatalcode.touched || hosiatalcode.dirty)}">
+                                        <div *ngIf="hosiatalcode.invalid && (hosiatalcode.dirty || hosiatalcode.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="hosiatalcode.errors">
+                                                <div *ngIf="hosiatalcode.errors['required']">
+                                                    Hosipatal Code is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Hosipatal Name/హాస్పిటల్ పేరు<span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="crs_hosipatalreg_form.hosiatalname" id="hosiatalname"
+                                                name="hosiatalname" placeholder="Hosipatal Name" required=""
+                                                #hosiatalname="ngModel"
+                                                [ngClass]="{'is-invalid':hosiatalname.invalid && (hosiatalname.dirty || hosiatalname.touched),
+                                                       'is-valid':hosiatalname.value!='' && (hosiatalname.touched || hosiatalname.dirty)}">
+                                            <div *ngIf="hosiatalname.invalid && (hosiatalname.dirty || hosiatalname.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="hosiatalname.errors">
+                                                    <div *ngIf="hosiatalname.errors['required']">
+                                                        Hosipatal Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">State/రాష్ట్రం<span
+                                                class="text-danger">*</span></label>
+
+                                        <ng-select name="state" id="state" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.state" #statee="ngModel"
+                                            placeholder="State" [ngClass]="{'is-invalid':statee.invalid && (statee.dirty || statee.touched),
+            'is-valid':statee.value!='' && (statee.touched || statee.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+                                            <ng-option *ngFor="let ht of state_array"
+                                                [value]="ht.STATE_CODE">{{ht.STATE_NAME}}</ng-option>
+                                        </ng-select>
+                                        <div *ngIf="statee.invalid && (statee.dirty || statee.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="statee.errors">
+                                                <div *ngIf="statee.errors['required']">
+                                                    State is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">District/జిల్లా<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="district" id="district" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.district" #districtt="ngModel"
+                                            placeholder="District" [ngClass]="{'is-invalid':districtt.invalid && (districtt.dirty || districtt.touched),
+            'is-valid':districtt.value!='' && (districtt.touched || districtt.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="districtt.invalid && (districtt.dirty || districtt.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="districtt.errors">
+                                                <div *ngIf="districtt.errors['required']">
+                                                    District is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Sub-District/ఉప జిల్లా<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="subdistrict" id="subdistrict" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.subdistrict" #subdistrictt="ngModel"
+                                            placeholder="District" [ngClass]="{'is-invalid':subdistrictt.invalid && (subdistrictt.dirty || subdistrictt.touched),
+            'is-valid':subdistrictt.value!='' && (subdistrictt.touched || subdistrictt.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="subdistrictt.invalid && (subdistrictt.dirty || subdistrictt.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="subdistrictt.errors">
+                                                <div *ngIf="subdistrictt.errors['required']">
+                                                    Sub-District is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Village/Town /గ్రామం/పట్టణం<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="village" id="village" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.village" #villaget="ngModel"
+                                            placeholder="Village/Town" [ngClass]="{'is-invalid':villaget.invalid && (villaget.dirty || villaget.touched),
+                                            'is-valid':villaget.value!='' && (villaget.touched || villaget.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="villaget.invalid && (villaget.dirty || villaget.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="villaget.errors">
+                                                <div *ngIf="villaget.errors['required']">
+                                                    Village/Town is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Registration Unit/ నమోదు విభాగం<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="registration" id="registration" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.registration" #registrationt="ngModel"
+                                            placeholder="Registration Unit"
+                                            [ngClass]="{'is-invalid':registrationt.invalid && (registrationt.dirty || registrationt.touched),
+                                                'is-valid':registrationt.value!='' && (registrationt.touched || registrationt.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="registrationt.invalid && (registrationt.dirty || registrationt.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="registrationt.errors">
+                                                <div *ngIf="registrationt.errors['required']">
+                                                    Registration Unit is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Email/ ఇమెయిల్</label>
+                                        <input type="text" class="form-control"
+                                            [(ngModel)]="crs_hosipatalreg_form.email" id="email" name="email"
+                                            placeholder="Email" required="" #email="ngModel">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-xl-4 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Mobile No/ మొబైల్ నంబర్<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control"
+                                            [(ngModel)]="crs_hosipatalreg_form.mobileno" id="mobileno" name="mobileno"
+                                            placeholder="Mobile No" required="" #mobileno="ngModel"
+                                            [ngClass]="{'is-invalid':mobileno.invalid && (mobileno.dirty || mobileno.touched),
+                                                'is-valid':mobileno.value!='' && (mobileno.touched || mobileno.dirty)}">
+                                        <div *ngIf="mobileno.invalid && (mobileno.dirty || mobileno.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="mobileno.errors">
+                                                <div *ngIf="mobileno.errors['required']">
+                                                    Mobile No is required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Place Type/ స్థలము రకం<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="place" id="place" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.place" #placet="ngModel"
+                                            placeholder="Place Type" [ngClass]="{'is-invalid':placet.invalid && (placet.dirty || placet.touched),
+                                                'is-valid':placet.value!='' && (placet.touched || placet.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="placet.invalid && (placet.dirty || placet.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="placet.errors">
+                                                <div *ngIf="placet.errors['required']">
+                                                    Place Type is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-3 col-12">
+                                    <div class="form-group mb-2 position-relative">
+                                        <label for="form-label" class="form-label">Is Active<span
+                                                class="text-danger">*</span></label>
+                                        <ng-select name="statust" id="statust" required=""
+                                            [(ngModel)]="crs_hosipatalreg_form.status" #statust="ngModel"
+                                            placeholder="Status" [ngClass]="{'is-invalid':statust.invalid && (statust.dirty || statust.touched),
+                                                'is-valid':statust.value!='' && (statust.touched || statust.dirty)}">
+                                            <ng-option value="">--Select--</ng-option>
+
+                                        </ng-select>
+                                        <div *ngIf="statust.invalid && (statust.dirty || statust.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="statust.errors">
+                                                <div *ngIf="statust.errors['required']">
+                                                    Is Active is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--   <div class="col-xl-4 col-12 d-flex justify-content-center align-items-center">
+                            <div class="form-check pe-2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="inside">
+                                <label class="form-check-label" for="male">
+                                    male
+                                </label>
+                              </div>
+                              <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="outside">
+                                <label class="form-check-label" for="female">
+                                  female
+                                </label>
+                              </div>
+                        </div> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 text-end">
+                                    <button class="btn btn-success me-2"
+                                        (click)="Submithealthmaster()">Save</button><!--  <i class="fa-solid fa-plus pe-2 text-white"></i> -->
+                                    <button class="btn btn-danger">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,158 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i>D-8 Deaths by Age, Occupation and
+                    Sex (Urban)</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="stattbl" [value]="state_levle_array" rowGroupMode="rowspan" groupRowsBy="OCCUPATION"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt1 [rows]="state_levle_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['BR_APPLICATION_ID']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a [routerLink]="['/shared/reports']"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">From Date</label>
+                                                <div class="input-group">
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="from_date" name="from_date" bsDatepicker
+                                                        [bsConfig]="bsConfig" #dp="bsDatepicker" appDateFormatDirective
+                                                        [maxDate]="cureent_date" [(ngModel)]="from_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">To Date</label>
+                                                <div class="input-group">
+
+                                                    <input type="text" placeholder="DD-MM-YYYY" #dateinput
+                                                        class="form-control" oncut="return false;"
+                                                        oncopy="return false;" onpaste="return false;" maxlength="15"
+                                                        autocomplete="off" id="to_date" name="to_date" bsDatepicker
+                                                        [maxDate]="cureent_date" [bsConfig]="bsConfig" #dp2="bsDatepicker" appDateFormatDirective
+                                                        [(ngModel)]="to_date" aria-describedby="basic-addon2"
+                                                        required="">
+                                                    <span class="input-group-text" id="basic-addon23"
+                                                        (click)="dp2.toggle()" type="button">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-1 mt-3">
+                                            <button class="btn btn-primary" (click)="get_statelevel()">Get</button>
+                                        </div>
+                                        <!-- <div class="col-md-3">
+                                            
+                                        </div> -->
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('stattbl','d8 Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('stattbl','d8 Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th rowspan="2" pSortableColumn="SNO">Sno.</th>
+                                        <th rowspan="2" pSortableColumn="OCCUPATION">Occupation of the Deceased</th>
+                                        <th rowspan="2" pSortableColumn="RURAL_URBAN">Rural/Urban</th>
+                                        <th rowspan="2" pSortableColumn="GENDER">Age Group</th>
+                                        <th colspan="15" style="text-align: center;">Birth Order</th>
+                                    </tr>
+                                    <tr>
+                                        <th> 1</th>
+                                        <th> 2</th>
+                                        <th> 3</th>
+                                        <th> 4</th>
+                                        <th> 5</th>
+                                        <th> 6</th>
+                                        <th> 7</th>
+                                        <th> 8</th>
+                                        <th> 9</th>
+                                        <th> 10</th>
+                                        <th> 11</th>
+                                        <th> 12</th>
+                                        <th> 13 and Above</th>
+                                        <th>Age Not Stated</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-Report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                                let-rowspan="rowspan">
+                                    <tr>
+                                        <td>{{ Report.SNO }}</td>
+                                        <td *ngIf="rowgroup" [attr.rowspan]="rowspan">{{ Report.OCCUPATION }}</td>
+                                        <td>{{ Report.RURAL_URBAN }}</td>
+                                        <td>{{ Report.AGE_GROUP }}</td>
+
+                                        <td>{{ Report.BIRTH_ORDER_1 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_2 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_3 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_4 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_5 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_6 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_7 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_8 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_9 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_10 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_11 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_12 }}</td>
+                                        <td>{{ Report.BIRTH_ORDER_13_AND_ABOVE }}</td>
+                                        <td>{{ Report.AGE_NOT_STATED }}</td>
+                                        <td>{{ Report.TOTAL }}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

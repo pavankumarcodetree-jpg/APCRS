@@ -1,0 +1,130 @@
+.p-dialog {
+    z-index: 1050 !important;
+}
+
+.p-dialog-mask {
+    z-index: 1049 !important;
+}
+.inbox{
+    position: relative;
+}
+
+.inbox .card .card-body{
+    padding: 1rem;
+}
+.inbox .card.active{
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    border:2px solid #007bff;
+}
+.inbox .bg-1{
+    background-image: linear-gradient(90deg, #4481eb 0%, #04befe 100%);
+    color: #fff;
+}
+.inbox .bg-2{
+    background-image: linear-gradient(90deg, #cf4e2b 0%, #dc6e50 100%);
+    color: #fff;
+}
+.inbox .bg-3{
+    background-image: linear-gradient(90deg, #27ab51 0%, #44b267 100%);
+    color: #fff;
+}
+.inbox .bg-4{
+    background-image: linear-gradient(90deg, #672eb1 0%, #7e4ebd 100%);
+    color: #fff;
+}
+.inbox .bg-5{
+    background-image: linear-gradient(90deg, #209cff 0%, #68e0cf 100%);
+    color: #fff;
+}
+
+.inbox .icon{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+    border:2px dotted #eee;
+}
+.inbox .card-title{
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+
+.modal-dialog {
+    width: 800px;
+    margin: 30px auto;
+}
+
+::ng-deep .p-inputtext {
+    padding: 0.25rem 0.25rem !important;
+    padding-left: 2.5rem !important;
+}
+.btn-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+  /* .custom-trash {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .custom-trash:hover {
+    background-color: #c82333;
+  } */
+  .custom-trash {
+    background-color: #c82333; 
+    border: 1px solid #dee2e6;
+    color: white; 
+  }
+  
+  .custom-trash:hover {
+    background-color: #c82333;
+  }
+
+  tr.first th:nth-child(1) {
+    position: sticky !important;
+    left: 0px !important;
+    background-color: #fff;
+}
+
+tr.first th:nth-child(2) {
+    position: sticky !important;
+    left: 82px !important;
+    background-color: #fff;
+}
+
+
+tr.first th:nth-child(3) {
+    position: sticky !important;
+    left: 295px !important;
+    background-color: #fff;
+}
+
+
+
+  tr.first td:nth-child(1) {
+    position: sticky !important;
+    left: 0px !important;
+   background: white !important;
+}
+
+tr.first td:nth-child(2) {
+    position: sticky !important;
+    left: 82px !important;
+
+}
+
+tr.first td:nth-child(3) {
+    position: sticky !important;
+    left: 294px !important;
+    background: white !important;
+}
+
+
+
+
+  

@@ -1,0 +1,118 @@
+<div class="authentication py-4" *ngIf="!verifyotpscreen">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-12">
+                <div class="card auth-card">
+                    <div class="card-body p-0">
+                        <div class="row justify-content-center d-flex align-items-center">
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-12">
+                                <div class="general-login">
+                                    <img src="assets/images/user.png" class="img-fluid">
+                                    <p>General Public Users! Please LOGIN to Report events of Birth & Death and obtain
+                                        certificates. The events should have been occurred at Home for reporting the
+                                        events.</p>
+                                    <button class="btn btn-outline-light rounded-pill w-50 text-white fw-bold">SIGN
+                                        UP</button>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-6 col-12">
+                                <div class="general-text">
+                                    <h5 class="text-center">General Public Login</h5>
+                                    <form>
+                                        <div class="mb-1">
+                                            <mat-form-field appearance="outline" class="w-100">
+                                                <mat-label>Email Id /Mobile No.</mat-label>
+                                                <input matInput [(ngModel)]="mobileno" placeholder="Email Id /Mobile No." value="">
+                                                <mat-error>
+                                                    <div>
+                                                        <div>
+                                                            Email Id /Mobile No. is required</div>
+                                                    </div>
+                                                </mat-error>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="mb-1">
+                                            <div class="row justify-content-center">
+                                                <div class="col-xl-4 col-4">
+                                                    <h3 class="captcha-text">{{capthform.imgurl}}</h3>
+                                                </div>
+                                                <div class="col-xl-2 col-2">
+                                                    <button class="btn btn-primary" type="submit"
+                                                        (click)="Get_captcha()"><i class="uil-refresh"></i></button>
+                                                </div>
+                                                <div class="col-xl-6 col-6">
+                                                    <mat-form-field appearance="outline" class="w-100">
+                                                        <mat-label>Enter Result</mat-label>
+                                                        <input matInput placeholder="Enter Result" value="">
+                                                        <mat-error>
+                                                            <div>
+                                                                <div>
+                                                                    result is required.</div>
+                                                            </div>
+                                                        </mat-error>
+                                                    </mat-form-field>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <button
+                                                class="btn rounded-pill bg-info text-white text-center w-100 my-3">Login</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="authentication py-4" *ngIf="verifyotpscreen">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-9 col-12">
+                <div class="card auth-card">
+                    <div class="card-body p-0">
+                        <div class="row justify-content-center d-flex align-items-center">
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-12">
+                                <div class="general-login">
+                                    <img src="assets/images/otp.png" class="img-fluid">
+                                    <p>Verify OTP</p>
+                                </div>
+                            </div>
+                            <div class="col-xl-7 col-lg-7 col-md-6 col-12">
+                                <div class="general-text">
+                                    <h5 class="text-center">Verify OTP</h5>
+                                    <h4 class="text-center mb-2 text-dark">Please Authenticate your Mobile Number</h4>
+                                    <p class="fs-4 text-dark text-center">OTP sent to 888xxxx009</p>
+                                    <div class="d-flex gap-2 justify-content-center mb-3">
+                                        <input type="text" class="form-control text-center otp-box">
+                                        <input type="text" class="form-control text-center otp-box">
+                                        <input type="text" class="form-control text-center otp-box">
+                                        <input type="text" class="form-control text-center otp-box">
+                                        <input type="text" class="form-control text-center otp-box">
+                                        <input type="text" class="form-control text-center otp-box">
+                                    </div>
+                                    <div class="row justify-content-center mb-2">
+                                        <div class="col-sm-3">
+                                            <span class="text-danger">{{display}}</span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <span class="text-center"> <i class="fa-regular fa-eye-slash"></i></span>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <button class="text-dark bg-light disabled rounded-1 b1">Resend OTP</button>
+                                        </div>
+                                    </div>
+                                    <button class="btn rounded-pill text-white text-center w-100 my-1">Login</button>
+                                    <button class="btn rounded-pill text-white text-center w-100 my-1">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

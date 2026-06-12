@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "https://sports.ap.gov.in",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

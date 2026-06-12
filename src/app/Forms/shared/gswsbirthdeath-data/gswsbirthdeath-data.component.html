@@ -1,0 +1,40 @@
+<div class="container-fluid py-4">
+
+  <!-- Tabs -->
+  <ul class="nav nav-tabs mb-3" id="dashboardTabs">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'birth'" (click)="activeTab = 'birth'">Birth Data</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="activeTab === 'death'" (click)="activeTab = 'death'">Death Data</a>
+    </li>
+  </ul>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    
+    <!-- Birth Data Tab -->
+    <div *ngIf="activeTab === 'birth'" class="tab-pane fade show active">
+      <div class="card">
+      
+        <div class="card-body">
+          <app-gsws-birth></app-gsws-birth>
+        </div>
+      </div>
+    </div>
+
+    <!-- Death Data Tab -->
+    <div *ngIf="activeTab === 'death'" class="tab-pane fade show active">
+      <div class="card mt-3">
+      
+        <div class="card-body">
+          <app-gsws-death></app-gsws-death>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+

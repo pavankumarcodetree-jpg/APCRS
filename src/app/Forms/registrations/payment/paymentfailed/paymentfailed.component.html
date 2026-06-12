@@ -1,0 +1,23 @@
+<div class="background-img align-items-center"
+    style="background-image: url(/assets/images/bg-img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+<div class="container">
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="message-box _success _failed">
+             <i class="fa fa-times-circle" style="font-size: 55px;" aria-hidden="true"></i>
+            <h2> Your payment failed </h2>
+     <p>  Try again later </p> 
+     <p>
+        Unfortunately, your payment of <b>Rs. {{regamount}}</b> was unsuccessful. <br />
+        Please try again or contact support if the issue persists.
+      </p>
+      <button class="btn bg-danger text-white m-2" (click)="retryPayment()">
+        <i class="mdi mdi-reload"></i> Retry Payment
+      </button>
+    </div> 
+  
+</div> 
+</div> 
+
+</div> 
+</div> 

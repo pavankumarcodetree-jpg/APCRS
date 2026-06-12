@@ -1,0 +1,205 @@
+.md\:w-12 {
+    width: 3rem;
+}
+.md\:h-12 {
+    height: 3rem;
+}
+
+@media (min-width: 768px) {
+    .md\:w-12 {
+        width: 3rem;
+    }
+    .md\:h-12 {
+        height: 3rem;
+    }
+}
+
+.login-btn {
+    background-color: #003366;
+    color: #fff;
+    border-radius: 3px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.top-login-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.top-login-btn:hover {
+    background-color: #ffcc00;
+    color: #000;
+    border: 0px solid #ccc;
+    border-radius: 20px;
+}
+label.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444444;
+}
+span.usericon-po {
+    position: absolute;
+    right: 10px;
+    top: 37px;
+    font-size: 17px;
+    color: #c4c4c4;
+}
+p.bread-text {
+    color: #42526f;
+    font-weight: 500;
+}
+
+/* Menu Bar Css */
+.topbar-section {
+background: rgb(0,51,102) !important;
+background: linear-gradient(90deg, rgba(0,51,102,1) 0%, rgba(255,111,97,1) 100%) !important;
+}
+
+
+/* Footer Css */
+section.footer-section {
+    padding: 40px 25px 10px 25px;
+    background-color: #0a0b0d;
+}
+input.neslater-field {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+input.neslater-field::placeholder {
+    color: #868686;
+}
+img.send-img {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 7px;
+    top: 4px;
+}
+.realtime-img img {
+    width: 130px;
+}
+
+
+/* .register-section .nav-pills .nav-item .nav-link{
+    position: relative;
+}
+.register-section .nav-pills .nav-item .nav-link::before,
+.register-section .nav-pills .nav-item .nav-link::after{
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    left: 100%;
+    top: 50%;
+    height: 0;
+    width: 0;
+    margin-top: -50px;
+    border: 50px solid transparent;
+    border-left-width: 40px;
+    transition: all .5s ease-in-out;
+} */
+.reg{
+    position: absolute;
+    bottom: -39px;
+    height: 0;
+    width: 0;
+    left: 50%;
+    transform: rotate(180deg);
+    border: 20px solid transparent;
+    border-bottom-color: #333333;
+    content: "";
+}
+
+.register-section .card.reg-card .card-header{
+    border-radius: 0.75rem 0.75rem 0rem 0rem;
+    position: relative;
+    background: #fff0f0 !important;
+    padding: 0.25rem 0.70rem !important;
+}
+.register-section .reg-card .table.add-table>thead{
+    background: #003366 !important;
+}
+.register-section .reg-card .table.add-table>thead>tr>th{
+   color: #fff !important;
+}
+.iconbar {
+    position: fixed;
+    top: 50%;
+    left: -3%;
+    transform: translateY(-50%);
+    background-color: #69d043;
+    padding: 10px;
+    border-radius: 0 5px 5px 0;
+    transform: rotate(90deg);
+    z-index: 999;
+}
+.iconbar a {
+display: flex;
+justify-content: center;
+align-items: center;
+color: white;
+text-decoration: none;
+font-size: 16px;
+}
+.iconbar i {
+font-size: 24px;
+margin-bottom: 5px;
+}
+
+.wizard-pills .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0dae3; /* Inactive tab color */
+    color: #d9534f; /* Text color */
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 0;
+    position: relative;
+    border: 1px solid #fff; /* Border between tabs */
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.wizard-pills .nav-link.active {
+    background-color: #d9534f; /* Active tab color */
+    color: white; /* Active text color */
+    z-index: 2;
+}
+
+.wizard-pills .nav-link:not(.active)::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    transform: translateY(-50%);
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 15px solid #d0dae3; /* Arrow for inactive tab */
+    z-index: 1;
+}
+
+.wizard-pills .nav-link.active::after {
+    border-left-color: #d9534f; /* Arrow for active tab */
+}
+
+.wizard-pills .nav-item:last-child .nav-link::after {
+    content: none; /* Remove arrow from the last tab */
+}
+
+.wizard-pills img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.wizard-pills .step-number {
+    display: none; /* Remove circle number if not applicable */
+}

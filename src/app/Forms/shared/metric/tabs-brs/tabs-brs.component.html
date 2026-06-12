@@ -1,0 +1,359 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title pe-4" *ngIf="report_dispaly_level=='state'">
+                    District Wise Report - {{ metricName}}
+                </h5>
+                <h5 class="page-title pe-4" *ngIf="report_dispaly_level=='district'">
+                    Mandal Wise Report - {{ metricName}}
+                </h5>
+                <h5 class="page-title pe-4" *ngIf="report_dispaly_level=='Mandal'">
+                    Secretariat Wise Report - {{ metricName}}
+                </h5>
+                <!-- <button class="btn btn-info btn-sm" routerLink="/shared/dashboardseven"><i class="uil-dashboard"></i>
+                    Dashboard</button> -->
+                <button class="btn btn-info btn-sm" routerLink="/shared/dashboardnine"><i class="uil-dashboard"></i>
+                    Dashboard</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+
+                            <p-table id="stattbl" [value]="state_level_array" *ngIf="report_dispaly_level=='state'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt1 [rows]="state_level_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple"
+                                [globalFilterFields]="['DISTRICT_NAME','BIRTH_COUNT', 'DEATH_COUNT', 'SEX_RATIO','BIRTH_COUNT_2026','DEATH_COUNT_2026']"
+                                [tableStyle]="{ 'width': '100%' }" [scrollable]="true" scrollHeight="560px">
+
+
+                                <ng-template pTemplate="caption">
+
+                                    <div class="row">
+                                        <div class="col-md-6 text-end mt-2"></div>
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('stattbl','District Wise Report - ' + metricName)"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('stattbl','District Wise Report - ' + metricName)"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="SNO">S No
+                                            <p-sortIcon field="SNO"></p-sortIcon>
+                                        </th>
+                                        <th class="text-center" pSortableColumn="DISTRICT_NAME">District Name
+                                            <p-sortIcon field="DISTRICT_NAME"></p-sortIcon>
+                                        </th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT_2026">Birth CRS (2025-26)<p-sortIcon
+                                                field="BIRTH_COUNT_2026"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT">Birth CRS (2024-25)<p-sortIcon
+                                                field="BIRTH_COUNT"></p-sortIcon></th>
+
+
+
+                                        <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT_2026">Death (2025-26)<p-sortIcon
+                                                field="DEATH_COUNT_2026"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT">Death  (2024-25)<p-sortIcon
+                                                field="DEATH_COUNT"></p-sortIcon></th>
+
+
+
+                                        <th class="text-center" *ngIf="metricName === 'Sex Ratio'"
+                                            pSortableColumn="SEX_RATIO">Sex Ratio  <p-sortIcon
+                                                field="SEX_RATIO"></p-sortIcon></th>
+
+
+
+                                    </tr>
+
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report let-rowIndex="rowIndex">
+                                    <tr>
+                                        <td class="text-center">{{ report.SNO }}</td>
+
+                                        <td class="text-left">
+                                            <a (click)="get_districtlevel(report)"
+                                                class="text-success fw-bold">{{report.DISTRICT_NAME}}</a>
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{
+                                            report.BIRTH_COUNT_2026
+                                            }}
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{ report.BIRTH_COUNT
+                                            }}
+                                        </td>
+
+                                        <td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT_2026 }}
+                                        </td>
+
+                                        <td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT }}
+                                        </td>
+
+
+                                        <td class="text-center" *ngIf="metricName === 'Sex Ratio'">{{ report.SEX_RATIO
+                                            }}
+                                        </td>
+
+                                    </tr>
+                                </ng-template>
+
+
+
+                            </p-table>
+
+                            <p-table id="distrcittbl" [value]="district_level_array"
+                                *ngIf="report_dispaly_level=='district'" rowGroupMode="rowspan"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt2 [rows]="district_level_array.length"
+                                [rowsPerPageOptions]="[district_level_array.length, 20, 30,40,{ showAll: 'All' }]"
+                                [paginator]="true" sortMode="multiple"
+                                [globalFilterFields]="['MANDAL_NAME','TFR', 'IMR', 'MMR', 'NMR', 'UNDER_5_YEARS','BIRTH_COUNT_2026','DEATH_COUNT_2026']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a href="javascript:void()" (click)="backstate()"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="page-title"><span class="text-success">District Name</span> :
+                                                {{district_name}}</h5>
+                                        </div>
+                                        <div class="col-md-2">
+
+                                        </div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('distrcittbl','Mandal Wise Report -'+ metricName)"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('distrcittbl','Mandal Wise Report -'+ metricName)"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="SNO">S No
+                                            <p-sortIcon field="SNO"></p-sortIcon>
+                                        </th>
+                                        <th class="text-center" pSortableColumn="MANDAL_NAME">Mandal Name <p-sortIcon
+                                                field="MANDAL_NAME"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT_2026">Birth CRS (2025-26)<p-sortIcon
+                                                field="BIRTH_COUNT_2026"></p-sortIcon></th>
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT">Birth CRS (2024-25) <p-sortIcon
+                                                field="BIRTH_COUNT"></p-sortIcon></th>
+
+
+                                     <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT_2026">Death (2025-26)<p-sortIcon
+                                                field="DEATH_COUNT_2026"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT">Death  (2024-25)<p-sortIcon
+                                                field="DEATH_COUNT"></p-sortIcon></th>
+                                        <th class="text-center" *ngIf="metricName === 'Sex Ratio'"
+                                            pSortableColumn="SEX_RATIO">Sex Ratio <p-sortIcon
+                                                field="SEX_RATIO"></p-sortIcon></th>
+
+
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                                    let-rowspan="rowspan">
+                                    <tr>
+                                        <td class="text-center">{{ report.SNO }}</td>
+                                        <td class="text-left">
+                                            <a (click)="get_mandallevel(report)"
+                                                class="text-success fw-bold">{{report.MANDAL_NAME}}</a>
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{
+                                            report.BIRTH_COUNT_2026
+                                            }}
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{ report.BIRTH_COUNT
+                                            }}
+                                        </td>
+                                       		<td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT_2026 }}
+                                        </td>
+
+                                        <td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT }}
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Sex Ratio'">{{ report.SEX_RATIO
+                                            }}
+                                        </td>
+
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+
+                            <p-table id="mandaltbl" [value]="mandal_level_array" *ngIf="report_dispaly_level=='Mandal'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt3 [rows]="mandal_level_array.length"
+                                [rowsPerPageOptions]="[mandal_level_array.length, 20, 30,40,{ showAll: 'All' }]"
+                                [paginator]="true" sortMode="multiple"
+                                [globalFilterFields]="['SECRETARIAT_NAME','TFR', 'IMR', 'MMR', 'NMR', 'UNDER_5_YEARS','BIRTH_COUNT_2026','DEATH_COUNT_2026']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-1">
+                                            <a href="javascript:void()" (click)="backdistrict()"><i
+                                                    class="fa-solid fa-arrow-left pe-2"></i></a>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="page-title"><span class="text-success">District Name</span> :
+                                                {{district_name}}</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <h5 class="page-title"><span class="text-success">Mandal Name </span>:
+                                                {{mandal_name}}</h5>
+                                        </div>
+
+
+
+                                        <div class="col-md-4 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('mandaltbl','Village Wise Report -'+ metricName)"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('mandaltbl','Village Wise Report -'+ metricName)"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+
+
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="SNO">S No
+                                            <p-sortIcon field="SNO"></p-sortIcon>
+                                        </th>
+                                        <th class="text-center" pSortableColumn="VILLAGE_NAME">Village Name <p-sortIcon
+                                                field="VILLAGE_NAME"></p-sortIcon></th>
+                                        <!-- <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT">Birth CRS <p-sortIcon
+                                                field="BIRTH_COUNT"></p-sortIcon></th> -->
+
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT_2026">Birth CRS (2025-26)<p-sortIcon
+                                                field="BIRTH_COUNT_2026"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Birth CRS'"
+                                            pSortableColumn="BIRTH_COUNT">Birth CRS (2024-25)<p-sortIcon
+                                                field="BIRTH_COUNT"></p-sortIcon></th>
+
+                                      <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT_2026">Death (2025-26)<p-sortIcon
+                                                field="DEATH_COUNT_2026"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Death'"
+                                            pSortableColumn="DEATH_COUNT">Death  (2024-25)<p-sortIcon
+                                                field="DEATH_COUNT"></p-sortIcon></th>
+
+                                        <th class="text-center" *ngIf="metricName === 'Sex Ratio'"
+                                            pSortableColumn="SEX_RATIO">Sex Ratio <p-sortIcon
+                                                field="SEX_RATIO"></p-sortIcon></th>
+
+
+
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-report let-rowIndex="rowIndex" let-rowgroup="rowgroup"
+                                    let-rowspan="rowspan">
+                                    <tr>
+                                        <td class="text-center">{{ report.SNO }}</td>
+
+                                        <td class="text-left">{{ report.VILLAGE_NAME }}</td>
+
+                                         <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{
+                                            report.BIRTH_COUNT_2026
+                                            }}
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Birth CRS'">{{ report.BIRTH_COUNT
+                                            }}
+                                        </td>
+                                    	<td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT_2026 }}
+                                        </td>
+
+                                        <td class="text-center" *ngIf="metricName === 'Death'">{{ report.DEATH_COUNT }}
+                                        </td>
+                                        <td class="text-center" *ngIf="metricName === 'Sex Ratio'">{{ report.SEX_RATIO
+                                            }}
+                                        </td>
+
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

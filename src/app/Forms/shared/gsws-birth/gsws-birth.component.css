@@ -1,0 +1,127 @@
+/* === PAGE HEADER === */
+.gsws-card {
+  background: rgb(191, 63, 54);
+  color: #fff;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 0;
+}
+
+/* === COMMON CARD STYLING === */
+.stat-card {
+  position: relative;  /* for absolute icon */
+  color: #222;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+  padding: 12px 10px;
+  transition: transform 0.2s ease;
+  min-height: auto; /* compact height */
+}
+
+.stat-card:hover {
+  transform: scale(1.02);
+}
+
+/* Card title */
+.stat-card .card-header {
+  background: transparent;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  border-bottom: none;
+}
+
+/* Compact body */
+.stat-card .card-body {
+  text-align: center;
+  padding: 4px;
+}
+
+/* Row labels + values */
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  margin: 3px 10%;
+}
+
+.stat-row.values .highlight {
+  font-size: 18px;
+  font-weight: bold;
+  color: #111;
+}
+
+/* Single number cards */
+.count-count {
+  font-size: 20px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* === ICON AS WATERMARK === */
+.stat-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 40px; /* small icon */
+  opacity: 0.3;
+}
+
+/* === PASTEL BACKGROUNDS === */
+
+/* Row 1 */
+.gsws-vs-actual {
+  background: linear-gradient(135deg, #d4f8d4, #a6e4a6);
+   border: 2px solid #6fbf6f; 
+}
+.death-vs-hh {
+  background: linear-gradient(135deg, #ffe3dc, #ffcab6);
+    border: 2px solid #ff8f6b; /* matching soft coral */
+}
+
+/* Row 2 */
+.child-missing {
+  background: linear-gradient(135deg, #d9ecff, #b8d8ff);
+   border: 2px solid #5daaff; /* matching soft sky blue */
+}
+.father-missing {
+  background: linear-gradient(135deg, #fff4cc, #ffe89c);
+     border: 2px solid #e6b800; /* matching soft sky blue */
+}
+.mother-missing {
+  background: linear-gradient(135deg, #f3e6ff, #e3ccff);
+    border: 2px solid #a873e8;/* matching soft sky blue */
+}
+.age-missing {
+  background: linear-gradient(135deg, #ffe6f3, #ffcce6);
+  border: 2px solid #ff7fb3;
+}
+
+/* Chart card */
+.bar-chart-card {
+  background: linear-gradient(135deg, #e6e6ff, #ccccff);
+   border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+  padding: 12px 10px;
+}
+
+:host ::ng-deep .stat-card .card-header {
+  background: none !important;
+  
+}
+
+
+
+
+

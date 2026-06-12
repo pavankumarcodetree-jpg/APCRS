@@ -1,0 +1,92 @@
+.md\:w-12 {
+    width: 3rem;
+}
+.md\:h-12 {
+    height: 3rem;
+}
+
+@media (min-width: 768px) {
+    .md\:w-12 {
+        width: 3rem;
+    }
+    .md\:h-12 {
+        height: 3rem;
+    }
+}
+
+.login-btn {
+    background-color: #003366;
+    color: #fff;
+    border-radius: 3px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.top-login-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.top-login-btn:hover {
+    background-color: #ffcc00;
+    color: #000;
+    border: 0px solid #ccc;
+    border-radius: 20px;
+}
+label.form-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #444444;
+}
+span.usericon-po {
+    position: absolute;
+    right: 10px;
+    top: 37px;
+    font-size: 17px;
+    color: #c4c4c4;
+}
+p.bread-text {
+    color: #42526f;
+    font-weight: 500;
+}
+
+/* Menu Bar Css */
+.topbar-section {
+background: rgb(0,51,102) !important;
+background: linear-gradient(90deg, rgba(0,51,102,1) 0%, rgba(255,111,97,1) 100%) !important;
+}
+
+
+/* Footer Css */
+section.footer-section {
+    padding: 40px 25px 10px 25px;
+    background-color: #0a0b0d;
+}
+input.neslater-field {
+    background-color: transparent;
+    border: 1px solid #ccc;
+    color: #fff;
+}
+input.neslater-field::placeholder {
+    color: #868686;
+}
+img.send-img {
+    width: 28px;
+    height: 28px;
+    position: absolute;
+    right: 7px;
+    top: 4px;
+}
+.realtime-img img {
+    width: 130px;
+}
+
+/* ng select red color */
+::ng-deep .ng-select.is-invalid .ng-select-container,::ng-deep .was-validated .ng-select:invalid .ng-select-container {
+    border-color: var(--ct-form-invalid-border-color) !important;
+}

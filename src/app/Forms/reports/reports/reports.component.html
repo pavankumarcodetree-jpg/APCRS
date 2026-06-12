@@ -1,0 +1,373 @@
+<div class="">
+    <section class="reports-section">
+        <div class="container">
+            <div class="row">
+                <h2><img src="assets/images/report.png">Reports</h2>
+                <ul class="nav nav-pills bg-nav-pills mb-3" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="#birthrpt" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-pill active me-2"
+                            aria-selected="true" role="tab">
+                            <i class="mdi mdi-mother-nurse icon"></i>Birth
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#deathrpt" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-pill" aria-selected="true"
+                            role="tab">
+                            <i class="mdi mdi-mother-nurse icon"></i>Death
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="#stillbirthrpt" data-bs-toggle="tab" aria-expanded="false" class="nav-link rounded-pill"
+                            aria-selected="true" role="tab">
+                            <i class="mdi mdi-mother-nurse icon"></i>Still Birth
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active show" id="birthrpt" role="tabpanel">
+                        <div class="row">
+                            <div class="col-xl-12 col-12">
+                                <div class="header">BIRTH REPORTS</div>
+                                <!-- <ul class="reports-list">
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>New Beginnings Report</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Birth Overview</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Life Statistics</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Birth Registration Insights</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Birth Trends Analysis</a></li>
+                    </ul> -->
+                                <table class="report-table">
+                                    <tr>
+                                        <td>B-1</td>
+                                        <td> <a [routerLink]="['/reports/b1']">Live Birth by Place of Occurrence, Districts (Rural &amp;
+                                                Urban) and Towns with population one
+                                                Lakh and
+                                                above</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-2</td>
+                                        <td> <a [routerLink]="['/reports/b2']">Live Birth by Place of Residence, Districts (Rural &amp;
+                                                Urban) and Towns with Population one
+                                                Lakh and
+                                                above </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-3</td>
+                                        <td><a [routerLink]="['/reports/b3']"> Time Gap in Registration of Live Births (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-5</td>
+                                        <td><a [routerLink]="['/reports/b5']"> Live Births by Type of Attention at Delivery (Rural &amp;
+                                                Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-6</td>
+                                        <td><a [routerLink]="['/reports/b6']"> Live Births by Method of Delivery and Type of Institution for
+                                                Institutional Births (Rural &amp;
+                                                Urban)
+
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-7</td>
+                                        <td><a [routerLink]="['/reports/b7']"> Live Births by Age of the Mother and Birth Order (Rural
+                                                &amp; Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-8</td>
+                                        <td><a [routerLink]="['/reports/b8']"> Live Births by Birth Order and Age of the Mother for
+                                                Towns with Population 1 Lakh and above
+
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-9</td>
+                                        <td><a [routerLink]="['/reports/b9']"> Live Births by Age and Level of Education of the Mother
+                                                (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-10</td>
+                                        <td><a [routerLink]="['/reports/b10']"> Live Births by Level of Education of the Father and Birth
+                                                Order (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-11</td>
+                                        <td><a [routerLink]="['/reports/b11']"> Live Births by Level of Education of the Mother and Birth
+                                                Order (Rural &amp; Urban)</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-12</td>
+                                        <td><a [routerLink]="['/reports/b12']"> Live Births by Age of the Mother and Birth Order for each
+                                                Level Education of the Mother (Rural)
+
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-13</td>
+                                        <td><a [routerLink]="['/reports/b13']"> Live Births by Age of the Mother and Birth Order for each
+                                                Level Education of the Mother (Urban)
+
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-14</td>
+                                        <td> <a [routerLink]="['/reports/b14']">Live Births by Age of the Mother, Birth Order and
+                                                Religion of the Family (Rural)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-15</td>
+                                        <td> <a [routerLink]="['/reports/b15']">Live Births by Age of the Mother, Birth Order and Religion
+                                                of
+                                                the Family (Urban)</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-16</td>
+                                        <td><a [routerLink]="['/reports/b16']"> Live Birth by Occupation of the Father and Birth Order
+                                                (Rural
+                                                &amp; Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-17</td>
+                                        <td><a [routerLink]="['/reports/b17']"> Live Birth by Occupation of the Mother and Birth Order
+                                                (Rural
+                                                &amp; Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-18</td>
+                                        <td><a [routerLink]="['/reports/b18']"> Live Birth by Duration of Marriage of the Mother and Birth
+                                                Order (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-19</td>
+                                        <td><a [routerLink]="['/reports/b19']"> Live Birth by Duration of Marriage and Age of the Mother
+                                                (Rural &amp; Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-20</td>
+                                        <td><a [routerLink]="['/reports/b20']"> Live Births by duration of Pregnancy and Birth Weight (Rural
+                                                &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-21</td>
+                                        <td><a [routerLink]="['/reports/b21']"> Live Births by Age of the Mother and Birth Weight (Rural
+                                                &amp; Urban)
+                                            </a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-22</td>
+                                        <td> <a [routerLink]="['/reports/b22']">Live Births by Birth Order and Birth Weight (Rural &amp;
+                                                Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>B-23</td>
+                                        <td><a [routerLink]="['/reports/b23']"> Live Births by Method of Delivery and Age of the Mother
+                                                (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr><!---->
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane show" id="deathrpt" role="tabpanel">
+                        <div class="row">
+                            <div class="col-xl-12 col-12">
+
+                                <div class="header">DEATH REPORTS</div>
+                                <!-- <ul class="reports-list">
+                            <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>End-of-Life Report</a></li>
+                            <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Mortality Insights</a></li>
+                            <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Death Trends Overview</a></li>
+                            <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Farewell Statistics</a></li>
+                            <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Mortality Data Summary</a></li>
+                        </ul> -->
+                                <table class="report-table">
+                                    <tr>
+                                        <td>D-1</td>
+                                        <td><a [routerLink]="['/reports/d1']"> Deaths by Place of Occurrence, Districts (Rural &amp; Urban)
+                                                and Towns with population One Lakh
+                                                and above</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-2</td>
+                                        <td><a [routerLink]="['/reports/d2']"> Death by Place of Residence, Districts (Rural &amp; Urban)
+                                                and Towns with Population one Lakh
+                                                and above</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-3</td>
+                                        <td><a [routerLink]="['/reports/d3']"> Time Gap in Registration of Deaths (Rural &amp; Urban)</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-4</td>
+                                        <td><a [routerLink]="['/reports/d4']"> Deaths by Sex and Month of Occurrence </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-5</td>
+                                        <td><a [routerLink]="['/reports/d5']"> Deaths by Type of Attention at Death (Rural &amp; Urban) </a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-6</td>
+                                        <td><a [routerLink]="['/reports/d6']"> Deaths by Age, Sex and Religion of the Deceased (Rural &amp;
+                                                Urban)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-7</td>
+                                        <td><a [routerLink]="['/reports/d7']"> Deaths by Age, Occupation and Sex (Rural)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-8</td>
+                                        <td><a [routerLink]="['/reports/d8']"> Deaths by Age, Occupation and Sex (Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-9</td>
+                                        <td><a [routerLink]="['/reports/d9']"> Deaths by Age, Occupation and Sex (All Areas) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-10</td>
+                                        <td><a [routerLink]="['/reports/d10']"> Deaths by Cause of Death, Age and Sex for all Deaths
+                                                Medically Certified or Not </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-11</td>
+                                        <td><a [routerLink]="['/reports/d11']"> Deaths by Cause of Death, Age and Sex for Medically
+                                                Certified
+                                                Deaths </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-12</td>
+                                        <td><a [routerLink]="['/reports/d12']"> Infant Deaths by Place of Occurrence, Districts (Rural &amp;
+                                                Urban) and Towns with Population
+                                                One Lakh and
+                                                Above </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-13</td>
+                                        <td><a [routerLink]="['/reports/d13']"> Infant death by place of residence,districts(Rural,Urban)
+                                                and
+                                                Towns with populations One Lakh
+                                                and above.
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-14</td>
+                                        <td><a [routerLink]="['/reports/d14']"> Infant Deaths by Age and Sex (Rural &amp; Urban)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-15</td>
+                                        <td><a [routerLink]="['/reports/d15']"> Pregnancy related death by Age group of the deceased and
+                                                cause of death for Medically Certified
+                                                Death(Rural
+                                                and Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-16</td>
+                                        <td><a [routerLink]="['/reports/d16']"> Pregnancy related death by Age group of the deceased and
+                                                cause of death for all Deaths
+                                                Medically Certified
+                                                or not (Rural or
+                                                Urban)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-18</td>
+                                        <td><a [routerLink]="['/reports/d18']"> Pregnancy Related Deaths by Age and Occupation (Rural &amp;
+                                                Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-19</td>
+                                        <td><a [routerLink]="['/reports/d19']"> Deaths by Selected Cause of Death, Age, Sex and Habit
+                                                (Rural)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-20</td>
+                                        <td><a [routerLink]="['/reports/d20']"> Deaths by Selected Cause of Death, Age, Sex and Habit
+                                                (Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>D-21</td>
+                                        <td><a [routerLink]="['/reports/d21']"> Deaths by Selected Cause of Death, Age, Sex and Habit (All
+                                                Areas) </a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane show" id="stillbirthrpt" role="tabpanel">
+                        <div class="row">
+                            <div class="col-xl-12 col-12">
+                                <div class="header">STILL BIRTH</div>
+                                <!-- <ul class="reports-list">
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Vital Statistics Report</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Mortality Insights</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Population Dynamics</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Civil Records Summary</a></li>
+                        <li><a href=""><i class="fa-solid fa-arrow-right pe-2"></i>Comprehensive Demographic</a></li>
+                    </ul> -->
+                                <table class="report-table">
+                                    <tr>
+                                        <td>S-1</td>
+                                        <td><a [routerLink]="['/reports/s1']"> Still Births by Place of Occurrence in Districts (Rural
+                                                &amp; Urban)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-2</td>
+                                        <td><a [routerLink]="['/reports/s2']"> Still Births by Place of Residence in Districts (Rural &amp;
+                                                Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-3</td>
+                                        <td><a [routerLink]="['/reports/s3']"> Still Births by Sex and Age of the Mother (Rural &amp;
+                                                Urban)</a> </td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-4</td>
+                                        <td><a [routerLink]="['/reports/s4']"> Still Births by Sex and Duration of Pregnancy (Rural &amp;
+                                                Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-5</td>
+                                        <td><a [routerLink]="['/reports/s5']"> Still Births by Sex and Type of Medical Attention Received
+                                                at Delivery (Rural &amp; Urban)
+                                            </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-6</td>
+                                        <td><a [routerLink]="['/reports/s6']"> Still Births by Cause of Still Births and age of the Mother
+                                                (Rural &amp; Urban) </a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>S-7</td>
+                                        <td><a [routerLink]="['/reports/s7']"> Still Births by duration of Pregnancy and Age of the Mother
+                                                (Rural &amp; Urban) </a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+</div>

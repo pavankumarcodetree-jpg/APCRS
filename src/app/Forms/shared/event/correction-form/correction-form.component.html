@@ -1,0 +1,641 @@
+<!-- <label for="middleName" class="form-label">DROPDOWN</label> -->
+<!-- <div class="col-md-4  multiselect-dropdown">
+   
+    <div class="form-group">
+        
+        <div class="dropdown-label" (click)="toggleDropdown()">
+            {{ getSelectedLabels() || 'Select Fields' }}
+          </div>
+
+          <div class="dropdown-list" *ngIf="dropdownOpen">
+            <label *ngFor="let field of fields">
+              <input
+                type="checkbox"
+                [value]="field."
+                (change)="onCheckboxChange($event,field)"
+                [checked]="selectedFields.indexOf(field) > -1"
+              />
+              {{ field }}
+            </label>
+          </div> 
+    </div>
+</div> -->
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <!-- <div class="col-md-2 ">
+        <div class="form-group">
+            <label for="middleName" class="form-label">DROPDOWN</label>
+        </div>
+    </div> -->
+        <div class="col-md-8">
+            <div class="row align-items-center">
+                <div class="col-md-2">DROPDOWN</div>
+                <div class="col-md-10">
+                    <div class="multiselect-dropdown">
+                        <div class="form-group">
+                            <div class="dropdown-label" (click)="toggleDropdown()">
+                                {{ getSelectedLabels() || 'Select Fields' }}
+                            </div>
+
+                            <div class="dropdown-list form-control" *ngIf="dropdownOpen">
+                                <label *ngFor="let field of fields">
+                                    <input type="checkbox" [value]="field.name"
+                                        (change)="onCheckboxChange($event, field)"
+                                        [checked]="selectedFields.indexOf(field.name) > -1" />
+                                    {{ field.name }}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="col-md-4 multiselect-dropdown">
+    <div class="form-group">
+      <div class="dropdown-label" (click)="toggleDropdown()">
+        {{ getSelectedLabels() || 'Select Fields' }}
+      </div>
+  
+      <div class="dropdown-list" *ngIf="dropdownOpen">
+        <label *ngFor="let field of fields">
+          <input
+            type="checkbox"
+            [value]="field.name"
+            (change)="onCheckboxChange($event, field)"
+            [checked]="selectedFields.indexOf(field.name) > -1"
+          />
+          {{ field.name }}
+        </label>
+      </div>
+    </div>
+  </div> -->
+
+<div class="container bg-white">
+    <!-- <div class="child-info"
+    [class.disabled]="!isFieldSelected('Childs Information')"
+    *ngIf="isFieldSelected('Childs Information')"
+    >
+        <h4>Child's Information / శిశువు సమాచారము</h4>
+
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Birth / పుట్టిన తేదీ
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{draft_details_array?.childinformation?.dateofbirth}}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Sex / లింగ భేదము
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.childinformation?.selgender_val
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Reporting / రిపోర్టింగ్ తేదీ:
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.childinformation?.confirmdateofbirth
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Registration / నమోదు తేదీ
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.childinformation?.dateofbirthmask
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div> -->
+
+
+    <div class="child-info" [class.disabled]="!isFieldSelected('Childs Information')">
+        <h4>Child's Information / శిశువు సమాచారము</h4>
+
+        <div class="col-xl-12 col-12" [class.disabled]="!isFieldSelected('Childs Information')">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Birth / పుట్టిన తేదీ
+                </div>
+                <div class="col-xl-8 col-6">
+                    <input type="text" class="form-control" [value]="draft_details_array?.childinformation?.dateofbirth"
+                        [disabled]="!isFieldSelected('Childs Information')" />
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Sex / లింగ భేదము
+                </div>
+                <div class="col-xl-8 col-6">
+                    <select class="form-select" [value]="draft_details_array?.childinformation?.selgender_val"
+                        [disabled]="!isFieldSelected('Childs Information')">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Reporting / రిపోర్టింగ్ తేదీ:
+                </div>
+                <div class="col-xl-8 col-6">
+                    <input type="text" class="form-control"
+                        [value]="draft_details_array?.childinformation?.confirmdateofbirth"
+                        [disabled]="!isFieldSelected('Childs Information')" />
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Date of Registration / నమోదు తేదీ
+                </div>
+                <div class="col-xl-8 col-6">
+                    <input type="text" class="form-control"
+                        [value]="draft_details_array?.childinformation?.dateofbirthmask"
+                        [disabled]="!isFieldSelected('Childs Information')" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="name-insertion">
+        <h2>Child Name Information / శిశువు పేరు సమాచారము</h2>
+        <form #nameForm="ngForm">
+            <div class="row">
+                <!-- First Name (ngSubmit)="onSubmit()"-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">First Name / మొదటి పేరు</label>
+                        <input type="text" class="form-control" [(ngModel)]="draft_details.firstName" id="firstName"
+                            name="firstName" placeholder="Full Name" required="" #ngfirstName="ngModel"
+                            appAlphanumericOnly autocomplete="off" minlength="3" maxlength="50"
+                            (change)="Teluglanguageconvrt(draft_details.firstName,'firstName')"
+                            [ngClass]="{'is-invalid':ngfirstName.invalid && (ngfirstName.dirty || ngfirstName.touched),
+                                                                                                            'is-valid':ngfirstName.value!='' && (ngfirstName.touched || ngfirstName.dirty)}">
+                        <div *ngIf="ngfirstName.invalid && (ngfirstName.dirty || ngfirstName.touched)"
+                            class="error-message text-danger">
+                            <div *ngIf="ngfirstName.errors">
+                                <div *ngIf="ngfirstName.errors['required']">
+                                    First Name / మొదటి పేరు is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Name [(ngModel)]="childName.firstName"-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="middleName" class="form-label">Middle Name / మధ్య పేరు</label>
+                        <input type="text" class="form-control" [(ngModel)]="draft_details.middleName" id="middleName"
+                            name="middleName" placeholder="Middle Name" required="" #ngmiddleName="ngModel"
+                            appAlphanumericOnly autocomplete="off" minlength="3" maxlength="50"
+                            (change)="Teluglanguageconvrt(draft_details.middleName,'middleName')"
+                            [ngClass]="{'is-invalid':ngmiddleName.invalid && (ngmiddleName.dirty || ngmiddleName.touched),
+                                                'is-valid':ngmiddleName.value!='' && (ngmiddleName.touched || ngmiddleName.dirty)}">
+                        <div *ngIf="ngmiddleName.invalid && (ngmiddleName.dirty || ngmiddleName.touched)"
+                            class="error-message text-danger">
+                            <div *ngIf="ngmiddleName.errors">
+                                <div *ngIf="ngmiddleName.errors['required']">
+                                    Middle Name / మధ్య పేరు is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last Name  [(ngModel)]="childName.middleName"-->
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name / చివరి పేరు</label>
+                        <input type="text" class="form-control" [(ngModel)]="draft_details.lastName" id="lastName"
+                            name="lastName" placeholder="Last Name" required="" #nglastName="ngModel"
+                            appAlphanumericOnly autocomplete="off" minlength="3" maxlength="50"
+                            (change)="Teluglanguageconvrt(draft_details.lastName,'lastName')"
+                            [ngClass]="{'is-invalid':nglastName.invalid && (nglastName.dirty || nglastName.touched),
+                                                'is-valid':nglastName.value!='' && (nglastName.touched || nglastName.dirty)}">
+                        <div *ngIf="nglastName.invalid && (nglastName.dirty || nglastName.touched)"
+                            class="error-message text-danger">
+                            <div *ngIf="nglastName.errors">
+                                <div *ngIf="nglastName.errors['required']">
+                                    Last Name / చివరి పేరు is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Confirm Name  [(ngModel)]="childName.lastName" -->
+            <div class="confirm-child">
+                <div class="row mt-5 mb-4">
+                    <h4>Confirm Child Name</h4>
+                    <!--  <div class="col-md-4">
+      <div class="form-group">
+        <label class="form-label">Confirm Child Name / శిశువు పేరు నిర్ధారించండి</label>
+        <p>
+           {{ childName.firstName || '-' }}
+          {{ childName.middleName || '-' }}
+          {{ childName.lastName || '-' }} 
+        </p>
+      </div>
+    </div> -->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="childfirstName" class="form-label">First Name / మొదటి పేరు</label>
+                            <input type="text" class="form-control" [(ngModel)]="draft_details.childfirstName"
+                                id="childfirstName" name="childfirstName" placeholder="First Name" required=""
+                                #ngchildfirstName="ngModel" appAlphanumericOnly autocomplete="off" minlength="3"
+                                maxlength="50"
+                                (change)="Teluglanguageconvrt(draft_details.childfirstName,'childfirstName')"
+                                [ngClass]="{'is-invalid':ngchildfirstName.invalid && (ngchildfirstName.dirty || ngchildfirstName.touched),
+                                                  'is-valid':ngchildfirstName.value!='' && (ngchildfirstName.touched || ngchildfirstName.dirty)}">
+                            <div *ngIf="ngchildfirstName.invalid && (ngchildfirstName.dirty || ngchildfirstName.touched)"
+                                class="error-message text-danger">
+                                <div *ngIf="ngchildfirstName.errors">
+                                    <div *ngIf="ngchildfirstName.errors['required']">
+                                        First Name / మొదటి పేరు is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Middle Name [(ngModel)]="childName.firstName"-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="childmiddleName" class="form-label">Middle Name / మధ్య పేరు</label>
+                            <input type="text" class="form-control" [(ngModel)]="draft_details.childmiddleName"
+                                id="childmiddleName" name="childmiddleName" placeholder="Middle Name" required=""
+                                #ngchildmiddleName="ngModel" appAlphanumericOnly autocomplete="off" minlength="3"
+                                maxlength="50"
+                                (change)="Teluglanguageconvrt(draft_details.childmiddleName,'childmiddleName')"
+                                [ngClass]="{'is-invalid':ngchildmiddleName.invalid && (ngchildmiddleName.dirty || ngchildmiddleName.touched),
+                                                  'is-valid':ngchildmiddleName.value!='' && (ngchildmiddleName.touched || ngchildmiddleName.dirty)}">
+                            <div *ngIf="ngchildmiddleName.invalid && (ngchildmiddleName.dirty || ngchildmiddleName.touched)"
+                                class="error-message text-danger">
+                                <div *ngIf="ngchildmiddleName.errors">
+                                    <div *ngIf="ngchildmiddleName.errors['required']">
+                                        Middle Name / మధ్య పేరు is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Last Name  [(ngModel)]="childName.middleName"-->
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">Last Name / చివరి పేరు</label>
+                            <input type="text" class="form-control" [(ngModel)]="draft_details.childlastName"
+                                id="childlastName" name="childlastName" placeholder="Last Name" required=""
+                                #ngchildlastName="ngModel" appAlphanumericOnly autocomplete="off" minlength="3"
+                                maxlength="50"
+                                (change)="Teluglanguageconvrt(draft_details.childlastName,'childlastName')"
+                                [ngClass]="{'is-invalid':ngchildlastName.invalid && (ngchildlastName.dirty || ngchildlastName.touched),
+                                                  'is-valid':ngchildlastName.value!='' && (ngchildlastName.touched || ngchildlastName.dirty)}">
+                            <div *ngIf="ngchildlastName.invalid && (ngchildlastName.dirty || ngchildlastName.touched)"
+                                class="error-message text-danger">
+                                <div *ngIf="ngchildlastName.errors">
+                                    <div *ngIf="ngchildlastName.errors['required']">
+                                        Last Name / చివరి పేరు is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Document -->
+            <div class="add-doc">
+                <h4>Add Name Documents / డాక్యుమెంట్లు జోడించండి</h4>
+                <div class="card reg-card mb-1">
+                    <div class="card-header bg-danger-subtle">
+                        <h5>Upload Supporting Documents (Only jpeg, jpg, png,
+                            pdf are allowed & maximum le size is 8MB)/ మద్దతు పత్రాలను అప్‌లోడ్
+                            చేయండి (కేవలం jpeg, jpg, png, pdf ఫైల్ రకాలే అనుమతించబడతాయి & గరిష్ట
+                            ఫైల్ పరిమాణం 8MB మాత్రమే).
+                        </h5>
+                    </div>
+                    <div class="card-body p-2">
+                        <div class="row">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Add Name Documents / డాక్యుమెంట్లు
+                                        జోడించండి<span class="text-danger">*</span></label>
+
+                                    <ng-select placeholder="Add Name Documents"
+                                        [(ngModel)]="draft_details.addnewdocument" id="addnewdocument"
+                                        name="addnewdocument" title="Add Name Documents" required
+                                        #ngaddnewdocument="ngModel" [ngClass]="{
+    'is-invalid': ngaddnewdocument.invalid && (ngaddnewdocument.dirty || ngaddnewdocument.touched),
+    'is-valid': ngaddnewdocument.value != '' && (ngaddnewdocument.dirty || ngaddnewdocument.touched)
+  }">
+                                        <ng-option value="">-- Select --</ng-option>
+                                        <ng-option *ngFor="let loc of document_list_array" [value]="loc.STATE_CODE">
+                                            {{ loc.STATE_NAME }}
+                                        </ng-option>
+                                    </ng-select>
+                                    <div *ngIf="ngaddnewdocument.invalid && (ngaddnewdocument.dirty || ngaddnewdocument.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="ngaddnewdocument.errors">
+                                            <div *ngIf="ngaddnewdocument.errors['required']">Add Name Documents /
+                                                డాక్యుమెంట్లు is required</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Document
+                                        Description/ డాక్యుమెంట్ యొక్క వివరాలు</label>
+                                    <input type="text" class="form-control"
+                                        [(ngModel)]="draft_details.documenent_descrption" id="documenent_descrption"
+                                        name="documenent_descrption" placeholder="Documenent Descrption" required=""
+                                        #ngdocumenent_descrption="ngModel"
+                                        [ngClass]="{'is-invalid':ngdocumenent_descrption.invalid && (ngdocumenent_descrption.dirty || ngdocumenent_descrption.touched),
+                                'is-valid':ngdocumenent_descrption.value!='' && (ngdocumenent_descrption.touched || ngdocumenent_descrption.dirty)}">
+                                    <div *ngIf="ngdocumenent_descrption.invalid && (ngdocumenent_descrption.dirty || ngdocumenent_descrption.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="ngdocumenent_descrption.errors">
+                                            <div *ngIf="ngdocumenent_descrption.errors['required']">
+                                                Documenent Descrption
+                                                is required</div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <label for="form-label" class="form-label">Upload Document / డాక్యుమెంట్</label>
+                                <input type="file" class="form-control" id="uploadphotouser" #notifyResolutionDocInput
+                                    name="uploadphotouser" oncut="return false;" oncopy="return false;"
+                                    onpaste="return false;" (change)="fileupload($event)"
+                                    accept=".png, .jpg,.jpeg,.pdf">
+
+                            </div>
+                            <div class="text-end">
+                                <button class="btn btn-primary my-2">Browse & Upload</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!-- Submit Button   [(ngModel)]="documentDescription"-->
+            <!-- <button type="submit" [disabled]="!nameForm.valid">Submit</button> -->
+        </form>
+    </div>
+
+
+    <div class="details-form">
+        <h2>Child & Parents Information</h2>
+
+        <!-- Child Information -->
+        <div class="child-aadh">
+            <h3>Aadhaar Number / ఆధార్ నంబరు</h3>
+            <div class="col-xl-12 col-12">
+                <div class="row bg-light mb-1">
+                    <div class="col-xl-4 col-6 border-end border-white border-2">
+                        Child's Aadhaar / శిశువు ఆధార్ నంబరు
+                    </div>
+                    <div class="col-xl-8 col-6">
+                        <strong class="">{{
+                            draft_details_array?.childinformation?.aadhaar
+                            }}</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h4>Father's Information / తండ్రి యొక్క సమాచారము</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Full Name / పూర్తి పేరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.fatherInformation?.fathername_value
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Email ID / ఈ మెయిల్ ID
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.fatherInformation?.father_email_number
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Mobile Number / మొబైలు నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.fatherInformation?.father_mobile_number
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Aadhaar Number / ఆధార్ నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.fatherInformation?.father_aadhhar_number
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <h4>Mother's Information / తల్లి యొక్క సమాచారము</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Full Name / పూర్తి పేరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.motherInformation?.mothername_value
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Email ID / ఈ మెయిల్ ID
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.motherInformation?.mother_email_number
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Mobile Number / మొబైలు నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.motherInformation?.mother_mobile_number
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Aadhaar Number / ఆధార్ నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.motherInformation?.mother_aadhhar_number
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+        <h4>Address of Parents at the time of birth of the child</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Address of Parents at the time of birth of the child / చిరునామా
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.addressof_parents?.addressof_parents_value
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <h4>Permanent address of parents</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Permanent address of parents / శాశ్వత చిరునామా
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.Permanent_addressof_parents?.Permanent_addressof_parents_value
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <h4>Place of Birth</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Place of Birth / జన్మ స్థలం
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.placeofbirth?.placeofbirth_value
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <h4>Informant's Information</h4>
+        <div class="col-xl-12 col-12">
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Full Name / పూర్తి పేరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.information?.information_value
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Email ID / ఈ మెయిల్ ID
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.information?.Informant_email_id
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Mobile Number / మొబైలు నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.information?.Informant_mobile_no
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Aadhaar Number / ఆధార్ నంబరు
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.information?.Informant_aadhhar_no
+                        }}</strong>
+                </div>
+            </div>
+            <div class="row bg-light mb-1">
+                <div class="col-xl-4 col-6 border-end border-white border-2">
+                    Address / చిరునామా
+                </div>
+                <div class="col-xl-8 col-6">
+                    <strong class="">{{
+                        draft_details_array?.information?.Informant_address_val
+                        }}</strong>
+                </div>
+            </div>
+        </div>
+
+        <h4>Remarks / వ్యాఖ్యలు</h4>
+        <div class="col-xl-12 col-12">
+            <input type="text" class="form-control" [(ngModel)]="draft_details.Remarks" id="Remarks" name="Remarks"
+                placeholder="Enter Remarks" required="" #ngRemarks="ngModel" appAlphanumericOnly autocomplete="off"
+                minlength="3" maxlength="50" (change)="Teluglanguageconvrt(draft_details.Remarks,'Remarks')"
+                [ngClass]="{'is-invalid':ngRemarks.invalid && (ngRemarks.dirty || ngRemarks.touched),
+                                                  'is-valid':ngRemarks.value!='' && (ngRemarks.touched || ngRemarks.dirty)}">
+            <div *ngIf="ngRemarks.invalid && (ngRemarks.dirty || ngRemarks.touched)" class="error-message text-danger">
+                <div *ngIf="ngRemarks.errors">
+                    <div *ngIf="ngRemarks.errors['required']">
+                        Remarks / వ్యాఖ్యలు is required</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-end">
+
+
+        <button type="submit" class="btn btn-success my-2" (click)="btnApprove()">Approve <i
+                class="fa-solid fa fa-check ps-2"></i></button>
+    </div>
+
+    <!-- <div  row align-items-center">
+    <button  class="btn btn-success">Approve</button>
+</div> -->

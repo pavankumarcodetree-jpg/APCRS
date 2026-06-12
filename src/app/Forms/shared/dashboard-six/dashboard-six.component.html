@@ -1,0 +1,1585 @@
+<!-- DashBoard3 Example -->
+
+<div class="population">
+  <header class="sticky-top">
+    <nav class="navbar navbar-expand-sm align-items-center" style="background: #036">
+      <div class="container-fluid px-1">
+        <a class="navbar-brand text-white d-flex align-items-center" href="#">
+          <img src="assets/images/aplogo.png" height="40px" class="me-2" />
+          APCRS Dashboard
+        </a>
+
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+          data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+          <ul class="navbar-nav ms-auto my-2 mb-lg-0 align-items-center">
+            <li class="nav-item">
+              <a class="nav-link active text-white" routerLink="/shared/welcome" aria-current="page">
+                Home <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+
+            <li clfass="nav-item mx-2">
+              <!-- <select class="form-select form-select-sm" [(ngModel)]="YearValue" (change)="dataChange()"> -->
+              <!-- <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option> -->
+              <!-- <option *ngFor="let year of yearList" [value]="year">{{ year }}</option>
+                            </select> -->
+
+              <ng-select name="YearValue" id="YearValue" [(ngModel)]="objDashBoard.YearValue" [clearable]="false"
+                (change)="dataChange()" [ngStyle]="{ 'min-width': '100px' }">
+                <ng-option *ngFor="let year of yearList" [value]="year">{{
+                  year
+                  }}</ng-option>
+              </ng-select>
+            </li>
+
+            <!-- <li class="nav-item text-white text-center px-2">
+                            <p class="mb-0 lh-sm fs-6 fw-bold text-light py-1 d-inline-block">
+                                <i class="mdi mdi-information"></i> Last Updated 17:30 PM<br>15-01-2025
+                            </p>
+                        </li> -->
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="mdi mdi-account"></i>
+                {{ displausername }}
+                <!-- User -->
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dropdownId">
+                <a class="dropdown-item" href="#">Logout</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="container-fluid my-2 pb-5 px-2 scroll-container">
+      <div class="row">
+        <div class="col-xl-12 col-12">
+          <!-- <div class="header-blk">
+          <h2 class="text-black fw-bold"><img src="assets/images/map-ap.png" class="img-fluid" alt="Images" style="width: 60px"> Andhra Pradesh</h2>
+        </div> -->
+          <div class="card mt-3 population-card">
+            <div class="card-body">
+              <div class="row text-center">
+                <!-- <div class="col-lg-6"> -->
+
+                <h2 style="color: #fff">Andhra Pradesh Population</h2>
+
+                <div class="d-inline-flex align-items-center justify-content-center mt-2">
+                  <i class="mdi mdi-account-group fw-bold fs-2" style="color: #fff"></i>
+                  <p class="mb-0 fw-bold fs-2" style="padding: 0 15px; border-radius: 8px; color: #e0ffff">
+                    <tm-ng-odometer [number]="objDashBoard.PopCount" [config]="{ auto: true }" [format]="'(,dd,dd,ddd)'"
+                      [observable]="observable"></tm-ng-odometer>
+                  </p>
+                  <i class="mdi mdi-information-outline fw-bold fs-4 blink-icon ms-2"
+                    style="cursor: pointer; color: #00ffff" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Click for more info" data-bs-target="#exampleModal" data-bs-toggle="modal"
+                    *ngIf="objDashBoard.YearValue == 2025">
+                  </i>
+                </div>
+                <!-- </div> -->
+                <!-- <div class="col-lg-3">
+
+
+
+                                    <div class="d-flex">
+                                        <div class="d-block">
+                                            <p class="birth-count"><i _ngcontent-ng-c3149488843=""
+                                                    class="mdi mdi-account-multiple-plus me-1"></i> Birth Today</p>
+                                            <p class="fs-5" style="color:#F5F5F5;">12345</p>
+                                        </div>
+                                        <div class="ms-4  d-block">
+                                            <p class="birth-count"> <i _ngcontent-ng-c3149488843=""
+                                                    class="mdi mdi-account-multiple-plus me-1"></i> Birth This Year</p>
+                                            <p class=" fs-5" style="color:#F5F5F5;">12345</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="d-flex">
+                                        <div class="d-block">
+                                            <p class="death-count"><i _ngcontent-ng-c3149488843=""
+                                                    class="mdi mdi-seat-flat me-1"></i> Death Today</p>
+                                            <p class=" fs-5" style="color:#F5F5F5;"> 12345</p>
+                                        </div>
+                                        <div class="ms-4 d-block">
+                                            <p class="death-count"> <i _ngcontent-ng-c3149488843=""
+                                                    class="mdi mdi-seat-flat me-1"></i> Death This Year</p>
+                                            <p class="fs-5" style="color:#F5F5F5;"> 12345</p>
+                                        </div>
+                                    </div>
+                                </div> -->
+              </div>
+            </div>
+            <!-- <p class="mb-0 text-dark fs-6">Total Population <i class="pi pi-info-circle"></i></p> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="mb-4">
+            Population Key Indicators
+            <!-- <span class="badge bg-light text-dark fs-6 p-2 float-end"
+              >FY 2024-25</span
+            > -->
+          </h2>
+
+          <div class="row mt-3 mb-3 align-items-streach">
+            <div class="col-lg-3 responsive-population-main-card">
+              <div class="card6 h-100 small-widget">
+                <a href="javascript:void(0)">
+                  <span class="icon-heart">
+                    <i class="mdi mdi-account-multiple-plus"></i>
+                  </span>
+                  <h2>Births</h2>
+
+                  <!-- Financial Year and Main Count -->
+                  <div class="text-center">
+                    <div class="stat-title mb-1">
+                      Financial Year <span class="fs-5">(2024–2025)</span>
+                    </div>
+                  </div>
+
+                  <!-- CRS and RCH -->
+                  <div class="d-flex justify-content-between px-3 mt-2">
+                    <div class="text-start" (click)="navigateToCrsmethod('Birth CRS')">
+                      <div class="stat-title" style="margin-left: 14px;">CRS</div>
+                      <div class="stat-value">
+                        {{
+                        DashBoardList[0]?.BRTH_YEAR
+                        | number : "1.0-0" : "en-IN"
+                        }}
+                      </div>
+                    </div>
+                    <div class="text-end" (click)="navigateToRchmethod('Birth RCH')">
+                      <div class="stat-title" style="margin-right: 16px;">RCH</div>
+                      <div class="stat-value">
+                        {{
+                        DashBoardList[0]?.RCH_YEAR
+                        | number : "1.0-0" : "en-IN"
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 responsive-population-main-card">
+              <div class="card7 h-100 small-widget" (click)="navigateToMetrictwo('Death')">
+                <a href="javascript:void(0)">
+                  <span class="icon-heart1">
+                    <i class="mdi mdi-seat-flat"></i>
+                  </span>
+                  <h2>Deaths</h2>
+
+                  <div class="stats-row">
+                    <!-- <div class="stat-box">
+                                    <div class="stat-title">Day<span class="fs-6">({{yesterdayDate |
+                                            date:'dd-MM-yyyy'}})
+                                        </span></div>
+                                    <div class="stat-value">{{ DashBoardList[0]?.DEATH_TODAY }}</div>
+                                </div> -->
+                    <div class="stat-box">
+                      <div class="stat-title">
+
+                        Financial Year<span class="fs-5">(2024–2025)</span>
+                      </div>
+
+                      <div class="stat-value">
+                        {{
+                        DashBoardList[0]?.DEATH_YEAR
+                        | number : "1.0-0" : "en-IN"
+                        }}
+                        <small class="text-muted">(as per CRS)</small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 responsive-population-main-card">
+              <div class="card8 h-100 small-widget" (click)="navigateToMetric('TFR')">
+                <a href="javascript:void(0)">
+                  <span class="icon-heart2">
+                    <i class="fa fa-baby"></i>
+                  </span>
+                  <h2>TFR</h2>
+
+                  <div class="stats-row">
+                    <!-- <div class="stat-box">
+                                    <div class="stat-title">Day<span class="fs-6">({{yesterdayDate |
+                                            date:'dd-MM-yyyy'}})
+                                        </span></div>
+                                    <div class="stat-value">{{ DashBoardList[0]?.TFR_TODAY }}</div>
+                                </div> -->
+                    <div class="stat-box">
+                      <div class="stat-title">
+                        Financial Year<span class="fs-5">(2024–2025)</span>
+                      </div>
+                      <div class="stat-value">
+                        {{ DashBoardList[0]?.TFR_YEAR }}
+                        <small class="text-muted">(as per RCH)</small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-lg-3 responsive-population-main-card">
+              <div class="card9 h-100 small-widget" (click)="navigateToMetrictwo('Sex Ratio')">
+                <a href="javascript:void(0)">
+                  <span class="icon-heart3">
+                    <i class="mdi mdi-gender-male-female"></i>
+                  </span>
+                  <h2>Sex Ratio</h2>
+
+                  <div class="stats-row">
+                    <!-- <div class="stat-box">
+                                    <div class="stat-title">Day<span class="fs-6">({{yesterdayDate |
+                                            date:'dd-MM-yyyy'}})
+                                        </span></div>
+                                    <div class="stat-value">{{ DashBoardList[0]?.SEX_RATIO_TODAY }}</div>
+                                </div> -->
+                    <div class="stat-box">
+                      <div class="stat-title">
+                        Financial Year<span class="fs-5">(2024–2025)</span>
+                      </div>
+                      <div class="stat-value">
+                        {{ DashBoardList[0]?.SEX_RATIO_YEAR }}
+                        <small class="text-muted">(as per GSWS)</small>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            <!-- <div class="col">
+                
+                </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 class="mb-4">
+            Parameters
+          </h2>
+
+          <div class="">
+            <div class="accordion mt-4" id="demoAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed population" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne">
+                    <span class="left-icon"><i class="mdi mdi-account-multiple-plus"></i></span>
+                    Population Structure <small class="sub-label">&nbsp; (as per GSWS)</small>
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="collapseOne">
+                  <div class="accordion-body">
+                    <div class="row">
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card10 h-100 small-widget">
+                          <h2 class="text-center">Population</h2>
+                          <div class="row">
+                            <div class="col-lg-6">
+                              <div class="stats-row">
+                                <div class="stat-box">
+                                  <div class="stat-title">Urban</div>
+                                  <div class="stat-value">
+                                    {{ DashBoardList[0]?.URBAN_POP | number : "1.0-0" : "en-IN" }}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-lg-6">
+                              <div class="stats-row">
+                                <div class="stat-box">
+                                  <div class="stat-title">Rural</div>
+                                  <div class="stat-value">
+                                    {{ DashBoardList[0]?.RURAL_POP | number : "1.0-0" : "en-IN"}}
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-2 responsive-population-card">
+                        <div class="card11 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Household Size
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.HH_SIZE }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-2 responsive-population-card">
+                        <div class="card12 h-100 small-widget">
+                          <!-- <h2 class="text-center">Sex Ratio</h2> -->
+
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">Child Sex Ratio</div>
+                              <div class="stat-value">
+                                {{ DashBoardList[0]?.CHILD_SEX_RATIO }}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- <div class="col">
+                        <div
+                          class="card13 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                             
+                                Dependency Ratio
+                              </div>
+
+                              <div class="stat-value">34.37</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div> -->
+
+                      <div class="col-lg-2 responsive-population-card">
+                        <div class="card14 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Child Dependency
+                              </div>
+
+                              <div class="stat-value"> {{ DashBoardList[0]?.CHILD_DEPENDENCY }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-2 responsive-population-card">
+                        <div class="card15 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Old-age Dependency
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.OLD_AGE_DEPENDENCY}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed health" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo">
+                    <span class="left-icon"><i class="mdi mdi-heart-pulse"></i></span>
+                    Health & Nutrition <small class="sub-label">&nbsp; (as per RCH)</small>
+                  </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse show" aria-labelledby="collapseTwo">
+                  <div class="accordion-body text-muted">
+                    <div class="row">
+                      <div class="col-lg-3 responsive-population-card">
+                        <div class="card11 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Neo -Natal Mortality Rate (NMR)
+                              </div>
+
+                              <!-- <div class="stat-value">{{ DashBoardList[0]?.NMR_YEAR  | number: '1.1-1' }} </div> -->
+                              <div class="stat-value">
+                                {{
+                                DashBoardList[0]?.NMR_YEAR
+                                | number : "1.0-0" : "en-IN"
+                                }}
+                                <small class="text-muted extra-small">(as per RCH)</small> / 20
+                                <small class="text-muted extra-small">(as per SRS)</small>
+
+                              </div>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3 responsive-population-card">
+                        <div class="card12 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Infant Mortality Rate (IMR)
+                              </div>
+
+                              <!-- <div class="stat-value">{{ DashBoardList[0]?.IMR_YEAR }}</div> -->
+
+
+                              <div class="stat-value">
+                                {{
+                                DashBoardList[0]?.IMR_YEAR
+                                | number : "1.0-0" : "en-IN"
+                                }}
+                                <small class="text-muted extra-small">(as per RCH)</small> / 24
+                                <small class="text-muted extra-small">(as per SRS)</small>
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 responsive-population-card">
+                        <div class="card13 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Under-5 Mortality Rate (U5MR)
+                              </div>
+
+                              <!-- <div class="stat-value">{{ DashBoardList[0]?.UNDER_5_YEARS_YEAR }}</div> -->
+
+
+
+                              <div class="stat-value">
+                                {{
+                                DashBoardList[0]?.UNDER_5_YEARS_YEAR
+                                | number : "1.0-0" : "en-IN"
+                                }}
+                                <small class="text-muted extra-small">(as per RCH)</small> / 24
+                                <small class="text-muted extra-small">(as per SRS)</small>
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 responsive-population-card">
+                        <div class="card10 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Maternal Mortality Rate (MMR)
+                              </div>
+                              <!-- 
+                              <div class="stat-value">{{ DashBoardList[0]?.MMR_YEAR }}</div> -->
+
+
+                              <div class="stat-value">
+                                {{
+                                DashBoardList[0]?.MMR_YEAR
+                                | number : "1.0-0" : "en-IN"
+                                }}
+                                <small class="text-muted extra-small">(as per RCH)</small> / 46
+                                <small class="text-muted extra-small">(as per SRS)</small>
+
+
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed fertility" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFour">
+                    <span class="left-icon"><i class="mdi mdi-baby-face-outline"></i></span>
+                    Fertility & Family Planning
+
+                  </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse show" aria-labelledby="collapseFour">
+                  <div class="accordion-body text-muted">
+                    <div class="row">
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card11 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+
+                                Total Fertility Rate
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.TFR_YEAR }}
+                                <small class="text-muted">(as per RCH)</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card12 h-100 small-widget">
+                          <!-- <h2 class="text-center">Birth Rate</h2> -->
+
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">Crude Birth Rate</div>
+                              <div class="stat-value">{{ DashBoardList[0]?.CRUDE_BIRTH_RATE }}
+                                <small class="text-muted">(as per CRS)</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card13 h-100 small-widget">
+                          <!-- <h2 class="text-center">Death Rate</h2> -->
+
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">Crude Death Rate</div>
+                              <div class="stat-value">{{ DashBoardList[0]?.CRUDE_DEATH_RATE }}
+                                <small class="text-muted">(as per CRS)</small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed vulnerability" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseFive">
+                    <span class="left-icon"><i class="mdi mdi-hand-heart-outline"></i></span>
+                    Vulnerability & Inclusion <small class="sub-label">&nbsp; (as per GSWS)</small>
+
+                  </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse show" aria-labelledby="collapseFive">
+                  <div class="accordion-body text-muted">
+                    <div class="row">
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card11 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Household with Senior Citizen
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.HH_SENIOR_CITIZEN | number : "1.0-0" :
+                                "en-IN"}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card12 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Orphan/Child-headed Household
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.ORPHAN_CHILD | number : "1.0-0" : "en-IN"}}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-lg-4 responsive-population-card">
+                        <div class="card13 h-100 small-widget">
+                          <div class="stats-row">
+                            <div class="stat-box">
+                              <div class="stat-title">
+                                <!-- Year -->
+                                Transgender Population
+                              </div>
+
+                              <div class="stat-value">{{ DashBoardList[0]?.TRANSGENDER_POP | number : "1.0-0" :
+                                "en-IN"}}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 
+            <div class="row row-cols-1 row-cols-md-4 g-3">
+             
+                <div class="col">
+                    <div class="stat-card card h-100">
+                        <div class="stat-title text-center">Birth Statistics</div>
+                        <div class="d-flex justify-content-between mt-1 data-blocks">
+                            <div class="data-block current-block">
+                                <div class="small-label">2025 CURRENT</div>
+                                <div class="stat-value">
+                                    {{
+                                    DashBoardList1[0]?.BIRTH_2025 | number : "1.0-0" : "en-IN"
+                                    }}
+                                </div>
+                            </div>
+                            <div class="data-block previous-block">
+                                <div class="small-label">2024 PREVIOUS</div>
+                                <div class="stat-value">
+                                    {{
+                                    DashBoardList1[0]?.BIRTH_2024 | number : "1.0-0" : "en-IN"
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="growth-rate mt-2">
+                            {{ DashBoardList1[0]?.BIRTH_GROWTH }}% Growth Rate
+                        </div>
+                    </div>
+                </div>
+
+          
+                <div class="col">
+                    <div class="stat-card card h-100">
+                        <div class="stat-title text-center">Death Statistics</div>
+                        <div class="d-flex justify-content-between mt-1 data-blocks">
+                            <div class="data-block current-block">
+                                <div class="small-label">2025 CURRENT</div>
+                                <div class="stat-value">
+                                    {{
+                                    DashBoardList1[0]?.DEATH_2025 | number : "1.0-0" : "en-IN"
+                                    }}
+                                </div>
+                            </div>
+                            <div class="data-block previous-block">
+                                <div class="small-label">2024 PREVIOUS</div>
+                                <div class="stat-value">
+                                    {{
+                                    DashBoardList1[0]?.DEATH_2024 | number : "1.0-0" : "en-IN"
+                                    }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="growth-rate mt-2">
+                            {{ DashBoardList1[0]?.DEATH_GROWTH }}% Growth Rate
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="stat-card card h-100">
+                        <div class="stat-title text-center">Sex Ratio</div>
+                        <div class="d-flex justify-content-between mt-1 data-blocks">
+                            <div class="data-block current-block">
+                                <div class="small-label">2025 CURRENT</div>
+                                <div class="stat-value">
+                                    {{ DashBoardList1[0]?.SEX_RATIO_2025 }}
+                                </div>
+                            </div>
+                            <div class="data-block previous-block">
+                                <div class="small-label">2024 PREVIOUS</div>
+                                <div class="stat-value">
+                                    {{ DashBoardList1[0]?.SEX_RATIO_2024 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="growth-rate mt-2">
+                            {{ DashBoardList1[0]?.SEX_RATIO_GROWTH }}% Growth Rate
+                        </div>
+                    </div>
+                </div>
+
+               
+                <div class="col">
+                    <div class="stat-card card h-100">
+                        <div class="stat-title text-center">Age Structure</div>
+                        <div class="d-flex justify-content-between mt-1 data-blocks">
+                            <div class="data-block current-block">
+                                <div class="small-label">2025 CURRENT</div>
+                                <div class="stat-value">{{DashBoardList1[0]?.AGE_STRUCTURE_2025 }}</div>
+                            </div>
+                            <div class="data-block previous-block">
+                                <div class="small-label">2024 PREVIOUS</div>
+                                <div class="stat-value">{{DashBoardList1[0]?.AGE_STRUCTURE_2024 }}</div>
+                            </div>
+                        </div>
+                        <div class="growth-rate mt-2"> {{DashBoardList1[0]?.AGE_STRUCTURE_GROWTH}}% Growth Rate</div>
+                    </div>
+                </div>
+
+           
+                <div class="col">
+                    <div class="stat-card card h-100">
+                        <div class="stat-title text-center">Dependency Ratio</div>
+                        <div class="d-flex justify-content-between mt-1 data-blocks">
+                            <div class="data-block current-block">
+                                <div class="small-label">2025 CURRENT</div>
+                                <div class="stat-value">
+                                    {{ DashBoardList1[0]?.DEPENDENCY_RATIO_2024 }}
+                                </div>
+                            </div>
+                            <div class="data-block previous-block">
+                                <div class="small-label">2024 PREVIOUS</div>
+                                <div class="stat-value">
+                                    {{ DashBoardList1[0]?.DEPENDENCY_RATIO_2025 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="growth-rate mt-2">
+                            {{ DashBoardList1[0]?.DEPENDENCY_RATIO_GROWTH }}% Growth Rate
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+      <!-- <div class="row d-flex mt-3 mt-2">
+                <div class="col-md-12">
+                    <div class="card">
+                        <h4 class="card-title text-center mt-3">Age Structure (%)</h4>
+                        <div class="card-body text-center">
+                            <div id="age-pie-chart" style="width: 100%; height: 400px;"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+      <!-- <div class="row d-flex justify-content-center mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h4 class="card-title text-center">Age Structure (%)</h4>
+                            <div class="vertical-divider"></div>
+                            <div class="row">
+                              
+                                <div class="col-md-6">
+                                    <div id="age-bar-chart" style="width: 100%; height: 400px;"></div>
+                                </div>
+
+                             
+                                <div class="col-md-6">
+                                    <div id="age-pie-chart" style="width: 100%; height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+
+      <!-- <div class="row d-flex  mb-2"> -->
+      <!-- <div class="col-xl-4 d-flex">
+                    <div class="card inner-card w-100">
+                        <div class="card-body">
+
+
+
+                            
+                            <table class="ps -2 table table-borderedless">
+                                <thead>
+                                    <tr>
+                                        <th>Metric</th>
+                                        <th>2025 <span class="current-currect">(Current)</span> </th>
+                                        <th>2024 <span class="current-currect">(Previous)</span></th>
+                                        <th>Completed</th>
+                                        <th>Growth</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="text-success"><i class="fa-solid fa-baby"></i> Births</td>
+                                        <td>{{DashBoardList1[0]?.BIRTH_2025 }}</td>
+                                        <td>{{DashBoardList1[0]?.BIRTH_2024 }}</td>
+                                        <td>{{DashBoardList1[0]?.YEAR_COMP_PER}}%</td>
+                                        <td class="down">{{DashBoardList1[0]?.BIRTH_GROWTH}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-success"><i class="fa-solid fa-skull-crossbones"></i> Deaths
+                                        </td>
+                                        <td>{{DashBoardList1[0]?.DEATH_2025 }}</td>
+                                        <td>{{DashBoardList1[0]?.DEATH_2024 }}</td>
+                                        <td>{{DashBoardList1[0]?.YEAR_COMP_PER}}%</td>
+                                        <td class="down">{{DashBoardList1[0]?.DEATH_GROWTH}}%</td>
+                                    </tr>
+                                 
+                                    <tr>
+                                        <td class="text-success"><i class="fa-solid fa-venus-mars"></i> Sex Ratio</td>
+                                        <td>{{DashBoardList1[0]?.SEX_RATIO_2025 }}</td>
+                                        <td>{{DashBoardList1[0]?.SEX_RATIO_2024 }}</td>
+                                        <td>{{DashBoardList1[0]?.YEAR_COMP_PER}}%</td>
+                                        <td class="up">{{DashBoardList1[0]?.SEX_RATIO_GROWTH}}%</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-success"><i class="fa-solid fa-chart-pie"></i> Age Structure
+                                        </td>
+                                        <td>{{DashBoardList1[0]?.AGE_STRUCTURE_2025 }}</td>
+                                        <td>{{DashBoardList1[0]?.AGE_STRUCTURE_2024 }}</td>
+                                        <td>{{DashBoardList1[0]?.YEAR_COMP_PER}}%</td>
+                                        <td class="down">{{DashBoardList1[0]?.AGE_STRUCTURE_GROWTH}}%</td>
+                                    </tr>
+                                   
+                                    <tr>
+                                        <td class="text-success"><i class="fa-solid fa-people-group"></i> Dependency
+                                            Ratio
+                                        </td>
+                                        <td>37.54</td>
+                                        <td>37.05</td>
+                                        <td>{{DashBoardList1[0]?.YEAR_COMP_PER}}%</td>
+                                        <td class="neutral">{{DashBoardList1[0]?.DEPENDENCY_RATIO_GROWTH}}%</td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                        </div>
+                     
+
+
+                    </div>
+                </div> -->
+      <div class="row mt-3 align-items-streach">
+        <!-- <div class="col-xl-4">
+                    <div class="card birth-summary h-100">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mt-3 mb-5">Age Structure (%)</h4>
+                            <div class="text-center d-flex align-items-center justify-content-center"
+                                style="height: 100%;">
+                                <div id="age-pie-chart" style="width: 100%; height: 100%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+        <div class="col-xl-4">
+          <div class="card">
+            <h4 class="card-title text-center mt-3">Age Structure (%)</h4>
+            <div class="card-body text-center">
+              <div id="age-pie-chart" style="width: 100%; height: 623px"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8">
+          <div class="row">
+            <div class="col-xl-12 col-12">
+              <div class="card birth-summary inner-card h-100">
+                <div class="text-center">
+                  <h3>
+                    Birth Summary
+                    <small>(2025)</small>
+                  </h3>
+                </div>
+
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                      <div class="row">
+                        <div class="col-xl-7 col-12 position-relative">
+                          <div class="">
+                            <svg version="1.1" id="andhrapradeshMap" xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1500 1100"
+                              xml:space="preserve" style="enable-background: new 0 0 1500 1100">
+                              <style type="text/css">
+                                #andhrapradeshMap {
+                                  transform: scale(1);
+                                  width: 131%;
+                                  z-index: 9;
+                                  position: relative;
+                                  margin-top: 37px;
+                                  margin-left: -56px;
+                                }
+
+                                text {
+                                  font-family: "Inter", "sans-serif";
+                                  font-size: 14px;
+                                  cursor: pointer;
+                                }
+
+                                .st0 {
+                                  enable-background: new;
+                                }
+
+                                .st1 {
+                                  fill: #eabb0c;
+                                }
+
+                                .st2 {
+                                  fill: none;
+                                  stroke: #fdfdff;
+                                  stroke-miterlimit: 2;
+                                }
+
+                                .st3 {
+                                  fill: #85b135;
+                                }
+
+                                .st1:hover,
+                                .st2:hover,
+                                .st3:hover,
+                                .st4:hover,
+                                .st5:hover,
+                                .st6:hover,
+                                .st7:hover,
+                                .st8:hover,
+                                .st9:hover,
+                                .st10:hover,
+                                .st11:hover,
+                                .st12:hover,
+                                .st13:hover,
+                                .st14:hover,
+                                .st15:hover,
+                                .st16:hover,
+                                .st17:hover,
+                                .st18:hover,
+                                .st19:hover,
+                                .st20:hover,
+                                .st21:hover,
+                                .st22:hover,
+                                .st23:hover,
+                                .st24:hover,
+                                .st25:hover,
+                                .st26:hover,
+                                .st27:hover,
+                                .st28:hover,
+                                .st29:hover,
+                                .st30:hover {
+                                  fill: #eabb0c;
+                                  filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.8));
+                                }
+
+                                .st4 {
+                                  fill: #abc439;
+                                }
+
+                                .st5 {
+                                  fill: none;
+                                  stroke: #ffffff;
+                                  stroke-miterlimit: 2;
+                                }
+
+                                .st6 {
+                                  fill: #b6cb32;
+                                }
+
+                                .st7 {
+                                  fill: #f72621;
+                                }
+
+                                .st8 {
+                                  fill: #abc439;
+                                }
+
+                                .st9 {
+                                  fill: #abc439;
+                                }
+
+                                .st10 {
+                                  fill: #abc439;
+                                }
+
+                                .st11 {
+                                  fill: #abc439;
+                                }
+
+                                .st12 {
+                                  fill: #f72621;
+                                }
+
+                                .st13 {
+                                  fill: #abc439;
+                                }
+
+                                .st14 {
+                                  fill: #f72621;
+                                }
+
+                                .st15 {
+                                  fill: #7dae38;
+                                }
+
+                                .st16 {
+                                  fill: #f72621;
+                                }
+
+                                .st17 {
+                                  fill: #abc439;
+                                }
+
+                                .st18 {
+                                  fill: #abc439;
+                                }
+
+                                .st19 {
+                                  fill: #f72621;
+                                }
+
+                                .st20 {
+                                  fill: #abc439;
+                                }
+
+                                .st21 {
+                                  fill: #eabb0c;
+                                }
+
+                                .st22 {
+                                  fill: #abc439;
+                                }
+
+                                .st23 {
+                                  fill: #abc439;
+                                }
+
+                                .st24 {
+                                  fill: #eabb0c;
+                                }
+
+                                .st25 {
+                                  fill: #eabb0c;
+                                }
+
+                                .st26 {
+                                  fill: #abc439;
+                                }
+
+                                .st27 {
+                                  fill: #f72621;
+                                }
+
+                                .st28 {
+                                  fill: #b7cb38;
+                                }
+
+                                .st29 {
+                                  font-family: "Inter";
+                                }
+
+                                .st30 {
+                                  fill: #ffffff;
+                                  font-size: 18px;
+                                  font-weight: 700;
+                                  font-family: "Inter", sans-serif !important;
+                                }
+
+                                .st30:hover {
+                                  text-decoration: none;
+                                }
+
+                                text {
+                                  font-family: "Inter", sans-serif !important;
+                                  font-size: 18px;
+                                  fill: #000 !important;
+                                  /* <-- black color and force override */
+                                }
+
+                                title {
+                                  fill: #fff !important;
+                                  color: #fff;
+                                }
+                              </style>
+                              <g id="Layer_1_xA0_Image_1_">
+                                <image width="1200" height="900" id="Layer_1_xA0_Image" xlink:href="72C3C8B1.png"
+                                  transform="matrix(1 0 0 1 3.4693 1143.3256)" style="overflow: visible"></image>
+                              </g>
+                              <path *ngFor="let district of districts" [attr.id]="district.id" [attr.d]="district.path"
+                                [style.fill]="
+                                  district.area > 1000
+                                    ? '#eabb0c'
+                                    : '#abc439' && district.area > 3000
+                                    ? '#f72621'
+                                    : '#abc439'
+                                " [attr.title]="district.name" (mouseover)="onHover(district)" (mouseleave)="onLeave()"
+                                (click)="onSelect(district)" style="
+                                  cursor: pointer;
+                                  stroke: #000;
+                                  stroke-width: 0.5px;
+                                "></path>
+                              <g id="guntur_1_" class="st0">
+                                <a title="Annamayya" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 302.0426 737.5057)" class="st29 st30">
+                                    Annamayya
+                                  </text>
+                                </a>
+                                <a title="Sri Sathya Sai" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 278.0512 671.4259)" class="st29 st30">
+                                    Satyasai
+                                  </text>
+                                </a>
+                                <a title="Ananthapuramu" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 220.5831 581.5536)" class="st29 st30">
+                                    Ananthpuramu
+                                  </text>
+                                </a>
+                                <a title="Kurnool" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 234.9448 491.9276)" class="st29 st30">
+                                    Kurnool
+                                  </text>
+                                </a>
+                                <a title="Nandyal" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 339.9661 514.4595)" class="st29 st30">
+                                    Nandyal
+                                  </text>
+                                </a>
+                                <a title="Prakasam" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 439.6124 484.8422)" class="st29 st30">
+                                    Prakasam
+                                  </text>
+                                </a>
+                                <a title="Palnadu" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 491.0925 376.111)" class="st29 st30">
+                                    Palnadu
+                                  </text>
+                                </a>
+                                <a title="Bapatla" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 569.4443 467.3029)" class="st29 st30">
+                                    Bapatla
+                                  </text>
+                                </a>
+                                <a title="Guntur" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 604.6271 392.3386)" class="st29 st30">
+                                    Guntur
+                                  </text>
+                                </a>
+                                <a title="Krishna" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 677.7847 407.4884)" class="st29 st30">
+                                    Krishna
+                                  </text>
+                                </a>
+                                <a title="NTR" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 572.5151 327.3701)" class="st29 st30">
+                                    NTR
+                                  </text>
+                                </a>
+                                <a title="Eluru" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 658.2053 283.8774)" class="st29 st30">
+                                    Eluru
+                                  </text>
+                                </a>
+                                <a title="West Godavari" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 732.503 376.1109)" class="st29 st30">
+                                    West Godavari
+                                  </text>
+                                </a>
+                                <a title="Konaseema" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 803.0947 346.4739)" class="st29 st30">
+                                    Konaseema
+                                  </text>
+                                </a>
+                                <a title="East Godavai" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 726.6307 302.0483)" class="st29 st30">
+                                    East Godavari
+                                  </text>
+                                </a>
+                                <a title="Kakinada" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 812.2289 283.8773)" class="st29 st30">
+                                    Kakinada
+                                  </text>
+                                </a>
+                                <a title="Anakapalli" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 873.9338 229.7954)" class="st29 st30">
+                                    Anakapalli
+                                  </text>
+                                </a>
+                                <a title="Visakhapatnam" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 935.2104 190.2209)" class="st29 st30">
+                                    Visakhapatnam
+                                  </text>
+                                </a>
+                                <a title="Vizianagaram" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 956.7194 147.3274)" class="st29 st30">
+                                    Vizianagaram
+                                  </text>
+                                </a>
+                                <a title="Srikakulam" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 1024.8148 99.121)" class="st29 st30">
+                                    Srikakulam
+                                  </text>
+                                </a>
+                                <a title="Parvathipuram Manyam" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 807.1726 64.605)" class="st29 st30">
+                                    Parvathipuram Manyam
+                                  </text>
+                                </a>
+                                <a title="Alluri Sitharama Raju" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 712.9728 158.5615)" class="st29 st30">
+                                    Alluri Seetarama Raju
+                                  </text>
+                                </a>
+                                <a title="Y.S.R." href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 375.5831 608.1068)" class="st29 st30">
+                                    YSR
+                                  </text>
+                                </a>
+                                <a title="Tirupati" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 532.115 699.903)" class="st29 st30">
+                                    Tirupati
+                                  </text>
+                                </a>
+                                <a title="SRI Potti Sriramulu Nellore" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 500.8115 595.2191)" class="st29 st30">
+                                    SRI Potti Sriramulu Nellore
+                                  </text>
+                                </a>
+                                <a title="Chittoor" href="javascript:void(0)">
+                                  <text transform="matrix(1 0 0 1 446.5532 798.4251)" class="st29 st30">
+                                    Chittor
+                                  </text>
+                                </a>
+                              </g>
+                            </svg>
+
+                            <div class="counts">
+                              <ul *ngIf="selectedShow">
+                                <div *ngIf="selectedDistrict">
+                                  <strong style="color: #f67015">{{
+                                    selectedDistrict.name
+                                    }}</strong><br />
+                                </div>
+                                <li class="text-black">
+                                  Total
+                                  <h4 class="my-1" style="color: #f67015">
+                                    {{ totalbirthcount }}
+                                  </h4>
+                                </li>
+                                <li class="text-black">
+                                  Male
+                                  <h4 class="my-1" style="color: #46c2f2">
+                                    {{ male_count }}
+                                  </h4>
+                                </li>
+                                <li class="text-black">
+                                  Female
+                                  <h4 class="my-1" style="color: #b73377">
+                                    {{ female_count }}
+                                  </h4>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-5 col-12">
+                          <div class="table-responsive headertable">
+                            <table class="table table-borderedless">
+                              <thead class="table-dark">
+                                <tr>
+                                  <th>SNo</th>
+                                  <th>District</th>
+                                  <th>Total</th>
+                                  <th>Male</th>
+                                  <th>Female</th>
+                                  <th>BR</th>
+                                </tr>
+                              </thead>
+                              <tbody class="fs-6">
+                                <tr *ngFor="
+                                    let dis of summary_birth_death_array;
+                                    let i = index
+                                  ">
+                                  <td>{{ i + 1 }}</td>
+                                  <td>{{ dis.DISTRICT_NAME }}</td>
+                                  <td>{{ dis.TOTAL_BIRTH }}</td>
+                                  <td>{{ dis.MALE_BIRTH }}</td>
+                                  <td>{{ dis.FEMALE_BIRTH }}</td>
+                                  <td>{{ dis.BIRTH_RATE }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                      <div class="row">
+                        <div class="col-xl-6 col-12 position-relative">
+                          <div class="heatmap">
+                            <ul>
+                              <li>
+                                1-1000
+                                <span></span>
+                              </li>
+                              <li>
+                                1001-3000
+                                <span></span>
+                              </li>
+                              <li>
+                                3000+
+                                <span></span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="">
+                            <img src="assets/images/India_grey.svg" class="img-fluid" />
+
+                            <div class="counts">
+                              <ul>
+                                >
+                                <li>
+                                  Total
+                                  <h4 class="my-1" style="color: #f67015">0</h4>
+                                </li>
+                                <li>
+                                  Male
+                                  <h4 class="my-1" style="color: #46c2f2">0</h4>
+                                </li>
+                                <li>
+                                  Female
+                                  <h4 class="my-1" style="color: #b73377">0</h4>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                          <div class="table-responsive headertable">
+                            <table class="table table-borderedless">
+                              <thead class="table-dark">
+                                <tr>
+                                  <th>State/UT</th>
+                                  <th>Male Births</th>
+                                  <th>Female Births</th>
+                                  <th>Total Births</th>
+                                  <th>Birth Rate (per 1,000)</th>
+                                </tr>
+                              </thead>
+                              <!-- <tbody>
+                                                                <tr
+                                                                    *ngFor="let st of all_state_summary_birth_death_array">
+                                                                    <td>{{st.STATE_NAME}}</td>
+                                                                    <td>{{st.TOT_MALE_BIRTHS}}</td>
+                                                                    <td>{{st.TOT_FEMALE_BIRTS}}</td>
+                                                                    <td>{{st.TOT_BIRTHS}}</td>
+                                                                    <td>{{st.BIRTH_RATE}}</td>
+                                                                </tr>
+
+                                                            </tbody> -->
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="messages" role="tabpanel" aria-labelledby="messages-tab">
+                      <div class="row">
+                        <div class="col-xl-6 col-12 position-relative">
+                          <div class="heatmap">
+                            <ul>
+                              <li>
+                                1-1000
+                                <span></span>
+                              </li>
+                              <li>
+                                1001-3000
+                                <span></span>
+                              </li>
+                              <li>
+                                3000+
+                                <span></span>
+                              </li>
+                            </ul>
+                          </div>
+                          <div class="">
+                            <img src="assets/images/world.svg" class="img-fluid" />
+
+                            <div class="counts">
+                              <ul>
+                                <li>
+                                  Total
+                                  <h4 class="my-1" style="color: #f67015">0</h4>
+                                </li>
+                                <li>
+                                  Male
+                                  <h4 class="my-1" style="color: #46c2f2">0</h4>
+                                </li>
+                                <li>
+                                  Female
+                                  <h4 class="my-1" style="color: #b73377">0</h4>
+                                </li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                          <div class="table-responsive headertable">
+                            <table class="table table-borderedless">
+                              <thead class="table-dark">
+                                <tr>
+                                  <th>State/UT</th>
+                                  <th>Male Births</th>
+                                  <th>Female Births</th>
+                                  <th>Total Births</th>
+                                  <th>Birth Rate (per 1,000)</th>
+                                </tr>
+                              </thead>
+                              <!-- <tbody>
+                                                                <tr *ngFor="let st of world_summary_birth_death_array">
+                                                                    <td>{{st.COUNTRY_NAME}}</td>
+                                                                    <td>{{st.TOT_MALE_BIRTHS}}</td>
+                                                                    <td>{{st.TOT_FEMALE_BIRTS}}</td>
+                                                                    <td>{{st.TOT_BIRTHS}}</td>
+                                                                    <td>{{st.BIRTH_RATE}}</td>
+                                                                </tr>
+
+                                                            </tbody> -->
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- </div> -->
+
+      <div class="row mt-3 d-flex">
+        <div class="col-xl-12 d-flex">
+          <div class="card py-1 pb-2 w-100">
+            <div class="card-body">
+              <!-- <div id="birth-death-treads-comparison-chart"></div> -->
+
+              <!-- <div class="form-group mb-3">
+                <label for="yearSelector">Select Year:</label>
+                <select id="yearSelector" class="form-control small-select" [(ngModel)]="objDashBoard.selectedDuration"
+                  (change)="onDurationChange($event)">
+                  <option *ngFor="let duration of durations" [value]="duration">
+                    {{ duration }} Years
+                  </option>
+                </select>
+              </div> -->
+              <div id="population-prediction-chart" style="width: 100%; height: 400px"></div>
+
+              <!-- <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions3"
+                                        style="width: 100%; height: 400px; display: block;"></highcharts-chart> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-xl-4 mt-1 d-flex">
+                    <div class="card py-3 pb-5 w-100">
+                        <div class="card-body text-black">
+                            <div class="row">
+                                <div class="col-xl-4 border-end border-dark">
+                                    <div class="d-flex flex-column pt-2 text-center align-items-center">
+                                        <div class="d-flex flex-column border-bottom border-dark py-2">
+                                            <img src="assets/images/female.svg" width="45px" class="m-auto">
+                                            <h4 style="color:#b73377">
+                                                {{summary_gender_array[0]?.TOT_FEMALE_PER}}%
+                                            </h4>
+                                        </div>
+                                        <div class="d-flex flex-column p-3">
+                                            <img src="assets/images/male.svg" width="45px" class="m-auto">
+                                            <h4 style="color:#2da9d9">{{summary_gender_array[0]?.TOT_MALE_PER}}%
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-8">
+                                    <div id="gender-chart"></div>
+                                    <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                                                style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 d-flex">
+                    <div class="card w-100 py-3 pb-5">
+                        <div class="card-body">
+                            <div id="age-gender-chart"></div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="ageGenderChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="age-gender-percantage-chart"></div>
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="ageDistributionChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="cause-Of-Death-chart"></div>
+
+                            <highcharts-chart [Highcharts]="Highcharts" [options]="causeOfDeathChart"
+                                    style="width: 100%; height: 100%; display: block;"></highcharts-chart>
+                        </div>
+                    </div>
+                </div> -->
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Exception Data</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          <strong>Total Population:</strong>
+          {{ DataList4[0]?.TOT_POP | number : "1.0-0" : "en-IN" }}
+        </p>
+        <p>
+          <strong>GSWS Population:</strong>
+          {{ DataList4[0]?.GSWS_POP | number : "1.0-0" : "en-IN" }}
+        </p>
+        <p>
+          <strong>Excess Birth Data Population:</strong>
+          {{ DataList4[0]?.BIRTH_DATA_EXCESS_POP | number : "1.0-0" : "en-IN" }}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

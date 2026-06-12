@@ -1,0 +1,786 @@
+<div class="background-img align-items-center"
+    style="background-image: url(/assets/images/bg-img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <section class="register-section py-3">
+        <div class="container-fluid" *ngIf="viewmodel=='searchstillbirth'">
+            <div class="card reg-card mb-1">
+
+                <div class="card-body p-2">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                                <h5 class="page-title"><i class="mdi mdi-human-child"></i> Still Birth Search
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                <div class="col-xl-2 col-12 mt-1">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="fromdate" class="form-label">Search By Filter<span class="text-danger">*</span></label>
+                        <ng-select name="searchby" id="searchby" required="" [(ngModel)]="birth_search.searchby" (change)="searchbychange()"
+                            #searchby="ngModel" placeholder="searchby">
+                            <ng-option value="">--Search By--</ng-option>
+                            <ng-option value="YEAR">Search By Year</ng-option>
+                            <ng-option value="DOB">Search By Date Of Birth</ng-option>
+                            <ng-option value="APPLICATIONNO">Search By Application No</ng-option>
+                            <ng-option value="REGISTRATIONNO">Search By Registration No</ng-option>
+                        </ng-select>
+                    </div>
+                </div>
+
+            </div> -->
+                    <div class="alert alert-info text-center">
+                        <i class="fa-solid fa-circle-exclamation"></i> Please select atleast “ Registration Number ” and “Sex” and “ Year of
+                        Registration From ” and “ Year of Registration To ” of child to search a record, Please provide more details for
+                        best result.
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-12">
+                            <div class="d-flex align-items-center mb-2 position-relative">
+                                <input type="radio" id="states" name="states" class="me-2"
+                                    [ngModelOptions]="{standalone: true}" (click)="getallstate($event)"
+                                    [(ngModel)]="birth_search.Allstates" value="1">
+                                <label for="states">Search By State</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isdropdownhide">
+                        <div class="col-xl-2 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> District
+                                    <span class="text-danger"></span></label>
+                                <ng-select placeholder="Select District" [(ngModel)]="birth_search.district" id="district" name="district"
+                                    (change)="Districtchange()" title="district" required="">
+                                    <ng-option value="" disabled>--Select
+                                        district--</ng-option>
+                                    <ng-option *ngFor="let loc of District" [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_NAME}}</ng-option>
+                                </ng-select>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-12"> 
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label">Urban/Rural
+                                   <span class="text-danger"></span></label>
+                                <ng-select placeholder="Select"
+                                    [(ngModel)]="birth_search.ruralurban"
+                                    id="ruralurban" name="ruralurban"
+                                    title="Urban Rural" required="" #ruralurban="ngModel"
+                                    (change)="urbanchange()">
+                                    <ng-option value="" disabled>--Select
+                                        urban/rural--</ng-option>
+                                    <ng-option *ngFor="let loc of ruralurban_array"
+                                        [value]="loc.RURAL_URBAN_CODE">{{loc.RURAL_URBAN}}</ng-option> 
+                                </ng-select> 
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label">Mandal/Muncipality<span class="text-danger"></span></label>
+                                <ng-select placeholder="Select"
+                                    [(ngModel)]="birth_search.mandal"
+                                    id="mandal" name="mandal" title="mandal"
+                                    required="" #mandal="ngModel" 
+                                    (change)="Mandalchange()"
+                                   >
+                                    <ng-option value="" disabled>--Select
+                                        mandal/muncipality--</ng-option>
+                                    <ng-option *ngFor="let loc of MandalMuncipality_array"
+                                        [value]="loc.MMC_CODE">{{loc.MMC_NAME}}</ng-option>
+    
+                                </ng-select> 
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> Registration Unit
+                                    <span class="text-danger"></span></label>
+                                <ng-select placeholder="Select Registration Unit" (change)="Registrationchange()"
+                                    [(ngModel)]="birth_search.Registration_Unit" id="Registration_Unit" name="Registration_Unit"
+                                    title="Registration_Unit" required="" #Registration_Unit="ngModel">
+                                    <ng-option value="" disabled>--Select
+                                        Registration Unit--</ng-option>
+                                    <ng-option *ngFor="let loc of Registration_UnitList" [value]="loc.RU_CODE">{{loc.RU_NAME}}</ng-option>
+                                </ng-select>
+
+
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> Registrar / Hospital
+                                    <span class="text-danger"></span></label>
+                                <ng-select placeholder="Select Hospital" [(ngModel)]="birth_search.Hospital" id="Hospital" name="Hospital"
+                                    title="Hospital" required="" #Hospital="ngModel">
+                                    <ng-option value="" disabled>--Select
+                                        Hospital--</ng-option>
+                                    <ng-option *ngFor="let loc of HospitalList" [value]="loc.HOSPITAL_ID">{{loc.HOSPITAL_NAME}}</ng-option>
+                                </ng-select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <h5 class="mt-1">Year Of Registration<span class="text-danger">*</span></h5>
+                        <div class="col-xl-1 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> From Year
+                                    <span class="text-danger">*</span></label>
+                                <ng-select name="fromyear" id="fromyear" required="" [(ngModel)]="birth_search.fromyear" #fromyear="ngModel"
+                                    placeholder="From" [ngClass]="{'is-invalid':fromyear.invalid && (fromyear.dirty || fromyear.touched),
+
+                                'is-valid':fromyear.value!='' && (fromyear.touched || fromyear.dirty)}">
+                                    <ng-option value="" disabled>From</ng-option>
+                                    <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                                </ng-select>
+                                <div *ngIf="fromyear.invalid && (fromyear.dirty || fromyear.touched)" class="error-message text-danger">
+                                    <div *ngIf="fromyear.errors">
+                                        <div *ngIf="fromyear.errors['required']">
+                                            From Year is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-1 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> To Year
+                                    <span class="text-danger">*</span></label>
+                                <ng-select name="toyear" id="toyear" required="" [(ngModel)]="birth_search.toyear" #toyear="ngModel"
+                                    placeholder="From" [ngClass]="{'is-invalid':toyear.invalid && (toyear.dirty || toyear.touched),
+
+                            'is-valid':toyear.value!='' && (toyear.touched || toyear.dirty)}">
+                                    <ng-option value="" disabled>To</ng-option>
+                                    <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                                </ng-select>
+                                <div *ngIf="toyear.invalid && (toyear.dirty || toyear.touched)" class="error-message text-danger">
+                                    <div *ngIf="toyear.errors">
+                                        <div *ngIf="toyear.errors['required']">
+                                            To Year is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label"> Gender
+                                    <span class="text-danger">*</span></label>
+                                <ng-select name="Gender" id="Gender" required="" [(ngModel)]="birth_search.Gender" #Gender="ngModel"
+                                    placeholder="Gender" [ngClass]="{'is-invalid':Gender.invalid && (Gender.dirty || Gender.touched),
+                        'is-valid':Gender.value!='' && (Gender.touched || Gender.dirty)}">
+                                    <ng-option value="">--Select Gender--</ng-option>
+                                    <ng-option value="MALE">Male</ng-option>
+                                    <ng-option value="FEMALE">FeMale</ng-option>
+                                    <ng-option value="Transgender Person">Transgender Person</ng-option>
+
+                                </ng-select>
+                                <div *ngIf="Gender.invalid && (Gender.dirty || Gender.touched)" class="error-message text-danger">
+                                    <div *ngIf="Gender.errors">
+                                        <div *ngIf="Gender.errors['required']">
+                                            Gender is
+                                            required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12 mt-3">
+                            <div class="form-group mb-2 position-relative">
+                                <input type="text" class="form-control" [(ngModel)]="birth_search.mothername" id="mothername"
+                                    maxlength="100" name="mothername" placeholder="Name Of Mother" required="" #mothername="ngModel">
+
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12 mt-3">
+                            <div class="form-group mb-2 position-relative">
+                                <input type="text" class="form-control" [(ngModel)]="birth_search.fathername" id="fathername"
+                                    maxlength="100" name="fathername" placeholder="Name Of Father" required="" #fathername="ngModel">
+
+                            </div>
+                        </div>
+                        <!-- <div class="col-xl-2 col-12 mt-1">
+                    <div class="form-group mb-2 position-relative">
+                        <input type="text" class="form-control" [(ngModel)]="birth_search.childname" id="childname"
+                            maxlength="100" name="childname" placeholder="Name Of Child" required=""
+                            #childname="ngModel">
+                       
+                    </div>
+                </div> -->
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xl-2 col-12 mt-2">
+                            <div class="form-group mb-2 position-relative">
+
+                                <input type="text" class="form-control" [(ngModel)]="birth_search.applicationnumber" id="applicationnumber"
+                                    maxlength="100" name="applicationnumber" placeholder="Application Ref Number" required=""
+                                    #applicationnumber="ngModel" [ngClass]="{'is-invalid':applicationnumber.invalid && (applicationnumber.dirty || applicationnumber.touched),
+
+                        'is-valid':applicationnumber.value!='' && (applicationnumber.touched || applicationnumber.dirty)}">
+                                <div *ngIf="applicationnumber.invalid && (applicationnumber.dirty || applicationnumber.touched)"
+                                    class="error-message text-danger">
+                                    <div *ngIf="applicationnumber.errors">
+                                        <div *ngIf="applicationnumber.errors['required']">
+                                            Application Ref Number is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12 mt-2">
+                            <div class="form-group mb-2 position-relative">
+
+
+                                <input type="text" class="form-control" [(ngModel)]="birth_search.registrationnumber"
+                                    id="registrationnumber" maxlength="100" name="registrationnumber" placeholder="Registration Number"
+                                    required="" #registrationnumber="ngModel" [ngClass]="{'is-invalid':registrationnumber.invalid && (registrationnumber.dirty || registrationnumber.touched),
+
+                        'is-valid':registrationnumber.value!='' && (registrationnumber.touched || registrationnumber.dirty)}">
+                                <div *ngIf="registrationnumber.invalid && (registrationnumber.dirty || registrationnumber.touched)"
+                                    class="error-message text-danger">
+                                    <div *ngIf="registrationnumber.errors">
+                                        <div *ngIf="registrationnumber.errors['required']">
+                                            Registration Number is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <h5 class="mt-1">Date Of Birth<span class="text-danger">*</span></h5>
+                        <div class="col-xl-2 col-12">
+                            <div class="input-group mt-2">
+
+                                <input type="text" placeholder="From" appDateFormatDirective class="form-control" oncut="return false;"
+                                    oncopy="return false;" onpaste="return false;" maxlength="100" autocomplete="off" #dp1="bsDatepicker"
+                                    id="fromdate" name="fromdate" bsDatepicker [bsConfig]="bsConfig" [(ngModel)]="birth_search.From_Date"
+                                    aria-describedby="basic-addon2" required />
+
+                                <span class="input-group-text" id="basic-addon23" (click)="dp1.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-12 mt-2">
+                            <div class="input-group">
+                                <input type="text" placeholder="To" appDateFormatDirective class="form-control" oncut="return false;"
+                                    oncopy="return false;" onpaste="return false;" maxlength="100" autocomplete="off" #dp2="bsDatepicker"
+                                    id="todate" name="todate" bsDatepicker [bsConfig]="bsConfig" [(ngModel)]="birth_search.To_Date"
+                                    aria-describedby="basic-addon2" required />
+                                <span class="input-group-text" id="basic-addon24" (click)="dp2.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-12 mt-2">
+                            <div class="input-group">
+                                <input type="text" placeholder="Date of birth" appDateFormatDirective class="form-control"
+                                    oncut="return false;" oncopy="return false;" onpaste="return false;" maxlength="100" autocomplete="off"
+                                    #dp3="bsDatepicker" id="todate" name="todate" bsDatepicker [bsConfig]="bsConfig"
+                                    [(ngModel)]="birth_search.Date_of_birth" aria-describedby="basic-addon2" required />
+                                <span class="input-group-text" id="basic-addon24" (click)="dp3.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-12">
+
+                            <!-- <button type="submit" class="btn btn-success my-2 me-2" data-bs-toggle="modal" data-bs-target="#NAC_Modal"> <i
+                                    class="fa-solid fa-circle-down ps-2"></i>Generate NAC
+
+                            </button> -->
+                            <button type="submit" class="btn btn-primary my-2 me-2" (click)="Resetsearch()"><i
+                                    class="fa-solid fa-arrows-rotate pe-2"></i>Reset</button>
+                            <button type="submit" class="btn btn-primary my-2" (click)="get_birth_table()"> <i
+                                    class="fa-solid fa-magnifying-glass ps-2"></i>Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="birth_depth_table_array.length>0">
+                <div class="col-md-12 col-12">
+                    <p-table id="tblbirthdepthtable" [value]="birth_depth_table_array"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" #dt2
+                        [rows]="10" [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" 
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [totalRecords]="birth_depth_table_array.length" [loading]="loading" [showCurrentPageReport]="true"
+                        [paginator]="true"
+                        sortMode="multiple"
+                        [globalFilterFields]="['APPLICATION_ID','REGISTRATION_ID','FATHER_FULLNAME','MOTHER_FULLNAME','CHILD_FULLNAME','CHILD_DOB','GENDER']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true" scrollHeight="560px">
+                        <ng-template pTemplate="caption">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="col-xl-8 col-12 mt-2">
+                                    <button type="submit" class="btn btn-primary my-2 me-2" [disabled]="!cancelshow"
+                                        (click)="getCorrection('Cancellation')">Cancellation</button>
+                                    <button type="submit" [disabled]="!correctionshow" (click)="getCorrection('Correction')"
+                                        class="btn btn-primary my-2 me-2">Correction</button>
+                                    <!-- [disabled]="!correctionshow" -->
+                                    <button type="submit" class="btn btn-primary my-2 me-2" [disabled]="!downloadshow"
+                                        (click)="downloadorder()">Download</button>
+                                    <button type="submit" class="btn btn-primary my-2 me-2" [disabled]="!docmentshow"
+                                        (click)="get_document_details()"> View
+                                        Document(s)</button>
+                                    <button type="submit" class="btn btn-primary my-2 me-2" [disabled]="!radiobutton"
+                                        (click)="viewReportform()"> Report
+                                        Forms</button>
+                                </div>
+                                <div>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th pSortableColumn="APPLICATION_ID">App Ref No.
+                                    <p-columnFilter type="text" field="APPLICATION_ID" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="REGISTRATION_ID">Reg No.
+                                    <p-columnFilter type="text" field="REGISTRATION_ID" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="FATHER_FULLNAME">Father's Name
+                                    <p-columnFilter type="text" field="FATHER_FULLNAME" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="MOTHER_FULLNAME">Mother's Name
+                                    <p-columnFilter type="text" field="MOTHER_FULLNAME" display="menu"></p-columnFilter>
+                                </th>
+                                <th pSortableColumn="CHILD_DOB">Date of Birth </th>
+                                <th pSortableColumn="GENDER">Gender</th>
+                                <th pSortableColumn="STATUS_TEXT">Status</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-agency>
+                            <tr>
+                                <td>
+                                    <input [checked]="agency.active" type="radio" name="group1" (change)="getbuttonenabled(agency)" />
+                                </td>
+                                <td>{{agency.APPLICATION_ID}}</td>
+                                <td>{{agency.REGISTRATION_ID}}</td>
+                                <td>{{agency.FATHER_FULLNAME}}</td>
+                                <td>{{agency.MOTHER_FULLNAME}}</td>
+                                <td>{{agency.CHILD_DOB}}</td>
+                                <td>{{agency.GENDER}}</td>
+                                <td>{{agency.STATUS_TEXT}}</td>
+
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='StillBIRTHCorrection'">
+            <div class="page-title-box d-flex justify-content-between align-items-center">
+                <h5 class="page-title">{{preview_tittle}} ({{applicationregid}})</h5>
+                <div>
+                    <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                        <i class="fa-solid fa-angles-left pe-2"></i>Back to Search
+                    </button>
+                </div>
+            </div>
+            <app-stillbirthcorrectionview [applicationid]="applicationid" [applicationregid]="applicationregid" [selecttab]="viewmodel"
+                [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-stillbirthcorrectionview>
+        </div>
+        <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='Cancellation'">
+            <div class="page-title-box d-flex justify-content-between align-items-center">
+                <h5 class="page-title">{{preview_tittle}} ({{applicationregid}})</h5>
+                <div>
+                    <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                        <i class="fa-solid fa-angles-left pe-2"></i>Back to Search
+                    </button>
+                </div>
+            </div>
+            <app-stillbirthcorrectionview [applicationid]="applicationid" [applicationregid]="applicationregid" [selecttab]="viewmodel"
+                [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-stillbirthcorrectionview>
+        </div>
+    </section>
+</div>
+<!--begin::Modal-->
+<!-- Backdrop -->
+<div class="modal-backdrop fade" [class.show]="isModalVisible" *ngIf="isModalVisible">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" [class.show]="isModalVisible"
+    [ngStyle]="{'display': isModalVisible ? 'block' : 'none', 'opacity': isModalVisible ? '1' : '0'}" aria-labelledby="allowLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="width:980px;">
+            <div class="modal-header">
+                <button type="button" class="btn btn-primary" (click)="downloadPdf()">Download PDF</button>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="width:980px;">
+                <pdf-viewer [src]="PathReportString" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="true"
+                    [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'blank'"
+                    [autoresize]="true" [show-borders]="false" style="width: 100%; height: 70vh;">
+                </pdf-viewer>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-backdrop fade" [class.show]="isdocModalVisible" *ngIf="isdocModalVisible">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" [class.show]="isdocModalVisible"
+    [ngStyle]="{'display': isdocModalVisible ? 'block' : 'none', 'opacity': isdocModalVisible ? '1' : '0'}" aria-labelledby="allowLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="width:980px;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="DocModalCLose()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="width:980px;">
+                <div class="card reg-card mb-1" *ngIf="documentlist.length>0">
+                    <div class="card-body p-2">
+                        <div class="container-fluid">
+
+                            <div class="row border-bottom border border-light" *ngFor="let doc of documentlist; index as i">
+                                <div class="col-xl-1 col-1">{{ i + 1 }}</div>
+                                <div class="col-xl-4 col-12">{{ doc.DOCUMENT_NAME_TEL }}</div>
+                                <div class="col-xl-4 col-12">{{ doc.DOCUMENT_DESCRIPTION }}</div>
+                                <div class="col-xl-3 col-12 text-end">
+                                    <figure *ngIf="doc.DOCUMENT_PATH">
+                                        <a class="text-center me-1 pdf-thumb position-relative d-block h-100"
+                                            *ngIf="isImage(doc.DOCUMENT_PATH)" [href]="contentshowurl + doc.DOCUMENT_PATH"
+                                            data-fancybox="gallery">
+                                            <img [src]="contentshowurl + doc.DOCUMENT_PATH" [alt]="doc.DOCUMENT_DESCRIPTION"
+                                                class="img-fluid" />
+                                            <i class="mdi mdi-eye me-1"></i>View
+
+                                        </a>
+                                        <a class="" *ngIf="isPDF(doc.DOCUMENT_PATH)" data-fancybox="gallery" data-type="iframe"
+                                            [data-src]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)"
+                                            [href]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)">
+
+                                            <div class="card border-dashed rounded-0 pdf-thumb">
+                                                <div class="card-body text-center p-0">
+                                                    <i class="fa fa-eye"></i>
+                                                    <iframe [src]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)"
+                                                        style="width: 100%; height: 80%; border: none;">
+                                                    </iframe>View
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </figure>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="DocModalCLose()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--end::Modal-->
+
+<div class="modal fade" id="NAC_Modal" tabindex="-1" aria-labelledby="NAC_ModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="NAC_ModalLabel">NON-AVAILABILITY CERTIFICATE </h1>
+            </div>
+            <form #NAC_form="ngForm">
+                <fieldset>
+                    <div class="modal-body">
+                        <!-- <div class="row mb-2">
+                            <div class="col-xl-2 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                     <label for="form-label" class="form-label">.</label>
+                                    <ng-select name="forntname" id="forntname" required="" [(ngModel)]="nac_registration.forntname"
+                                        #updaterole="ngModel"  placeholder="Role"
+                                        [ngClass]="{'is-invalid':updaterole.invalid && (updaterole.dirty || updaterole.touched),'is-valid':updaterole.value!='' && (updaterole.touched || updaterole.dirty)}">
+                                        <ng-option value="" disabled>--Please Select--</ng-option>
+                                        <ng-option value="shri">Shri</ng-option>
+                                        <ng-option value="smt">Smt.</ng-option>
+                                        <ng-option value="kum">Kum.</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="updaterole.invalid && (updaterole.dirty || updaterole.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="updaterole.errors">
+                                            <div *ngIf="updaterole.errors['required']">
+                                                Name is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Child Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="nac_registration.childname"
+                                                     minlength="10" maxlength="200"
+                                                    id="childname" name="childname"
+                                                    placeholder="Name" required="" #name1="ngModel"
+                                                    appAlphabetsonly
+                                                    [ngClass]="{'is-invalid':name1.invalid && (name1.dirty || name1.touched),
+                                                    'is-valid':name1.value!='' && (name1.touched || name1.dirty)}">
+                                                <div *ngIf="name1.invalid && (name1.dirty || name1.touched)"
+                                                    class="error-message text-danger">
+                                                    <div *ngIf="name1.errors">
+                                                        <div *ngIf="name1.errors['required']">
+                                                             Name is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                     <label for="form-label" class="form-label">C/O</label>
+                                    <ng-select name="careof" id="careof" required="" [(ngModel)]="nac_registration.careof"
+                                        #ngcareof="ngModel"  placeholder="Role"
+                                        [ngClass]="{'is-invalid':ngcareof.invalid && (ngcareof.dirty || ngcareof.touched),'is-valid':ngcareof.value!='' && (ngcareof.touched || ngcareof.dirty)}">
+                                        <ng-option value="" disabled>--Please Select--</ng-option>
+                                        <ng-option value="son">Son</ng-option>
+                                        <ng-option value="wife">Wife</ng-option>
+                                        <ng-option value="daughter">Daughter</ng-option>
+                                        <ng-option value="sonanddaughter">Son/Daughter</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="ngcareof.invalid && (ngcareof.dirty || ngcareof.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="ngcareof.errors">
+                                            <div *ngIf="ngcareof.errors['required']">
+                                                Name is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Father Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="nac_registration.fathername"
+                                                     minlength="10" maxlength="200"
+                                                    id="fathername" name="fathername"
+                                                    placeholder="Father Name" required="" #ngfathername="ngModel"
+                                                    appAlphabetsonly
+                                                    [ngClass]="{'is-invalid':ngfathername.invalid && (ngfathername.dirty || ngfathername.touched),
+                                                    'is-valid':ngfathername.value!='' && (ngfathername.touched || ngfathername.dirty)}">
+                                                <div *ngIf="ngfathername.invalid && (ngfathername.dirty || ngfathername.touched)"
+                                                    class="error-message text-danger">
+                                                    <div *ngIf="ngfathername.errors">
+                                                        <div *ngIf="ngfathername.errors['required']">
+                                                            Father Name is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+
+
+                        <div class="certificate border-1 border-light border">
+                            <div class="row mb-2 ">
+                                <div class="col-xl-12 col-12 text-center">
+                                    <p class="mb-1">Form No.10</p>
+                                    <h4 class="mb-2 mt-0">NON-AVAILABILITY CERTIFICATE</h4>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-end mb-1">
+                                    This is to certify that a search has been made on the request of
+                                    <div class="col-xl-3 col-3 ps-2">
+                                        <ng-select name="forntname" id="forntname" required="" [(ngModel)]="nac_registration.forntname"
+                                            #updaterole="ngModel" placeholder="Role"
+                                            [ngClass]="{'is-invalid':updaterole.invalid && (updaterole.dirty || updaterole.touched),'is-valid':updaterole.value!='' && (updaterole.touched || updaterole.dirty)}">
+                                            <ng-option value="" disabled>--Please Select--</ng-option>
+                                            <ng-option value="shri">Shri</ng-option>
+                                            <ng-option value="smt">Smt.</ng-option>
+                                            <ng-option value="kum">Kum.</ng-option>
+                                        </ng-select>
+                                        <div *ngIf="updaterole.invalid && (updaterole.dirty || updaterole.touched)"
+                                            class="error-message text-danger">
+                                            <div *ngIf="updaterole.errors">
+                                                <div *ngIf="updaterole.errors['required']">
+                                                    Name is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-start mb-1">
+                                    <!-- <div class="col-xl-3 col-3 pe-1">
+                                        <ng-select name="forntname" id="forntname" required="" [(ngModel)]="nac_registration.forntname"
+                                            #updaterole="ngModel" placeholder="Role"
+                                            [ngClass]="{'is-invalid':updaterole.invalid && (updaterole.dirty || updaterole.touched),'is-valid':updaterole.value!='' && (updaterole.touched || updaterole.dirty)}">
+                                            <ng-option value="" disabled>--Please Select--</ng-option>
+                                            <ng-option value="shri">Shri</ng-option>
+                                            <ng-option value="smt">Smt.</ng-option>
+                                            <ng-option value="kum">Kum.</ng-option>
+                                        </ng-select>
+                                        <div *ngIf="updaterole.invalid && (updaterole.dirty || updaterole.touched)" class="error-message text-danger">
+                                            <div *ngIf="updaterole.errors">
+                                                <div *ngIf="updaterole.errors['required']">
+                                                    Name is
+                                                    required</div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                    of
+                                    <div class="col-xl-3 col-3 px-2">
+                                        <input class="form-control" type="text">
+                                    </div>
+                                    in the Registration records of the year(s) <strong class="px-1">2025-2025</strong>
+                                </div>
+
+                                <div class="d-flex align-items-center justify-content-start mb-1">relating to <strong class="px-1"> CRS DEMO
+                                        003 </strong> of (Tehsil) of (District) of (State) and found</div>
+                                <div class="d-flex align-items-center justify-content-start mb-1">
+                                    <div class="col-xl-5">that event relating to the still birth Of</div>
+
+                                    <div class="col-xl-3 col-3 px-2">
+                                        <div class="form-group position-relative">
+                                            <input type="text" class="form-control" [(ngModel)]="nac_registration.childname" minlength="10"
+                                                maxlength="200" id="childname" name="childname" placeholder="Name" required=""
+                                                #name1="ngModel" appAlphabetsonly
+                                                [ngClass]="{'is-invalid':name1.invalid && (name1.dirty || name1.touched),
+                                                                                    'is-valid':name1.value!='' && (name1.touched || name1.dirty)}">
+                                            <div *ngIf="name1.invalid && (name1.dirty || name1.touched)" class="error-message text-danger">
+                                                <div *ngIf="name1.errors">
+                                                    <div *ngIf="name1.errors['required']">
+                                                        Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-2 col-2 px-2">
+                                        <div class="form-group position-relative">
+                                            <ng-select name="careof" id="careof" required="" [(ngModel)]="nac_registration.careof"
+                                                #ngcareof="ngModel" placeholder="Role"
+                                                [ngClass]="{'is-invalid':ngcareof.invalid && (ngcareof.dirty || ngcareof.touched),'is-valid':ngcareof.value!='' && (ngcareof.touched || ngcareof.dirty)}">
+                                                <ng-option value="" disabled>--Please Select--</ng-option>
+                                                <ng-option value="son">Son</ng-option>
+                                                <ng-option value="wife">Wife</ng-option>
+                                                <ng-option value="daughter">Daughter</ng-option>
+                                                <ng-option value="sonanddaughter">Son/Daughter</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="ngcareof.invalid && (ngcareof.dirty || ngcareof.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="ngcareof.errors">
+                                                    <div *ngIf="ngcareof.errors['required']">
+                                                        Name is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    of
+                                    <div class="col-xl-2 col-3 px-2">
+                                        <div class="form-group position-relative">
+                                            <input type="text" class="form-control" [(ngModel)]="nac_registration.fathername" minlength="10"
+                                                maxlength="200" id="fathername" name="fathername" placeholder="Father Name" required=""
+                                                #ngfathername="ngModel" appAlphabetsonly
+                                                [ngClass]="{'is-invalid':ngfathername.invalid && (ngfathername.dirty || ngfathername.touched),
+                                                                                    'is-valid':ngfathername.value!='' && (ngfathername.touched || ngfathername.dirty)}">
+                                            <div *ngIf="ngfathername.invalid && (ngfathername.dirty || ngfathername.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="ngfathername.errors">
+                                                    <div *ngIf="ngfathername.errors['required']">
+                                                        Father Name is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="d-flex align-items-center justify-content-start mb-1">
+                                    was not registered.
+                                </div>
+                            </div>
+                            <div class="row mb-2 ">
+                                <div class="col-xl-4 col-12 text-center">
+                                    <p class="mb-0">Date : {{cureentdate}}</p>
+                                </div>
+                                <div class="col-xl-4 col-12 text-center"></div>
+                                <div class="col-xl-4 col-12 text-center">
+                                    <p class="mb-0">Signature of issuing authority</p>
+                                    <strong>Registrar (Birth & Death)</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-end">
+                            <button type="button" class="btn btn-success me-2" (click)="NACSave()">Save</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="modelcloseclear()">Cancel</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade mdl" tabindex="-1" *ngIf="viewmodelShow=='STILLBIRTH'" [class.show]="isdocModalVisibleStillBirth"
+    [ngStyle]="{'display': isdocModalVisibleStillBirth ? 'block' : 'none', 'opacity': isdocModalVisibleStillBirth ? '1' : '0'}"
+    aria-labelledby="allowLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered d-flex justify-content-center" role="document">
+        <div class="modal-content" style="width:1180px;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="StillBirthCLose()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body modal-body-scroll" style="width:1180px;">
+                <div class="card reg-card mb-1">
+                    <div class="card-body p-2">
+                        <div class="container-fluid">
+
+                            <div class="col-xl-12 col-lg-12">
+                                <div class="page-title-box d-flex justify-content-between align-items-center">
+                                    <h5 class="page-title">{{preview_tittle}} ({{applicationnumber}})</h5>
+
+                                </div>
+                                <app-stillbirthpopupview [applicationid]="applicationnumber" [selecttab]="viewmodelShow"
+                                    [preview_tittle]="preview_tittle"></app-stillbirthpopupview>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" (click)="StillBirthCLose()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

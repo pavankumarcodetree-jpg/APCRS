@@ -1,0 +1,29 @@
+/* ::ng-deep div:where(.swal2-container).swal2-center>.swal2-popup {
+    grid-column: 2;
+    grid-row: 2;
+    place-self: center center;
+    position: absolute;
+    right: 20px;
+    bottom: 30%;
+} */
+
+.floating-button {
+    position: fixed;
+    right: 100%;
+    z-index: 1000;
+    transform: rotate(90deg);
+    height: 40px;
+    width: 130px;
+    left: -36px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.floating-button button {
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.floating-button button:hover {
+    background-color: #28a87f;
+    border-color: #28a87f;
+}

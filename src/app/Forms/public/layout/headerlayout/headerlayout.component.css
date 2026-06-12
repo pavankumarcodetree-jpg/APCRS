@@ -1,0 +1,96 @@
+
+::ng-deep .footer {
+    position: relative !important;
+    height: auto !important;
+    display: block !important;
+}
+::ng-deep .main-menu-right-button .btn-primary {
+    background: #ef8b00 !important;
+    border-color: #ef8b00;
+}
+
+/* Menu Bar Css */
+.topbar-section {
+    background: rgb(0,51,102) !important;
+    background: linear-gradient(90deg, rgba(0,51,102,1) 0%, rgba(255,111,97,1) 100%) !important;
+    }
+.top-login-btn {
+    background-color: #ffcc00;
+    color: #000;
+    border-radius: 20px;
+    font-family: 'Poppins';
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+}
+.top-login-btn:hover {
+    background-color: #ffcc00;
+    color: #000;
+    border: 0px solid #ccc;
+    border-radius: 20px;
+}
+.cm-imgblk p {
+    line-height: 20px;
+}
+.topnav {
+    padding: 7px;
+}
+
+
+
+
+::ng-deep header{
+    position: relative !important;
+    top: 0 !important;
+    width: 100%;
+    z-index: 99;
+}
+/* ::ng-deep header.main-header{
+    position: absolute !important;
+    top: 0 !important;
+} */
+::ng-deep .content-page.creative-style {
+    min-height: calc(100vh - 94px) !important;
+}
+
+.captcha-text{
+    font-size: clamp(10px, 2vw, 13px) !important;
+}
+
+
+.custom-modal-popup .btn.btn-success {
+    border-radius: 50px !important;
+    /* background: rgb(255, 166, 0);
+    border-color: rgb(255, 166, 0); */
+    background: #003366;
+    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+    border-radius: 50px;
+    background-size: 300% 100%;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    border: none !important;
+}
+
+.custom-modal-popup .btn.btn-success:hover {
+    background-position: 100% 0;
+    -moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    box-shadow: 0 4px 15px 0 rgba(242, 70, 69, 0.749);
+}
+
+.custom-modal-popup .btn.btn-success:focus {
+    outline: none;
+}
+
+
+.forgot {
+    color: #e52c1d;
+    font-weight: bold;
+}
+.error-message {
+   color: #e52c1d;  
+}

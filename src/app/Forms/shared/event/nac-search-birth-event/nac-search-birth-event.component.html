@@ -1,0 +1,195 @@
+<div class="background-img align-items-center"
+    style="background-image: url(/assets/images/bg-img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <section class="register-section py-3">
+        <div class="container-fluid" *ngIf="viewmodel=='nacsearchbirth'">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                        <h5 class="page-title"><i class="mdi mdi-human-child"></i> Birth NAC Search
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-xl-2 col-12">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="fromdate" class="form-label">Year Of NAC Issued<span class="text-danger">*</span></label>
+                        <ng-select name="fromyear" id="fromyear" required="" [(ngModel)]="birth_search.fromyear" #fromyear="ngModel"
+                            placeholder="From" [ngClass]="{'is-invalid':fromyear.invalid && (fromyear.dirty || fromyear.touched),
+                                'is-valid':fromyear.value!='' && (fromyear.touched || fromyear.dirty)}">
+                            <ng-option value="">--Select From--</ng-option>
+                            <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                        </ng-select>
+                        <div *ngIf="fromyear.invalid && (fromyear.dirty || fromyear.touched)" class="error-message text-danger">
+                            <div *ngIf="fromyear.errors">
+                                <div *ngIf="fromyear.errors['required']">
+                                    From Year is
+                                    required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2 col-12 mt-1">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="fromdate" class="form-label"></label>
+                        <ng-select name="toyear" id="toyear" required="" [(ngModel)]="birth_search.toyear" #toyear="ngModel"
+                            placeholder="From" [ngClass]="{'is-invalid':toyear.invalid && (toyear.dirty || toyear.touched),
+                            'is-valid':toyear.value!='' && (toyear.touched || toyear.dirty)}">
+                            <ng-option value="">--Select To--</ng-option>
+                            <ng-option *ngFor="let y of years" [value]="y.year">{{y.year}}</ng-option>
+                        </ng-select>
+                        <div *ngIf="toyear.invalid && (toyear.dirty || toyear.touched)" class="error-message text-danger">
+                            <div *ngIf="toyear.errors">
+                                <div *ngIf="toyear.errors['required']">
+                                    To Year is
+                                    required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-12 mt-1">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label"></label>
+                        <input type="text" class="form-control" [(ngModel)]="birth_search.childname" id="childname" maxlength="10"
+                            name="childname" placeholder="Name Of Child" required="" #childname="ngModel" [ngClass]="{'is-invalid':childname.invalid && (childname.dirty || childname.touched),
+                        'is-valid':childname.value!='' && (childname.touched || childname.dirty)}">
+                        <div *ngIf="childname.invalid && (childname.dirty || childname.touched)" class="error-message text-danger">
+                            <div *ngIf="childname.errors">
+                                <div *ngIf="childname.errors['required']">
+                                    Child Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-12 mt-1">
+                    <div class="form-group mb-2 position-relative">
+                        <label for="form-label" class="form-label"></label>
+                        <input type="text" class="form-control" [(ngModel)]="birth_search.fathername" id="fathername" maxlength="10"
+                            name="fathername" placeholder="Name Of Father" required="" #fathername="ngModel" [ngClass]="{'is-invalid':fathername.invalid && (fathername.dirty || fathername.touched),
+                    'is-valid':fathername.value!='' && (fathername.touched || fathername.dirty)}">
+                        <div *ngIf="fathername.invalid && (fathername.dirty || fathername.touched)" class="error-message text-danger">
+                            <div *ngIf="fathername.errors">
+                                <div *ngIf="fathername.errors['required']">
+                                    Father Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-2 col-12 mt-1">
+                    <label for="todate" class="form-label"></label>
+                    <div class="input-group">
+                        <input type="text" placeholder="Date of birth" appDateFormatDirective class="form-control" oncut="return false;"
+                            oncopy="return false;" onpaste="return false;" maxlength="10" autocomplete="off" #dp3="bsDatepicker" id="todate"
+                            name="todate" bsDatepicker [bsConfig]="bsConfig" [(ngModel)]="birth_search.To_Date"
+                            aria-describedby="basic-addon2" required />
+                        <span class="input-group-text" id="basic-addon24" (click)="dp3.toggle()" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12 mt-3 ">
+                    <button type="submit" class="btn btn-primary my-2 me-2" (click)="get_birth_table()"> <i
+                            class="fa-solid fa-magnifying-glass ps-2"></i>Search</button>
+                    <button type="submit" class="btn btn-primary my-2 me-2" (click)="Resetsearch()"><i
+                            class="fa-solid fa-arrows-rotate pe-2"></i>Reset</button>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <p-table id="tblbirthdepthtable" [value]="birth_depth_table_array"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" #dt2
+                        [rows]="birth_depth_table_array.length" [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                        sortMode="multiple"
+                        [globalFilterFields]="['BR_APPLICATION_ID','FATHER_FULLNAME','MOTHER_FULLNAME','CHILD_FULLNAME','CHILD_DOB','GENDER']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true" scrollHeight="360px">
+                        <ng-template pTemplate="caption">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="col-xl-8 col-12 mt-2">
+                                    <button type="submit" [disabled]="!NacSearchRDO" class="btn btn-primary my-2 me-2"
+                                        (click)="getRdo()">Send To RDO</button>
+                                </div>
+                                <div>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th pSortableColumn="SNO">Sr.No.</th>
+                                <th pSortableColumn="CHILD_FULLNAME">Child Name</th>
+                                <th pSortableColumn="ISSUED_DATE">Date Of Issue</th>
+                                <th pSortableColumn="PARENT_FULLNAME">Parent Name</th>
+                                <th pSortableColumn="PARENT_FULLNAME">Non Availability Certificate</th>
+                                <th pSortableColumn="STATUS">Status</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-agency>
+                            <tr>
+                                <td>
+                                    <input [checked]="agency.active" type="radio" name="group1" (change)="getbuttonenabled(agency)" />
+                                </td>
+                                <td>{{agency.SNO}}</td>
+                                <td>{{agency.CHILD_FULLNAME}}</td>
+                                <td>{{agency.ISSUED_DATE}}</td>
+                                <td>{{agency.PARENT_FULLNAME}}</td>
+                                <td>
+                                    <button type="submit" class="btn btn-success my-2 me-2" (click)="downloadorder(agency)">View &
+                                        Print</button>
+                                </td>
+                                <td>{{agency.STATUS}}</td>
+
+
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='Rdo'">
+            <div>
+
+                <div>
+                    <button type="button" class="btn btn-primary float-end mb-2" (click)="Backwindow()">
+                        <i class="fa-solid fa-angles-left pe-2"></i>Back
+                    </button>
+                </div>
+            </div>
+            <app-birthhome [preview_tittle]="preview_tittle" [drafttype]="drafttype" [brapplicationid]="applicationnumber"
+                [NAC_application_Id]="NAC_application_Id" [typeofcorrection]="typeofcorrection"></app-birthhome>
+        </div>
+    </section>
+</div>
+
+<div class="modal fade" tabindex="-1" [class.show]="isModalVisible"
+    [ngStyle]="{'display': isModalVisible ? 'block' : 'none', 'opacity': isModalVisible ? '1' : '0'}" aria-labelledby="allowLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="width:980px;">
+            <div class="modal-header">
+                <button type="button" class="btn btn-primary" (click)="downloadPdf()">Download PDF</button>
+                <button type="button" class="btn-close" (click)="closeModal()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="width:980px;">
+                <pdf-viewer [src]="PathReportString" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="true"
+                    [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true" [external-link-target]="'blank'"
+                    [autoresize]="true" [show-borders]="false" style="width: 100%; height: 70vh;">
+                </pdf-viewer>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

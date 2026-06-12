@@ -1,0 +1,845 @@
+<div class="population">
+
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-sm align-items-center" style="background: #036;">
+            <div class="container-fluid px-1">
+                <a class="navbar-brand text-white d-flex align-items-center" href="#">
+                    <img src="assets/images/aplogo.png" height="40px" class="me-2">
+                    APCRS Dashboard
+                </a>
+                
+
+                <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId"
+                    aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="collapsibleNavId">
+                    <ul class="navbar-nav ms-auto my-2 mb-lg-0 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link active text-white" routerLink="/shared/welcome" aria-current="page">
+                                Home <span class="visually-hidden">(current)</span>
+                            </a>
+                        </li>
+
+                        <li clfass="nav-item mx-2">
+                            <!-- <select class="form-select form-select-sm" [(ngModel)]="YearValue" (change)="dataChange()"> -->
+                            <!-- <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option> -->
+                            <!-- <option *ngFor="let year of yearList" [value]="year">{{ year }}</option>
+                            </select> -->
+
+                            <ng-select name="YearValue" id="YearValue" [(ngModel)]="objDashBoard.YearValue" [clearable]="false"
+                                (change)="dataChange()" [ngStyle]="{'min-width': '100px'}">
+                                <ng-option *ngFor="let year of yearList" [value]="year">{{year}}</ng-option>
+
+                            </ng-select>
+                        </li>
+
+
+                        <!-- <li class="nav-item text-white text-center px-2">
+                            <p class="mb-0 lh-sm fs-6 fw-bold text-light py-1 d-inline-block">
+                                <i class="mdi mdi-information"></i> Last Updated 17:30 PM<br>15-01-2025
+                            </p>
+                        </li> -->
+                        <li class="nav-item text-white text-center px-2">
+                            <p class="mb-0 lh-sm fs-6 fw-bold text-light py-1 d-inline-block">
+                                <i class="mdi mdi-information"></i>
+                                Last Updated {{ lastUpdated }}
+                            </p>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-bs-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <i class="mdi mdi-account"></i>
+                                {{ displausername }}
+                                <!-- User -->
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                <a class="dropdown-item" href="#">Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <main>
+        <section class="dashboards-section">
+            <div class="container-fluid">
+                <div class="dashboard-header mb-3">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 d-flex position-relative">
+                            <img src="assets/images/apcrs-map.png" alt="people"
+                                class="map position-absolute start-0 top-0 mx-auto d-block z-0">
+                            <div class="">
+                                <h2 class="dashboard-title">Andhra Pradesh</h2>
+                                <h5 class="dashboard-subtitle">Population Dashboard 2025</h5>
+                                <p class="mb-0 dashboard-text">Comprehensive demographic analysis and insights</p>
+                            </div>
+                        </div>
+                        <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 d-flex justify-content-end align-content-end">
+                            <img src="assets/images/people1.png" alt="people" class=" m-3">
+                            <div class="">
+                                <h2 class="dashboard-title">{{DataList4[0]?.TOT_POP}}</h2>
+                                <p class="mb-0 dashboard-text text-end">Total Population</p>
+                                <p class="mb-0 text-end">+2.1% From 2023</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card birth">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="newborn  d-flex justify-content-between">
+                                    <div class="births-card">
+                                        <h2 class="birth-head">Births</h2>
+                                        <h5 class="birth-text">Financial Year</h5>
+                                        <h5 class="mb-0 birth-text">(2025-26) / (2024-25)</h5>
+                                    </div>
+                                    <img src="assets/images/newborn.png" alt="birth" class="">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-head">CRS</h5>
+                                    <h3 class="birth-count" style="color:#f86d1d">{{DashBoardList[0]?.BIRTH_TODAY}} /
+                                        {{DashBoardList[0]?.BRTH_YEAR}}</h3>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-head">RCH</h5>
+                                    <h3 class="birth-count" style="color:#f86d1d">{{DashBoardList[0]?.RCH_YEAR_2026}} /
+                                        {{DashBoardList[0]?.RCH_YEAR}}</h3>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-head">GSWS</h5>
+                                    <h3 class="birth-count" style="color:#f86d1d">{{DashBoardList[0]?.GSWS_YEAR_2026}} /
+                                        {{DashBoardList[0]?.GSWS_YEAR}}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="card death">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="death-head">Deaths</h5>
+                                        <p class="death-text">Financial Year (2025-26) / (2024-25)</p>
+                                    </div>
+                                    <div class="bg-death">
+                                        <img src="assets/images/people1.png" alt="people" class="dashboard-image">
+                                    </div>
+                                </div>
+                                <div class="death-card text-center">
+                                    <!-- <h3 class="birth-count" style="color:#f86d1d"></h3> -->
+                                    <h3 class="birth-count1">{{DashBoardList1[0]?.DEATH_2025}} / {{DashBoardList1[0]?.DEATH_2024}}</h3>
+                                    <span class="">(as per CRS)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="card death">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="death-head">TFR</h5>
+                                        <p class="death-text">Financial Year (2025-26) / (2024-25)</p>
+                                    </div>
+                                    <div class="bg-death">
+                                        <img src="assets/images/pediatrics.png" alt="people" class="dashboard-image">
+                                    </div>
+                                </div>
+                                <div class="death-card text-center">
+                                    <h3 class="birth-count1">{{DashBoardList1[0]?.TFR_2025}} / {{DashBoardList1[0]?.TFR_2024}}</h3>
+                                    <span class="">(as per CRS)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+                        <div class="card death">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="death-head">Sex Ratio</h5>
+                                        <p class="death-text">Financial Year (2025-26) / (2024-25)</p>
+                                    </div>
+                                    <div class="bg-death">
+                                        <img src="assets/images/male-female.png" alt="people" class="dashboard-image">
+                                    </div>
+                                </div>
+                                <div class="death-card text-center">
+                                    <h3 class="birth-count1">{{DashBoardList1[0]?.SEX_RATIO_2025}} / {{DashBoardList1[0]?.SEX_RATIO_2024}}
+                                    </h3>
+                                    <span class="">(as per CRS)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sideheading">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                        <div class="heading-bg">
+                            <img src="assets/images/group.png" alt="people" class="dashboard-image">
+                        </div>
+                        <h2 class="heading-text ps-2">Population Structure</h2>
+                    </div>
+                    <div class="col-xxl-3 col-3"></div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                        <p class="mb-0 text-end text-dark">(as per GSWS)</p>
+                    </div>
+                </div>
+                <div class="card birth">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="newborn  d-flex justify-content-between">
+                                    <div class="births-card">
+                                        <h2 class="birth-head">Population</h2>
+                                        <h5 class="birth-text">Financial Year (2024-25)</h5>
+                                    </div>
+                                    <img src="assets/images/population.png" alt="birth" class="opacity-25">
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-heads">Urban</h5>
+                                    <h3 class="birth-count1">{{DashBoardList[0]?.URBAN_POP}}</h3>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-heads">Rural</h5>
+                                    <h3 class="birth-count1">{{DashBoardList[0]?.RURAL_POP}}</h3>
+                                </div>
+                            </div>
+                            <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="birth-card">
+                                    <h5 class="birth-heads">Birth Data in CRS</h5>
+                                    <h3 class="birth-count1">{{DataList4[0]?.BIRTH_DATA_EXCESS_POP}}</h3>
+                                    <span class="mb-0"> (but not mapped in GSWS)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/household.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Household Size</h5>
+                                <h3 class="population-text">{{ DashBoardList[0]?.HH_SIZE }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/male-female.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Child Sex Ratio</h5>
+                                <h3 class="population-text">{{ DashBoardList[0]?.CHILD_SEX_RATIO }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/children.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Child Dependency</h5>
+                                <h3 class="population-text">{{ DashBoardList[0]?.CHILD_DEPENDENCY }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/aged.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Old-Age Dependency</h5>
+                                <h3 class="population-text">{{ DashBoardList[0]?.OLD_AGE_DEPENDENCY }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="row sideheading">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                        <div class="heading-bg">
+                            <img src="assets/images/pregnant.png" alt="people" class="dashboard-image">
+                        </div>
+                        <h2 class="heading-text ps-2">Health & Nutrition</h2>
+                        <span class="heading-small ms-2">Financial Year (2024-25)</span>
+                    </div>
+                    <div class="col-xxl-3 col-3"></div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                        <p class="mb-0 text-end text-dark">(as per RCH)</p>
+                    </div>
+                </div>
+                <div class="row align-items-strech">
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card h-100 population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/death.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Neo -Natal Mortality Rate (NMR)</h5>
+                                <div class="d-flex justify-content-center align-items-end mt-1">
+                                    <h3 class="population-text m-0">{{DashBoardList[0]?.NMR_YEAR }}</h3>
+                                    <!-- <span class="text-muted small">(as per RCH)</span> -->
+                                    <p class="mb-0 test-test text-dark ms-1">(as per RCH)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card h-100  population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/death.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Infant Mortality Rate (IMR)</h5>
+                                <div class="d-flex justify-content-center align-items-end mt-1">
+                                    <h3 class="population-text m-0">{{DashBoardList[0]?.IMR_YEAR}}</h3>
+                                    <!-- <span class="text-muted small">(as per RCH)</span><h3 class="population-text m-0">/24</h3><span  class="text-muted small">(as per SRC)</span> -->
+
+                                    <p class="mb-0 test-test  text-dark ms-1 me-1">(as per RCH)</p>
+                                    <h3 class="population-text m-0"> / 24</h3>
+                                    <p class="mb-0 test-test text-dark ms-1">(as per SRC)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card h-100 population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/death.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Under-5 Mortality Rate (U5MR)</h5>
+                                <div class="d-flex justify-content-center align-items-end mt-1">
+                                    <h3 class="population-text m-0">{{DashBoardList[0]?.UNDER_5_YEARS_YEAR}}</h3>
+                                    <!-- <span class="text-muted small">(as per RCH)</span><h3 class="population-text m-0">/24</h3><span  class="text-muted small">(as per SRC)</span> -->
+                                    <!-- <p class="mb-2">(as per RCH)</p>/24<p class="mb-2">(as per SRC)</p> -->
+                                    <p class="mb-0 test-test  text-dark ms-1  me-1">(as per RCH)</p>
+                                    <h3 class="population-text m-0"> / 24</h3>
+                                    <p class="mb-0 test-test text-dark ms-1">(as per SRC)</p>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                        <div class="card h-100 population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/death.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Maternal Mortality Rate (MMR)</h5>
+                                <div class="d-flex justify-content-center align-items-end mt-1">
+                                    <h3 class="population-text m-0">{{DashBoardList[0]?.MMR_YEAR}}</h3>
+                                    <!-- <span class="text-muted small">(as per RCH)</span><h3 class="population-text m-0">/46</h3><span  class="text-muted small">(as per SRC)</span> -->
+                                    <p class="mb-0 test-test  text-dark ms-1 me-1">(as per RCH)</p>
+                                    <h3 class="population-text m-0"> / 46</h3>
+                                    <p class="mb-0 test-test text-dark ms-1">(as per SRC)</p>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row sideheading">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                        <div class="heading-bg">
+                            <img src="assets/images/pregnant.png" alt="people" class="dashboard-image">
+                        </div>
+                        <h2 class="heading-text ps-2">Fertility & Family Planning</h2>
+                        <span class="heading-small ms-2">Financial Year (2024-25)</span>
+                    </div>
+                    <div class="col-xxl-3 col-3"></div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                        <p class="mb-0 text-end text-dark">(as per RCH)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/pediatrics.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Total Fertility Rate</h5>
+                                <h3 class="population-text m-0">{{ DashBoardList[0]?.TFR_YEAR }}</h3>
+                                <p class="mb-2">(as per RCH)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/pediatrics.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Crude Birth Rate</h5>
+                                <h3 class="population-text m-0">{{ DashBoardList[0]?.CRUDE_BIRTH_RATE }}</h3>
+                                <p class="mb-2">(as per RCH)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/death.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Crude Death Rate</h5>
+                                <h3 class="population-text m-0">{{ DashBoardList[0]?.CRUDE_DEATH_RATE}}</h3>
+                                <p class="mb-2">(as per RCH)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row sideheading">
+                    <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                        <div class="heading-bg">
+                            <img src="assets/images/hand.png" alt="people" class="dashboard-image">
+                        </div>
+                        <h2 class="heading-text ps-2">Vulnerability & Inclusion</h2>
+                        <span class="heading-small ms-2">Financial Year (2024-25)</span>
+                    </div>
+                    <div class="col-xxl-3 col-3"></div>
+                    <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12">
+                        <p class="mb-0 text-end text-dark">(as per RCH)</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/aged.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Household with Senior Citizen</h5>
+                                <h3 class="population-text m-0">{{DashBoardList[0]?.HH_SENIOR_CITIZEN}}</h3>
+                                <p class="mb-2">(as per GSWS)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/male-female.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Orphan/ChiId-headed Household</h5>
+                                <h3 class="population-text m-0">{{DashBoardList[0]?.ORPHAN_CHILD}}</h3>
+                                <p class="mb-2">(as per GSWS)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                        <div class="card population">
+                            <div class="card-body p-1">
+                                <div class="population1">
+                                    <img src="assets/images/pediatrics.png" alt="people" class="dashboard-image">
+                                </div>
+                                <h5 class="population-head">Total Fertility Rate</h5>
+                                <h3 class="population-text m-0">{{DashBoardList[0]?.TRANSGENDER_POP}}</h3>
+                                <p class="mb-2">(as per RCH)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row align-items-strech">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div id="chart">
+                                    <apx-chart [series]="chartOptions10.series" [chart]="chartOptions10.chart"
+                                        [labels]="chartOptions10.labels" [responsive]="chartOptions10.responsive"
+                                        style="height: 300px;"></apx-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 col-md-7 col-sm-12 col-12">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-6 col-12 position-relative">
+                                        <div class="">
+                                            <svg version="1.1" id="andhrapradeshMap" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1500 900"
+                                                xml:space="preserve" style="enable-background: new 0 0 1500 900;">
+                                                <style type="text/css">
+                                                    #andhrapradeshMap {
+                                                        transform: scale(1);
+                                                        width: 131%;
+                                                        z-index: 9;
+                                                        position: relative;
+                                                        margin-top: 37px;
+                                                        margin-left: -56px;
+                                                    }
+
+                                                    text {
+                                                        font-family: 'Inter', 'sans-serif';
+                                                        font-size: 14px;
+                                                        cursor: pointer;
+                                                    }
+
+                                                    .st0 {
+                                                        enable-background: new;
+                                                    }
+
+                                                    .st1 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st2 {
+                                                        fill: none;
+                                                        stroke: #FDFDFF;
+                                                        stroke-miterlimit: 2;
+                                                    }
+
+                                                    .st3 {
+                                                        fill: #85B135;
+                                                    }
+
+                                                    .st1:hover,
+                                                    .st2:hover,
+                                                    .st3:hover,
+                                                    .st4:hover,
+                                                    .st5:hover,
+                                                    .st6:hover,
+                                                    .st7:hover,
+                                                    .st8:hover,
+                                                    .st9:hover,
+                                                    .st10:hover,
+                                                    .st11:hover,
+                                                    .st12:hover,
+                                                    .st13:hover,
+                                                    .st14:hover,
+                                                    .st15:hover,
+                                                    .st16:hover,
+                                                    .st17:hover,
+                                                    .st18:hover,
+                                                    .st19:hover,
+                                                    .st20:hover,
+                                                    .st21:hover,
+                                                    .st22:hover,
+                                                    .st23:hover,
+                                                    .st24:hover,
+                                                    .st25:hover,
+                                                    .st26:hover,
+                                                    .st27:hover,
+                                                    .st28:hover,
+                                                    .st29:hover,
+                                                    .st30:hover {
+                                                        fill: #eabb0c;
+                                                        filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.8));
+                                                    }
+
+                                                    .st4 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st5 {
+                                                        fill: none;
+                                                        stroke: #FFFFFF;
+                                                        stroke-miterlimit: 2;
+                                                    }
+
+                                                    .st6 {
+                                                        fill: #B6CB32;
+                                                    }
+
+                                                    .st7 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st8 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st9 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st10 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st11 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st12 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st13 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st14 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st15 {
+                                                        fill: #7DAE38;
+                                                    }
+
+                                                    .st16 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st17 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st18 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st19 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st20 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st21 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st22 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st23 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st24 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st25 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st26 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st27 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st28 {
+                                                        fill: #B7CB38;
+                                                    }
+
+                                                    .st29 {
+                                                        font-family: 'Inter';
+                                                    }
+
+                                                    .st30 {
+                                                        fill: #FFFFFF;
+                                                        font-size: 18px;
+                                                        font-weight: 700;
+                                                        font-family: "Inter", sans-serif !important;
+                                                    }
+
+                                                    .st30:hover {
+                                                        text-decoration: none;
+                                                    }
+
+                                                    text {
+                                                        font-family: "Inter", sans-serif !important;
+                                                        font-size: 18px;
+                                                        fill: #000 !important;
+                                                        /* <-- black color and force override */
+                                                    }
+
+
+
+                                                    title {
+                                                        fill: #fff !important;
+                                                        color: #fff;
+                                                    }
+                                                </style>
+                                                <!-- <g id="Layer_1_xA0_Image_1_">
+                                                                <image width="1200" height="900" id="Layer_1_xA0_Image"
+                                                                    xlink:href="72C3C8B1.png"
+                                                                    transform="matrix(1 0 0 1 3.4693 1143.3256)"
+                                                                    style="overflow: visible;"></image>
+                                                            </g> -->
+                                                <path *ngFor="let district of districts" [attr.id]="district.id" [attr.d]="district.path"
+                                                    [style.fill]="district.area >1000 ? '#eabb0c' : '#abc439' && district.area >3000 ? '#f72621' : '#abc439'"
+                                                    [attr.title]="district.name" (mouseover)="onHover(district)" (mouseleave)="onLeave()"
+                                                    (click)="onSelect(district)"
+                                                    style="cursor: pointer; stroke: #000; stroke-width: 0.5px;">
+                                                </path>
+                                                <g id="guntur_1_" class="st0"><a title="Annamayya" href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 302.0426 737.5057)"
+                                                            class="st29 st30">Annamayya</text></a><a title="Sri Sathya Sai"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 278.0512 671.4259)"
+                                                            class="st29 st30">Satyasai</text></a><a title="Ananthapuramu"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 220.5831 581.5536)"
+                                                            class="st29 st30">Ananthpuramu</text></a><a title="Kurnool"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 234.9448 491.9276)"
+                                                            class="st29 st30">Kurnool</text></a><a title="Nandyal"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 339.9661 514.4595)"
+                                                            class="st29 st30">Nandyal</text></a><a title="Prakasam"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 439.6124 484.8422)"
+                                                            class="st29 st30">Prakasam</text></a><a title="Palnadu"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 491.0925 376.111)"
+                                                            class="st29 st30">Palnadu</text></a><a title="Bapatla"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 569.4443 467.3029)"
+                                                            class="st29 st30">Bapatla</text></a><a title="Guntur"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 604.6271 392.3386)"
+                                                            class="st29 st30">Guntur</text></a><a title="Krishna"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 677.7847 407.4884)"
+                                                            class="st29 st30">Krishna</text></a><a title="NTR"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 572.5151 327.3701)"
+                                                            class="st29 st30">NTR</text></a><a title="Eluru" href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 658.2053 283.8774)"
+                                                            class="st29 st30">Eluru</text></a><a title="West Godavari"
+                                                        href="javascript:void(0)">
+                                                        <text transform="matrix(1 0 0 1 732.503 376.1109)" class="st29 st30">West
+                                                            Godavari</text></a><a title="Konaseema" href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 803.0947 346.4739)"
+                                                            class="st29 st30">Konaseema</text></a><a title="East Godavai"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 726.6307 302.0483)"
+                                                            class="st29 st30">East
+                                                            Godavari</text></a><a title="Kakinada" href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 812.2289 283.8773)"
+                                                            class="st29 st30">Kakinada</text></a><a title="Anakapalli"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 873.9338 229.7954)"
+                                                            class="st29 st30">Anakapalli</text></a><a title="Visakhapatnam"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 935.2104 190.2209)"
+                                                            class="st29 st30">Visakhapatnam</text></a><a title="Vizianagaram"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 956.7194 147.3274)"
+                                                            class="st29 st30">Vizianagaram</text></a><a title="Srikakulam"
+                                                        href="javascript:void(0)"> <text transform="matrix(1 0 0 1 1024.8148 99.121)"
+                                                            class="st29 st30">Srikakulam</text></a><a title="Parvathipuram Manyam"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 807.1726 64.605)"
+                                                            class="st29 st30">Parvathipuram
+                                                            Manyam</text></a><a title="Alluri Sitharama Raju"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 712.9728 158.5615)"
+                                                            class="st29 st30">Alluri Seetarama
+                                                            Raju</text></a><a title="Y.S.R." href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 375.5831 608.1068)" class="st29 st30">YSR</text></a><a
+                                                        title="Tirupati" href="javascript:void(0)"><text
+                                                            transform="matrix(1 0 0 1 532.115 699.903)"
+                                                            class="st29 st30">Tirupati</text></a><a title="SRI Potti Sriramulu Nellore"
+                                                        href="javascript:void(0)"><text transform="matrix(1 0 0 1 500.8115 595.2191)"
+                                                            class="st29 st30">SRI
+                                                            Potti Sriramulu
+                                                            Nellore</text></a><a title="Chittoor" href="javascript:void(0)">
+                                                        <text transform="matrix(1 0 0 1 446.5532 798.4251)"
+                                                            class="st29 st30">Chittor</text></a></g>
+                                            </svg>
+
+                                            <div class="counts">
+                                                <ul>
+                                                    <div *ngIf="selectedDistrict">
+                                                        <strong style="color: #f67015;">{{selectedDistrict.name
+                                                            }}</strong><br>
+
+                                                    </div>
+                                                    <li class="text-black">Total<h4 class="my-1" style="color: #f67015;">
+                                                            {{totalbirthcount}}
+                                                        </h4>
+                                                    </li>
+                                                    <li class="text-black">Male<h4 class="my-1" style="color: #46c2f2;">
+                                                            {{male_count}}
+                                                        </h4>
+                                                    </li>
+                                                    <li class="text-black">Female<h4 class="my-1" style="color: #b73377;">
+
+                                                            {{female_count}}
+                                                        </h4>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6 col-12">
+                                        <div class="table-responsive headertable">
+                                            <table class="table table-borderedless">
+                                                <thead class="table-light rounded-top">
+                                                    <tr>
+                                                        <th>SNo</th>
+                                                        <th>District</th>
+                                                        <th>Total</th>
+                                                        <th>Male</th>
+                                                        <th>Female</th>
+                                                        <th>BR</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="fs-6">
+                                                    <tr *ngFor="let dis of summary_birth_death_array let i=index">
+                                                        <td>{{i+1}}</td>
+                                                        <td>{{dis.DISTRICT_NAME}}</td>
+                                                        <td style="color: #e3800f;">{{dis.TOTAL_BIRTH}}</td>
+                                                        <td style="color: #1c57c4;">{{dis.MALE_BIRTH}}</td>
+                                                        <td style="color: #b5247b;">{{dis.FEMALE_BIRTH}}</td>
+                                                        <td style="color: #ce073f;">{{dis.BIRTH_RATE}}</td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mt-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="population-Projection-chart" style="width: 100%; height: 400px;">
+                                    <highcharts-chart [Highcharts]="Highcharts" [options]="populationChart"
+                                        style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+</div>

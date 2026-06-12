@@ -1,0 +1,1482 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i> Registration Unit List</h5>
+                <div *ngIf="user_role == '101' || user_role == '107'">
+                    <button class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#UserModal" (click)="modal_open()"><i
+                            class="mdi mdi-account-plus"></i>
+                        Registration Unit List</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+
+            <div class="row mt-2" *ngIf="display_level=='registration'">
+                <div class="col-xl-12 col-12">
+                    <p-table id="tblbirthdepthtable" [value]="reg_unit_details_array"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" #dt2
+                        [rows]="reg_unit_details_array.length" [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                        sortMode="multiple"
+                        [globalFilterFields]="['SNO','RU_CODE','RU_CODE','ISACTIVE','RU_NAME','DEPT_NAME','RU_TYPE_NAME','DISTRICT_NAME','RURAL_URBAN','MMC_NAME','VW_NAME','RU_ADDRESS','INSERTED_ON']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true" scrollHeight="560px">
+                        <ng-template pTemplate="caption">
+                            <div class="row">
+                                <div class="col-md-10 row">
+                                    <div class="col-md-2">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Department/శాఖ<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="getrole" id="getrole" [(ngModel)]="getrole" (change)="check_mandal_panchayat()"
+                                                placeholder="Role">
+                                                <ng-option value="">--Select--</ng-option>
+                                                <ng-option *ngFor="let rl of get_role_array"
+                                                    [value]="rl.DEPT_CODE">{{rl.DEPT_DD}}</ng-option>
+                                            </ng-select>
+                                            <div *ngIf="role.invalid && (role.dirty || role.touched)" class="error-message text-danger">
+                                                <div *ngIf="role.errors">
+                                                    <div *ngIf="role.errors['required']">
+                                                        Role is
+                                                        required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">District/ జిల్లా<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="get_district" id="get_district" required="" [(ngModel)]="get_district"
+                                                [disabled]="isdistrict_disabled" (change)="get_districtchange()">
+                                                <ng-option value="" disabled>--Select
+                                                    district--</ng-option>
+                                                <ng-option value="0">All</ng-option>
+                                                <ng-option *ngFor="let loc of get_district_array"
+                                                    [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Urban/Rural/ పట్టణ/గ్రామీణ<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select placeholder="Urban/Rural/ పట్టణ/గ్రామీణ" [(ngModel)]="get_rural_urban"
+                                                [disabled]="is_get_urban_disable" id="get_rural_urban" name="get_rural_urban"
+                                                title="Urban Rural">
+                                                <ng-option value="" disabled>--Select
+                                                    urban/rural--</ng-option>
+                                                <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                                <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Mandal/Muncipality/ మండలం/మున్సిపాలిటీ<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="get_mandal" id="get_mandal" required="" [(ngModel)]="get_mandal"
+                                                (change)="get_VillageWard()" placeholder="Mandal/Muncipality/ మండలం/మున్సిపాలిటీ">
+                                                <ng-option value="" disabled>--Select
+                                                    mandal/muncipality--</ng-option>
+                                                <ng-option *ngFor="let loc of get_MandalMuncipality_array"
+                                                    [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" *ngIf="isgetvillagedisable">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Village/Town /గ్రామం /వార్డు<span
+                                                    class="text-danger">*</span></label>
+                                            <ng-select name="getvillage" id="getvillage" [(ngModel)]="getvillage"
+                                                placeholder="Village/Ward /గ్రామం /వార్డు">
+                                                <ng-option value="" disabled>--Select
+                                                    village/Town--</ng-option>
+                                                <ng-option *ngFor="let loc of get_village_ward_array"
+                                                    [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+
+                                            </ng-select>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 mt-3">
+                                        <button class="btn btn-primary" type="button" (click)="get_registration_unit_details()">Get</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 text-end mt-2">
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text" (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pSortableColumn="SNO">Sno<p-sortIcon field="SNO" /><p-columnFilter type="text" field="SNO"
+                                        display="menu" /></th>
+                                <th pSortableColumn="RU_CODE">Action<p-sortIcon field="RU_CODE" /><p-columnFilter type="text"
+                                        field="RU_CODE" display="menu" /></th>
+                                <th pSortableColumn="ISACTIVE">Status<p-sortIcon field="ISACTIVE" /><p-columnFilter type="text"
+                                        field="ISACTIVE" display="menu" /></th>
+                                <th pSortableColumn="RU_CODE">Registration Unit Code<p-sortIcon field="RU_CODE" /><p-columnFilter
+                                        type="text" field="RU_CODE" display="menu" /></th>
+
+                                <th pSortableColumn="RU_NAME">Registration <br />Unit Name<p-sortIcon field="RU_NAME" /><p-columnFilter
+                                        type="text" field="RU_NAME" display="menu" /></th>
+                                <th pSortableColumn="DEPT_NAME">Department<p-sortIcon field="DEPT_NAME" /><p-columnFilter type="text"
+                                        field="DEPT_NAME" display="menu" /></th>
+                                <th pSortableColumn="RU_TYPE_NAME">Registration <br />Unit Type<p-sortIcon
+                                        field="RU_TYPE_NAME" /><p-columnFilter type="text" field="RU_TYPE_NAME" display="menu" /></th>
+                                <th pSortableColumn="DISTRICT_NAME">District<p-sortIcon field="DISTRICT_NAME" /><p-columnFilter type="text"
+                                        field="DISTRICT_NAME" display="menu" /></th>
+                                <th pSortableColumn="RURAL_URBAN">Rural / Urban<p-sortIcon field="RURAL_URBAN" /><p-columnFilter type="text"
+                                        field="RURAL_URBAN" display="menu" /></th>
+                                <th pSortableColumn="MMC_NAME">Mandal / Muncipality<p-sortIcon field="MMC_NAME" /><p-columnFilter
+                                        type="text" field="MMC_NAME" display="menu" /></th>
+                                <th pSortableColumn="VW_NAME">Village/Ward<p-sortIcon field="VW_NAME" /><p-columnFilter type="text"
+                                        field="VW_NAME" display="menu" /></th>
+                                <th pSortableColumn="RU_ADDRESS">Address<p-sortIcon field="RU_ADDRESS" /><p-columnFilter type="text"
+                                        field="RU_ADDRESS" display="menu" /></th>
+                                <th pSortableColumn="INSERTED_ON">Registered On<p-sortIcon field="INSERTED_ON" /><p-columnFilter type="text"
+                                        field="INSERTED_ON" display="menu" /></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-agency>
+                            <tr>
+                                <td>{{agency.SNO}}</td>
+                                <td *ngIf="agency.ISACTIVE=='1'"><button (click)="updatedetails(agency)" class="btn btn-sm btn-success"
+                                        data-bs-toggle="modal" data-bs-target="#update_UserModal"><i class="mdi mdi-pencil"></i></button>
+                                </td>
+                                <td *ngIf="agency.ISACTIVE=='0'"><span class="text-danger">Inactive</span>
+                                </td>
+                                <td>
+                                    <div class="form-check form-checkbox-success form-switch text-center lg">
+                                        <input type="checkbox" class="form-check-input m-auto" id="customSwitch1"
+                                            [(ngModel)]="agency.ISACTIVE" (click)="update_active_status(agency)">
+                                    </div>
+                                </td>
+                                <td><button class="btn btn-sm btn-success" (click)="view_details(agency)" data-bs-toggle="modal"
+                                        data-bs-target="#view_UserModal">{{agency.RU_CODE}}</button>
+                                </td>
+                                <td>{{agency.RU_NAME}}</td>
+                                <td>{{agency.DEPT_NAME}}</td>
+                                <!-- <td>{{agency.disease}}</td> -->
+                                <td>{{agency.RU_TYPE_NAME}}</td>
+                                <td>{{agency.DISTRICT_NAME}}</td>
+                                <td>{{agency.RURAL_URBAN}}</td>
+                                <td>{{agency.MMC_NAME}}</td>
+                                <td>{{agency.VW_NAME}}</td>
+                                <td>{{agency.RU_ADDRESS}}</td>
+                                <td>{{agency.INSERTED_ON}}</td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Add user modal -->
+<div class="modal fade" id="UserModal" tabindex="-1" aria-labelledby="UserModalModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="UserModalLabel">Registration Unit List </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close_modal()"></button>
+            </div>
+            <form #crs_hosipatalreg_form="ngForm">
+                <fieldset>
+                    <legend>Add New Registration Unit & Registrar</legend>
+
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Department/శాఖ<span class="text-danger">*</span></label>
+                                    <ng-select name="role" id="role" required="" [(ngModel)]="registration_unit.role" #role="ngModel"
+                                        (change)="getregunitdata()" placeholder="Role"
+                                        [ngClass]="{'is-invalid':role.invalid && (role.dirty || role.touched),'is-valid':role.value!='' && (role.touched || role.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option *ngFor="let rl of role_array" [value]="rl.DEPT_CODE">{{rl.DEPT_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="role.invalid && (role.dirty || role.touched)" class="error-message text-danger">
+                                        <div *ngIf="role.errors">
+                                            <div *ngIf="role.errors['required']">
+                                                Role is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Type of Registration Unit/నమోదు విభాగం<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select class="" [(ngModel)]="registration_unit.type_of_reg" id="type_of_reg" maxlength=""
+                                        (change)="registration_unit_capture_data()" name="type_of_reg" placeholder="Type of Registration"
+                                        required="" #type_of_reg="ngModel" [ngClass]="{'is-invalid':type_of_reg.invalid && (type_of_reg.dirty || type_of_reg.touched),
+                                    'is-valid':type_of_reg.value!='' && (type_of_reg.touched || type_of_reg.dirty)}">
+                                        <ng-option value="" disabled>--select</ng-option>
+                                        <ng-option *ngFor="let rgu of reg_unt_array"
+                                            [value]="rgu.RU_TYPE_CODE+'^'+rgu.RU_TYPE_NAME">{{rgu.RU_TYPE_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="type_of_reg.invalid && (type_of_reg.dirty || type_of_reg.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="type_of_reg.errors">
+                                            <div *ngIf="type_of_reg.errors['required']">
+                                                Type of Registration is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select class="" [(ngModel)]="registration_unit.reg_level" id="reg_level" maxlength=""
+                                        name="reg_level" placeholder="egistration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్" required=""
+                                        #reg_level="ngModel" [ngClass]="{'is-invalid':reg_level.invalid && (reg_level.dirty || reg_level.touched),
+                                                                'is-valid':reg_level.value!='' && (reg_level.touched || reg_level.dirty)}">
+                                        <ng-option value="" disabled>--select</ng-option>
+                                        <ng-option *ngFor="let rgu of reg_unit_level_array"
+                                            [value]="rgu.RU_LEVEL_CODE+'^'+rgu.RU_LEVEL">{{rgu.RU_LEVEL_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="reg_level.invalid && (reg_level.dirty || reg_level.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="reg_level.errors">
+                                            <div *ngIf="reg_level.errors['required']">
+                                                Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Registration Unit Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="registration_unit.reg_unit_name"
+                                                    [disabled]="is_reg_unit_disable" minlength="10" maxlength="200" id="reg_unit_name"
+                                                    name="reg_unit_name" placeholder="Registration Unit Name" required=""
+                                                    #reg_unit_name="ngModel" appAlphabetsonly
+                                                    (change)="Teluglanguageconvrt(registration_unit.reg_unit_name,'reg_unit_name_tel')"
+                                                    [ngClass]="{'is-invalid':reg_unit_name.invalid && (reg_unit_name.dirty || reg_unit_name.touched),
+                                                                   'is-valid':reg_unit_name.value!='' && (reg_unit_name.touched || reg_unit_name.dirty)}">
+                                                <div *ngIf="reg_unit_name.invalid && (reg_unit_name.dirty || reg_unit_name.touched)"
+                                                    class="error-message text-danger">
+                                                    <div *ngIf="reg_unit_name.errors">
+                                                        <div *ngIf="reg_unit_name.errors['required']">
+                                                            Registration Unit Name is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">రిజిస్ట్రేషన్ యూనిట్
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <input type="text" autocomplete="off" appAlphanumericOnly minlength="10" maxlength="200"
+                                                    [disabled]="is_reg_unit_disable" class="form-control border-warning"
+                                                    [(ngModel)]="registration_unit.reg_unit_name_t"
+                                                    (change)="Teluglanguageconvrt(registration_unit.reg_unit_name_t,'reg_unit_name_tel')"
+                                                    id="reg_unit_name_t" name="reg_unit_name_t" required="" #reg_unit_name_t="ngModel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">District/ జిల్లా<span class="text-danger">*</span></label>
+                                    <ng-select name="district" id="district" required="" [(ngModel)]="registration_unit.district"
+                                        [disabled]="isdistrict_disabled" (change)="Addressof_districtchange()" #districtt="ngModel"
+                                        placeholder="District/ జిల్లా" [ngClass]="{'is-invalid':districtt.invalid && (districtt.dirty || districtt.touched),
+'is-valid':districtt.value!='' && (districtt.touched || districtt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            district--</ng-option>
+                                        <ng-option value="0">All</ng-option>
+                                        <ng-option *ngFor="let loc of Addressofparents_district_array"
+                                            [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="districtt.invalid && (districtt.dirty || districtt.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="districtt.errors">
+                                            <div *ngIf="districtt.errors['required']">
+                                                District/ జిల్లా is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Urban/Rural/ పట్టణ/గ్రామీణ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select placeholder="Urban/Rural/ పట్టణ/గ్రామీణ" [(ngModel)]="registration_unit.rural_urban"
+                                        [disabled]="is_urban_disable" id="rural_urban" name="rural_urban" title="Urban Rural" required=""
+                                        #rural_urban="ngModel" (change)="MandalMuncipality()" [ngClass]="{'is-invalid': rural_urban.invalid && (rural_urban.dirty || rural_urban.touched),
+                                                'is-valid': rural_urban.value!='' && (rural_urban.dirty || rural_urban.touched)}">
+                                        <ng-option value="" disabled>--Select
+                                            urban/rural--</ng-option>
+                                        <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                        <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="rural_urban.invalid && (rural_urban.dirty || rural_urban.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="rural_urban.errors">
+                                            <div *ngIf="rural_urban.errors['required']">
+                                                Urban/Rural/ పట్టణ/గ్రామీణ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Mandal/Muncipality/ మండలం/మున్సిపాలిటీ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="mandal" id="mandal" required="" [(ngModel)]="registration_unit.mandal"
+                                        #mandalt="ngModel" (change)="VillageWard()" placeholder="Mandal/Muncipality/ మండలం/మున్సిపాలిటీ"
+                                        [ngClass]="{'is-invalid':mandalt.invalid && (mandalt.dirty || mandalt.touched),
+'is-valid':mandalt.value!='' && (mandalt.touched || mandalt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            mandal/muncipality--</ng-option>
+                                        <ng-option *ngFor="let loc of Addressofparents_MandalMuncipality_array"
+                                            [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="mandalt.invalid && (mandalt.dirty || mandalt.touched)" class="error-message text-danger">
+                                        <div *ngIf="mandalt.errors">
+                                            <div *ngIf="mandalt.errors['required']">
+                                                Mandal/Muncipality/ మండలం/మున్సిపాలిటీ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- *ngIf="isvillagedisable" -->
+                            <div class="col-xl-4 col-12" >
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Village/Ward /గ్రామం /వార్డు<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="village" id="village" required="" [(ngModel)]="registration_unit.village"
+                                        #villaget="ngModel" placeholder="Village/Ward /గ్రామం /వార్డు" [ngClass]="{'is-invalid':villaget.invalid && (villaget.dirty || villaget.touched),
+                                    'is-valid':villaget.value!='' && (villaget.touched || villaget.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            village/ward--</ng-option>
+                                        <ng-option *ngFor="let loc of village_ward_array" [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="villaget.invalid && (villaget.dirty || villaget.touched)" class="error-message text-danger">
+                                        <div *ngIf="villaget.errors">
+                                            <div *ngIf="villaget.errors['required']">
+                                                Village/Ward /గ్రామం /వార్డు is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Revenue Division/రెవెన్యూ డివిజన్<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="RevenueDivision" id="RevenueDivision" required=""
+                                        [(ngModel)]="user_reg_form.RevenueDivision" #RevenueDivision="ngModel"
+                                        placeholder="Revenue Division/రెవెన్యూ డివిజన్"
+                                        [ngClass]="{'is-invalid':RevenueDivision.invalid && (RevenueDivision.dirty || RevenueDivision.touched),'is-valid':RevenueDivision.value!='' && (RevenueDivision.touched || RevenueDivision.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option *ngFor="let rl of department_revenuesdata_array"
+                                            [value]="rl.REVENUE_DIVISION_CODE">{{rl.REVENUE_DIVISION}}</ng-option>
+                                        <!-- <ng-option value="Department">Department</ng-option>
+                                                                                                            <ng-option value="Head Office">Head Office</ng-option> -->
+                                    </ng-select>
+                                    <div *ngIf="RevenueDivision.invalid && (RevenueDivision.dirty || RevenueDivision.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="RevenueDivision.errors">
+                                            <div *ngIf="RevenueDivision.errors['required']">
+                                                Revenue Division/రెవెన్యూ డివిజన్ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div [class.col-xl-12]="!isvillagedisable" [class.col-xl-8]="isvillagedisable" class="col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Address<span class="text-danger">*</span></label>
+                                            <textarea rows="1" class="form-control" name="address" id="address" required="" maxlength="300"
+                                                (change)="Teluglanguageconvrt(registration_unit.address,'address_tel')"
+                                                [(ngModel)]="registration_unit.address" #address="ngModel" placeholder="Address " [ngClass]="{'is-invalid':address.invalid && (address.dirty || address.touched),
+                                                'is-valid':address.value!='' && (address.touched || address.dirty)}">
+                                </textarea>
+                                            <div *ngIf="address.invalid && (address.dirty || address.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="address.errors">
+                                                    <div *ngIf="address.errors['required']">
+                                                        Address is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12" hidden>
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">చిరునామా
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <textarea rows="1" class="form-control" name="address_tel" id="address_tel" required=""
+                                                    maxlength="300"
+                                                    (change)="Teluglanguageconvrt(registration_unit.address_tel,'address_tel')"
+                                                    [(ngModel)]="registration_unit.address_tel" #address_tel="ngModel"
+                                                    placeholder="చిరునామా" [ngClass]="{'is-invalid':address_tel.invalid && (address_tel.dirty || address_tel.touched),
+                                                    'is-valid':address_tel.value!='' && (address_tel.touched || address_tel.dirty)}">
+                                               </textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">PIN Code/ పిన్ కోడ్<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="regpincode" id="regpincode" required=""
+                                        appNumericOnlyDirective appNumericsOnlyEnter Pincodevalidation
+                                        [(ngModel)]="registration_unit.regpincode" #regpincode="ngModel" placeholder="PIN Code/ పిన్ కోడ్"
+                                        [ngClass]="{'is-invalid':regpincode.invalid && (regpincode.dirty || regpincode.touched),
+                                        'is-valid':regpincode.value!='' && (regpincode.touched || regpincode.dirty)}">
+                                    <div *ngIf="regpincode.invalid && (regpincode.dirty || regpincode.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="regpincode.errors">
+                                            <div *ngIf="regpincode.errors['required']">
+                                                PIN Code/ పిన్ కోడ్ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Office Location on Google Map/ఆఫీస్
+                                        లొకేషన్<span class="text-danger">*</span></label>
+                                    <input type="tex" class="form-control" name="google_map_link" id="google_map_link"
+                                        (change)="extractLatLongFromLink(registration_unit.google_map_link)"
+                                        [(ngModel)]="registration_unit.google_map_link" placeholder="Office Location on Google Map/ఆఫీస్
+                                        లొకేషన్">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Logo of Registration Unit/నమోదు యూనిట్ లోగో
+                                    </label>
+                                    <input type="file" class="form-control" oncut="return false;" oncopy="return false;" #regunitlogo
+                                        accept=".jpg,.png,.jpeg" onpaste="return false;" (change)="fileupload($event,'logo')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Registrar Details</legend>
+
+                    <div class="modal-body">
+                        <!-- <fieldset>
+                            <legend>Basic Deatails</legend> -->
+                        <div class="row mb-2">
+                                <div class="col-xl-12 col-12">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Name of Functionary<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="user_reg_form.name_of_functionary"
+                                                    id="name_of_functionary" name="name_of_functionary" appAlphabetsonly
+                                                    (change)="Teluglanguageconvrt(user_reg_form.name_of_functionary,'name_of_functionary_tel')"
+                                                    placeholder="Name of Functionary/పదవిదారుడి పేరు" required=""
+                                                    #name_of_functionary="ngModel"
+                                                    [ngClass]="{'is-invalid':name_of_functionary.invalid && (name_of_functionary.dirty || name_of_functionary.touched),
+                                                                                   'is-valid':name_of_functionary.value!='' && (name_of_functionary.touched || name_of_functionary.dirty)}">
+                                                <div *ngIf="name_of_functionary.invalid && (name_of_functionary.dirty || name_of_functionary.touched)"
+                                                    class="error-message text-danger">
+                                                    <div *ngIf="name_of_functionary.errors">
+                                                        <div *ngIf="name_of_functionary.errors['required']">
+                                                            Name of Functionary/పదవిదారుడి పేరు is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">పదవిదారుడి పేరు<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control border-warning"
+                                                    [(ngModel)]="user_reg_form.name_of_functionary_t" id="name_of_functionary_t"
+                                                    name="name_of_functionary_t" placeholder="Name of Functionary Telugu" required=""
+                                                    #name_of_functionary_t="ngModel"
+                                                    (change)="Teluglanguageconvrt(user_reg_form.name_of_functionary_t,'name_of_functionary_tel')"
+                                                    [ngClass]="{'is-invalid':name_of_functionary_t.invalid && (name_of_functionary_t.dirty || name_of_functionary_t.touched),
+                                                         'is-valid':name_of_functionary_t.value!='' && (name_of_functionary_t.touched || name_of_functionary_t.dirty)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Gender/ లింగ బేధము<span class="text-danger">*</span></label>
+                                    <ng-select name="gender" id="gender" [(ngModel)]="user_reg_form.gender" required="" placeholder="Sex"
+                                        #gender="ngModel"
+                                        [ngClass]="{'is-invalid':gender.invalid && (gender.dirty || gender.touched),'is-valid':gender.value!='' && (gender.touched || gender.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option value="Male">Male</ng-option>
+                                        <ng-option value="Female">Female</ng-option>
+                                        <ng-option value="Transgender">Transgender</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="gender.invalid && (gender.dirty || gender.touched)" class="error-message text-danger">
+                                        <div *ngIf="gender.errors">
+                                            <div *ngIf="gender.errors['required']">
+                                                Gender/ లింగ బేధము is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Email ID/ ఇమెయిల్ ID</label>
+                                    <input type="text" class="form-control" [(ngModel)]="user_reg_form.email" id="email" name="email"
+                                        appEmailFormat placeholder="Email ID/ ఇమెయిల్ ID" required="" #email="ngModel" [ngClass]="{'is-invalid':email.invalid && (email.dirty || email.touched),
+                                                    'is-valid':email.value!='' && (email.touched || email.dirty)}">
+                                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message text-danger">
+                                        <div *ngIf="email.errors">
+                                            <div *ngIf="email.errors['required']">
+                                                Email ID/ ఇమెయిల్ ID is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group position-relative">
+                                    <label for="form-label" class="form-label">Aadhar Number/
+                                        ఆధార్ సంఖ్య</label>
+                                    <input type="text" class="form-control" [(ngModel)]="user_reg_form.aadhaarmask" id="aadhaarno"
+                                        name="aadhaarno" placeholder="Aadhar Number/ ఆధార్ సంఖ్య" required=""
+                                        (change)="validateaadhaar($event.target.value,'fatheraadhaar')" maxlength="12" minlength="12"
+                                        appNumericsOnlyEnter appNumericOnlyDirective autocomplete="off" #aadhaarno="ngModel" [ngClass]="{'is-invalid':aadhaarno.invalid && (aadhaarno.dirty || aadhaarno.touched),
+                                           'is-valid':aadhaarno.value!='' && (aadhaarno.touched || aadhaarno.dirty)}">
+                                    <div *ngIf="aadhaarno.invalid && (aadhaarno.dirty || aadhaarno.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="aadhaarno.errors">
+                                            <div *ngIf="aadhaarno.errors['required']">
+                                                Aadhar Number/ ఆధార్ సంఖ్య</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Mobile Number/ మొబైల్ నంబర్<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="user_reg_form.mobileno" id="mobileno"
+                                        appMobileFirstFiveNotAllowedDirective appNumericsOnlyEnter appNumericOnlyDirective maxlength="10"
+                                        name="mobileno" placeholder="Mobile Number/ మొబైల్ నంబర్" required="" #mobileno="ngModel" [ngClass]="{'is-invalid':mobileno.invalid && (mobileno.dirty || mobileno.touched),
+                                                    'is-valid':mobileno.value!='' && (mobileno.touched || mobileno.dirty)}">
+                                    <div *ngIf="mobileno.invalid && (mobileno.dirty || mobileno.touched)" class="error-message text-danger">
+                                        <div *ngIf="mobileno.errors">
+                                            <div *ngIf="mobileno.errors['required']">
+                                                Mobile Number/ మొబైల్ నంబర్ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Designation/పదవి<span class="text-danger">*</span></label>
+                                    <ng-select name="designation" id="designation" required="" [(ngModel)]="user_reg_form.designation"
+                                        (change)="get_depat_designationdata()" #designation="ngModel" placeholder="Designation/పదవి"
+                                        [ngClass]="{'is-invalid':designation.invalid && (designation.dirty || designation.touched),'is-valid':designation.value!='' && (designation.touched || designation.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option *ngFor="let rl of designation_array"
+                                            [value]="rl.ROLE_CODE+'^'+rl.ROLE_NAME">{{rl.ROLE_NAME}}</ng-option>
+                                        <!-- <ng-option value="Department">Department</ng-option>
+                                                    <ng-option value="Head Office">Head Office</ng-option> -->
+                                    </ng-select>
+                                    <div *ngIf="designation.invalid && (designation.dirty || designation.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="designation.errors">
+                                            <div *ngIf="designation.errors['required']">
+                                                Designation/పదవి is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Department Designation/శాఖా సంబంధిత పదవి<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="departmentaldesignation" id="departmentaldesignation" required=""
+                                        [(ngModel)]="user_reg_form.departmentaldesignation" #departmentaldesignation="ngModel"
+                                        placeholder="Departmental Designation/శాఖా సంబంధిత పదవి"
+                                        [ngClass]="{'is-invalid':departmentaldesignation.invalid && (departmentaldesignation.dirty || departmentaldesignation.touched),'is-valid':departmentaldesignation.value!='' && (departmentaldesignation.touched || departmentaldesignation.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option *ngFor="let rl of department_designation_array"
+                                            [value]="rl.DESIGNATION_CODE">{{rl.DESIGNATION_DD}}</ng-option>
+                                        <!-- <ng-option value="Department">Department</ng-option>
+                                                                                <ng-option value="Head Office">Head Office</ng-option> -->
+                                    </ng-select>
+                                    <div *ngIf="departmentaldesignation.invalid && (departmentaldesignation.dirty || departmentaldesignation.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="departmentaldesignation.errors">
+                                            <div *ngIf="departmentaldesignation.errors['required']">
+                                                Departmental Designation/శాఖా సంబంధిత పదవి is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Date of Posting/పోస్టింగ్ తేది<span
+                                            class="text-danger">*</span></label>
+                                    <div class="input-group">
+
+                                        <input type="text" placeholder="DD-MM-YYYY" #dateinput class="form-control" oncut="return false;"
+                                            oncopy="return false;" onpaste="return false;" maxlength="15" autocomplete="off"
+                                            id="dateofreport" name="dateofreport" bsDatepicker [bsConfig]="bsConfig" #dp="bsDatepicker"
+                                            appDateFormatDirective [(ngModel)]="user_reg_form.dateofposting" aria-describedby="basic-addon2"
+                                            required="" #dateofreport="ngModel"
+                                            [ngClass]="{'is-invalid':dateofreport.invalid && (dateofreport.dirty || dateofreport.touched),
+                                                                                                                        'is-valid': dateofreport.value!='' && (dateofreport.dirty || dateofreport.touched)}">
+                                        <span class="input-group-text" id="basic-addon23" (click)="dp.toggle()" type="button">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <div *ngIf="dateofreport.invalid && (dateofreport.dirty || dateofreport.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="dateofreport.errors">
+                                            <div *ngIf="dateofreport.errors['required']">
+                                                Date of Posting is
+                                                required</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">User Supporting Document/వాడుకరి సహాయ పత్రం
+                                    </label>
+                                    <input type="file" class="form-control" oncut="return false;" oncopy="return false;" #supportdocelement
+                                        accept=".pdf" onpaste="return false;" (change)="fileupload($event,'doc')">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- </fieldset>
+                        <fieldset>
+                            <legend>Address</legend> -->
+                        <div class="row mb-2">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">District/ జిల్లా<span class="text-danger">*</span></label>
+                                    <ng-select name="registrar_district" id="registrar_district" required=""
+                                        [(ngModel)]="user_reg_form.registrar_district" (change)="registrar_districtchange()"
+                                        [disabled]="isdistrict_disabled" #districtt="ngModel" placeholder="District" [ngClass]="{'is-invalid':districtt.invalid && (districtt.dirty || districtt.touched),
+                'is-valid':districtt.value!='' && (districtt.touched || districtt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            district--</ng-option>
+                                        <ng-option value="0">All</ng-option>
+                                        <ng-option *ngFor="let loc of registrar_district_array"
+                                            [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="districtt.invalid && (districtt.dirty || districtt.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="districtt.errors">
+                                            <div *ngIf="districtt.errors['required']">
+                                                District/ జిల్లా* is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Urban/Rural/ పట్టణ/గ్రామీణ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select placeholder="Urban/Rural/ పట్టణ/గ్రామీణ" [(ngModel)]="user_reg_form.registrar_rural_urban"
+                                        id="registrar_rural_urban" name="registrar_rural_urban" title="Urban Rural" required=""
+                                        #rural_urban="ngModel" (change)="registrar_mandalmuncipality()"
+                                        [ngClass]="{'is-invalid': rural_urban.invalid && (rural_urban.dirty || rural_urban.touched),
+                                                                'is-valid': rural_urban.value!='' && (rural_urban.dirty || rural_urban.touched)}">
+                                        <ng-option value="" disabled>--Select
+                                            urban/rural--</ng-option>
+                                        <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                        <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="rural_urban.invalid && (rural_urban.dirty || rural_urban.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="rural_urban.errors">
+                                            <div *ngIf="rural_urban.errors['required']">
+                                                Urban/Rural/ పట్టణ/గ్రామీణ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Mandal/Muncipality/ మండలం/మున్సిపాలిటీ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="registrar_mandal" id="registrar_mandal" required=""
+                                        [(ngModel)]="user_reg_form.registrar_mandal" #mandalt="ngModel" (change)="registrar_villageward()"
+                                        placeholder="District" [ngClass]="{'is-invalid':mandalt.invalid && (mandalt.dirty || mandalt.touched),
+                'is-valid':mandalt.value!='' && (mandalt.touched || mandalt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            mandal/muncipality--</ng-option>
+                                        <ng-option *ngFor="let loc of registrar_MandalMuncipality_array"
+                                            [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="mandalt.invalid && (mandalt.dirty || mandalt.touched)" class="error-message text-danger">
+                                        <div *ngIf="mandalt.errors">
+                                            <div *ngIf="mandalt.errors['required']">
+                                                Mandal/Muncipality/ మండలం/మున్సిపాలిటీ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Village/Town /గ్రామం / పట్టణం పేరు<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="registrar_village" id="registrar_village" required=""
+                                        [(ngModel)]="user_reg_form.registrar_village" #villaget="ngModel" placeholder="Village/Town"
+                                        [ngClass]="{'is-invalid':villaget.invalid && (villaget.dirty || villaget.touched),
+                                                'is-valid':villaget.value!='' && (villaget.touched || villaget.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            village/ward--</ng-option>
+                                        <ng-option *ngFor="let loc of registrar_village_ward_array"
+                                            [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="villaget.invalid && (villaget.dirty || villaget.touched)" class="error-message text-danger">
+                                        <div *ngIf="villaget.errors">
+                                            <div *ngIf="villaget.errors['required']">
+                                                Village/Town /గ్రామం / పట్టణం పేరు is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Building No. & Name/ భవనం సంఖ్య & పేరు<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="building_name" id="building_name"
+                                        [(ngModel)]="user_reg_form.building_name">
+
+                                    <!-- <div *ngIf="building_name.invalid && (building_name.dirty || building_name.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="building_name.errors">
+                                            <div *ngIf="building_name.errors['required']">
+                                                Building No. & Name/ భవనం సంఖ్య & పేరు is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">House No/ ఇంటి నం.<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="hsno" id="hsno" [(ngModel)]="user_reg_form.hsno">
+
+                                    <!-- <div *ngIf="hsno.invalid && (hsno.dirty || hsno.touched)" class="error-message text-danger">
+                                        <div *ngIf="hsno.errors">
+                                            <div *ngIf="hsno.errors['required']">
+                                                House No/ ఇంటి నం. is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Street Name/ వీధి పేరు<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="street_name" id="street_name"
+                                        [(ngModel)]="user_reg_form.street_name" placeholder="Street Name/ వీధి పేరు">
+
+                                    <!-- <div *ngIf="street_name.invalid && (street_name.dirty || street_name.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="street_name.errors">
+                                            <div *ngIf="street_name.errors['required']">
+                                                Street Name/ వీధి పేరు is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Locality/ ప్రాంతం<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="locality" id="locality"
+                                        [(ngModel)]="user_reg_form.locality" placeholder="Locality/ ప్రాంతం">
+
+                                    <!-- <div *ngIf="locality.invalid && (locality.dirty || locality.touched)" class="error-message text-danger">
+                                        <div *ngIf="pincode.errors">
+                                            <div *ngIf="pincode.errors['required']">
+                                                Locality/ ప్రాంతం is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">PIN Code/ పిన్ కోడ్<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="pincode" id="pincode" required="" appNumericsOnlyEnter
+                                        appNumericOnlyDirective Pincodevalidation [(ngModel)]="user_reg_form.pincode" #pincode="ngModel"
+                                        placeholder="PIN Code/ పిన్ కోడ్" [ngClass]="{'is-invalid':pincode.invalid && (pincode.dirty || pincode.touched),
+                                           'is-valid':pincode.value!='' && (pincode.touched || pincode.dirty)}">
+
+                                    <div *ngIf="pincode.invalid && (pincode.dirty || pincode.touched)" class="error-message text-danger">
+                                        <div *ngIf="pincode.errors">
+                                            <div *ngIf="pincode.errors['required']">
+                                                PIN Code/ పిన్ కోడ్ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <!-- </fieldset> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-end">
+                            <button type="button" class="btn btn-success me-2" (click)="Savephotoupload()">Save</button>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+
+
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- view details -->
+<div class="modal fade" id="view_UserModal" tabindex="-1" aria-labelledby="view_UserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="view_UserModalLabel">Registration Unit List </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close_modal()"></button>
+            </div>
+            <form #crs_hosipatalreg_form="ngForm">
+                <fieldset>
+                    <legend>Registration Unit Details</legend>
+
+                    <div class="modal-body">
+                        <div class="row mb-2" *ngFor="let view of view_details_array">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Department/శాఖ<span class="text-danger">*</span></label>
+                                    <input class="form-control" type="text" [name]="view.DEPT_NAME" [id]="view.DEPT_NAME" readonly
+                                        [(ngModel)]="view.DEPT_NAME">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Type of Registration Unit/నమోదు విభాగం<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select class="" [(ngModel)]="view.RU_TYPE" [id]="view.RU_TYPE" maxlength="" [name]="view.RU_TYPE"
+                                        readonly placeholder="Type of Registration" required="">
+                                        <ng-option value="" disabled>--select</ng-option>
+                                        <ng-option *ngFor="let rgu of view_reg_unt_array"
+                                            [value]="rgu.RU_TYPE_CODE">{{rgu.RU_TYPE_DD}}</ng-option>
+                                    </ng-select>
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" [(ngModel)]="view.RU_LEVEL" [id]="view.RU_LEVEL" maxlength=""
+                                        [name]="view.RU_LEVEL" placeholder="egistration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్">
+                                    <!-- <div *ngIf="update_reg_level.invalid && (update_reg_level.dirty || update_reg_level.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_reg_level.errors">
+                                            <div *ngIf="update_reg_level.errors['required']">
+                                                Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్ is required</div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Registration Unit Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="view.RU_NAME" readonly minlength="10"
+                                                    [id]="view.RU_NAME" [name]="view.RU_NAME" placeholder="Registration Unit Name">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">రిజిస్ట్రేషన్ యూనిట్
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <input type="text" autocomplete="off" appAlphanumericOnly minlength="10" maxlength="200"
+                                                    readonly class="form-control border-warning" [(ngModel)]="view.RU_NAME_TEL"
+                                                    [id]="view.RU_NAME_TEL" [name]="view.RU_NAME_TEL">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">District/ జిల్లా<span class="text-danger">*</span></label>
+                                    <!-- <ng-select name="district" id="district" required="" [(ngModel)]="registration_unit.district"
+                                        [disabled]="isdistrict_disabled" (change)="Addressof_districtchange()" #districtt="ngModel"
+                                        placeholder="District/ జిల్లా" [ngClass]="{'is-invalid':districtt.invalid && (districtt.dirty || districtt.touched),
+'is-valid':districtt.value!='' && (districtt.touched || districtt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            district--</ng-option>
+                                        <ng-option *ngFor="let loc of Addressofparents_district_array"
+                                            [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                    </ng-select> -->
+                                    <!-- <div *ngIf="districtt.invalid && (districtt.dirty || districtt.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="districtt.errors">
+                                            <div *ngIf="districtt.errors['required']">
+                                                District/ జిల్లా is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                    <input type="text" autocomplete="off" class="form-control border-warning"
+                                        [(ngModel)]="view.DISTRICT_NAME" [id]="view.DISTRICT_NAME" readonly [name]="view.DISTRICT_NAME">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Urban/Rural/ పట్టణ/గ్రామీణ<span
+                                            class="text-danger">*</span></label>
+                                    <!-- <ng-select placeholder="Urban/Rural/ పట్టణ/గ్రామీణ" [(ngModel)]="registration_unit.rural_urban"
+                                        [disabled]="is_urban_disable" id="rural_urban" name="rural_urban" title="Urban Rural" required=""
+                                        #rural_urban="ngModel" (change)="MandalMuncipality()" [ngClass]="{'is-invalid': rural_urban.invalid && (rural_urban.dirty || rural_urban.touched),
+                                                'is-valid': rural_urban.value!='' && (rural_urban.dirty || rural_urban.touched)}">
+                                        <ng-option value="" disabled>--Select
+                                            urban/rural--</ng-option>
+                                        <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                        <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="rural_urban.invalid && (rural_urban.dirty || rural_urban.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="rural_urban.errors">
+                                            <div *ngIf="rural_urban.errors['required']">
+                                                Urban/Rural/ పట్టణ/గ్రామీణ is required</div>
+                                        </div>
+                                    </div> -->
+                                    <input type="text" autocomplete="off" class="form-control border-warning" [(ngModel)]="view.RURAL_URBAN"
+                                        readonly [id]="view.RURAL_URBAN" [name]="view.RURAL_URBAN">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Mandal/Muncipality/ మండలం/మున్సిపాలిటీ<span
+                                            class="text-danger">*</span></label>
+                                    <!-- <ng-select name="mandal" id="mandal" required="" [(ngModel)]="registration_unit.mandal"
+                                        #mandalt="ngModel" (change)="VillageWard()" placeholder="Mandal/Muncipality/ మండలం/మున్సిపాలిటీ"
+                                        [ngClass]="{'is-invalid':mandalt.invalid && (mandalt.dirty || mandalt.touched),
+'is-valid':mandalt.value!='' && (mandalt.touched || mandalt.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            mandal/muncipality--</ng-option>
+                                        <ng-option *ngFor="let loc of Addressofparents_MandalMuncipality_array"
+                                            [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="mandalt.invalid && (mandalt.dirty || mandalt.touched)" class="error-message text-danger">
+                                        <div *ngIf="mandalt.errors">
+                                            <div *ngIf="mandalt.errors['required']">
+                                                Mandal/Muncipality/ మండలం/మున్సిపాలిటీ is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                    <input type="text" autocomplete="off" class="form-control border-warning" [(ngModel)]="view.MMC_NAME"
+                                        readonly [id]="view.MMC_NAME" [name]="view.MMC_NAME">
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12" *ngIf="isview_villagedisable">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Village/Ward /గ్రామం /వార్డు<span
+                                            class="text-danger">*</span></label>
+                                    <!-- <ng-select name="village" id="village" required="" [(ngModel)]="registration_unit.village"
+                                        #villaget="ngModel" placeholder="Village/Ward /గ్రామం /వార్డు" [ngClass]="{'is-invalid':villaget.invalid && (villaget.dirty || villaget.touched),
+                                    'is-valid':villaget.value!='' && (villaget.touched || villaget.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            village/ward--</ng-option>
+                                        <ng-option *ngFor="let loc of village_ward_array" [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="villaget.invalid && (villaget.dirty || villaget.touched)" class="error-message text-danger">
+                                        <div *ngIf="villaget.errors">
+                                            <div *ngIf="villaget.errors['required']">
+                                                Village/Ward /గ్రామం /వార్డు is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                    <input type="text" autocomplete="off" class="form-control border-warning" [(ngModel)]="view.VW_NAME"
+                                        readonly [id]="view.VW_NAME" [name]="view.VW_NAME">
+                                </div>
+                            </div>
+
+                            <div [class.col-xl-12]="!isview_villagedisable" [class.col-xl-8]="isview_villagedisable" class="col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Address<span class="text-danger">*</span></label>
+                                            <!-- <textarea rows="1" class="form-control" name="address" id="address" required="" maxlength="300"
+                                                (change)="Teluglanguageconvrt(registration_unit.address,'address_tel')"
+                                                [(ngModel)]="registration_unit.address" #address="ngModel" placeholder="Address " [ngClass]="{'is-invalid':address.invalid && (address.dirty || address.touched),
+                                                'is-valid':address.value!='' && (address.touched || address.dirty)}">
+                                </textarea>
+                                            <div *ngIf="address.invalid && (address.dirty || address.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="address.errors">
+                                                    <div *ngIf="address.errors['required']">
+                                                        Address is required
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <textarea type="text" autocomplete="off" class="form-control border-warning"
+                                                [(ngModel)]="view.RU_ADDRESS" readonly [id]="view.RU_ADDRESS"
+                                                [name]="view.RU_ADDRESS"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12" hidden>
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">చిరునామా
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <!-- <textarea rows="1" class="form-control" name="address_tel" id="address_tel" required=""
+                                                    maxlength="300"
+                                                    (change)="Teluglanguageconvrt(registration_unit.address_tel,'address_tel')"
+                                                    [(ngModel)]="registration_unit.address_tel" #address_tel="ngModel"
+                                                    placeholder="చిరునామా" [ngClass]="{'is-invalid':address_tel.invalid && (address_tel.dirty || address_tel.touched),
+                                                    'is-valid':address_tel.value!='' && (address_tel.touched || address_tel.dirty)}">
+                                               </textarea> -->
+                                                <textarea type="text" autocomplete="off" class="form-control border-warning"
+                                                    [(ngModel)]="view.RU_ADDRESS" readonly [id]="view.RU_ADDRESS" [name]="view.RU_ADDRESS"
+                                                    (change)="Teluglanguageconvrt(view.RU_ADDRESS,'address_tel')"></textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">PIN Code/ పిన్ కోడ్<span class="text-danger">*</span></label>
+                                    <!-- <input type="text" class="form-control" name="regpincode" id="regpincode" required=""
+                                        appNumericOnlyDirective appNumericsOnlyEnter Pincodevalidation
+                                        [(ngModel)]="registration_unit.regpincode" #regpincode="ngModel" placeholder="PIN Code/ పిన్ కోడ్"
+                                        [ngClass]="{'is-invalid':regpincode.invalid && (regpincode.dirty || regpincode.touched),
+                                        'is-valid':regpincode.value!='' && (regpincode.touched || regpincode.dirty)}">
+                                    <div *ngIf="regpincode.invalid && (regpincode.dirty || regpincode.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="regpincode.errors">
+                                            <div *ngIf="regpincode.errors['required']">
+                                                PIN Code/ పిన్ కోడ్ is
+                                                required</div>
+                                        </div>
+                                    </div> -->
+                                    <input type="text" autocomplete="off" class="form-control border-warning" [(ngModel)]="view.RU_PINCODE"
+                                        readonly [id]="view.RU_PINCODE" [name]="view.RU_PINCODE">
+                                </div>
+                            </div>
+                            <!-- <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Office Location on Google Map/ఆఫీస్
+                                        లొకేషన్<span class="text-danger">*</span></label>
+                                    <input type="tex" class="form-control" name="google_map_link" id="google_map_link"
+                                        [(ngModel)]="registration_unit.google_map_link" placeholder="Office Location on Google Map/ఆఫీస్
+                                        లొకేషన్">
+
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Logo of Registration Unit/నమోదు యూనిట్ లోగో
+                                    </label>
+                                    <input type="file" class="form-control" oncut="return false;" oncopy="return false;" #regunitlogo
+                                        accept=".jpg,.png,.jpeg" onpaste="return false;" (change)="fileupload($event,'logo')">
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- update details -->
+<div class="modal fade" id="update_UserModal" tabindex="-1" aria-labelledby="update_UserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="update_UserModalLabel">Update Registration Unit List </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="update_close_modal()"></button>
+            </div>
+            <form #update_reg_unit_form="ngForm">
+                <fieldset>
+                    <legend>Registration Unit Details</legend>
+
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Department/శాఖ<span class="text-danger">*</span></label>
+                                    <ng-select name="updaterole" id="updaterole" required="" [(ngModel)]="update_registration_unit.role"
+                                        #updaterole="ngModel" (change)="getupdateregunitdata()" placeholder="Role"
+                                        [ngClass]="{'is-invalid':updaterole.invalid && (updaterole.dirty || updaterole.touched),'is-valid':updaterole.value!='' && (updaterole.touched || updaterole.dirty)}">
+                                        <ng-option value="">--Select--</ng-option>
+                                        <ng-option *ngFor="let rl of update_role_array" [value]="rl.DEPT_CODE">{{rl.DEPT_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="updaterole.invalid && (updaterole.dirty || updaterole.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="updaterole.errors">
+                                            <div *ngIf="updaterole.errors['required']">
+                                                Role is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Type of Registration Unit/నమోదు విభాగం<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select class="" [(ngModel)]="update_registration_unit.type_of_reg" id="update_type_of_reg"
+                                        maxlength="" (change)="getupdateregunitleveldata()" name="update_type_of_reg"
+                                        placeholder="Type of Registration" required="" #update_type_of_reg="ngModel"
+                                        [ngClass]="{'is-invalid':update_type_of_reg.invalid && (update_type_of_reg.dirty || update_type_of_reg.touched),
+                                                        'is-valid':update_type_of_reg.value!='' && (update_type_of_reg.touched || update_type_of_reg.dirty)}">
+                                        <ng-option value="" disabled>--select</ng-option>
+                                        <ng-option *ngFor="let rgu of update_reg_unt_array"
+                                            [value]="rgu.RU_TYPE_CODE+'^'+rgu.RU_TYPE_NAME">{{rgu.RU_TYPE_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="update_type_of_reg.invalid && (update_type_of_reg.dirty || update_type_of_reg.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_type_of_reg.errors">
+                                            <div *ngIf="update_type_of_reg.errors['required']">
+                                                Type of Registration is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select class="" [(ngModel)]="update_registration_unit.reg_level" id="update_reg_level" maxlength=""
+                                        name="update_reg_level" placeholder="egistration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్" required=""
+                                        #update_reg_level="ngModel"
+                                        [ngClass]="{'is-invalid':update_reg_level.invalid && (update_reg_level.dirty || update_reg_level.touched),
+                                                                                    'is-valid':update_reg_level.value!='' && (update_reg_level.touched || update_reg_level.dirty)}">
+                                        <ng-option value="" disabled>--select</ng-option>
+                                        <ng-option *ngFor="let rgu of update_reg_unit_level_array"
+                                            [value]="rgu.RU_LEVEL_CODE+'^'+rgu.RU_LEVEL">{{rgu.RU_LEVEL_DD}}</ng-option>
+                                    </ng-select>
+                                    <div *ngIf="update_reg_level.invalid && (update_reg_level.dirty || update_reg_level.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_reg_level.errors">
+                                            <div *ngIf="update_reg_level.errors['required']">
+                                                Registration Unit Level/రిజిస్ట్రేషన్ యూనిట్ లెవెల్ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">Registration Unit Name<span
+                                                        class="text-danger">*</span></label>
+                                                <input type="text" class="form-control" [(ngModel)]="update_registration_unit.reg_unit_name"
+                                                    [disabled]="is_reg_unit_disable" minlength="10" maxlength="200"
+                                                    id="update_reg_unit_name" name="update_reg_unit_name"
+                                                    placeholder="Registration Unit Name" required="" #update_reg_unit_name="ngModel"
+                                                    appAlphabetsonly
+                                                    (change)="Teluglanguageconvrt(update_registration_unit.reg_unit_name,'update_reg_unit_name_tel')"
+                                                    [ngClass]="{'is-invalid':update_reg_unit_name.invalid && (update_reg_unit_name.dirty || update_reg_unit_name.touched),
+                                                                                       'is-valid':update_reg_unit_name.value!='' && (update_reg_unit_name.touched || update_reg_unit_name.dirty)}">
+                                                <div *ngIf="update_reg_unit_name.invalid && (update_reg_unit_name.dirty || update_reg_unit_name.touched)"
+                                                    class="error-message text-danger">
+                                                    <div *ngIf="update_reg_unit_name.errors">
+                                                        <div *ngIf="update_reg_unit_name.errors['required']">
+                                                            Registration Unit Name is required</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">రిజిస్ట్రేషన్ యూనిట్
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <input type="text" autocomplete="off" appAlphanumericOnly minlength="10" maxlength="200"
+                                                    [disabled]="is_reg_unit_disable" class="form-control border-warning"
+                                                    [(ngModel)]="update_registration_unit.reg_unit_name_t"
+                                                    (change)="Teluglanguageconvrt(update_registration_unit.reg_unit_name_t,'update_reg_unit_name_tel')"
+                                                    id="update_reg_unit_name_t" name="update_reg_unit_name_t" required=""
+                                                    #reg_unit_name_t="ngModel">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">District/ జిల్లా<span class="text-danger">*</span></label>
+                                    <ng-select name="update_district" id="update_district" required=""
+                                        [(ngModel)]="update_registration_unit.district" [disabled]="isdistrict_disabled"
+                                        (change)="update_districtchange()" #update_district="ngModel" placeholder="District/ జిల్లా"
+                                        [ngClass]="{'is-invalid':update_district.invalid && (update_district.dirty || update_district.touched),
+                    'is-valid':update_district.value!='' && (update_district.touched || update_district.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            district--</ng-option>
+                                        <ng-option value="0">All</ng-option>
+                                        <ng-option *ngFor="let loc of update_district_array"
+                                            [value]="loc.DISTRICT_CODE">{{loc.DISTRICT_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="update_district.invalid && (update_district.dirty || update_district.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_district.errors">
+                                            <div *ngIf="update_district.errors['required']">
+                                                District/ జిల్లా is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Urban/Rural/ పట్టణ/గ్రామీణ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select placeholder="Urban/Rural/ పట్టణ/గ్రామీణ" [(ngModel)]="update_registration_unit.rural_urban"
+                                        [disabled]="is_urban_disable" id="update_rural_urban" name="update_rural_urban" title="Urban Rural"
+                                        required="" #update_rural_urban="ngModel" (change)="update_MandalMuncipality()"
+                                        [ngClass]="{'is-invalid': update_rural_urban.invalid && (update_rural_urban.dirty || update_rural_urban.touched),
+                                                                    'is-valid': update_rural_urban.value!='' && (update_rural_urban.dirty || update_rural_urban.touched)}">
+                                        <ng-option value="" disabled>--Select
+                                            urban/rural--</ng-option>
+                                        <ng-option value="Urban">Urban/పట్టణ</ng-option>
+                                        <ng-option value="Rural">Rural/గ్రామీణ</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="update_rural_urban.invalid && (update_rural_urban.dirty || update_rural_urban.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_rural_urban.errors">
+                                            <div *ngIf="update_rural_urban.errors['required']">
+                                                Urban/Rural/ పట్టణ/గ్రామీణ is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Mandal/Muncipality/ మండలం/మున్సిపాలిటీ<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="update_mandal" id="update_mandal" required=""
+                                        [(ngModel)]="update_registration_unit.mandal" #update_mandal="ngModel"
+                                        (change)="update_VillageWard()" placeholder="Mandal/Muncipality/ మండలం/మున్సిపాలిటీ" [ngClass]="{'is-invalid':update_mandal.invalid && (update_mandal.dirty || update_mandal.touched),
+                    'is-valid':update_mandal.value!='' && (update_mandal.touched || update_mandal.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            mandal/muncipality--</ng-option>
+                                        <ng-option *ngFor="let loc of update_MandalMuncipality_array"
+                                            [value]="loc.MMC_CODE">{{loc.MMC_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="update_mandal.invalid && (update_mandal.dirty || update_mandal.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_mandal.errors">
+                                            <div *ngIf="update_mandal.errors['required']">
+                                                Mandal/Muncipality/ మండలం/మున్సిపాలిటీ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12" *ngIf="isupdatevillagedisable">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Village/Ward /గ్రామం /వార్డు<span
+                                            class="text-danger">*</span></label>
+                                    <ng-select name="update_village" id="update_village" required=""
+                                        [(ngModel)]="update_registration_unit.village" #update_village="ngModel"
+                                        placeholder="Village/Ward /గ్రామం /వార్డు"
+                                        [ngClass]="{'is-invalid':update_village.invalid && (update_village.dirty || update_village.touched),
+                                                        'is-valid':update_village.value!='' && (update_village.touched || update_village.dirty)}">
+                                        <ng-option value="" disabled>--Select
+                                            village/ward--</ng-option>
+                                        <ng-option *ngFor="let loc of update_village_ward_array"
+                                            [value]="loc.VW_CODE">{{loc.VW_DD}}</ng-option>
+
+                                    </ng-select>
+                                    <div *ngIf="update_village.invalid && (update_village.dirty || update_village.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_village.errors">
+                                            <div *ngIf="update_village.errors['required']">
+                                                Village/Ward /గ్రామం /వార్డు is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div [class.col-xl-12]="!isupdatevillagedisable" [class.col-xl-8]="isupdatevillagedisable" class="col-12">
+                                <div class="row">
+                                    <div class="col-xl-12 col-12">
+                                        <div class="form-group mb-2 position-relative">
+                                            <label for="form-label" class="form-label">Address<span class="text-danger">*</span></label>
+                                            <textarea rows="1" class="form-control" name="update_address" id="update_address" required=""
+                                                maxlength="300"
+                                                (change)="Teluglanguageconvrt(update_registration_unit.address,'update_address_tel')"
+                                                [(ngModel)]="update_registration_unit.address" #update_address="ngModel"
+                                                placeholder="update_address "
+                                                [ngClass]="{'is-invalid':update_address.invalid && (update_address.dirty || update_address.touched),
+                                                                    'is-valid':update_address.value!='' && (update_address.touched || update_address.dirty)}">
+                                                    </textarea>
+                                            <div *ngIf="update_address.invalid && (update_address.dirty || update_address.touched)"
+                                                class="error-message text-danger">
+                                                <div *ngIf="update_address.errors">
+                                                    <div *ngIf="update_address.errors['required']">
+                                                        Address is required
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-12 col-12" hidden>
+                                        <div class="form-group mb-2 position-relative">
+                                            <div class="form-group mb-2 position-relative">
+                                                <label for="form-label" class="form-label">చిరునామా
+                                                    పేరు<span class="text-danger">*</span></label>
+                                                <textarea rows="1" class="form-control" name="update_address_tel" id="update_address_tel"
+                                                    required="" maxlength="300"
+                                                    (change)="Teluglanguageconvrt(update_registration_unit.address_tel,'update_address_tel')"
+                                                    [(ngModel)]="update_registration_unit.address_tel" #update_address_tel="ngModel"
+                                                    placeholder="చిరునామా"
+                                                    [ngClass]="{'is-invalid':update_address_tel.invalid && (update_address_tel.dirty || update_address_tel.touched),
+                                                                        'is-valid':update_address_tel.value!='' && (update_address_tel.touched || update_address_tel.dirty)}">
+                                                                   </textarea>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">PIN Code/ పిన్ కోడ్<span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="update_regpincode" id="update_regpincode" required=""
+                                        appNumericOnlyDirective appNumericsOnlyEnter Pincodevalidation
+                                        [(ngModel)]="update_registration_unit.regpincode" #update_regpincode="ngModel"
+                                        placeholder="PIN Code/ పిన్ కోడ్"
+                                        [ngClass]="{'is-invalid':update_regpincode.invalid && (update_regpincode.dirty || update_regpincode.touched),
+                                                            'is-valid':update_regpincode.value!='' && (update_regpincode.touched || update_regpincode.dirty)}">
+                                    <div *ngIf="update_regpincode.invalid && (update_regpincode.dirty || update_regpincode.touched)"
+                                        class="error-message text-danger">
+                                        <div *ngIf="update_regpincode.errors">
+                                            <div *ngIf="update_regpincode.errors['required']">
+                                                PIN Code/ పిన్ కోడ్ is
+                                                required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Office Location on Google Map/ఆఫీస్
+                                        లొకేషన్<span class="text-danger">*</span></label>
+                                    <input type="tex" class="form-control" name="update_google_map_link" id="update_google_map_link"
+                                        (change)="extractLatLongFromLink(update_registration_unit.google_map_link)"
+                                        [(ngModel)]="update_registration_unit.google_map_link" placeholder="Office Location on Google Map/ఆఫీస్
+                                                            లొకేషన్">
+
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group mb-2 position-relative">
+                                    <label for="form-label" class="form-label">Logo of Registration Unit/నమోదు యూనిట్ లోగో
+                                    </label>
+                                    <input type="file" class="form-control" oncut="return false;" oncopy="return false;" #regunitlogo
+                                        accept=".jpg,.png,.jpeg" onpaste="return false;" (change)="fileupload($event,'logo')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-end">
+                            <button type="button" class="btn btn-success me-2" (click)="update()">Save</button>
+                            <button type="button" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

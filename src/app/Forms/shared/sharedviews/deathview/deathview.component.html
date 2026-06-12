@@ -1,0 +1,741 @@
+<div class="col-xl-12 col-lg-12" >
+    <div class="row align-items-center justify-content-center">
+        <div class="col-xl-12 col-12">
+            <div class="iconbar">
+            </div>
+            
+    
+            <ul class="nav nav-pills wizard-pills mb-2" id="pills-tab" role="tablist">
+    
+                <li class="nav-item pe-3 mb-1" role="presentation">
+                    <button class="nav-link" id="pills-confirmdeathl-tab" data-bs-toggle="pill"
+                         data-bs-target="#pills-confirmdeathl" type="button" [disabled]="!isConfirmLegalEnabled"
+                        role="tab" aria-controls="pills-confirmdeathl" aria-selected="false">
+                        <img src="assets/images/compliant.png" alt="Legal Confirmation">Legal Information
+                        Confirmation
+                    </button>
+                </li>
+                <li class="nav-item pe-3 mb-1" role="presentation">
+                    <button class="nav-link" id="pills-confirmdeathstatistic-tab" data-bs-toggle="pill"
+                         data-bs-target="#pills-confirmdeathstatistic"
+                        type="button" role="tab" [disabled]="!isConfirmStatisticalEnabled" aria-controls="pills-confirmdeathstatistic"
+                        aria-selected="false">
+                        <img src="assets/images/confirmation.png" alt="Statistical Confirmation">Statistical
+                        Information Confirmation
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+    
+            <!-- //Confim death-->
+            <div class="tab-pane fade show active" id="pills-confirmdeathl" role="tabpanel"
+            aria-labelledby="pills-confirmdeathl-tab" tabindex="0">
+
+            <div class="container-fluid">
+                <h5>Deceased Information / మరణించిన వారి సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Date of Death / మరణించిన తేదీ
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong
+                                class="">{{draft_details_array?.Informationofthedeceased?.DateofDeath}}</strong>
+                        </div>
+                        
+                    </div>
+
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'gender')" />Sex / లింగ భేదము
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.Informationofthedeceased?.Gender_val}}</strong>
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Informationofthedeceased.Gendercheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Informationofthedeceased.Genderremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'dateofbirth')" />Date of Birth / పుట్టిన తేదీ
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.Informationofthedeceased?.DateofBirth}}</strong>
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Informationofthedeceased.DateofBirthcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Informationofthedeceased.DateofBirthremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">Age / వయస్సు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.Informationofthedeceased?.AgeYear}}</strong>
+                        </div>
+                        
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'fullname')" />First Name / మొదటి పేరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.Informationofthedeceased?.FullName_value}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Informationofthedeceased.FullNamecheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Informationofthedeceased.FullNameremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    
+
+
+                    <!-- <div class="row bg-light mb-1"
+                        *ngIf="draft_details_array?.Confirmnameofthedeceased?.Aadhaartype=='Aadhaar'">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Primary Language/ ప్రాథమిక భాష
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.language?.primarylan
+                                }}</strong>
+                        </div>
+                    </div> -->
+                    <div class="row bg-light mb-1"
+                        *ngIf="draft_details_array?.Confirmnameofthedeceased?.Aadhaartype=='EID'">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'aadhar')" /> Aadhaar Number / ఆధార్ నంబరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.Confirmnameofthedeceased?.AadhaarEIDNumber
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Confirmnameofthedeceased.aadhaarcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Confirmnameofthedeceased.aadhaarremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1"
+                        *ngIf="draft_details_array?.Confirmnameofthedeceased?.Aadhaartype=='Aadhaar'">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <div class="col-xl-4 col-6 border-end border-white border-2">
+                                <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'aadhar')" /> EID Number / EID నంబరు
+                            </div> 
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.Confirmnameofthedeceased?.AadhaarEIDNumber
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Confirmnameofthedeceased.aadhaarcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Confirmnameofthedeceased.aadhaarremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+
+                </div>
+                <h5>Mother’s Information / తల్లి యొక్క సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'motherfullname')" /> First Name / మొదటి పేరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.motherInformation?.mother_full_name_value
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.motherInformation.mother_full_namecheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.motherInformation.mother_full_nameremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Email ID / ఈ మెయిల్ ID
+
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.motherInformation?.mother_email
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Mobile Number / మొబైలు నంబరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.motherInformation?.mother_mobile_number
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'motheraadhar')" />  Aadhaar Number / ఆధార్ నంబరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.motherInformation?.mother_aadhaar_number_mask
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.motherInformation.mother_aadhhar_numbercheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.motherInformation.mother_aadhhar_numberremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+
+
+                <h5>Father’s Information / తండ్రి యొక్క సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'fatherfullname')" />First Name / మొదటి పేరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.fatherInformation?.father_full_namer_value
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.fatherInformation.father_full_namercheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.fatherInformation.father_full_namerremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Email ID / ఈ మెయిల్ ID
+
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.fatherInformation?.father_email_number
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Mobile Number / మొబైలు నంబరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.fatherInformation?.father_mobile_number
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'fatheraadhar')" />Aadhaar Number / ఆధార్ నంబరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.fatherInformation?.father_aadhhar_number_mask
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.fatherInformation.father_aadhhar_numbercheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.fatherInformation.father_aadhhar_numberremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <h5>Marital Status / వైవాహిక స్థితి</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'MaritalStatus')" /> Married / Unmarried / వివాహిత / అవివాహిత
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.MaritalStatus?.Spouse_Married_Status
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.MaritalStatus.MaritalStatuscheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.MaritalStatus.MaritalStatusremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+
+                </div>
+                <h5>Spouse's Information / భార్య /భర్త సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'spousefullname')" />First Name / మొదటి పేరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.MaritalStatus?.Spouse_FullName_val
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.MaritalStatus.Spouse_FullName_valcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.MaritalStatus.Spouse_FullName_valremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Email ID / ఈ మెయిల్ ID
+
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.MaritalStatus?.Spouse_ContactDetails_EmailId
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Mobile Number / మొబైలు నంబరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.MaritalStatus?.Spouse_ContactDetails_EmailId
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'spouseaadhar')" />Aadhaar Number / ఆధార్ నంబరు
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.MaritalStatus?.Spouse_AadharNumber_mask
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.MaritalStatus.Spouse_AadharNumber_maskcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.MaritalStatus.Spouse_AadharNumber_maskremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+
+                <h5>Address of the deceased at the time of death / మరణించినపుడు మృతుని చిరునామా</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'addressofparents')" /> Address of the deceased at the time of death / మరణించినపుడు మృతుని చిరునామా
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.Addressofthedeceased?.Addressofthedeceased_value
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Addressofthedeceased.addressof_parentscheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Addressofthedeceased.addressof_parentsremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+
+                </div>
+                <h5>Permanent address of the deceased / మరణించిన వ్యక్తి శాశ్వత (స్థిర) చిరునామా</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'permanentaddress')" />Permanent address of the deceased / మరణించిన వ్యక్తి శాశ్వత (స్థిర) చిరునామా
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong class="">{{
+                                draft_details_array?.Permanentaddress?.Permanentaddress_value
+                                }}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.Permanentaddress.address_permenentcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.Permanentaddress.address_permenentremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+
+                </div>
+                <h5>Place of death / మరణించిన స్థలము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Place of death / మరణించిన స్థలము
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.PlaceofDeath?.PlaceofDeath_value
+                                }}</strong>
+                        </div>
+                    </div>
+
+                </div>
+                <h5>Informant’s Information / సమాచారమిచ్చిన వ్యక్తి యొక్క సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            First Name / మొదటి పేరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.information?.Informant_fullname_val
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Email ID / ఈ మెయిల్ ID
+
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.information?.Informant_email_id
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Mobile Number / మొబైలు నంబరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.information?.Informant_mobile_no
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Aadhaar Number / ఆధార్ నంబరు
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.information?.Informant_aadhhar_no_mask
+                                }}</strong>
+                        </div>
+                    </div>
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Address / చిరునామా
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.information?.Informant_address_val
+                                }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-12">
+
+
+                    <!-- Next -->
+                    <div class="text-end">
+                        <button type="submit" *ngIf="!showcheckbox && typeofcorrection!='Cancellation'" (click)="showcheckbox=true" class="btn btn-primary my-2 me-2"><i
+                            class="fa-solid fa-lightbulb ps-2"></i>Seek Clarification</button>
+                            <button type="submit" *ngIf="showcheckbox" (click)="inbox_Save()"  class="btn btn-primary my-2 me-2"><i
+                               class="fa-solid fa-floppy-disk ps-2"></i>Save</button>
+                        <button type="submit" class="btn btn-success my-2"
+                        (click)="enableConfirmStatisticalTab()"><i
+                                class="fa-solid fa-angles-right ps-2"></i>Next</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- //Confim static -->
+        <div class="tab-pane fade" id="pills-confirmdeathstatistic" role="tabpanel"
+            aria-labelledby="pills-confirmdeathstatistic-tab"
+            tabindex="0">
+            
+            <div class="container-fluid">
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Address / చిరునామా
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong class="">{{
+                                draft_details_array?.OtherInformation?.deceased_residence_value
+                                }}</strong>
+                        </div>
+                    </div>
+                </div>
+                <h5>Deceased Information / మరణించిన వారి సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Religion / మతము
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong
+                                class="">{{draft_details_array?.StatisticalInformation?.Religion_Other_val}}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Level of education / విద్యా స్థాయి
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong
+                                class="">{{draft_details_array?.StatisticalInformation?.Education_val}}</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            Occupation / వృత్తి
+                        </div>
+                        <div class="col-xl-8 col-6">
+                            <strong
+                                class="">{{draft_details_array?.StatisticalInformation?.Occupation_val}}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <h5>Other Information / ఇతర సమాచారము</h5>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'Typeofmedical')" />Type of medical attention received before death / మరణానికి ముందు తీసుకొనిన
+                            వైద్య సహాయం
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.medicalattention_val}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.Typeofmedicalcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.Typeofmedicalremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'deathmedically')" />Was the cause of death medically certified? / మరణ కారణాన్ని వైద్యపరంగా
+                            ధృవీకరించడం జరిగిందా?
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.causeofdeathmedicallycertified}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.deathmedicallycheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.deathmedicallyremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'DiseaseorActual')" />Name of Disease or Actual Cause of Death / మరణానికి దారి తీసిన వ్యాధి పేరు
+                            లేదా వాస్తవ కారణం
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.nameofdiseaseoractualcauseofdeath_val}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.DiseaseorActualcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.DiseaseorActualremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'habituallysmoke')" />If used to habitually smoke - for how many years? / పొగ త్రాగే అలవాటు
+                            ఉన్నవారి విషయములో - ఆ అలవాటు ఎన్ని సంవత్సరాల నుండి
+                            ఉన్నది?
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.habituallysmoke}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.habituallysmokecheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.habituallysmokeremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'chewtobacco')" />If used to habitually chew tobacco in any form - for how many years? /
+                            పొగాకు నమిలే అలవాటు ఉందా - ఎన్ని సంవత్సరాల నుండి
+                            ఉన్నది?
+
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.chewtobacco}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.chewtobaccocheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.chewtobaccoremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'chewarecanut')" />If used to habitually chew arecanut in any form (including pan masala) - for
+                            how many years? / ఏదో ఒక పద్దతిలో పోకచెక్క
+                            నమిలే అలవాటు ఉందా(పాన్ మసాలాతో సహా) - ఈ అలవాటు ఎన్ని సంవత్సరాల నుండి ఉన్నది?
+
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.chewarecanut_years}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.chewarecanutcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.chewarecanutremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-12">
+                    <div class="row bg-light mb-1">
+                        <div class="col-xl-4 col-6 border-end border-white border-2">
+                            <p-checkbox *ngIf="showcheckbox" [binary]="true" (onChange)="modelchange($event,'drinkalcohol')" />If used to habitually drink alcohol - for how many years? / పొగ త్రాగే
+                            అలవాటు ఉన్నవారి విషయములో - ఆ అలవాటు ఎన్ని
+                            సంవత్సరాల నుండి ఉన్నది?
+
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <strong
+                                class="">{{draft_details_array?.OtherInformation?.drinkalcohol_years}}</strong>
+                        </div>
+                        <div class="col-xl-4 col-6">
+                            <textarea [rows]="5" [cols]="30" class="flexheight" *ngIf="draft_details_array.OtherInformation.drinkalcoholcheck=='1'" pInputTextarea [(ngModel)]="draft_details_array.OtherInformation.drinkalcoholremarks" autoResize="true" placeholder="Remarks"></textarea>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-end">
+
+                <!-- <div class="row justify-content-start">
+                    <div class="col-xl-3 col-12">
+                        <div class="card border-dashed rounded-0 pdf-thumb" data-bs-toggle="modal"
+                            data-bs-target="#pdfviemodal">
+                            <div class="card-body text-center p-0">
+                                <i class="fa fa-eye"></i>
+                                <iframe id="ifrm" width="100%"  height="300px" frameborder="0"></iframe>
+                                <p>Text here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="col-xl-12 col-12">
+
+                    <div class="form-group position-relative">
+                        <label for="form-label" class="form-label">Remarks / వ్యాఖ్యలు</label>
+                        <textarea class="form-control" [(ngModel)]="userremarks" id="remarks"
+                            name="remarks" rows="3"
+                            placeholder="Enter remarks here / వ్యాఖ్యలను ఇక్కడ నమోదు చేయండి" required=""
+                            appAlphanumericOnly autocomplete="off" minlength="3" maxlength="300"
+                            #ngremarks="ngModel"
+                            [ngClass]="{'is-invalid':ngremarks.invalid && (ngremarks.dirty || ngremarks.touched),
+                            'is-valid':ngremarks.value!='' && (ngremarks.touched || ngremarks.dirty)}"></textarea>
+                        <div *ngIf="ngremarks.invalid && (ngremarks.dirty || ngremarks.touched)"
+                            class="error-message text-danger">
+                            <div *ngIf="ngremarks.errors">
+                                <div *ngIf="ngremarks.errors['required']">
+                                    Enter remarks is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="text-end">
+
+
+                    <button type="submit" class="btn btn-primary my-2 me-2"
+                    (click)="openTab('pills-confirmdeathl-tab')"><i
+                            class="fa-solid fa-angles-left pe-2"></i>Back</button>
+                            <button type="submit" *ngIf="showcheckbox && typeofcorrection!='Cancellation'" class="btn btn-primary my-2 me-2 " (click)="showcheckbox=false"
+                            ><i class="fa-solid fa-xmark ps-2"></i>Cancel </button>
+                            <button type="submit" *ngIf="!showcheckbox && typeofcorrection!='Cancellation'" (click)="showcheckbox=true" class="btn btn-primary my-2 me-2"><i
+                                class="fa-solid fa-lightbulb ps-2"></i>Seek Clarification</button>
+                                <button type="submit" *ngIf="showcheckbox && typeofcorrection!='Cancellation'" (click)="inbox_Save()"  class="btn btn-primary my-2 me-2"><i
+                                   class="fa-solid fa-floppy-disk ps-2"></i>Clarification Save</button>
+                            <button type="submit"  class="btn btn-primary my-2 me-2"
+                            (click)="eSignwindow_open()">Approve
+                            <i class="fa-solid fa-save ps-2"></i></button>
+                            <button type="submit" class="btn btn-danger my-2 me-2 " (click)="inbox_Approve('Rejected')"
+                            >Rejected <i
+                                class="fa-solid fa-trash ps-2"></i></button>
+                                <!-- <button type="submit" class="btn btn-success my-2 me-2" *ngIf="typeofcorrection!='Cancellation'" (click)="inbox_Approve('Correction')"
+                            >Sent Back for Correction <i
+                                class="fa-solid fa-save ps-2"></i></button> -->
+                               
+                </div>
+            </div>
+
+        </div>
+    
+    
+        </div>
+    </div>
+    </div>
+
+    <div class="modal" tabindex="-1" aria-labelledby="allowLabel" [ngStyle]="{'display':displaymodal}" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bolder" id="allowLabel">Application Number:{{applicationid}}</h5>
+                    <button type="button" class="btn-close" (click)="ModalCLose()" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12 col-xl-8">
+                                <div class="shadow-card">
+                                    <div class="container-fluid">
+                                        <div class="col-xl-12 col-12">
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox1'" (change)="onCheckboxChange($event,'checkbox1')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">E-Sign</strong>
+                                                </div>
+                                            </div>
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox2'" (change)="onCheckboxChange($event,'checkbox2')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">Scanned Signature</strong>
+                                                </div>
+                                            </div>
+                                            <div class="row bg-light mb-1">
+                                                <div class="col-xl-4 col-6 border-end border-white border-2">
+                                                    <input type="checkbox" [checked]="selectedCheckbox.value === 'checkbox3'" (change)="onCheckboxChange($event,'checkbox3')">
+                                                </div>
+                                                <div class="col-xl-8 col-6">
+                                                    <strong class="">Digital Key(DSC)</strong>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+    
+                                        <div class="text-end">
+
+
+                                            <button type="submit" class="btn btn-danger my-2 me-2" (click)="ModalCLose()"><i
+                                                    class="fa-solid fa-angles-left pe-2"></i>Cancel</button>
+                                            <button type="submit" [disabled]="!selectedCheckbox.value" class="btn btn-primary my-2" (click)="inbox_Approve('Approve')"
+                                                > <i
+                                                    class="fa-solid fa-save ps-2"></i>Approve</button>
+                                        </div>
+    
+    
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    
+                <!-- <div class="modal-footer text-center">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                    (click)="ModalCLose()">Close</button>
+            </div> -->
+            </div>
+        </div>
+    </div>
+    

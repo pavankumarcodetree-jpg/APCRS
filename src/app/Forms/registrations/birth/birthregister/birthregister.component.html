@@ -1,0 +1,136 @@
+<div class="background-img align-items-center"
+    style="background-image: url(/assets/images/bg-img.jpg); background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <section class="register-section py-3">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                        <h5 class="page-title"><i class="mdi mdi-human-child"></i> Birth register
+                        </h5>
+                    </div>
+                </div>
+            </div>
+       
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-6 col-12 mt-2"></div>
+                <div class="col-xl-6 col-12 mt-2">
+                    
+                    <button type="submit" class="btn btn-primary my-2" (click)="get_birthregister_table()"> <i
+                            class="fa-solid fa-magnifying-glass ps-2"></i>Get</button>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-md-12 col-12">
+                    <p-table id="tblbirthdepthtable" [value]="birth_depth_table_array"
+                        styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true" #dt2
+                        [rows]="birth_depth_table_array.length"
+                        [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true" sortMode="multiple"
+                        [globalFilterFields]="['BR_APPLICATION_ID']"
+                        [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                        scrollHeight="560px">
+                        <ng-template pTemplate="caption">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="col-md-2"></div>
+                                <div>
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="caption">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="col-md-9 col-12">
+                                    <button type="submit" class="btn btn-primary my-2 me-2" [disabled]="!radiobutton">Add Name</button>
+                        <button type="submit" class="btn btn-primary my-2 me-2"
+                            [disabled]="!radiobutton">Cancellation</button>
+                        <button type="submit" class="btn btn-primary my-2 me-2"
+                            [disabled]="!radiobutton">Correction</button>
+                            <button type="submit" class="btn btn-primary my-2 me-2" (click)="downloadorder()" [disabled]="!radiobutton">Download</button>
+                        <button type="submit" class="btn btn-primary my-2 me-2" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" [disabled]="!radiobutton"> View
+                            Document(s)</button>
+                      
+                                </div>
+                                <div class="col-md-3 col-12 text-end">
+
+                                    <span class="p-input-icon-left">
+                                        <i class="pi pi-search"></i>
+                                        <input pInputText type="text"
+                                            (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                            placeholder="Search keyword" />
+                                    </span>
+                                </div>
+                            </div>
+
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th></th>
+                                <th pSortableColumn="BR_APPLICATION_ID">Reg No.</th>
+                                <th pSortableColumn="FATHER_FULLNAME">Father's Name</th>
+                                <th pSortableColumn="MOTHER_FULLNAME">Mother's Name</th>
+                                <th pSortableColumn="CHILD_FULLNAME">Child Name</th>
+                                <th pSortableColumn="CHILD_DOB">Date of Birth</th>
+                                <th pSortableColumn="GENDER">Gender</th>
+
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-agency>
+                            <tr>
+                                <td>
+                                    <input [checked]="agency.active" type="radio" name="group1"
+                                        (change)="getbuttonenabled()" />
+                                </td>
+                                <td>{{agency.BR_APPLICATION_ID}}</td>
+                                <td>{{agency.FATHER_FULLNAME}}</td>
+                                <td>{{agency.MOTHER_FULLNAME}}</td>
+                                <td>{{agency.CHILD_FULLNAME}}</td>
+                                <td>{{agency.CHILD_DOB}}</td>
+                                <td>{{agency.GENDER}}</td>
+
+
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                </div>
+            </div>
+           
+        </div>
+    </section>
+</div>
+<!--begin::Modal-->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" role="dialog"
+    aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="width:980px;">
+            <div class="modal-header">
+                <!--<h5 class="modal-title" id="">Title</h5>-->
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form class="m-form m-form--fit m-form--label-align-right">
+                <div class="modal-body" style="width:980px;">
+                    <!--<ngx-doc-viewer [url]="pdfSrc" viewer="google"  style="width:100%;height:73vh;"
+                    >
+                    <div>Loading</div>
+                    </ngx-doc-viewer>-->
+                    <iframe src="assets/images/BA202328150080000734.pdf" width="100%" height="600px"
+                        frameborder="0"></iframe>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--end::Modal-->

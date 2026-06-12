@@ -1,0 +1,1126 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+                <h5 class="page-title"><i class="mdi mdi-account-multiple-outline"></i> Monitoring Report</h5>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xxl-12">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="date-options mb-2 col-md-2">
+                            <label style="font-weight: bold; font-size: 18px;">
+                                <input type="radio" name="dateOption" value="birth" [(ngModel)]="selectedbirth"
+                                    (change)="radiobuttonchange('birth')" />
+                                Birth
+                            </label>
+
+                        </div>
+                        <div class="date-options mb-2 col-md-2">
+                            <label style="font-weight: bold; font-size: 18px;">
+
+                                <input type="radio" name="dateOption" value="death" [(ngModel)]="selecteddeath"
+                                    (change)="radiobuttonchange('death')" />
+                                Death
+                            </label>
+
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group mb-2 position-relative">
+                                <label for="form-label" class="form-label">State/
+                                    రాష్ట్రం</label>
+                                <ng-select placeholder="State/ రాష్ట్రం" [(ngModel)]="monitoring_state"
+                                    id="permenent_state" name="permenent_state" title="permenent_state" required=""
+                                    #Permenent_state="ngModel">
+                                    <ng-option value="" disabled>--Select
+                                        State--</ng-option>
+                                    <ng-option *ngFor="let loc of staticstical_state_master_array"
+                                        [value]="loc.STATE_CODE">{{loc.STATE_DD}}</ng-option>
+                                </ng-select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-2 col-12">
+                            <label for="fromdate" class="form-label">From Date</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="DD-MM-YYYY" appDateFormatDirective class="form-control"
+                                    oncut="return false;" oncopy="return false;" onpaste="return false;" maxlength="10"
+                                    autocomplete="off" #dp1="bsDatepicker" id="fromdate" name="fromdate" bsDatepicker
+                                    [bsConfig]="bsConfig" [maxDate]="cureent_date" [(ngModel)]="From_Date"
+                                    aria-describedby="basic-addon2" required />
+                                <span class="input-group-text" id="basic-addon23" (click)="dp1.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-2 col-12">
+                            <label for="todate" class="form-label">To Date</label>
+                            <div class="input-group">
+                                <input type="text" placeholder="DD-MM-YYYY" appDateFormatDirective class="form-control"
+                                    oncut="return false;" oncopy="return false;" onpaste="return false;" maxlength="10"
+                                    autocomplete="off" #dp2="bsDatepicker" id="todate" name="todate" bsDatepicker
+                                    [bsConfig]="getToDateConfig()" [maxDate]="cureent_date" [(ngModel)]="To_Date"
+                                    aria-describedby="basic-addon2" required />
+                                <span class="input-group-text" id="basic-addon24" (click)="dp2.toggle()" type="button">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-2 col-12 mt-3 ">
+                            <div class="form-group">
+                                <button class="btn btn-primary " (click)="get_monitoring_report()">View Report
+                                    <i class="mdi mdi-arrow-right"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-12">
+                            <p-table id="tblmonitringtable" [value]="monitoring_report_array"
+                                *ngIf="display_level=='district'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt2 [rows]="monitoring_report_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','TOT_BR_REG_UNITS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringtable','Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringtable','Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DISTRICT_NAME">District
+                                            Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="TOT_BR_REG_UNITS">Total
+                                            Registration <br>Units</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="NO_OF_BR_WORKING_RUS">No of
+                                            Working<br>RUs</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" *ngIf="radiobuttontype=='birth'" rowspan="2"
+                                            pSortableColumn="BR_SEX_RATIO">Gender Ratio<br>at Birth</th>
+                                        <th class="text-center" *ngIf="radiobuttontype=='death'" rowspan="2"
+                                            pSortableColumn="BR_SEX_RATIO">Gender Ratio<br>at Death</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <!-- <td class="text-center">{{agency.DISTRICT_NAME}}</td> -->
+                                        <td class="text-center"><a (click)="get_monitoring_report_mandal(agency)"
+                                                class="text-success fw-bold">{{agency.DISTRICT_NAME}}</a></td>
+                                        <td class="text-center">{{agency.TOT_BR_REG_UNITS}}</td>
+                                        <td class="text-center">{{agency.NO_OF_BR_WORKING_RUS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.BR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="footer">
+                                    <tr>
+                                        <td colspan="1" style="background-color: #d7b35a;"></td>
+                                        <td class="text-center" colspan="1"
+                                            style="background-color: #d7b35a; color: white; ">Total</td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('TOT_BR_REG_UNITS') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('NO_OF_BR_WORKING_RUS') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REP_BR_MALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REP_BR_FEMALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REP_BR_TRANS') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REP_BR_TOTAL') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REG_BR_MALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REG_BR_FEMALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REG_BR_TRANS') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('REG_BR_TOTAL') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('PEN_BR_MALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('PEN_BR_FEMALE') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('PEN_BR_TRANS') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('PEN_BR_TOTAL') }}
+                                        </td>
+                                        <td class="text-center" style="background-color: #d7b35a; color: white;">
+                                            {{ getsum_of_coloumn('BR_SEX_RATIO') }}
+                                        </td>
+
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                            <p-table id="tblmonitringmandalbirthtable" [value]="monitoring_report_mandal_array"
+                                *ngIf="display_level=='mandal' && display_sub_level=='birth'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt3 [rows]="monitoring_report_mandal_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','TOT_BR_REG_UNITS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}}</h5>
+                                            <button class="btn btn-primary " (click)="get_monitoring_report();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringmandalbirthtable','Birth Mandal Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringmandalbirthtable','Birth Mandal Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt3.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DISTRICT_NAME">District
+                                            Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="MMC_NAME">Mandal Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="TOT_BR_REG_UNITS">Total
+                                            Registration <br>Units</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="NO_OF_BR_WORKING_RUS">No of
+                                            Working<br>RUs</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="BR_SEX_RATIO">Gender
+                                            Ratio<br>at Birth</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.DISTRICT_NAME}}</td>
+                                        <td class="text-center"><a (click)="get_monitoring_report_ru(agency)"
+                                                class="text-success fw-bold">{{agency.MMC_NAME}}</a></td>
+                                        <!-- <td class="text-center">{{agency.MMC_NAME}}</td> -->
+                                        <td class="text-center">{{agency.TOT_BR_REG_UNITS}}</td>
+                                        <td class="text-center">{{agency.NO_OF_BR_WORKING_RUS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.BR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringmandaldeathtable" [value]="monitoring_report_mandal_array"
+                                *ngIf="display_level=='mandal' && display_sub_level=='death'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt4 [rows]="monitoring_report_mandal_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','TOT_BR_REG_UNITS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}}</h5>
+                                            <button class="btn btn-primary " (click)="get_monitoring_report();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringmandaldeathtable','Mandal Death Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringmandaldeathtable','Mandal Death Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt4.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DISTRICT_NAME">District
+                                            Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="MMC_NAME">Mandal Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="TOT_DR_REG_UNITS">Total
+                                            Registration <br>Units</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="NO_OF_DR_WORKING_RUS">No of
+                                            Working<br>RUs</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DR_SEX_RATIO">Gender
+                                            Ratio<br>at Death</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.DISTRICT_NAME}}</td>
+                                        <td class="text-center"><a (click)="get_monitoring_report_ru(agency)"
+                                                class="text-success fw-bold">{{agency.MMC_NAME}}</a></td>
+                                        <td class="text-center">{{agency.TOT_DR_REG_UNITS}}</td>
+                                        <td class="text-center">{{agency.NO_OF_DR_WORKING_RUS}}</td>
+                                        <td class="text-center">{{agency.REP_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.DR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringrubirthtable" [value]="monitoring_report_RU_array"
+                                *ngIf="display_level=='RU' && display_sub_ru_level=='birth'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt4 [rows]="monitoring_report_RU_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','TOT_BR_REG_UNITS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}} / {{mandal_name}}</h5>
+                                            <button class="btn btn-primary " (click)="backtomandal();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringrubirthtable','Birth Village Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringrubirthtable','Birth Village Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt4.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DISTRICT_NAME">District
+                                            Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="MMC_NAME">Mandal Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="RU_NAME">Village
+                                            Name/Muncipility</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="TOT_BR_REG_UNITS">Total
+                                            Registration <br>Units</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="NO_OF_BR_WORKING_RUS">No of
+                                            Working<br>RUs</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="BR_SEX_RATIO">Gender
+                                            Ratio<br>at Birth</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_BR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_BR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.DISTRICT_NAME}}</td>
+                                        <td class="text-center">{{agency.MMC_NAME}}</td>
+                                        <!-- <td class="text-center">{{agency.RU_NAME}}</td> -->
+
+                                        <td class="text-center">
+                                            <span *ngIf="agency.STATUS == '2'">
+                                                <a (click)="get_monitoring_report_Hospital(agency)"
+                                                    class="text-success fw-bold">{{agency.RU_NAME}}</a>
+                                            </span>
+                                            <span *ngIf="agency.STATUS == '0'">{{agency.RU_NAME}}
+                                            </span>
+                                        </td>
+
+                                        <td class="text-center">{{agency.TOT_BR_REG_UNITS}}</td>
+                                        <td class="text-center">{{agency.NO_OF_BR_WORKING_RUS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.BR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringrudeathtable" [value]="monitoring_report_RU_array"
+                                *ngIf="display_level=='RU' && display_sub_ru_level=='death'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt5 [rows]="monitoring_report_RU_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['DISTRICT_NAME','TOT_BR_REG_UNITS']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}} / {{mandal_name}}</h5>
+                                            <button class="btn btn-primary " (click)="backtomandal();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringrudeathtable','Death Village Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringrudeathtable','Death Village Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt5.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DISTRICT_NAME">District
+                                            Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="MMC_NAME">Mandal Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="RU_NAME">Village Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="TOT_DR_REG_UNITS">Total
+                                            Registration <br>Units</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="NO_OF_DR_WORKING_RUS">No of
+                                            Working<br>RUs</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DR_SEX_RATIO">Gender
+                                            Ratio<br>at Death</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.DISTRICT_NAME}}</td>
+                                        <td class="text-center">{{agency.MMC_NAME}}</td>
+                                        <!-- <td class="text-center">{{agency.RU_NAME}}</td> -->
+                                        <td class="text-center">
+                                            <span *ngIf="agency.STATUS == '2'">
+                                                <a (click)="get_monitoring_report_Hospital(agency)"
+                                                    class="text-success fw-bold">{{agency.RU_NAME}}</a>
+                                            </span>
+                                            <span *ngIf="agency.STATUS == '0'">{{agency.RU_NAME}}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">{{agency.TOT_DR_REG_UNITS}}</td>
+                                        <td class="text-center">{{agency.NO_OF_DR_WORKING_RUS}}</td>
+                                        <td class="text-center">{{agency.REP_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.DR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringhospitalbirthtable" [value]="monitoring_report_Hospital_array"
+                                *ngIf="display_level=='Hospital' && display_sub_ru_level=='birth'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt6 [rows]="monitoring_report_Hospital_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="[
+                                'RU_NAME', 'HOSPITAL_NAME', 'REP_BR_MALE', 'REP_BR_FEMALE', 'REP_BR_TRANS', 
+                                'REP_BR_TOTAL', 'REG_BR_MALE', 'REG_BR_FEMALE', 'REG_BR_TRANS', 'REG_BR_TOTAL', 
+                                'PEN_BR_MALE', 'PEN_BR_FEMALE', 'PEN_BR_TRANS', 'PEN_BR_TOTAL', 'BR_SEX_RATIO'
+                              ]"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}} / {{mandal_name}} / {{Ru_Name |
+                                                lowercase}}</h5>
+                                            <button class="btn btn-primary " (click)="get_monitoring_report_ru();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringhospitalbirthtable','Hospital Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringhospitalbirthtable','Hospital Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt6.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="RU_NAME">RU Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="HOSPITAL_NAME">Institution
+                                            Name</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DR_SEX_RATIO">Gender
+                                            Ratio<br>at Birth</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.RU_NAME}}</td>
+                                        <!-- <td class="text-center">{{agency.HOSPITAL_NAME}}</td>  -->
+
+                                        <td class="text-center">
+                                            <span>
+                                                <a (click)="get_monitoring_report_Hospital_details(agency)"
+                                                    class="text-success fw-bold">{{agency.HOSPITAL_NAME}}</a>
+                                            </span>
+                                            <!-- <span *ngIf="agency.STATUS == '0'">{{agency.RU_NAME}}
+                                        </span> -->
+                                        </td>
+
+                                        <td class="text-center">{{agency.REP_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_BR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.BR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringhospitaldeathtable" [value]="monitoring_report_Hospital_array"
+                                *ngIf="display_level=='Hospital' && display_sub_ru_level=='death'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt7 [rows]="monitoring_report_Hospital_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="[
+                                'RU_NAME', 'HOSPITAL_NAME', 'REP_BR_MALE', 'REP_BR_FEMALE', 'REP_BR_TRANS', 
+                                'REP_BR_TOTAL', 'REG_BR_MALE', 'REG_BR_FEMALE', 'REG_BR_TRANS', 'REG_BR_TOTAL', 
+                                'PEN_BR_MALE', 'PEN_BR_FEMALE', 'PEN_BR_TRANS', 'PEN_BR_TOTAL', 'BR_SEX_RATIO'
+                              ]"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">{{district_name}} / {{mandal_name}} / {{Ru_Name |
+                                                lowercase}}</h5>
+                                            <button class="btn btn-primary " (click)="get_monitoring_report_ru();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringhospitaldeathtable','Hospital Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringhospitaldeathtable','Hospital Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt7.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" rowspan="2" pSortableColumn="SNO">S.No.</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="RU_NAME">RU Name</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="HOSPITAL_NAME">Institution
+                                            Name</th>
+                                        <th colspan="4" class="text-center">Reported Events</th>
+                                        <th colspan="4" class="text-center">Registered Events</th>
+                                        <th colspan="4" class="text-center">Pending Events</th>
+                                        <th class="text-center" rowspan="2" pSortableColumn="DR_SEX_RATIO">Gender
+                                            Ratio<br>at Birth</th>
+
+
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="REP_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REP_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="REG_DR_TOTAL">Total</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_MALE">Male</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_FEMALE">Female</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TRANS">Transgender</th>
+                                        <th class="text-center" pSortableColumn="PEN_DR_TOTAL">Total</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency>
+                                    <tr>
+                                        <td class="text-center">{{agency.SNO}}</td>
+                                        <td class="text-center">{{agency.RU_NAME}}</td>
+                                        <!-- <td class="text-center">{{agency.HOSPITAL_NAME}}</td>  -->
+                                        <td class="text-center">
+                                            <span>
+                                                <a (click)="get_monitoring_report_Hospital_details(agency)"
+                                                    class="text-success fw-bold">{{agency.HOSPITAL_NAME}}</a>
+                                            </span>
+                                            <!-- <span *ngIf="agency.STATUS == '0'">{{agency.RU_NAME}}
+                                        </span> -->
+                                        </td>
+                                        <td class="text-center">{{agency.REP_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REP_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.REG_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.REG_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_MALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_FEMALE}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TRANS}}</td>
+                                        <td class="text-center">{{agency.PEN_DR_TOTAL}}</td>
+                                        <td class="text-center">{{agency.DR_SEX_RATIO}}</td>
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringhospitaldetailsbirthtable"
+                                [value]="monitoring_report_Hospital_details_array"
+                                *ngIf="display_level=='HospitalDetails' && display_sub_ru_level=='birth'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt8 [rows]="monitoring_report_Hospital_details_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple"[globalFilterFields]="['REGISTRATION_ID', 'RU_CODE', 'RU_NAME', 
+                                'RU_NAME_TEL', 'RU_STATE_NAME_TEL',
+                                'RU_STATE_NAME', 'RU_DISTRICT_NAME', 'RU_DISTRICT_NAME_TEL', 'RU_RURAL_URBAN_TEL', 
+                                'RU_MMC_NAME', 'RU_MMC_NAME_TEL', 'RU_VW_NAME', 'RU_VW_NAME_TEL', 'CHILD_NAME', 
+                                'GENDER', 'CHILD_UID', 'CHILD_DOB', 'CHILD_DOB_TEXT', 'PLACE_OF_BIRTH', 'MOTHER_NAME', 
+                                'MOTHER_UID', 'FATHER_NAME', 'FATHER_UID', 'ABT_ADDRESS', 'PAP_ADDRESS', 'REMARKS', 
+                                'DATE_OF_ISSUE', 'DATE_OF_REGISTRATION']"
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true"
+                                scrollHeight="560px">
+
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">
+                                                {{district_name}} / {{mandal_name}} / {{Ru_Name | lowercase}} /
+                                                {{hospitalName}}</h5>
+                                            <button class="btn btn-primary "
+                                                (click)="get_monitoring_report_Hospital();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringhospitaldetailsbirthtable','Hospital Details Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringhospitaldetailsbirthtable','Hospital Details Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt8.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="SLNO">S No</th>
+                                        <th class="text-center" pSortableColumn="REGISTRATION_ID">Registration Id</th>
+                                        <th class="text-center" pSortableColumn="RU_CODE">Ru Code</th>
+                                        <th class="text-center" pSortableColumn="RU_NAME">Ru Name</th>
+                                        <th class="text-center" pSortableColumn="RU_NAME_TEL">Ru Name Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_STATE_NAME_TEL">Ru State Name Tel
+                                        </th>
+                                        <th class="text-center" pSortableColumn="RU_STATE_NAME">Ru State Name</th>
+                                        <th class="text-center" pSortableColumn="RU_DISTRICT_NAME">Ru District Name</th>
+                                        <th class="text-center" pSortableColumn="RU_DISTRICT_NAME_TEL">Ru District Name
+                                            Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_RURAL_URBAN_TEL">Ru Rural Urban Tel
+                                        </th>
+                                        <th class="text-center" pSortableColumn="RU_MMC_NAME">Ru Mmc Name</th>
+                                        <th class="text-center" pSortableColumn="RU_MMC_NAME_TEL">Ru Mmc Name Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_VW_NAME">Ru Vw Name</th>
+                                        <th class="text-center" pSortableColumn="RU_VW_NAME_TEL">Ru Vw Name Tel</th>
+                                        <th class="text-center" pSortableColumn="CHILD_NAME">Child Name</th>
+                                        <th class="text-center" pSortableColumn="GENDER">Gender</th>
+                                        <th class="text-center" pSortableColumn="CHILD_UID">Child Uid</th>
+                                        <th class="text-center" pSortableColumn="CHILD_DOB">Child Dob</th>
+                                        <th class="text-center" pSortableColumn="CHILD_DOB_TEXT">Child Dob Text</th>
+                                        <th class="text-center" pSortableColumn="PLACE_OF_BIRTH">Place Of Birth</th>
+                                        <th class="text-center" pSortableColumn="MOTHER_NAME">Mother Name</th>
+                                        <th class="text-center" pSortableColumn="MOTHER_UID">Mother Uid</th>
+                                        <th class="text-center" pSortableColumn="FATHER_NAME">Father Name</th>
+                                        <th class="text-center" pSortableColumn="FATHER_UID">Father Uid</th>
+                                        <th class="text-center" pSortableColumn="ABT_ADDRESS">Abt Address</th>
+                                        <th class="text-center" pSortableColumn="PAP_ADDRESS">Pap Address</th>
+                                        <th class="text-center" pSortableColumn="REMARKS">Remarks</th>
+                                        <th class="text-center" pSortableColumn="DATE_OF_ISSUE">Date Of Issue</th>
+                                        <th class="text-center" pSortableColumn="DATE_OF_REGISTRATION">Date Of
+                                            Registration</th>
+                                        <!-- <th class="text-center" pSortableColumn="UPDATED_ON">Updated On</th>
+                                        <th class="text-center" pSortableColumn="QRVALUE">Qrvalue</th>
+                                        <th class="text-center" pSortableColumn="SIGNPATH">Signpath</th>
+                                        <th class="text-center" pSortableColumn="ISCANCELED">Iscanceled</th> -->
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-center">{{ i + 1 }}</td>
+                                        <td class="text-center">{{ agency.REGISTRATION_ID }}</td>
+                                        <td class="text-center">{{ agency.RU_CODE }}</td>
+                                        <td class="text-center">{{ agency.RU_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_STATE_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_STATE_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_DISTRICT_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_DISTRICT_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_RURAL_URBAN_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_MMC_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_MMC_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_VW_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_VW_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.CHILD_NAME }}</td>
+                                        <td class="text-center">{{ agency.GENDER }}</td>
+                                        <td class="text-center">{{ agency.CHILD_UID }}</td>
+                                        <td class="text-center">{{ agency.CHILD_DOB }}</td>
+                                        <td class="text-center">{{ agency.CHILD_DOB_TEXT }}</td>
+                                        <td class="text-center">{{ agency.PLACE_OF_BIRTH }}</td>
+                                        <td class="text-center">{{ agency.MOTHER_NAME }}</td>
+                                        <td class="text-center">{{ agency.MOTHER_UID }}</td>
+                                        <td class="text-center">{{ agency.FATHER_NAME }}</td>
+                                        <td class="text-center">{{ agency.FATHER_UID }}</td>
+                                        <td class="text-center">{{ agency.ABT_ADDRESS }}</td>
+                                        <td class="text-center">{{ agency.PAP_ADDRESS }}</td>
+                                        <td class="text-center">{{ agency.REMARKS }}</td>
+                                        <td class="text-center">{{ agency.DATE_OF_ISSUE }}</td>
+                                        <td class="text-center">{{ agency.DATE_OF_REGISTRATION }}</td>
+                                        <!-- <td class="text-center">{{ agency.UPDATED_ON }}</td>
+                                        <td class="text-center">{{ agency.QRVALUE }}</td>
+                                        <td class="text-center">{{ agency.SIGNPATH }}</td>
+                                        <td class="text-center">{{ agency.ISCANCELED }}</td> -->
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                            <p-table id="tblmonitringhospitaldetailsdeathtable"
+                                [value]="monitoring_report_Hospital_details_array"
+                                *ngIf="display_level=='HospitalDetails' && display_sub_ru_level=='death'"
+                                styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm" [paginator]="true"
+                                #dt9 [rows]="monitoring_report_Hospital_details_array.length"
+                                [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                sortMode="multiple" [globalFilterFields]="['REGISTRATION_ID', 'RU_CODE', 'RU_NAME', 
+                                'RU_NAME_TEL', 'RU_STATE_NAME_TEL',
+                                'RU_STATE_NAME', 'RU_DISTRICT_NAME', 'RU_DISTRICT_NAME_TEL', 'RU_RURAL_URBAN_TEL', 
+                                'RU_MMC_NAME', 'RU_MMC_NAME_TEL', 'RU_VW_NAME', 'RU_VW_NAME_TEL', 'CHILD_NAME', 
+                                'GENDER', 'CHILD_UID', 'CHILD_DOB', 'CHILD_DOB_TEXT', 'PLACE_OF_BIRTH', 'MOTHER_NAME', 
+                                'MOTHER_UID', 'FATHER_NAME', 'FATHER_UID', 'ABT_ADDRESS', 'PAP_ADDRESS', 'REMARKS', 
+                                'DATE_OF_ISSUE', 'DATE_OF_REGISTRATION']"
+
+                                [tableStyle]="{ 'min-width': '75rem','min-height':'90%'}" [scrollable]="true" scrollHeight="560px">
+                                <ng-template pTemplate="caption">
+                                    <div class="row">
+                                        <div
+                                            class="page-title-box text-start d-flex justify-content-start align-items-center">
+                                            <h5 class="page-title">
+                                                {{district_name}} / {{mandal_name}} / {{Ru_Name |lowercase}} /
+                                                {{hospitalName}}</h5>
+                                            <button class="btn btn-primary "
+                                                (click)="get_monitoring_report_Hospital();">
+                                                <i class="fas fa-backward"></i></button>
+                                        </div>
+                                        <div class="col-md-6"></div>
+
+                                        <div class="col-md-6 text-end mt-2">
+                                            <button type="button" pButton pRipple icon="pi pi-file-excel"
+                                                (click)="exportTable_toexcel('tblmonitringhospitaldetailsdeathtable','Hospital Monitoring Report')"
+                                                class="p-button-success me-1" pTooltip="XLS"
+                                                tooltipPosition="bottom"></button>
+
+                                            <button type="button" pButton pRipple icon="pi pi-file-pdf"
+                                                (click)="exportTable_ToPDF('tblmonitringhospitaldetailsdeathtable','Hospital Monitoring Report')"
+                                                class="p-button-warning me-1" pTooltip="PDF"
+                                                tooltipPosition="bottom"></button>
+                                            <span class="p-input-icon-left">
+                                                <i class="pi pi-search"></i>
+                                                <input pInputText type="text"
+                                                    (input)="dt9.filterGlobal($event.target.value, 'contains')"
+                                                    placeholder="Search keyword" />
+                                            </span>
+                                        </div>
+                                    </div>
+
+
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th class="text-center" pSortableColumn="SLNO">S No</th>
+                                        <th class="text-center" pSortableColumn="REGISTRATION_ID">Registration Id</th>
+                                        <th class="text-center" pSortableColumn="RU_CODE">Ru Code</th>
+                                        <th class="text-center" pSortableColumn="RU_NAME">Ru Name</th>
+                                        <th class="text-center" pSortableColumn="RU_NAME_TEL">Ru Name Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_STATE_NAME_TEL">Ru State Name Tel
+                                        </th>
+                                        <th class="text-center" pSortableColumn="RU_STATE_NAME">Ru State Name</th>
+                                        <th class="text-center" pSortableColumn="RU_DISTRICT_NAME">Ru District Name</th>
+                                        <th class="text-center" pSortableColumn="RU_DISTRICT_NAME_TEL">Ru District Name
+                                            Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_RURAL_URBAN_TEL">Ru Rural Urban Tel
+                                        </th>
+                                        <th class="text-center" pSortableColumn="RU_MMC_NAME">Ru Mmc Name</th>
+                                        <th class="text-center" pSortableColumn="RU_MMC_NAME_TEL">Ru Mmc Name Tel</th>
+                                        <th class="text-center" pSortableColumn="RU_VW_NAME">Ru Vw Name</th>
+                                        <th class="text-center" pSortableColumn="RU_VW_NAME_TEL">Ru Vw Name Tel</th>
+                                        <th class="text-center" pSortableColumn="CHILD_NAME">Child Name</th>
+                                        <th class="text-center" pSortableColumn="GENDER">Gender</th>
+                                        <th class="text-center" pSortableColumn="CHILD_UID">Child Uid</th>
+                                        <th class="text-center" pSortableColumn="CHILD_DOB">Child Dob</th>
+                                        <th class="text-center" pSortableColumn="CHILD_DOB_TEXT">Child Dob Text</th>
+                                        <th class="text-center" pSortableColumn="PLACE_OF_BIRTH">Place Of Birth</th>
+                                        <th class="text-center" pSortableColumn="MOTHER_NAME">Mother Name</th>
+                                        <th class="text-center" pSortableColumn="MOTHER_UID">Mother Uid</th>
+                                        <th class="text-center" pSortableColumn="FATHER_NAME">Father Name</th>
+                                        <th class="text-center" pSortableColumn="FATHER_UID">Father Uid</th>
+                                        <th class="text-center" pSortableColumn="ABT_ADDRESS">Abt Address</th>
+                                        <th class="text-center" pSortableColumn="PAP_ADDRESS">Pap Address</th>
+                                        <th class="text-center" pSortableColumn="REMARKS">Remarks</th>
+                                        <th class="text-center" pSortableColumn="DATE_OF_ISSUE">Date Of Issue</th>
+                                        <th class="text-center" pSortableColumn="DATE_OF_REGISTRATION">Date Of
+                                            Registration</th>
+                                        <!-- <th class="text-center" pSortableColumn="UPDATED_ON">Updated On</th>
+                                        <th class="text-center" pSortableColumn="QRVALUE">Qrvalue</th>
+                                        <th class="text-center" pSortableColumn="SIGNPATH">Signpath</th>
+                                        <th class="text-center" pSortableColumn="ISCANCELED">Iscanceled</th> -->
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-agency let-i="rowIndex">
+                                    <tr>
+                                        <td class="text-center">{{ i + 1 }}</td>
+                                        <td class="text-center">{{ agency.REGISTRATION_ID }}</td>
+                                        <td class="text-center">{{ agency.RU_CODE }}</td>
+                                        <td class="text-center">{{ agency.RU_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_STATE_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_STATE_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_DISTRICT_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_DISTRICT_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_RURAL_URBAN_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_MMC_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_MMC_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.RU_VW_NAME }}</td>
+                                        <td class="text-center">{{ agency.RU_VW_NAME_TEL }}</td>
+                                        <td class="text-center">{{ agency.CHILD_NAME }}</td>
+                                        <td class="text-center">{{ agency.GENDER }}</td>
+                                        <td class="text-center">{{ agency.CHILD_UID }}</td>
+                                        <td class="text-center">{{ agency.CHILD_DOB }}</td>
+                                        <td class="text-center">{{ agency.CHILD_DOB_TEXT }}</td>
+                                        <td class="text-center">{{ agency.PLACE_OF_BIRTH }}</td>
+                                        <td class="text-center">{{ agency.MOTHER_NAME }}</td>
+                                        <td class="text-center">{{ agency.MOTHER_UID }}</td>
+                                        <td class="text-center">{{ agency.FATHER_NAME }}</td>
+                                        <td class="text-center">{{ agency.FATHER_UID }}</td>
+                                        <td class="text-center">{{ agency.ABT_ADDRESS }}</td>
+                                        <td class="text-center">{{ agency.PAP_ADDRESS }}</td>
+                                        <td class="text-center">{{ agency.REMARKS }}</td>
+                                        <td class="text-center">{{ agency.DATE_OF_ISSUE }}</td>
+                                        <td class="text-center">{{ agency.DATE_OF_REGISTRATION }}</td>
+                                        <!-- <td class="text-center">{{ agency.UPDATED_ON }}</td>
+                                        <td class="text-center">{{ agency.QRVALUE }}</td>
+                                        <td class="text-center">{{ agency.SIGNPATH }}</td>
+                                        <td class="text-center">{{ agency.ISCANCELED }}</td> -->
+                                    </tr>
+                                </ng-template>
+
+                            </p-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

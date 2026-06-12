@@ -1,0 +1,209 @@
+/* Curtain */
+
+
+.leftcurtain{
+    width: 50%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    position: fixed;
+    z-index: 999;
+    -webkit-animation: slide 5s forwards;
+    -webkit-animation-delay: 1s;
+    animation: slide 5s forwards;
+    animation-delay: 1s;
+  }
+   .rightcurtain{
+    width: 51%;
+    height: 100%;
+    right: 0px;
+    top: 0px;
+    position: fixed;
+    z-index: 999;
+    -webkit-animation: sliderRight 5s forwards;
+    -webkit-animation-delay: 1s;
+    animation: sliderRight 5s forwards;
+    animation-delay: 1s;
+  }
+  .rightcurtain img, .leftcurtain img{
+    width: 100%;
+    height: 100%;
+  }
+
+  .fireworks {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+  }
+
+button.btn-primary{
+    position: relative;
+    z-index: 1;
+}
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(50%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+
+
+@-webkit-keyframes slide {
+    100% { left: -50%; }
+}
+
+@keyframes slide {
+    100% { left: -50%; }
+}
+
+@-webkit-keyframes sliderRight {
+    100% { right: -51%; }
+}
+
+@keyframes sliderRight {
+    100% { right: -51%; }
+}
+
+.main-header {
+    z-index:0 !important;
+}
+
+
+.dist0 {
+    stroke-width: 2;
+    /* fill: #b9d8b6;
+    stroke: #728e6f; */
+    fill: #dd944f;
+    stroke: #F77E09;
+    stroke-miterlimit: 5;
+}
+
+.dist1 {
+    /* fill: #aaa4c3;
+    stroke: #736a93; */
+    fill: #bb6799;
+    stroke: #F370BF;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist2 {
+    fill: #e9b8d2;
+    stroke: #c97da6;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist3 {
+    /* fill: #edb897;
+    stroke: #a7795c; */
+    fill: #51898d;
+    stroke: #19b8c3;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+    color: #000;
+}
+
+.dist4 {
+    fill: #388354;
+    stroke: #009738;
+    /* fill: #e5e094;
+    stroke: #a19e6d; */
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist5 {
+    /* fill: #aca1d8;
+    stroke: #7266a0; */
+    fill: #8b4f4f;
+    stroke: #F36868;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist6 {
+    /* fill: #cbbeb2;
+    stroke: #937e6b; */
+    fill: #6e5b3a;
+    stroke: #A37A34;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist7 {
+    /* fill: #8ec38a;
+    stroke: #528b4d; */
+    fill: #3a5381;
+    stroke: #568FF7;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist8 {
+    /* fill: #e68ebd;
+    stroke: #9c4e77; */
+    fill: #274c57;
+    stroke: #1687A7;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist9 {
+    /* fill: #f4a471;
+    stroke: #c2825a; */
+    fill: #703e75;
+    stroke: #93329E;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist10 {
+    /* fill: #beb7b1;
+    stroke: #7e746b; */
+    fill: #4d7c41;
+    stroke: #84ec6a;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist11 {
+    /* fill: #d397b7;
+    stroke: #9a4f77; */
+    fill: #8b5b3e;
+    stroke: #f7660a;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+.dist12 {
+    /* fill: #f0eba6;
+    stroke: #b2ad67; */
+    fill: #747136;
+    stroke: #BFB928;
+    stroke-width: 2;
+    stroke-miterlimit: 22.9256;
+}
+
+path:hover {
+    fill: #1296ff;
+    stroke-width: 3px;
+    stroke: #97d1ff;
+    /* filter: url(#dropshadow); */
+    transition: fill .8s ease-out;
+    transition: stroke .2s ease-out;
+}

@@ -1,0 +1,556 @@
+<div class="">
+    <header class="main-header header-style-two">
+        <div class="top-nav">
+            <div class="container-fluid">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 d-flex align-items-center">
+                        <div class="logo">
+                            <img src="assets/images/logo-sm.png" class="img-fluid" height="80px">
+                        </div>
+                        <div class="text ps-2">
+                            <h3 class="mb-0">APCRS</h3>
+                            <p class="mb-0">Andhra Pradesh Civil Registration System</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 col-12 text-end">
+                        <div class="d-flex justify-content-end">
+
+     <button type="button"
+        class="btn top-login-btn"
+        (click)="showLoginDialog()">
+        Login <i class="mdi mdi-login"></i>
+    </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-lower">
+
+            <div class="main-box">
+                <div class="nav-outer">
+                    <nav class="nav main-menu">
+                        <ul class="navigation">
+                            <li class="current"><a routerLink="/home/index">Home</a></li>
+                            <li><a href="javascript:void()" routerLink="/home/about"> About CRS</a></li>
+                            <li class="dropdown"><a href="javascript:void()" routerLink=""> RBD Act and Model Rules</a>
+                                <ul>
+                                    <li><a href="assets/downloads/rbd_act_1969.pdf" target="_blank">RBD Act, 1969</a></li>
+                                    <li><a href="assets/downloads/Births_and_Deaths_Rules_2024.pdf" target="_blank">RBD (Amendment) Act, 2023</a></li>
+                                    <li><a href="assets/downloads/Births_and_Deaths_Rules_1999.pdf" target="_blank">Model RBD Rules, 1999</a></li>
+                                    <li><a href="assets/downloads/rbd_act_2024.pdf" target="_blank">Model RBD (Amendment) Rules, 2024</a></li>
+                                </ul>
+                            </li>
+                            <!-- <li><a href="javascript:void()" routerLink="/home/circulars">Circulars</a></li>
+                            <li class="dropdown"><a href="javascript:void()" routerLink="">Form</a>
+                                <ul>
+                                    <li><a href="assets/downloads/all_forms_CRS_2019_new.pdf" target="_blank">CRS</a></li>
+                                    <li><a href="assets/downloads/MCCD_Form.pdf" target="_blank">MCCD</a></li>
+                                </ul>
+                            </li> -->
+                            <!-- <li class="dropdown"><a href="javascript:void()" routerLink="">FAQ</a><ul>
+                                    <li><a href="assets/downloads/FAQ_of_CRS_Latest.pdf" target="_blank">CRS Procedural</a></li>
+                                    <li><a href="assets/downloads/Procedure_for_B_&_D_Registration.pdf" target="_blank">Requisite Documents</a></li>
+                                    <li><a href="assets/downloads/Procedure_for_B_&_D_Registration.pdf" target="_blank">Trobleshooting</a></li>
+                                    <li><a href="javascript:void(0)">Training Video</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="assets/downloads/Procedure_for_B_&_D_Registration.pdf" target="_blank">How to Apply</a></li> -->
+
+                            <!-- <li>
+                                <select class='form-select language' (change)="ChangingValue($event)">
+
+                                    <option *ngFor="let obj of langarray" [ngValue]="obj.id">{{obj.lantype1}}</option>
+
+                                </select>
+                            </li> -->
+                        </ul>
+                    </nav>
+                </div>
+
+
+                <div class="outer-box">
+                    <!-- <div class="btn-box">
+                        <a href="javascript:void(0)" routerLink="/auth/Department-login"
+                            class="theme-btn btn-style-one orange-bg"><span class="btn-title"><i
+                                    class="fas fa-lock"></i>Department Login</span></a>
+                    </div> -->
+                    <div class="mobile-nav-toggler" (click)="toggleBodyClass()"><span class="icon lnr-icon-bars"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mobile-menu">
+            <div class="menu-backdrop"></div>
+
+            <nav class="menu-box" style="font-family: 'Ramabhadra';">
+                <div class="upper-box">
+                    <div class="nav-logo"><a href=""><img src="assets/images/logo-sm.png" alt="Logo" title="SAAP"></a>
+                    </div>
+
+                    <div class="close-btn" (click)="toggleBodyClass()"><i class="icon fa fa-times"></i></div>
+                </div>
+                <div class="outer-box d-block w-100">
+                </div>
+
+                <ul class="navigation">
+
+                </ul>
+
+
+
+            </nav>
+        </div>
+
+
+
+        <div class="sticky-header">
+            <div class="auto-container">
+                <div class="inner-container">
+                    <div class="d-flex align-items-center">
+                        <div class="logo">
+                            <a href="javascript:void(0)"><img src="assets/images/logo-sm.png" alt="Logo" title=""></a>
+                        </div>
+                        <div class="text ps-2">
+                            <h3 class="mb-0">APCRS</h3>
+                            <p class="mb-0">Andhra Pradesh Civil Registration System</p>
+                        </div>
+                    </div>
+                    <div class="nav-outer">
+
+                        <nav class="main-menu">
+                            <div class="navbar-collapse show collapse clearfix">
+
+                                <ul class="navigation"></ul>
+                            </div>
+                        </nav>
+
+                        <div class="mobile-nav-toggler" (click)="toggleBodyClass()"><span
+                                class="icon lnr-icon-bars"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="page-wrapper">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!-- Footer Start -->
+    <section class="footer-section">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-5 col-12 px-lg-4">
+                    <div class="footer-imgblk d-flex justify-content-center align-items-center mb-2">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-sm.png" alt="logo">
+                        </span>
+                        <div class="text ps-2">
+                            <h3 class="mb-0 text-white">APCRS</h3>
+                            <p class="mb-0 text-white">Andhra Pradesh Civil Registration System</p>
+                        </div>
+                    </div>
+                    <p class="text-white mb-0">Commissioner of Health & Family Welfare, 5th Floor, APIIC Building, Mangalagiri, Guntur Dt., Andhra Pradesh.
+                    </p>
+                </div>
+                <div class="col-xl-3 col-12">
+                    <div class="footer-quicklinks">
+                        <h4 class="text-white">Quick Links</h4>
+                        <ul class="list-style ps-0">
+                            <li class="text-white pb-1">Home</li>
+                            <li class="text-white pb-1">About us</li>
+                            <li class="text-white pb-1">Sitemap</li>
+                            <li class="text-white pb-1">Help</li>
+                            <li class="text-white pb-1">Contact Us</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <h4 class="text-white">Get In Touch</h4>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-facebook-f"></i></p>
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-youtube"></i></p>
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-twitter"></i></p>
+                        <p class="mb-0 text-white"><i class="fa-brands fa-instagram"></i></p>
+                    </div>
+                    <p class="mb-0 text-white"><span class="fs-6">Support :</span> 08632441111</p>
+                    <p class="mb-0 text-white fs-6">Email : drg-crs.rgi&#64;gov.in & srocrs.rgi&#64;nic.in</p>
+                </div>
+            </div>
+            <hr class="mb-2 mt-3 text-secondary">
+            <div class="row align-items-center">
+                <div class="col-xl-12 footer-links">
+                    <ul class="list-style ps-0 d-flex justify-content-center align-items-center">
+                        <li class="text-white pb-1">Website Policy</li>
+                        <li class="text-white pb-1">Terms & Conditions</li>
+                        <li class="text-white pb-1">Mobile App Privacy Policy</li>
+                        <li class="text-white pb-1">Accessibility Statement</li>
+                        <li class="text-white pb-1">Web Information Manager</li>
+                    </ul>
+                </div>
+                <!-- <hr class="mb-1 mt-1 text-secondary">
+                <div class="col-xl-6 col-12">
+                    <div class="copy-text">
+                        <p class="mb-0 text-white fs-6">©2024 Govt of Andhra Pradesh (Civil Resgistration System) . All Rights Reserved</p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-12">
+                    <div class="realtime-img">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <p class="mb-0 text-white me-2 fs-6">Design and Developed by</p>
+                            <img src="assets/images/realtime-logo.png" class="img-fluid" alt="Images">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- end Footer -->
+
+    <footer>
+        <div class="footer-bt">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-8 col-12">
+                        <p class="mb-0 text-dark">©2024 Govt of Andhra Pradesh (Civil Resgistration System) . All Rights
+                            Reserved</p>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                        <p class="mb-0 text-dark">Design and Developed by</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <p-dialog 
+    header="Login"
+    [(visible)]="displayLoginDialog"
+    [modal]="true"
+    [closable]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{width: '40rem'}"
+   >
+
+    <div class="mt-2">
+        
+        <div class="card login-card custom-modal-popup">
+                        <div class="card-body px-4 py-2">
+                            <div class="my-auto">
+                                <h4 class="text-center">Login</h4>
+                                 <form #loginfrmref="ngForm">
+                                  
+                                     <div class="mb-2 form-group">
+                                        <label for="Username" class="form-label">Username</label>
+                                         <!-- <input
+            class="form-control"
+            type="text"
+            id="username"
+            placeholder="Enter your username"> -->
+
+    
+                                         <input class="form-control" type="text" appAlphanumericOnly appUppercase
+                                            id="username" name="username" required oncopy="return false"
+                                            oncut="return false" maxlength="15" autocomplete="off"
+                                            placeholder="Enter your username" [(ngModel)]="loginform.username"
+                                            #username="ngModel" [ngClass]="{'is-invalid': username.invalid && (username.dirty || username.touched),
+                                'is-valid': username.value?.length >= 4 && (username.dirty || username.touched)}">
+                                        <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                                            class="error-message">
+                                             <div *ngIf="username.errors">
+                                                <div *ngIf="username.errors['required']">
+                                                    Username is required.
+                                                </div>
+                                            </div> 
+                                         </div>
+                                    </div> 
+                                    <!-- </div> -->
+                                    <div class="mb-2">
+                                        <label for="password" class="form-label">Password</label>
+                                        <div class="form-group mb-0 position-relative">
+                                             <span class="toggle-password eye">
+                <i class="uil-eye-slash"></i>
+            </span>
+
+            <!-- <input
+                class="form-control pass-input"
+                type="password"
+                id="password"
+                placeholder="Enter your password"> -->
+
+                                             <span class="toggle-password eye" (click)="toggleFieldTextTypeonelogin()"
+                                                [ngClass]="{
+                                                'inactive' : !fieldTextTypeonelogin,
+                                                'active' : fieldTextTypeonelogin}">
+                                                <i class="" [ngClass]="{
+                                                    'uil-eye-slash' : !fieldTextTypeonelogin,
+                                                    'uil-eye' : fieldTextTypeonelogin}"></i>
+                                            </span>
+                                             <input class="form-control pass-input"
+                                                [type]="fieldTextTypeonelogin ? 'text' : 'password'" required
+                                                id="password" name="password" oncopy="return false"
+                                                oncut="return  false" maxlength="15" autocomplete="off"
+                                                [(ngModel)]="loginform.password" placeholder="Enter your password"
+                                                #password="ngModel"
+                                                [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched),
+                                      'is-valid': password.value?.length >= 4 && (password.dirty || password.touched)}">
+                                             <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                                                class="error-message">
+                                                <div *ngIf="password.errors">
+                                                    <div *ngIf="password.errors['required']">
+                                                        Password is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <a (click)="openForgotPassword()"  href="javascript:void(0);">Forgot password</a>
+                                    </div>
+                                    <div class="mb-2 form-group">
+                                         <div class="row">
+                                            <div class="col-xl-4 col-4">
+                                                <h3 class="captcha-text">{{capthform.imgurl}}</h3>
+                                            </div>
+                                            <div class="col-xl-2 col-2">
+                                                <button class="btn btn-primary" type="submit" (click)="Get_captcha()"><i
+                                                        class="uil-refresh"></i></button>
+                                            </div>
+                                            <div class="col-xl-6 col-6">
+                                                <input class="form-control" type="text" id="captchvalue"
+                                                    name="captchvalue" required appNumericsOnlyEnter
+                                                    [(ngModel)]="capthform.captchvalue"
+                                                    title=" Please enter the result here" oncopy="return false"
+                                                    oncut="return false" #captchvalue="ngModel" autocomplete="off"
+                                                    name="Conformation" maxlength="2"
+                                                    placeholder="Enter the result here"
+                                                    [ngClass]="{'is-invalid': captchvalue.invalid && (captchvalue.dirty || captchvalue.touched),
+                                         'is-valid': captchvalue.value?.length >= 2 && (captchvalue.dirty || captchvalue.touched)}">
+
+                                                <div *ngIf="captchvalue.invalid && (captchvalue.dirty || captchvalue.touched)"
+                                                    class="error-message">
+                                                    <div *ngIf="captchvalue.errors">
+                                                        <div *ngIf="captchvalue.errors['required']">
+                                                            result is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="d-grid mb-0 text-center">
+                                        <!-- login_submit_form() -->
+                                        <button class="btn btn-success" type="submit" (click)="login_submit_form()"
+                                            [disabled]="!loginfrmref.form.valid"><i class="mdi mdi-login"></i> Log in
+                                        </button>
+                                    </div>
+                                 </form>
+                            </div>
+
+
+                            <div class="bottom-text text-center mb-1">
+                                <!-- <p>If you've forgotten your password, click <a href="javascript:void(0);"
+                                        (click)="forgot_password()">'Forgot Password!'</a></p> -->
+                            </div>
+                            <p>If you've forgotten your password, click <a class="forgot" href="javascript:void(0);"
+                                    (click)="openForgotPassword()" >'Forgot Password!'</a></p>
+
+                        </div>
+                        </div>
+                        </div>
+                  
+
+</p-dialog>
+
+<p-dialog 
+    header="Forgot Password"
+    [(visible)]="displayForgotDialog"
+    [modal]="true"
+    [closable]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{width: '40rem'}">
+
+        <div class="card login-card custom-modal-popup mt-2">
+                        <div class="card-body p-4">
+                            <div class="my-auto">
+                                <h2 class="mt-0 text-center">Forgot Password</h2>
+
+                                <!-- <form #loginfrmref="ngForm"> -->
+                                    <div class="mb-2 form-group">
+                                        <label for="Username" class="form-label">Username</label>
+                                         <!-- <input
+                        class="form-control"
+                        type="text"
+                        id="username"
+                        maxlength="20"
+                        placeholder="Enter your username"> -->
+
+                                         <input class="form-control" type="text" appAlphanumericOnly id="username" name="username" required
+                                            oncopy="return false" oncut="return false" maxlength="20" autocomplete="off"
+                                            [(ngModel)]="Changpassform.username" placeholder="Enter your username" #username="ngModel" [ngClass]="{'is-invalid': username.invalid && (username.dirty || username.touched),
+                                'is-valid': username.value?.length >= 4 && (username.dirty || username.touched)}">
+         
+        
+                                         <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error-message">
+                                            <div *ngIf="username.errors">
+                                                <div *ngIf="username.errors['required']">
+                                                    Username is required.
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    
+                                    <div class="mb-2">
+                                        <label for="newpassword" class="form-label">New Password</label>
+        
+                                        <div class="form-group mb-0 position-relative">
+                                           
+
+                        <!-- <span class="toggle-password eye">
+                            <i class="uil-eye-slash"></i>
+                        </span>
+
+                        <input
+                            class="form-control pass-input"
+                            type="password"
+                            id="newpassword"
+                            maxlength="15"
+                            placeholder="Enter your new password"> -->
+
+                   
+                                             <span class="toggle-password eye" (click)="toggleFieldTextTypeonelogin()" [ngClass]="{
+                                                'inactive' : !fieldTextTypeonelogin,
+                                                'active' : fieldTextTypeonelogin}">
+                                                <i class="" [ngClass]="{
+                                                    'uil-eye-slash' : !fieldTextTypeonelogin,
+                                                    'uil-eye' : fieldTextTypeonelogin}"></i>
+                                            </span>
+                                            <input class="form-control pass-input" [type]="fieldTextTypeonelogin ? 'text' : 'password'" required
+                                                id="newpassword" name="newpassword" oncopy="return false" oncut="return  false" maxlength="15"
+                                                autocomplete="off" [(ngModel)]="Changpassform.newpassword" placeholder="Enter your new password"
+                                                #newpassword="ngModel" [ngClass]="{'is-invalid': newpassword.invalid && (newpassword.dirty || newpassword.touched),
+                                      'is-valid': newpassword.value?.length >= 4 && (newpassword.dirty || newpassword.touched)}">
+               
+                                            <div *ngIf="newpassword.invalid && (newpassword.dirty || newpassword.touched)" class="error-message">
+                                                <div *ngIf="newpassword.errors">
+                                                    <div *ngIf="newpassword.errors['required']">
+                                                        New Password is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+        
+                                    </div>
+        
+                                    <div class="mb-2">
+                                        <label for="connewpassword" class="form-label">Confirm Password</label>
+        
+                                        <div class="form-group mb-0 position-relative">
+                                              <!-- <span class="toggle-password eye">
+                            <i class="uil-eye-slash"></i>
+                        </span> -->
+
+                        <!-- <input
+                            class="form-control pass-input"
+                            type="password"
+                            id="connewpassword"
+                            maxlength="15"
+                            placeholder="Enter your confirm password"> -->
+
+                                            <span class="toggle-password eye" (click)="toggleFieldTextTypeonelogin()" [ngClass]="{
+                                                'inactive' : !fieldTextTypeonelogin,
+                                                'active' : fieldTextTypeonelogin}">
+                                                <i class="" [ngClass]="{
+                                                    'uil-eye-slash' : !fieldTextTypeonelogin,
+                                                    'uil-eye' : fieldTextTypeonelogin}"></i>
+                                            </span>
+                                            <input class="form-control pass-input" [type]="fieldTextTypeonelogin ? 'text' : 'password'" required
+                                                id="connewpassword" name="connewpassword" oncopy="return false" oncut="return  false" maxlength="15"
+                                                autocomplete="off" [(ngModel)]="Changpassform.connewpassword"
+                                                placeholder="Enter your confirm password" #connewpassword="ngModel" [ngClass]="{'is-invalid': connewpassword.invalid && (connewpassword.dirty || connewpassword.touched),
+                                      'is-valid': connewpassword.value?.length >= 4 && (connewpassword.dirty || connewpassword.touched)}">
+                                            <div *ngIf="connewpassword.invalid && (connewpassword.dirty || connewpassword.touched)"
+                                                class="error-message">
+                                                <div *ngIf="connewpassword.errors">
+                                                    <div *ngIf="connewpassword.errors['required']">
+                                                        Confirm Password is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+        
+        
+                                    </div>
+                                    <div class="mb-2">
+                                        <div class="row">
+                                             <div class="col-xl-4 col-4">
+                                                <h3>{{capthform.imgurl}}</h3>
+                                            </div>
+                                            <div class="col-xl-2 col-2">
+                                                <button class="btn btn-primary" type="submit" (click)="Get_captcha()"><i
+                                                        class="uil-refresh"></i></button>
+                                            </div>
+                                             <!-- <div class="col-xl-4 col-4">
+                                                <h3 class="captcha-text">{{capthform.imgurl}}</h3>
+                                            </div>
+                                             <div class="col-xl-2 col-2">
+                                                <button class="btn btn-primary" type="submit" (click)="Get_captcha()"><i
+                                                        class="uil-refresh"></i></button>
+                                            </div>  -->
+                                             <div class="col-xl-6 col-6">
+                                                <input class="form-control" type="text" id="captchvalue" name="captchvalue" required
+                                                    appNumericsOnlyEnter [(ngModel)]="capthform.captchvalue" title=" Please enter the result here"
+                                                    oncopy="return false" oncut="return false" #captchvalue="ngModel" autocomplete="off"
+                                                    name="Conformation" maxlength="2" placeholder="Enter the result here" [ngClass]="{'is-invalid': captchvalue.invalid && (captchvalue.dirty || captchvalue.touched),
+                                                 'is-valid': captchvalue.value?.length >= 2 && (captchvalue.dirty || captchvalue.touched)}">
+        
+                                                <div *ngIf="captchvalue.invalid && (captchvalue.dirty || captchvalue.touched)"
+                                                    class="error-message">
+                                                    <div *ngIf="captchvalue.errors">
+                                                        <div *ngIf="captchvalue.errors['required']">
+                                                            result is required.
+                                                        </div>
+                                                    </div>
+                                                </div>
+        
+                                            </div>
+                                        </div>
+                                    </div>
+        
+                                    <div class="d-grid mb-0 text-center">
+                                          <!-- <button class="btn btn-success" type="submit">
+                        <i class="mdi mdi-login"></i> Submit
+                    </button> -->
+                                        <button class="btn btn-success" type="submit" (click)="submit_form()"
+                                            [disabled]="!loginfrmref.form.valid"><i class="mdi mdi-login"></i> Submit </button>
+                                    </div>
+                                    <!-- <div class="d-grid mb-0 text-center" *ngIf="!isotpDisable && !is_send_otp_disable">
+                                        <button class="btn btn-success" type="submit" (click)="send_otp()" [disabled]="!loginfrmref.form.valid"><i
+                                                class="mdi mdi-login"></i>
+                                            Send otp </button>
+                                    </div>
+                                    <div class="d-grid mb-0 text-center" *ngIf="is_send_otp_disable">
+                                        <button class="btn btn-success" type="submit" (click)="verify_otp()" [disabled]="!loginfrmref.form.valid"><i
+                                                class="mdi mdi-login"></i>
+                                            Verify otp </button>
+                                    </div> -->
+        
+                                <!-- </form> -->
+                                <div class="bottom-text text-center mb-1">
+                                     <p>
+                    Back To Login, click
+                    <a href="#" (click)="backToLogin()">Login!</a>
+                </p>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+</p-dialog>

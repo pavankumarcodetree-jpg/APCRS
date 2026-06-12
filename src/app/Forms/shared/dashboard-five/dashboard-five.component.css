@@ -1,0 +1,223 @@
+::ng-deep body{
+    background: #1c1c1c;
+}
+
+::ng-deep .card{
+    background: #212121;
+    border:1px solid #3c3b3b !important;
+    box-shadow: none;
+}
+::ng-deep .highcharts-background{
+    fill: transparent;
+}
+::ng-deep .headertable {
+    overflow-y: auto;
+    height: 440px;
+}
+::ng-deep .headertable th {
+    position: sticky;
+    top: 0px;
+    background: #1c1c1c !important;
+    font-size: 0.85rem;
+    font-weight: normal;
+    padding: 4px 5px;
+    color: #dadada;
+}
+::ng-deep .headertable th, .headertable td {
+    color: #dadada;
+    padding: 4px 5px;
+    border-color:#3c3b3b;
+}
+::ng-deep .nav-tabs .nav-item.show .nav-link,::ng-deep  .nav-tabs .nav-link.active{
+    background: #212121;
+    border: 1px solid #3c3b3b !important;
+    border-bottom:2px solid #fd6d17 !important;
+    color: #fd6d17;
+}
+::ng-deep .nav-tabs .nav-link{
+    border: 1px solid #3c3b3b !important;
+    color: #dadada;
+}
+.headertable table tbody td:nth-child(1){color:#dadada;}
+.headertable table tbody td:nth-child(2){color:#fd8700;}
+.headertable table tbody td:nth-child(3){color:#46c2f2;}
+.headertable table tbody td:nth-child(4){color:#d04c90;}
+
+.heatmap ul{
+    position: relative;
+    display: flex;
+}
+.heatmap ul li{
+    text-align: center;
+    color: #dadada;
+    font-size: 0.75rem;
+}
+
+.heatmap ul li span{
+    min-width: 60px;
+    height: 5px;
+    display: block;
+    margin: 0px 3px;
+}
+.heatmap ul li:nth-child(1) span{background: #abc439;}
+.heatmap ul li:nth-child(2) span{background: #eabb0c;}
+.heatmap ul li:nth-child(3) span{background: #f72621;}
+
+
+.headertable::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+.headertable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+}
+
+.headertable::-webkit-scrollbar-thumb {
+    background-color: #535353;
+    outline: 1px solid rgb(100, 100, 100);
+}
+
+.headertable::-webkit-scrollbar-thumb {
+    background-color: #c7c7c7;
+    outline: 1px solid rgb(197, 197, 197);
+}
+
+.headertable::-webkit-scrollbar-thumb {
+    background-color: #535353;
+    outline: 1px solid rgb(100, 100, 100);
+}
+.counts{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+}
+.counts ul{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.counts ul li{
+    border:1px solid #363636;
+    padding: 5px 5px;
+    line-height: 1.2;
+    color: #dadada;
+}
+.card .card-body{
+    padding: 0.25rem;
+    position: relative;
+}
+.card .card-body p{
+    color: #dadada;
+    margin-bottom: 0.25rem;
+    text-align: center;
+}
+
+.card .card-body .icon{
+    background: linear-gradient(to bottom, transparent, #c3c3c3);
+    -webkit-background-clip: text;
+    color: transparent;
+    position: absolute;
+    right: 0;
+    font-size: 3rem;
+    top: -5px;
+    opacity: 0.3;
+}
+
+.card .card-body .smallcount h2{
+    font-size: 1rem;
+}
+.card.birth .card-body h2{
+    color: #92da43;
+    margin: 0;
+    text-align: center;
+    font-weight:800;
+    font-family:'Inter';
+}
+.card.death .card-body h2{
+    color: #dc3545;
+    margin: 0;
+    text-align: center;
+    font-weight:800;
+    font-family:'Inter';
+}
+
+.card.rate .card-body h2{
+    color: #ff8f00;
+    margin: 0;
+    text-align: center;
+    font-weight:800;
+    font-family:'Inter';
+}
+
+.card.pop .card-body h2{
+    color: #46c2f2;
+    margin: 0;
+    text-align: center;
+    font-weight:800;
+    font-family:'Inter';
+}
+
+::ng-deep .highcharts-credits,::ng-deep .highcharts-axis.highcharts-xaxis{
+    display: none;
+}
+
+.leftscroll{
+    width: inherit;
+    padding-right: 0.5rem;
+    max-height: 100%;
+    overflow: auto;
+}
+
+@media(max-width:575.98px) {
+    .leftscroll{
+        position: relative !important;
+    }
+}
+
+.leftscroll .card .title{
+    color: #dadada;
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+.leftscroll .card p{
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}
+.leftscroll .card h2{
+    margin: 0 !important;
+    line-height: 1;
+}
+
+.leftscroll::-webkit-scrollbar {
+    width: 0.6em;
+}
+
+.leftscroll::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.leftscroll::-webkit-scrollbar-thumb {
+    background-color: #535353;
+    outline: 1px solid rgb(100, 100, 100);
+}
+
+.leftscroll::-webkit-scrollbar-thumb {
+    background-color: #c7c7c7;
+    outline: 1px solid rgb(197, 197, 197);
+}
+
+.leftscroll::-webkit-scrollbar-thumb {
+    background-color: #535353;
+    outline: 1px solid rgb(100, 100, 100);
+}
+#birth-death-treads-comparison-chart,
+#age-gender-percantage-chart,
+#age-gender-chart,
+#gender-chart,
+#cause-Of-Death-chart {
+    display: block;
+    width: 100%;
+    height: 400px;
+    margin: 0 auto;
+}

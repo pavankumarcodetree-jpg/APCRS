@@ -1,0 +1,820 @@
+<div class="wrapper">
+  <div class="navbar-custom">
+    <div class="topbar container-fluid">
+      <div class="d-flex align-items-center gap-lg-2 gap-1">
+        <div class="logo-topbar">
+          <a href="" class="logo-light">
+            <span class="logo-lg">
+              <img src="assets/images/logo.svg" alt="logo" />
+            </span>
+            <span class="logo-sm">
+              <img src="assets/images/aplogo.png" alt="small logo" />
+            </span>
+          </a>
+
+          <a href="" class="logo-dark">
+            <span class="logo-lg">
+              <img src="assets/images/logo.svg" alt="dark logo" />
+            </span>
+            <span class="logo-sm">
+              <img src="assets/images/aplogo.png" alt="small logo" />
+            </span>
+          </a>
+        </div>
+
+        <!-- Sidebar Menu Toggle Button -->
+        <button class="button-toggle-menu" (click)="toggleMenu()">
+          <i class="mdi mdi-menu"></i>
+        </button>
+
+        <!-- Horizontal Menu Toggle Button -->
+        <button class="navbar-toggle" data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
+          <div class="lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+
+        <!-- Topbar Search Form -->
+        <div class="app-search dropdown d-none d-lg-block">
+          <h2 class="">Civil Registration System</h2>
+        </div>
+      </div>
+
+      <ul class="topbar-menu d-flex align-items-center gap-3">
+        <li class="d-none d-sm-inline-block">
+          <div class="nav-link" (click)="toggleTheme()" data-bs-toggle="tooltip" data-bs-placement="left"
+            title="Theme Mode">
+            <i class="ri-moon-line font-22"></i>
+          </div>
+        </li>
+
+        <li class="d-none d-md-inline-block">
+          <a class="nav-link" data-toggle="fullscreen">
+            <i class="ri-fullscreen-line font-22"></i>
+          </a>
+        </li>
+
+        <li class="dropdown">
+          <a class="nav-link dropdown-toggle arrow-none nav-user px-2" data-bs-toggle="dropdown" href="#" role="button"
+            aria-haspopup="false" aria-expanded="false">
+            <span class="account-user-avatar">
+              <img src="assets/dash/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle" />
+            </span>
+            <span class="d-lg-flex flex-column d-none">
+              <h5 class="my-0">{{ displausername }}</h5>
+              <h6 class="my-0 fw-normal">{{ designationname }}</h6>
+              <h5 class="my-0">{{ displayUnitName }}</h5>
+            </span>
+          </a>
+          <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+            <div class="dropdown-header noti-title p-0">
+              <a class="nav-link dropdown-toggle arrow-none nav-user p-2" data-bs-toggle="dropdown" href="#"
+                role="button" aria-haspopup="false" aria-expanded="true">
+                <span class="account-user-avatar">
+                  <img src="assets/dash/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle" />
+                </span>
+                <span class="d-lg-flex flex-column gap-1 d-none">
+                  <h5 class="my-0">{{ displausername }}</h5>
+                  <h6 class="my-0 fw-normal">
+                    {{ designationname }}({{ user_type }})
+                  </h6>
+                </span>
+              </a>
+            </div>
+
+            <div class="dropdown-header noti-title">
+              <div class="dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome:{{ displausername }}</h6>
+              </div>
+              <a href="javascript:void(0);" class="dropdown-item time">
+                <span class="fs-6 text-wrap"><i class="mdi mdi-clock me-1"></i>Last login time:
+                  {{ last_login_time }}</span>
+              </a>
+            </div>
+
+            <a href="javascript:void(0);" class="dropdown-item" (click)="changepasswword()">
+              <i class="mdi mdi-lock-outline me-1"></i>
+              <span>Change Password</span>
+            </a>
+            <a href="javascript:void(0);" class="dropdown-item" (click)="signout()">
+              <i class="mdi mdi-logout me-1"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="topnav">
+    <div class="container-fluid">
+      <nav class="navbar navbar-expand-lg" *ngIf="urole == '100'">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <!-- All Menus-->
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+                id="topnav-dashboards" role="button">
+                <i class="uil-home-alt"></i>
+                <span> Home </span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardeight"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard </span>
+              </a>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/gsws-birth-death-data"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard Two </span>
+              </a>
+            </li> 
+            <!-- 
+             <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardseven"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard one </span>
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/gsws-birth-death-data"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard Two </span>
+              </a>
+            </li> -->
+
+
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle arrow-none" href="#" id="dashboard" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="uil-dashboard"></i> Analysis
+                <div class="arrow-down"></div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dashboard">
+                <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/gsws-birth-data"
+                  routerLinkActive="active">1.Birth Analysis</a>
+                <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/gsws-death-data"
+                  routerLinkActive="active">2.Death Analysis
+                </a>
+
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+
+      <nav class="navbar navbar-expand-lg" *ngIf="urole == '1000'">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <!-- All Menus-->
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+                id="topnav-dashboards" role="button">
+                <i class="uil-home-alt"></i>
+                <span> Home </span>
+              </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardnine"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard </span>
+              </a>
+            </li>
+
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardseven"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard one </span>
+              </a>
+            </li> -->
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardsix"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard one </span>
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/gsws-birth-death-data"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard Two </span>
+              </a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardsix"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard Three </span>
+              </a>
+            </li> -->
+
+
+            <!-- <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle arrow-none" href="#" id="dashboard" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="uil-dashboard"></i> Analysis
+                <div class="arrow-down"></div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="dashboard">
+                <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/gsws-birth-data"
+                  routerLinkActive="active">1.Birth Analysis</a>
+                <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/gsws-death-data"
+                  routerLinkActive="active">2.Death Analysis
+                </a>
+
+              </div>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+
+
+      <nav class="navbar navbar-expand-lg" *ngIf="urole != '100' && urole != '1000'">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <!-- All Menus-->
+          <ul class="navbar-nav" *ngIf="
+              urole != '113' &&
+              urole != '105' &&
+              urole != '107' &&
+              urole != '101' &&
+              urole != '100' &&
+              urole != '108'
+            ">
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+                id="topnav-dashboards" role="button">
+                <i class="uil-home-alt"></i>
+                <span> Home </span>
+              </a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardeight"
+                routerLinkActive="active" id="topnav-dashboards" role="button">
+                <i class="uil-dashboard"></i>
+                <span> Dashboard </span>
+              </a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardFive"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="uil-dashboard"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardsix"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="uil-dashboard"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li>  -->
+
+            <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardFour"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="uil-dashboard"></i>
+                                <span> Dashboard</span>
+                            </a>
+                        </li>
+
+                         <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle arrow-none" href="#" id="dashboard" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-grave-stone"></i> Dashboard <div class="arrow-down"></div>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dashboard"> 
+                        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/dashboardtwo"
+                            routerLinkActive="active">1.Dashboard One</a>
+                        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/dashboardFive"
+                            routerLinkActive="active">2.Dashboard Two </a>
+                        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/dashboardsix"
+                            routerLinkActive="active">3.Dashboard Three</a> 
+                        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/dashboardseven"
+                            routerLinkActive="active">4.Dashboard Four</a> 
+                        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/dashboardeight"
+                            routerLinkActive="active">5.Dashboard Five</a> 
+                    </div>
+                </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/inbox"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="mdi mdi-inbox-full-outline"></i>
+                                <span> Inbox </span>
+                            </a>
+                        </li>
+                         <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/draft"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="mdi mdi-inbox-full-outline"></i>
+                                <span> Draft </span>
+                            </a>
+                        </li> -->
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle arrow-none" href="#" id="registration" role="button"
+                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa-solid fa-baby"></i> Birth
+                <div class="arrow-down"></div>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="registration">
+            <li>Birth</li>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-birth">1.Register Birth</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthEvent">2.Search Birth
+              Register</a>
+            <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/add-childname">3.Add Child Name</a>
+                               <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/new-add-childname">3.New Add Child Name</a> -->
+            <a href="javascript:void(0)" routerLink="/reg/ReporForeignBirth" class="dropdown-item">3.Register Foreign
+              Birth</a>
+            <a href="javascript:void(0)" routerLink="/shared/SearchForeignBirthEvent" class="dropdown-item">4.Search
+              Foreign Birth Register</a>
+            <a href="javascript:void(0)" routerLink="/reg/birthRegisterOldData" class="dropdown-item">5.Add Old Birth
+              Event</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthNAC">6.Search Birth NAC
+              Application</a>
+            <li>Still Birth</li>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/still-register-birth">7.Register Still
+              Birth</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchstillbirthEvent">8.Search Still
+              Birth Register</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchStillBirthNAC">9.Search Still
+              Birth NAC Application</a>
+            <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/stillbirth-register">6.Still Birth Register</a> -->
+
+            <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/birth-register">4.Search Still Birth NAC Application</a> -->
+        </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" href="#" id="Death" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-grave-stone"></i> Death
+            <div class="arrow-down"></div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Death">
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-death"
+              routerLinkActive="active">1.Death Registration</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathEvent"
+              routerLinkActive="active">2.Search Death Register</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/deathRegisterOldData"
+              routerLinkActive="active">3.Add Old Death Event</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathNAC"
+              routerLinkActive="active">4.Search Death NAC Application</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" href="#" id="Adoption" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="far fa-family-pants"></i> Adoption
+            <div class="arrow-down"></div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Adoption">
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/adoption-registration"
+              routerLinkActive="active">1.Register Adaption
+            </a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchAdoptionEvent"
+              routerLinkActive="active">2.Search Adaption Register
+            </a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchAdoptionNAC"
+              routerLinkActive="active">3.Search Adoption NAC Application</a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" href="#" id="GenericMaster" role="button"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="uil uil-database"></i> Generic Master
+            <div class="arrow-down"></div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="GenericMaster">
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/hosiptal-registration"
+              routerLinkActive="active">1.Institution Registration</a>
+            <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/user-registration"
+                                    routerLinkActive="active">2.User
+                                    Registration</a> -->
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/user-creation"
+              routerLinkActive="active">2.User view & Creation</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/registration-unit"
+              routerLinkActive="active">3.Registration Unit & Registrar</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" href="#" id="Jurisdiction" role="button"
+            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-scale-balanced"></i> Jurisdiction
+            <div class="arrow-down"></div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Jurisdiction">
+            <!-- <a href="javascript:void(0)" class="dropdown-item">1.Locality</a> -->
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/locality"
+              routerLinkActive="active">1.Locality</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" href="#" id="reports" role="button" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="uil uil-database"></i> Reports
+            <div class="arrow-down"></div>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="reports">
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/reports"
+              routerLinkActive="active">1.Reports</a>
+            <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/monitoring-report"
+              routerLinkActive="active">2.Monitoring Report</a>
+          </div>
+        </li>
+        </ul>
+        <!-- Sub Register Menu-->
+        <ul class="navbar-nav" *ngIf="urole == '105'">
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+              id="topnav-dashboards" role="button">
+              <i class="uil-home-alt"></i>
+              <span> Home </span>
+            </a>
+          </li>
+
+          <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardtwo"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="uil-dashboard"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li> -->
+
+          <li class="nav-item dropdown">
+            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/inbox" routerLinkActive="active"
+              id="topnav-dashboards" role="button">
+              <i class="mdi mdi-inbox-full-outline"></i>
+              <span> Inbox </span>
+            </a>
+          </li>
+          <!-- <li class="nav-item dropdown">
+                        <a class="nav-link" href="javascript:void(0)" routerLink="/shared/draft"
+                            routerLinkActive="active" id="topnav-dashboards" role="button">
+                            <i class="mdi mdi-inbox-full-outline"></i>
+                            <span> Draft </span>
+                        </a>
+                    </li> -->
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle arrow-none" href="#" id="registration" role="button"
+              data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-baby"></i> Birth
+              <div class="arrow-down"></div>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="registration">
+          <li>Birth</li>
+          <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-birth">1.Register Birth</a>
+          <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthEvent">2.Search Birth
+            Register</a>
+          <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/add-childname">3.Add Child Name</a>
+                               <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/new-add-childname">3.New Add Child Name</a> -->
+          <a href="javascript:void(0)" routerLink="/reg/ReporForeignBirth" class="dropdown-item">3.Register Foreign
+            Birth</a>
+          <a href="javascript:void(0)" routerLink="/shared/SearchForeignBirthEvent" class="dropdown-item">4.Search
+            Foreign Birth Register</a>
+
+          <li>Still Birth</li>
+          <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/still-register-birth">5.Register Still
+            Birth</a>
+          <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchstillbirthEvent">6.Search Still
+            Birth Register</a>
+          <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/stillbirth-register">6.Still Birth Register</a> -->
+    </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle arrow-none" href="#" id="Death" role="button" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="mdi mdi-grave-stone"></i> Death
+        <div class="arrow-down"></div>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="Death">
+        <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-death"
+          routerLinkActive="active">1.Death Registration</a>
+        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathEvent"
+          routerLinkActive="active">2.Search Death Register</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle arrow-none" href="#" id="Adoption" role="button" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="far fa-family-pants"></i> Adoption
+        <div class="arrow-down"></div>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="Adoption">
+        <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/adoption-registration"
+          routerLinkActive="active">1.Register Adaption
+        </a>
+        <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchAdoptionEvent"
+          routerLinkActive="active">2.Search Adaption Register
+        </a>
+      </div>
+    </li>
+    <!-- <li class="nav-item dropdown" >
+                            <a class="nav-link dropdown-toggle arrow-none" href="#" id="Usermanagemant" role="button"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="uil uil-database"></i> User Managemant <div class="arrow-down"></div>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="Usermanagemant">
+                                <a href="javascript:void(0)" class="dropdown-item"
+                                    routerLink="/reg/user-creation" routerLinkActive="active">1.User view & Creation</a>
+                            </div>
+                        </li> -->
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle arrow-none" href="#" id="GenericMaster" role="button" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="uil uil-database"></i> Generic Master
+        <div class="arrow-down"></div>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="GenericMaster">
+        <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/hosiptal-registration"
+          routerLinkActive="active">1.Institution Registration</a>
+        <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/user-registration"
+                                    routerLinkActive="active">2.User
+                                    Registration</a> -->
+      </div>
+    </li>
+    </ul>
+
+    <ul class="navbar-nav" *ngIf="urole == '108'">
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+          id="topnav-dashboards" role="button">
+          <i class="uil-home-alt"></i>
+          <span> Home </span>
+        </a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="javascript:void(0)" routerLink="/shared/inbox" routerLinkActive="active"
+          id="topnav-dashboards" role="button">
+          <i class="mdi mdi-inbox-full-outline"></i>
+          <span> Inbox </span>
+        </a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" routerLink="/shared/draft"
+                    routerLinkActive="active" id="topnav-dashboards" role="button">
+                    <i class="mdi mdi-inbox-full-outline"></i>
+                    <span> Draft </span>
+                </a>
+            </li> -->
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle arrow-none" href="#" id="registration" role="button"
+          data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa-solid fa-baby"></i> Birth
+          <div class="arrow-down"></div>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="registration">
+      <li>Birth</li>
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-birth">1.Register Birth</a>
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthEvent">2.Search Birth
+        Register</a>
+
+      <li>Still Birth</li>
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/still-register-birth">3.Register Still
+        Birth</a>
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchstillbirthEvent">4.Search Still Birth
+        Register</a>
+      <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/stillbirth-register">6.Still Birth Register</a> -->
+  </div>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle arrow-none" href="#" id="Death" role="button" data-bs-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
+      <i class="mdi mdi-grave-stone"></i> Death
+      <div class="arrow-down"></div>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="Death">
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-death"
+        routerLinkActive="active">1.Death Registration</a>
+      <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathEvent"
+        routerLinkActive="active">2.Search Death Register</a>
+    </div>
+  </li>
+  </ul>
+  <!-- Rdo Menu-->
+  <ul class="navbar-nav" *ngIf="urole == '113'">
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+        id="topnav-dashboards" role="button">
+        <i class="uil-home-alt"></i>
+        <span> Home </span>
+      </a>
+    </li>
+
+    <!-- <li class="nav-item dropdown">
+                            <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardtwo"
+                                routerLinkActive="active" id="topnav-dashboards" role="button">
+                                <i class="uil-dashboard"></i>
+                                <span> Dashboard </span>
+                            </a>
+                        </li> -->
+
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="javascript:void(0)" routerLink="/shared/inbox" routerLinkActive="active"
+        id="topnav-dashboards" role="button">
+        <i class="mdi mdi-inbox-full-outline"></i>
+        <span> Inbox </span>
+      </a>
+    </li>
+  </ul>
+  <!-- chep register & Director -->
+  <ul class="navbar-nav" *ngIf="urole == '107' || urole == '101' || urole == '100'">
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="javascript:void(0)" routerLink="/shared/welcome" routerLinkActive="active"
+        id="topnav-dashboards" role="button">
+        <i class="uil-home-alt"></i>
+        <span> Home </span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="javascript:void(0)" routerLink="/shared/dashboardtwo" routerLinkActive="active"
+        id="topnav-dashboards" role="button">
+        <i class="uil-dashboard"></i>
+        <span> Dashboard </span>
+      </a>
+    </li>
+
+    <li class="nav-item dropdown">
+      <a class="nav-link" href="javascript:void(0)" routerLink="/shared/inbox" routerLinkActive="active"
+        id="topnav-dashboards" role="button">
+        <i class="mdi mdi-inbox-full-outline"></i>
+        <span> Inbox </span>
+      </a>
+    </li>
+    <!-- <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" routerLink="/shared/draft" routerLinkActive="active"
+                    id="topnav-dashboards" role="button">
+                    <i class="mdi mdi-inbox-full-outline"></i>
+                    <span> Draft </span>
+                </a>
+            </li> -->
+
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle arrow-none" href="#" id="registration" role="button" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <i class="fa-solid fa-baby"></i> Birth
+        <div class="arrow-down"></div>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="registration">
+    <li>&nbsp; Birth</li>
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-birth">1.Register Birth</a> -->
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthEvent">1.Search Birth Register</a>
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/add-childname">3.Add Child Name</a> -->
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchBirthNAC">2.Search Birth NAC
+      Application</a>
+    <li>&nbsp; Still Birth</li>
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/still-register-birth">5.Register Still Birth</a> -->
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchstillbirthEvent">3.Search Still Birth
+      Register</a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchStillBirthNAC">4.Search Still Birth NAC
+      Application</a>
+    <li>&nbsp; Foreign Birth</li>
+    <a href="javascript:void(0)" routerLink="/shared/SearchForeignBirthEvent" class="dropdown-item">5.Search Foreign
+      Birth Register</a>
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/stillbirth-register">6.Still Birth Register</a> -->
+    <!-- <a href="javascript:void(0)" routerLink="/reg/ReporForeignBirth" class="dropdown-item">7.Register Foreign Birth</a>
+                               <a href="javascript:void(0)" routerLink="/reg/birthRegisterOldData" class="dropdown-item">8.Add Old Birth Event</a> -->
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/birth-register">4.Search Still Birth NAC Application</a> -->
+</div>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle arrow-none" href="#" id="Death" role="button" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="mdi mdi-grave-stone"></i> Death
+    <div class="arrow-down"></div>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="Death">
+    <!-- <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/register-death"
+                                    routerLinkActive="active">1.Death Registration</a> -->
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathEvent"
+      routerLinkActive="active">1.Search Death Register</a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchDeathNAC"
+      routerLinkActive="active">2.Search Death NAC Application</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle arrow-none" href="#" id="Adoption" role="button" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="far fa-family-pants"></i> Adoption
+    <div class="arrow-down"></div>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="Adoption">
+    <!-- <a href="javascript:void(0)" class="dropdown-item"
+                                    routerLink="/reg/adoption-registration" routerLinkActive="active">1.Register
+                                    Adaption
+                                </a> -->
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchAdoptionEvent"
+      routerLinkActive="active">1.Search Adaption Register
+    </a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/SearchAdoptionNAC"
+      routerLinkActive="active">2.Search Adoption NAC Application</a>
+  </div>
+</li>
+
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle arrow-none" href="#" id="GenericMaster" role="button" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="uil uil-database"></i> Generic Master
+    <div class="arrow-down"></div>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="GenericMaster">
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/hosiptal-registration"
+      routerLinkActive="active">1.Institution Registration</a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/user-registration"
+      routerLinkActive="active">2.User Registration</a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/registration-unit"
+      routerLinkActive="active">3.Registration Unit & Registrar</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle arrow-none" href="#" id="Jurisdiction" role="button" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="fa-solid fa-scale-balanced"></i> Jurisdiction
+    <div class="arrow-down"></div>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="Jurisdiction">
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/reg/locality"
+      routerLinkActive="active">1.Locality</a>
+  </div>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle arrow-none" href="#" id="reports" role="button" data-bs-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    <i class="uil uil-database"></i> Reports
+    <div class="arrow-down"></div>
+  </a>
+  <div class="dropdown-menu" aria-labelledby="reports">
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/reports"
+      routerLinkActive="active">1.Reports</a>
+    <a href="javascript:void(0)" class="dropdown-item" routerLink="/shared/monitoring-report"
+      routerLinkActive="active">2.Monitoring Report</a>
+  </div>
+</li>
+</ul>
+</div>
+</nav>
+</div>
+</div>
+
+<div class="content-page creative-style">
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Footer Start -->
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+          © All rights reserved Andhra Pradesh Civil Registration System.
+        </div>
+        <div class="col-md-6">
+          <div class="text-md-end footer-links d-none d-md-block">
+            <a href="javascript: void(0);">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- end Footer -->
+</div>
+
+<div class="modal" tabindex="-1" aria-labelledby="allowLabel" [ngStyle]="{ display: displaymodal }" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bolder" id="allowLabel">Change Password</h5>
+        <button type="button" class="btn-close" (click)="ModalCLose()" data-bs-dismiss="modal"
+          aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="passwordviewornot">
+          <app-changepassword (changepasswordshow)="changebuttonClick()"></app-changepassword>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

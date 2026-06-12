@@ -1,0 +1,1012 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box text-start d-flex justify-content-between align-items-center">
+
+                <div class="col-xl-4">
+                    <h5 class="page-title" *ngIf="viewmodel=='INBOX'"><i class="mdi mdi-account-multiple-outline"></i>
+                        Inbox</h5>
+                </div>
+                <div class="col-xl-8 text-end">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-lg-5 inbox" *ngIf="viewmodel=='INBOX'">
+        <div class="col">
+            <div class="card bg-1" (click)="get_registration_counts('BIRTH');getsubcounts('BIRTH','NEWEVENT')"
+                [ngClass]="{'active':table_card_select=='BIRTH'}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><i class="mdi mdi-mother-nurse icon"></i> Birth</h4>
+                        <h4 class="card-title mb-0">{{birth_depth_counts_array[0]?.CNT_BIRTH}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-2" (click)="get_registration_counts('DEATH');getsubcounts('DEATH','NEWEVENT')"
+                [ngClass]="{'active':table_card_select=='DEATH'}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><i class="mdi mdi-mother-nurse icon"></i> Death</h4>
+                        <h4 class="card-title mb-0">{{birth_depth_counts_array[0]?.CNT_DEATH}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card bg-3" (click)="get_registration_counts('STILLBIRTH');getsubcounts('STILLBIRTH','NEWEVENT')"
+                [ngClass]="{'active':table_card_select=='STILLBIRTH'}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><i class="mdi mdi-mother-nurse icon"></i> Still Birth </h4>
+                        <h4 class="card-title mb-0">{{birth_depth_counts_array[0]?.CNT_STILLBIRTH}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<div class="col">
+            <div class="card bg-4" (click)="get_registration_counts('ADOPTION');getsubcounts('ADOPTION','NEWEVENT')" [ngClass]="{'active':table_card_select=='ADOPTION'}">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title"><i class="mdi mdi-mother-nurse icon"></i> Adoption</h4>
+                        <h4 class="card-title mb-0">{{birth_depth_counts_array[0]?.CNT_ADOPTION}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='INBOX'">
+        <div class="tab-content">
+            <div class="tab-pane active show" id="Pending" role="tabpanel">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-header d-flex cstmheader justify-content-between align-items-center py-3">
+                                <div class="col-xl-4 col-12">
+                                    <h4 class="card-title my-0 text-white lh-1">{{table_card_select}}</h4>
+                                </div>
+                                <div class="col-xl-8 col-12 text-end">
+                                    <ng-container *ngIf="viewmodel=='INBOX'">
+                                        <span class="me-1 text-white"><i class="fa fa-square text-success"></i> Within
+                                            time limit 21 days</span>
+                                        <span class="me-1 text-white"><i class="fa fa-square text-warning"></i> After 21
+                                            days but within 30 days</span>
+                                        <span class="me-1 text-white"><i class="fa fa-square text-primary"></i> After 31
+                                            days but within one year</span>
+                                        <span class="me-1 text-white"><i class="fa fa-square text-danger"></i> After one
+                                            year</span></ng-container>
+                                </div>
+                            </div>
+                            <div class="card-body pt-1">
+
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+
+
+                                        <p-table id="tblbirthdepthtable" [value]="birth_depth_table_array"
+                                            styleClass="p-datatable-gridlines p-datatable-striped p-datatable-sm"
+                                            [paginator]="true" #dt2 [rows]="birth_depth_table_array.length"
+                                            [rowsPerPageOptions]="[10, 20, 30,40,{ showAll: 'All' }]" [paginator]="true"
+                                            sortMode="multiple" [globalFilterFields]="['APPLICATION_ID']"
+                                            [tableStyle]="{ 'min-width': '120rem','min-height':'90%'}"
+                                            [scrollable]="true" scrollHeight="560px">
+                                            <ng-template pTemplate="caption">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="col-md-10 col-12">
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'NEWEVENT')">New
+                                                            Registered :
+                                                            {{registration_counts_array[0]?.CNT_NEWEVENTS}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            *ngIf="table_card_select!='STILLBIRTH' && table_card_select!='ADOPTION'"
+                                                            (click)="getsubcounts(table_card_select,'CORRECTION')">Corrections
+                                                            :
+                                                            {{registration_counts_array[0]?.CORRECTION_REQUESTS}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'DRAFT')">Draft
+                                                            Applications :
+                                                            {{registration_counts_array[0]?.DRAFT}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'NAC')">NAC
+                                                            Applications :
+                                                            {{registration_counts_array[0]?.NAC}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'REJECT')">Rejected
+                                                            Applications :
+                                                            {{registration_counts_array[0]?.REJECTED}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'PAYEXTRA')">Pay and
+                                                            Extract :
+                                                            {{registration_counts_array[0]?.DIGITIZATION}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            *ngIf="table_card_select!='ADOPTION'"
+                                                            (click)="getsubcounts(table_card_select,'CLARIFICATION')">Clarifications
+                                                            :
+                                                            {{registration_counts_array[0]?.CLARIFICATIONS}}</button>
+                                                        <button class="btn btn-primary btn-sm me-1"
+                                                            (click)="getsubcounts(table_card_select,'CANCELLATION')">Cancellation
+                                                            :
+                                                            {{registration_counts_array[0]?.CANCELLATION_REQUESTS}}</button>
+                                                        <!-- <button class="btn btn-primary btn-sm me-1"  (click)="getsubcounts(table_card_select,'HISTORY')">History :
+                                                                    {{registration_counts_array[0]?.HISTORY}}</button> -->
+                                                    </div>
+                                                    <div class="col-md-2 col-12 text-end">
+
+                                                        <span class="p-input-icon-left">
+                                                            <i class="pi pi-search"></i>
+                                                            <input pInputText type="text"
+                                                                (input)="dt2.filterGlobal($event.target.value, 'contains')"
+                                                                placeholder="Search keyword" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                            </ng-template>
+                                            <ng-template pTemplate="header">
+                                                <tr class="first">
+                                                    <th pSortableColumn="SNO">SNo.<p-sortIcon field="SNO"></p-sortIcon>
+                                                    </th>
+                                                    <th pSortableColumn="APPLICATION_ID">Application Ref No.<p-sortIcon
+                                                            field="APPLICATION_ID"></p-sortIcon> <p-columnFilter
+                                                            type="APPLICATION_ID" field="APPLICATION_ID"
+                                                            display="menu" /></th>
+                                                    <th pSortableColumn="REGISTRATION_ID">Reg No<p-sortIcon
+                                                            field="REGISTRATION_ID"></p-sortIcon></th>
+                                                    <th pSortableColumn="CHILD_FULLNAME"
+                                                        *ngIf="table_card_select=='ADOPTION' || table_card_select=='BIRTH'">
+                                                        Child Name<p-sortIcon field="CHILD_FULLNAME"></p-sortIcon></th>
+                                                    <th pSortableColumn="MOTHER_FULLNAME">Mother's Name<p-sortIcon
+                                                            field="MOTHER_FULLNAME"></p-sortIcon></th>
+                                                    <th *ngIf="table_card_select=='STILLBIRTH' || table_card_select=='BIRTH'"
+                                                        pSortableColumn="FATHER_FULLNAME">Father's Name<p-sortIcon
+                                                            field="FATHER_FULLNAME"></p-sortIcon></th>
+                                                    <th *ngIf="table_card_select=='DEATH'"
+                                                        pSortableColumn="DECEASED_FULLNAME">Deceased Name<p-sortIcon
+                                                            field="DECEASED_FULLNAME"></p-sortIcon></th>
+                                                    <th *ngIf="table_card_select=='STILLBIRTH' || table_card_select=='BIRTH'"
+                                                        pSortableColumn="CHILD_DOB">Date of Birth<p-sortIcon
+                                                            field="SNO"></p-sortIcon></th>
+                                                    <th *ngIf="table_card_select=='DEATH'" pSortableColumn="CHILD_DOB">
+                                                        Date of Death<p-sortIcon field="CHILD_DOB"></p-sortIcon></th>
+                                                    <th pSortableColumn="REPORTING_DATE">Date of Reporting<p-sortIcon
+                                                            field="REPORTING_DATE"></p-sortIcon></th>
+                                                    <th pSortableColumn="FILE_STATUS">Submitted by<p-sortIcon
+                                                            field="FILE_STATUS"></p-sortIcon></th>
+                                                    <th pSortableColumn="APPLICATION_TYPE">Application Type
+                                                        <p-columnFilter field="APPLICATION_TYPE" matchMode="equals"
+                                                            display="menu">
+                                                            <ng-template pTemplate="filter" let-value
+                                                                let-filter="filterCallback">
+                                                                <p-dropdown [ngModel]="value" [options]="statuses"
+                                                                    (onChange)="filter($event.value)"
+                                                                    placeholder="Search by Application Type">
+                                                                    <ng-template let-option pTemplate="item">
+                                                                        <span
+                                                                            [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                                                    </ng-template>
+                                                                </p-dropdown>
+                                                            </ng-template>
+                                                        </p-columnFilter>
+                                                    </th>
+                                                    <th pSortableColumn="FILE_STATUS">Status<p-sortIcon
+                                                            field="FILE_STATUS"></p-sortIcon></th>
+                                                    <th pSortableColumn="">Action<p-sortIcon field=""></p-sortIcon></th>
+                                                    <!-- <th pSortableColumn="">Docments View<p-sortIcon field=""></p-sortIcon></th> -->
+                                                    <th pSortableColumn="">Services<p-sortIcon field=""></p-sortIcon>
+                                                    </th>
+
+                                                </tr>
+                                            </ng-template>
+                                            <ng-template pTemplate="body" let-col>
+                                                <tr class="first">
+                                                    <td>{{col.SNO}}</td>
+                                                    <td class="text-white"
+                                                        [ngClass]="{'bg-success':status==='1','bg-warning':status==='2','bg-primary':status==='3','bg-danger':status==='4'}">
+                                                        {{col.APPLICATION_ID}}</td>
+                                                    <td>{{col.REGISTRATION_ID}}</td>
+                                                    <td
+                                                        *ngIf="table_card_select=='ADOPTION' || table_card_select=='BIRTH'">
+                                                        <span [innerHTML]="col.CHILD_FULLNAME"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span [innerHTML]="col.MOTHER_FULLNAME"></span>
+                                                    </td>
+                                                    <td
+                                                        *ngIf="table_card_select=='STILLBIRTH' || table_card_select=='BIRTH'">
+                                                        <span [innerHTML]="col.FATHER_FULLNAME"></span>
+                                                    </td>
+                                                    <td *ngIf="table_card_select=='DEATH'">
+                                                        <span [innerHTML]="col.DECEASED_FULLNAME"></span>
+                                                    </td>
+                                                    <td
+                                                        *ngIf="table_card_select=='STILLBIRTH' || table_card_select=='BIRTH'">
+                                                        <span class="" [innerHTML]="col.CHILD_DOB"></span>
+                                                    </td>
+                                                    <td *ngIf="table_card_select=='DEATH'">
+                                                        <span class="" [innerHTML]="col.DECEASED_DOD"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="" [innerHTML]="col.REPORTING_DATE"></span>
+                                                    </td>
+                                                    <td>{{col.SUBMITED_BY}}</td>
+                                                    <td>{{col.APPLICATION_TYPE}} ({{col.FORM_TYPE}})</td>
+                                                    <td>{{col.FILE_STATUS_TEXT}}</td>
+                                                    <td><button class="btn btn-success btn-sm"
+                                                            *ngIf="table_card_sub_select=='NEWEVENT' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getproceed(col)">Proceed</button>
+                                                        <button class="btn btn-success btn-sm"
+                                                            *ngIf="table_card_sub_select=='NAC' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getproceed(col)">Proceed</button>
+                                                        <button class="btn btn-primary btn-sm"
+                                                            *ngIf="table_card_sub_select=='CORRECTION' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getCorrection(col,table_card_select,table_card_sub_select)">Correction</button>
+                                                        <button class="btn btn-primary btn-sm"
+                                                            *ngIf="table_card_sub_select=='CLARIFICATION' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getCorrection(col,table_card_select,table_card_sub_select)">Clarification</button>
+                                                        <button class="btn btn-primary btn-sm"
+                                                            *ngIf="table_card_sub_select=='CANCELLATION' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getCorrection(col,table_card_select,table_card_sub_select)">Cancellation</button>
+                                                        <!-- <button class="btn btn-primary btn-sm" *ngIf="table_card_sub_select=='REJECT' && col.PROCED_BUTTON == '1'"
+                                                            (click)="getCorrection(col,table_card_select,table_card_sub_select)">Rejected</button> -->
+                                                        <div *ngIf="table_card_sub_select === 'DRAFT'"
+                                                            class="btn-group">
+                                                            <button class="btn btn-primary btn-sm"
+                                                                (click)="getCorrection(col, table_card_select, table_card_sub_select)">
+                                                                Draft
+                                                            </button>
+
+                                                            <button
+                                                                class="btn btn-sm custom-trash d-flex align-items-center"
+                                                                (click)="draftDeleteConfirmation(col)">
+                                                                <i class="fa-solid fa-trash me-1"></i> Trash
+                                                            </button>
+                                                        </div>
+
+
+                                                        <!-- <button class="btn btn-primary btn-sm" *ngIf="table_card_sub_select=='DRAFT'"
+                                                            (click)="getCorrection(col,table_card_select,table_card_sub_select)">Draft</button>
+                                                            <button class="btn btn-secondary btn-sm" *ngIf="table_card_sub_select=='DRAFT'"
+                                                            (click)="draftdelteconfrimation(col)">Trash</button> -->
+                                                        <!-- <a href="javascript:void(0)" *ngIf="table_card_sub_select=='DRAFT'"
+                    (click)="draftdelteconfrimation(col)"><i
+                    class="fa-solid fa-trash ps-2 text-danger"></i></a> -->
+                                                    </td>
+                                                    <!-- <td>
+                                                            <button type="submit" class="btn btn-primary my-2 me-2" (click)="get_document_details(col)"> View
+                                                                Document(s)</button>
+                                                        </td> -->
+                                                    <td><button class="btn btn-success btn-sm"
+                                                            (click)="applicationflow(col)" data-bs-toggle="modal"
+                                                            data-bs-target="#appFlow">Application Flow</button></td>
+
+                                                </tr>
+                                            </ng-template>
+
+                                        </p-table>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane show" id="Approved" role="tabpanel">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0 table-hover">
+                                                <thead class="table-dark text-center">
+                                                    <tr>
+                                                        <th class="text-center">Sno</th>
+                                                        <th>File type</th>
+                                                        <th>File code</th>
+                                                        <th>File from</th>
+                                                        <th>File subject</th>
+                                                        <th>File datetime</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-container>
+                                                        <tr *ngFor=" let ar of File_list_approved_arry">
+                                                            <td class="text-center">{{ar.SNO}}</td>
+                                                            <td>{{ar.FILE_TYPE}}</td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Association'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Getfiledetails(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#offcanvasRight"
+                                                                    aria-controls="offcanvasRight">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Certificate'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_certificate_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#certificate_modal"
+                                                                    aria-controls="certificate_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Inventory request'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_inventory_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#inventory_request"
+                                                                    aria-controls="inventory_request">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Inventory purchase'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_purchase_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#inventory_purchase"
+                                                                    aria-controls="inventory_purchase">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Incentives'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_incentive_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#incentive"
+                                                                    aria-controls="incentive">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Admissions'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_admission_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#final_list_modal"
+                                                                    aria-controls="final_list_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Players'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_player_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#player_modal"
+                                                                    aria-controls="player_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Assets'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_assets_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#asset_premises_modal"
+                                                                    aria-controls="asset_premises_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td>{{ar.FILE_FROM}}</td>
+
+                                                            <td>{{ar.FILE_SUBJECT}}</td>
+                                                            <td>{{ar.FILE_FROM_DT}} <span
+                                                                    class="text-danger">({{ar.TIME_AGO}})</span></td>
+
+                                                        <tr>
+
+
+                                                    </ng-container>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane show" id="Rejected" role="tabpanel">
+                <div class="row">
+                    <div class="col-xxl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12 col-12">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered mb-0 table-hover">
+                                                <thead class="table-dark text-center">
+                                                    <tr>
+                                                        <th class="text-center">Sno</th>
+                                                        <th>File type</th>
+                                                        <th>File code</th>
+                                                        <th>File from</th>
+                                                        <th>File subject</th>
+                                                        <th>File datetime</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <ng-container>
+                                                        <tr *ngFor=" let ar of File_list_rejected_arry">
+                                                            <td class="text-center">{{ar.SNO}}</td>
+                                                            <td>{{ar.FILE_TYPE}}</td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Association'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Getfiledetails(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#offcanvasRight"
+                                                                    aria-controls="offcanvasRight">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Certificate'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_certificate_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#certificate_modal"
+                                                                    aria-controls="certificate_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Inventory request'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_inventory_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#inventory_request"
+                                                                    aria-controls="inventory_request">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Inventory purchase'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_purchase_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#inventory_purchase"
+                                                                    aria-controls="inventory_purchase">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Incentives'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_incentive_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#incentive"
+                                                                    aria-controls="incentive">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Admissions'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_admission_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#final_list_modal"
+                                                                    aria-controls="final_list_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Players'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_player_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#player_modal"
+                                                                    aria-controls="player_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td *ngIf="ar.FILE_TYPE=='Assets'">
+                                                                <a href="javascript:void(0)"
+                                                                    (click)="Get_assets_file_details(ar)"
+                                                                    data-bs-toggle="offcanvas"
+                                                                    data-bs-target="#asset_premises_modal"
+                                                                    aria-controls="asset_premises_modal">
+                                                                    <span> {{ar.FILE_CODE}} </span>
+                                                                </a>
+                                                            </td>
+                                                            <td>{{ar.FILE_FROM}}</td>
+
+                                                            <td>{{ar.FILE_SUBJECT}}</td>
+                                                            <td>{{ar.FILE_FROM_DT}} <span
+                                                                    class="text-danger">({{ar.TIME_AGO}})</span></td>
+
+                                                        <tr>
+
+
+                                                    </ng-container>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='BIRTH' || viewmodel=='BirthCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-birthview [applicationid]="applicationid" [table_card_sub_select]="applicationtype" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-birthview>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='DEATH' || viewmodel=='DeathCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-deathview [applicationid]="applicationid" [table_card_sub_select]="applicationtype" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-deathview>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='STILLBIRTH' || viewmodel=='StillbirthCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-stillbirthview [applicationid]="applicationid" [table_card_sub_select]="applicationtype"
+            [selecttab]="viewmodel" [preview_tittle]="preview_tittle"
+            [typeofcorrection]="typeofcorrection"></app-stillbirthview>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='ADOPTION' || viewmodel=='AdoptionCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-adoptionview [applicationid]="applicationid" [table_card_sub_select]="applicationtype"
+            [selecttab]="viewmodel" [preview_tittle]="preview_tittle"
+            [typeofcorrection]="typeofcorrection"></app-adoptionview>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='HISTORY'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-history [applicationid]="applicationid" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle"></app-history>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='INFO'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-applicationinfo [applicationid]="applicationid" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle"></app-applicationinfo>
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='BIRTHClarification'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <!-- <app-stillbirthcorrectionview [applicationid]="applicationid" [selecttab]="viewmodel"
+        [preview_tittle]="preview_tittle"></app-stillbirthcorrectionview> -->
+
+        <!-- <app-birthcorrectionview [applicationid]="applicationid" [selecttab]="viewmodel"
+        [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-birthcorrectionview> -->
+        <app-birthseekclarification [applicationid]="applicationid" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-birthseekclarification>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='STILLBIRTHClarification'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-stillbirthclarification [applicationid]="applicationid" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-stillbirthclarification>
+
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='DEATHClarification'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <!-- <app-deathcorrectionview [applicationid]="applicationid" [selecttab]="viewmodel"
+        [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-deathcorrectionview>  -->
+        <app-deathseekclarification [applicationid]="applicationid" [selecttab]="viewmodel"
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-deathseekclarification>
+
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='BIRTHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title"><i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-birthhome [NAC_application_Id]="NAC_application_Id" [brapplicationid]="applicationid"
+            [drafttype]="drafttype" [preview_tittle]="preview_tittle"></app-birthhome>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='FOREIGNBIRTHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title"><i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-repor-foreign-birth [brapplicationid]="applicationid" [drafttype]="drafttype"
+            [preview_tittle]="preview_tittle"></app-repor-foreign-birth>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='DEATHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title"><i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-deathhome [NAC_application_Id]="NAC_application_Id" [brapplicationid]="applicationid"
+            [drafttype]="drafttype" [preview_tittle]="preview_tittle"></app-deathhome>
+
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='STILLBIRTHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title"><i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-stillbirthhome [brapplicationid]="applicationid" [drafttype]="drafttype"
+            [preview_tittle]="preview_tittle"></app-stillbirthhome>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='ADOPTIONEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">
+                <i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})
+            </h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-adoptionregistration [NAC_application_Id]="NAC_application_Id" [brapplicationid]="applicationid"
+            [drafttype]="drafttype" [preview_tittle]="preview_tittle"></app-adoptionregistration>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='OLDBIRTHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">
+                <i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})
+            </h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-birth-register-old-data [brapplicationid]="applicationid" [drafttype]="drafttype"
+            [preview_tittle]="preview_tittle"></app-birth-register-old-data>
+    </div>
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='OLDDEATHEDIT'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">
+                <i class="fa-solid fa-baby"></i>{{preview_tittle}} ({{applicationid}})
+            </h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-death-register-old-data [brapplicationid]="applicationid" [drafttype]="drafttype"
+            [preview_tittle]="preview_tittle"></app-death-register-old-data>
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='BirthSeekClarification'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-birth-cancellation [applicationid]="applicationid" [table_card_sub_select]="applicationtype"
+            [selecttab]="viewmodel" [preview_tittle]="preview_tittle"
+            [typeofcorrection]="typeofcorrection"></app-birth-cancellation>
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='OldBirthCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationregid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back to Search
+                </button>
+            </div>
+        </div>
+        <app-oldbirthcorrectionview [applicationid]="applicationid" [applicationregid]="applicationregid"
+            [selecttab]="viewmodel" [preview_tittle]="preview_tittle" [oldbirthview]="oldbirthview" [table_card_sub_select]="applicationtype"
+            [typeofcorrection]="typeofcorrection"></app-oldbirthcorrectionview>
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='OldDeathCancellation'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationregnumber}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-olddeathcorrectionview [applicationid]="applicationid" [applicationregnumber]="applicationregnumber"  [olddeathview]="olddeathview" 
+            [preview_tittle]="preview_tittle" [typeofcorrection]="typeofcorrection"></app-olddeathcorrectionview>
+    </div>
+
+    <div class="col-xl-12 col-lg-12" *ngIf="viewmodel=='DeathSeekClarification'">
+        <div class="page-title-box d-flex justify-content-between align-items-center">
+            <h5 class="page-title">{{preview_tittle}} ({{applicationid}})</h5>
+            <div>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="viewHistory()">
+                    <i class="fa-regular fa-clock-rotate-left pe-2"></i>View History
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2" (click)="showInfo()">
+                    <i class="fa-regular fa-circle-info pe-2"></i>Info
+                </button>
+                <button type="button" class="btn btn-primary my-2 me-2 float-end" (click)="Backwindow()">
+                    <i class="fa-solid fa-angles-left pe-2"></i>Back
+                </button>
+            </div>
+        </div>
+        <app-death-cancellation [applicationid]="applicationid" [table_card_sub_select]="applicationtype"
+            [selecttab]="viewmodel" [preview_tittle]="preview_tittle"
+            [typeofcorrection]="typeofcorrection"></app-death-cancellation>
+    </div>
+
+    <div class="loading" *ngIf="isspinnershow">
+        <img src="assets/images/process.gif" height="100px" />
+    </div>
+</div>
+
+
+<div class="modal-backdrop fade" [class.show]="isdocModalVisible" *ngIf="isdocModalVisible">
+</div>
+
+<!-- Modal -->
+<div class="modal fade" tabindex="-1" [class.show]="isdocModalVisible"
+    [ngStyle]="{'display': isdocModalVisible ? 'block' : 'none', 'opacity': isdocModalVisible ? '1' : '0'}"
+    aria-labelledby="allowLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="width:980px;">
+            <div class="modal-header">
+                <button type="button" class="btn-close" (click)="DocModalCLose()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="width:980px;">
+                <div class="card reg-card mb-1" *ngIf="documentlist.length>0">
+                    <div class="card-body p-2">
+                        <div class="container-fluid">
+
+                            <div class="row border-bottom border border-light"
+                                *ngFor="let doc of documentlist; index as i">
+                                <div class="col-xl-1 col-1">{{ i + 1 }}</div>
+                                <div class="col-xl-4 col-12">{{ doc.DOCUMENT_NAME_TEL }}</div>
+                                <div class="col-xl-4 col-12">{{ doc.DOCUMENT_DESCRIPTION }}</div>
+                                <div class="col-xl-3 col-12 text-end">
+                                    <figure *ngIf="doc.DOCUMENT_PATH">
+                                        <a class="text-center me-1 pdf-thumb position-relative d-block h-100"
+                                            *ngIf="isImage(doc.DOCUMENT_PATH)"
+                                            [href]="contentshowurl + doc.DOCUMENT_PATH" data-fancybox="gallery">
+                                            <img [src]="contentshowurl + doc.DOCUMENT_PATH"
+                                                [alt]="doc.DOCUMENT_DESCRIPTION" class="img-fluid" />
+                                            <i class="mdi mdi-eye me-1"></i>View
+
+                                        </a>
+                                        <a class="" *ngIf="isPDF(doc.DOCUMENT_PATH)" data-fancybox="gallery"
+                                            data-type="iframe"
+                                            [data-src]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)"
+                                            [href]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)">
+
+                                            <div class="card border-dashed rounded-0 pdf-thumb">
+                                                <div class="card-body text-center p-0">
+                                                    <i class="fa fa-eye"></i>
+                                                    <iframe [src]="getSafeUrl(contentshowurl + doc.DOCUMENT_PATH)"
+                                                        style="width: 100%; height: 80%; border: none;">
+                                                    </iframe>View
+                                                </div>
+                                            </div>
+                                        </a>
+
+                                    </figure>
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="DocModalCLose()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end::Modal-->
+
+
+<div class="modal fade" id="appFlow" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    Application Flow : {{application_flow_array[0]?.APPLICATION_ID}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 col-12">
+                    <div class="Scriptcontent" *ngFor="let ar of application_flow_array">
+                        <div>{{ar.ACTION_USER}}</div>
+                        <div>{{ar.USER_DESIGNATION}}</div>
+                        <div class="step step-active">
+                            <div>
+                                <div class="circle"><i class="mdi mdi-check"></i>{{ar.SNO}}</div>
+
+                            </div>
+                            <div>
+                                <div class="title">{{ar.ACTION_NOTE}}</div>
+                                <div class="caption">{{ar.NOTE_TEXT}}</div>
+                                <div class="caption">{{ar.NOTE_DATE}}</div>
+                            </div>
+                        </div>
+                        <!-- <div class="step step-active">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">{{ar.NOTE_DATE}}</div>
+                                <div class="caption">23-12-2024 01:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div>
+                                <div class="circle">3</div>
+                            </div>
+                            <div>
+                                <div class="title">Statistical-Draft</div>
+                                <div class="caption">23-12-2024 01:00 PM</div>
+                            </div>
+                        </div>
+                        <div class="step">
+                            <div>
+                                <div class="circle">4</div>
+                            </div>
+                            <div>
+                                <div class="title">Submitted for registration</div>
+                                <div class="caption">23-12-2024 01:00 PM</div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const myModal = new bootstrap.Modal(
+        document.getElementById("modalId"),
+        options,
+    );
+</script>
