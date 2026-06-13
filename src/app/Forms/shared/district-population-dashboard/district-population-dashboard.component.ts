@@ -58,8 +58,6 @@ export class DistrictPopulationDashboardComponent {
 
   {
     districtName: 'East Godavari',
-
-    districtYearWiseData: {
       ageDistribution: {
   age0To14: 14.94,
   age15To59: 69.58,
@@ -74,6 +72,8 @@ dependencyRatio: {
     age2024: 65.95,
     age2025: 66.18
   },
+
+    districtYearWiseData: {
   districtSexRatio: 1044,
      2023: {
     totalPopulation: 1963922,   // Col 20
@@ -4028,14 +4028,15 @@ ageDistribution: {
     this.districtDetails?.dependencyRatio?.childDependency || 0;
   this.dashboardSummary.oldAgeDependency =
     this.districtDetails?.dependencyRatio?.oldAgeDependency || 0;
+    const ageDistribution = this.districtDetails?.ageDistribution || {};
     this.loadBarChart();
     this.loadLineChart();
     this.loadMedianAgeAtDeathChart();
     this.loadSexRatioChart();
     this.loadAgeWiseChart(
-    14.94, // 0-14 Years
-    69.58, // 15-59 Years
-    15.48  // 60+ Years
+    ageDistribution.age0To14 || 0,
+    ageDistribution.age15To59 || 0,
+    ageDistribution.age60Plus || 0
   );
   }
   onMandalChange(event: any, mandal: any) {
