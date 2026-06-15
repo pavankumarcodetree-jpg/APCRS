@@ -58,6 +58,9 @@ export class DistrictPopulationDashboardComponent {
 
   {
     districtName: 'East Godavari',
+         population2001: 1708018,
+     population2011:1818849,
+     annualExponantional:0.0063,
       ageDistribution: {
   age0To14: 14.94,
   age15To59: 69.58,
@@ -109,13 +112,13 @@ dependencyRatio: {
   },
 
   2026: {
-    totalPopulation: 1947731,
-    totalBirths: 3220,
-    totalDeaths: 4592,
-    tfr: 1.01,
+    totalPopulation: 0,
+    totalBirths: 0,
+    totalDeaths: 0,
+    tfr: 0,
     sexRatio: 0,
-    birthRate: 1.65,
-    deathRate: 2.36
+    birthRate: 0,
+    deathRate: 0
   }
 
     },
@@ -123,6 +126,9 @@ dependencyRatio: {
       "mandals": [
     {
       "mandalName": "Anaparthy",
+        population2001: 68519,
+  population2011: 70859,
+  annualExponantional: 0.0034,
       ageDistribution: {
   age0To14: 13.88,
   age15To59: 71.15,
@@ -181,6 +187,9 @@ sexRatio: { 2023: 1059, 2024: 1059, 2025: 1059 },
     },
     {
       "mandalName": "Biccavolu",
+        population2001: 67717,
+  population2011: 70277,
+  annualExponantional: 0.0037,
       ageDistribution: {
   age0To14: 14.64,
   age15To59: 70.64,
@@ -227,17 +236,20 @@ sexRatio: { 2023: 1034, 2024: 1034, 2025: 1034 },
         sexRatio: 104,
         "populationGrowthRate": -0.23
       },
-        // "2026": {
-        //   "totalPopulation": 74256,
-        //   "totalBirths": 84,
-        //   "totalDeaths": 180,
-        //   "tfr": 0.82,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Chagallu",
+        population2001: 64371,
+       population2011: 64774,
+      annualExponantional: 0.0006,
       ageDistribution: {
   age0To14: 15.79,
   age15To59: 70.38,
@@ -284,17 +296,20 @@ sexRatio: { 2023: 1049, 2024: 1049, 2025: 1049 },
         sexRatio: 95,
         "populationGrowthRate": 0.23
       },
-        // "2026": {
-        //   "totalPopulation": 66456,
-        //   "totalBirths": 123,
-        //   "totalDeaths": 193,
-        //   "tfr": 1.03,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Devarapalle",
+        population2001: 72324,
+  population2011: 77971,
+  annualExponantional: 0.0075,
       ageDistribution: {
   age0To14: 16.14,
   age15To59: 69.98,
@@ -342,17 +357,20 @@ sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
         "populationGrowthRate": 0.05
       },
     
-        // "2026": {
-        //   "totalPopulation": 85382,
-        //   "totalBirths": 146,
-        //   "totalDeaths": 200,
-        //   "tfr": 0.98,
-        //   "sexRatio": 0,
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0,
+        }
       }
     },
     {
       "mandalName": "Gokavaram",
+        population2001: 67557,
+       population2011: 69596,
+      annualExponantional: 0.0030,
       ageDistribution: {
   age0To14: 17.43,
   age15To59: 69.79,
@@ -399,17 +417,20 @@ sexRatio: { 2023: 1036, 2024: 1036, 2025: 1036 },
         sexRatio: 125,
         "populationGrowthRate": 0.41
       },
-        // "2026": {
-        //   "totalPopulation": 73961,
-        //   "totalBirths": 164,
-        //   "totalDeaths": 188,
-        //   "tfr": 1.29,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Gopalapuram",
+        population2001: 59728,
+  population2011: 62597,
+  annualExponantional: 0.0047,
       ageDistribution: {
   age0To14: 16.20,
   age15To59: 68.39,
@@ -466,6 +487,9 @@ medianAgeAtDeath: {
     },
     {
       "mandalName": "Kadiam",
+        population2001: 83857,
+  population2011: 90499,
+  annualExponantional: 0.0076,
       ageDistribution: {
   age0To14: 15.46,
   age15To59: 72.94,
@@ -512,17 +536,20 @@ sexRatio: { 2023: 1029, 2024: 1029, 2025: 1029 },
         sexRatio: 116 ,
         "populationGrowthRate": -0.01
       },
-        // "2026": {
-        //   "totalPopulation": 100640,
-        //   "totalBirths": 154,
-        //   "totalDeaths": 251,
-        //   "tfr": 0.99,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Korukonda",
+        population2001: 76645,
+  population2011: 79553,
+  annualExponantional: 0.0037,
       ageDistribution: {
   age0To14: 16.85,
   age15To59: 70.65,
@@ -560,6 +587,9 @@ sexRatio: { 2023: 1017, 2024: 1017, 2025: 1017 },
         "populationGrowthRate": 0.1
       },
       "2025": {
+          population2001: 108159,
+  population2011: 108445,
+  annualExponantional: 0.0003,
         "totalPopulation": 83414,
         "totalBirths": 720,
         "totalDeaths": 718,
@@ -569,17 +599,20 @@ sexRatio: { 2023: 1017, 2024: 1017, 2025: 1017 },
         sexRatio: 116,
         "populationGrowthRate": 0.06
       },
-        // "2026": {
-        //   "totalPopulation": 84802,
-        //   "totalBirths": 154,
-        //   "totalDeaths": 206,
-        //   "tfr": 1.11,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr":0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Kovvur",
+        population2001: 108159,
+  population2011: 108445,
+  annualExponantional: 0.0003,
       ageDistribution: {
   age0To14: 15.29,
   age15To59: 70.38,
@@ -637,6 +670,9 @@ sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
     },
     {
       "mandalName": "Nallajerla",
+        population2001: 75031,
+  population2011: 80388,
+  annualExponantional: 0.0069,
       ageDistribution: {
   age0To14: 15.41,
   age15To59: 69.91,
@@ -683,17 +719,20 @@ sexRatio: { 2023: 1050, 2024: 1050, 2025: 1050 },
          sexRatio: 101,
         "populationGrowthRate": 0.2
       },
-        // "2026": {
-        //   "totalPopulation": 88782,
-        //   "totalBirths": 167,
-        //   "totalDeaths": 182,
-        //   "tfr": 0.97,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Nidadavole",
+        population2001: 111908,
+  population2011: 114245,
+  annualExponantional: 0.0021,
       ageDistribution: {
   age0To14: 15.84,
   age15To59: 69.88,
@@ -740,17 +779,20 @@ sexRatio: { 2023: 1049, 2024: 1049, 2025: 1049 },
         sexRatio: 101,
         "populationGrowthRate": 0.11
       },
-        // "2026": {
-        //   "totalPopulation": 119292,
-        //   "totalBirths": 206,
-        //   "totalDeaths": 273,
-        //   "tfr": 1.05,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0,
+        }
       }
     },
     {
       "mandalName": "Peravali",
+        population2001: 69312,
+  population2011: 70194,
+  annualExponantional: 0.0013,
       ageDistribution: {
   age0To14: 15.48,
   age15To59: 68.62,
@@ -798,16 +840,19 @@ sexRatio: { 2023: 1021, 2024: 1021, 2025: 1021 },
         "populationGrowthRate": 0.13
       },
         "2026": {
-          "totalPopulation": 72636,
-          "totalBirths": 121,
-          "totalDeaths": 149,
-          "tfr": 1.03,
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
           "sexRatio": 0
         }
       }
     },
     {
       "mandalName": "Rajahmundry Rural",
+        population2001: 137712,
+  population2011: 166973,
+  annualExponantional: 0.0193,
       ageDistribution: {
   age0To14: 15.20,
   age15To59: 72.54,
@@ -854,17 +899,20 @@ sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
         sexRatio: 112,
         "populationGrowthRate": 0.03
       },
-        // "2026": {
-        //   "totalPopulation": 212836,
-        //   "totalBirths": 323,
-        //   "totalDeaths": 460,
-        //   "tfr": 0.86,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Rajahmundry Urban",
+        population2001: 315251,
+  population2011: 341831,
+  annualExponantional: 0.0081,
       ageDistribution: {
   age0To14: 13.53,
   age15To59: 72.08,
@@ -911,17 +959,20 @@ sexRatio: { 2023: 1077, 2024: 1077, 2025: 1077 },
         sexRatio: 112,
         "populationGrowthRate": 0.03
       },
-        // "2026": {
-        //   "totalPopulation": 321535,
-        //   "totalBirths": 507,
-        //   "totalDeaths": 660,
-        //   "tfr": 1.08,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Rajanagaram",
+        population2001: 92916,
+  population2011: 106085,
+  annualExponantional: 0.0133,
       ageDistribution: {
   age0To14: 16.16,
   age15To59: 71.82,
@@ -968,16 +1019,19 @@ medianAgeAtDeath: {
         sexRatio: 114,
         "populationGrowthRate": 0.07
       },
-        // "2026": {
-        //   "totalPopulation": 126069,
-        //   "totalBirths": 204,
-        //   "totalDeaths": 254,
-        //   "tfr": 0.97
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0
+        }
       }
     },
     {
       "mandalName": "Rangampeta",
+        population2001: 54623,
+  population2011: 57106,
+  annualExponantional: 0.0044,
       ageDistribution: {
   age0To14: 15.94,
   age15To59: 70.50,
@@ -1024,17 +1078,20 @@ sexRatio: { 2023: 1001, 2024: 1001, 2025: 1001 },
         sexRatio: 93,
         "populationGrowthRate": 0.07
       },
-        // "2026": {
-        //   "totalPopulation": 61228,
-        //   "totalBirths": 86,
-        //   "totalDeaths": 148,
-        //   "tfr": 0.96,
-        //   "sexRatio": 0
-        // }
+         "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
       "mandalName": "Seethanagaram",
+        population2001: 56331,
+  population2011: 58182,
+  annualExponantional: 0.0032,
       ageDistribution: {
   age0To14: 14.29,
   age15To59: 69.69,
@@ -1081,17 +1138,20 @@ medianAgeAtDeath: {
         sexRatio: 112,
         "populationGrowthRate": 0.06
       },
-        // "2026": {
-        //   "totalPopulation": 70552,
-        //   "totalBirths": 137,
-        //   "totalDeaths": 200,
-        //   "tfr": 1.15,
-        //   "sexRatio": 0,
-        // }
+        "2026": {
+          "totalPopulation": 70552,
+          "totalBirths": 137,
+          "totalDeaths": 200,
+          "tfr": 1.15,
+          "sexRatio": 0,
+        }
       }
     },
     {
       "mandalName": "Tallapudi",
+        population2001: 54477,
+  population2011: 52785,
+  annualExponantional: -0.0032,
       ageDistribution: {
   age0To14: 15.07,
   age15To59: 69.23,
@@ -1138,16 +1198,19 @@ medianAgeAtDeath: {
         sexRatio: 109,
         "populationGrowthRate": 0.18
       },
-        // "2026": {
-        //   "totalPopulation": 52150,
-        //   "totalBirths": 73,
-        //   "totalDeaths": 139,
-        //   "tfr": 1.31
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0
+        }
       }
     },
     {
       "mandalName": "Undrajavaram",
+        population2001: 71580,
+  population2011: 76489,
+  annualExponantional: 0.0066,
       ageDistribution: {
   age0To14: 14.46,
   age15To59: 69.50,
@@ -1194,13 +1257,13 @@ medianAgeAtDeath: {
         sexRatio: 98,
         "populationGrowthRate": -0.05
       },
-        // "2026": {
-        //   "totalPopulation": 83767,
-        //   "totalBirths": 116,
-        //   "totalDeaths": 198,
-        //   "tfr": 0.88,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       
     }
   }
@@ -1216,6 +1279,9 @@ medianAgeAtDeath: {
 
   {
     districtName: 'West Godavari',
+     population2001: 1827907,
+     population2011:1844898,
+     annualExponantional:0.0009,
     ageDistribution: {
   age0To14: 14.94,
   age15To59: 69.58,
@@ -1265,14 +1331,14 @@ medianAgeAtDeath: {
      populationGrowthRate: -0.07
   },
   2026: {
-  totalPopulation: 1779032,
-  totalBirths: 6096,
-  totalDeaths: 7005,
-  tfr: 1.07,
-  sexRatio: 104,
-  birthRate: 3.43,
-  deathRate: 3.94,
-  populationGrowthRate: 0.09
+  totalPopulation: 0,
+  totalBirths: 0,
+  totalDeaths: 0,
+  tfr: 0,
+  sexRatio: 0,
+  birthRate: 0,
+  deathRate: 0,
+  populationGrowthRate: 0
 }
 
     },
@@ -1281,6 +1347,9 @@ medianAgeAtDeath: {
 
     {
       "mandalName": "Achanta",
+        population2001: 63358,
+  population2011: 60711,
+  annualExponantional: -0.0043,
       ageDistribution: {
       age0To14: 14.96,
       age15To59: 69.27,
@@ -1333,17 +1402,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.00
   },
         "2026": {
-          totalPopulation: 57875,
-          totalBirths: 220,
-          totalDeaths: 238,
-          tfr: 1.08,
-          sexRatio: 106,
-          populationGrowthRate: -0.01
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Akividu",
+        population2001: 74766,
+  population2011: 73889,
+  annualExponantional: -0.0012,
       ageDistribution: {
   age0To14: 15.38,
   age15To59: 69.60,
@@ -1395,17 +1467,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.05
   },
         "2026": {
-          totalPopulation: 73057,
-          totalBirths: 220,
-          totalDeaths: 271,
-          tfr: 1.05,
-          sexRatio: 113,
-          populationGrowthRate: -0.07
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Attili",
+        population2001: 68196,
+  population2011: 68881,
+  annualExponantional: 0.0010,
       ageDistribution: {
       age0To14: 13.98,
       age15To59: 70.74,
@@ -1457,17 +1532,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.07
   },
         "2026": {
-        totalPopulation: 69738,
-        totalBirths: 224,
-        totalDeaths: 285,
-        tfr: 1.10,
-        sexRatio: 106,
-        populationGrowthRate: -0.09
+        totalPopulation: 0,
+        totalBirths: 0,
+        totalDeaths: 0,
+        tfr: 0,
+        sexRatio: 0,
+        populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Bhimavaram",
+        population2001: 219212,
+  population2011: 226497,
+  annualExponantional: 0.0033,
       ageDistribution: {
   age0To14: 13.98,
   age15To59: 70.74,
@@ -1519,17 +1597,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.07
   },
         "2026": {
-          totalPopulation: 235865,
-          totalBirths: 611,
-          totalDeaths: 776,
-          tfr: 0.96,
-          sexRatio: 94,
-          populationGrowthRate: -0.07
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Ganapavaram",
+        population2001: 66656,
+  population2011: 64963,
+  annualExponantional: -0.0026,
       medianAgeAtDeath: {
   age2023: 70,
   age2024: 69,
@@ -1581,17 +1662,20 @@ medianAgeAtDeath: {
     populationGrowthRate: -0.07
   },
         "2026": {
-        totalPopulation: 62848,
-        totalBirths: 224,
-        totalDeaths: 275,
-        tfr: 0.88,
-        sexRatio: 100,
-        populationGrowthRate: -0.08
+        totalPopulation: 0,
+        totalBirths: 0,
+        totalDeaths: 0,
+        tfr: 0,
+        sexRatio: 0,
+        populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Iragavaram",
+        population2001: 66292,
+  population2011: 65831,
+  annualExponantional: -0.0007,
       medianAgeAtDeath: {
   age2023: 70,
   age2024: 70,
@@ -1643,17 +1727,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.09
   },
         "2026": {
-            totalPopulation: 65189,
-          totalBirths: 224,
-          totalDeaths: 280,
-          tfr: 1.04,
-          sexRatio: 136,
-          populationGrowthRate: -0.09
+            totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr:0,
+          sexRatio: 0,
+          populationGrowthRate: 0,
         }
       }
     },
     {
       "mandalName": "Kalla",
+        population2001: 68867,
+  population2011: 68118,
+  annualExponantional: -0.0011,
       ageDistribution: {
         age0To14: 15.42,
         age15To59: 68.82,
@@ -1705,17 +1792,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.06
   },
         "2026": {
-             totalPopulation: 70074,
-            totalBirths: 238,
-            totalDeaths: 301,
-            tfr: 1.17,
-            sexRatio: 233,
-            populationGrowthRate: -0.09
+             totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Mogalthur",
+        population2001: 73136,
+  population2011: 72255,
+  annualExponantional: -0.0012,
         ageDistribution: {
         age0To14: 15.97,
         age15To59: 68.53,
@@ -1767,17 +1857,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.08
   },
         "2026": {
-            totalPopulation: 76287,
-            totalBirths: 238,
-            totalDeaths: 261,
-            tfr: 1.14,
-            sexRatio: 192,
-            populationGrowthRate: -0.03
+            totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Narasapuram",
+        population2001: 139084,
+  population2011: 138741,
+  annualExponantional: -0.0002,
          ageDistribution: {
         age0To14: 16.21,
         age15To59: 68.61,
@@ -1829,17 +1922,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.07
   },
         "2026": {
-             totalPopulation: 138952,
-            totalBirths: 238,
-            totalDeaths: 503,
-            tfr: 1.12,
-            sexRatio: 86,
-            populationGrowthRate: -0.19
+             totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Palacoderu",
+        population2001: 65648,
+  population2011: 66119,
+  annualExponantional: 0.0007,
         ageDistribution: {
         age0To14: 14.78,
         age15To59: 69.05,
@@ -1891,17 +1987,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.04
   },
         "2026": {
-           totalPopulation: 66630,
-          totalBirths: 238,
-          totalDeaths: 346,
-          tfr: 1.07,
-          sexRatio: 103,
-          populationGrowthRate: -0.16
+           totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Palacole",
+        population2001: 126300,
+  population2011: 129717,
+  annualExponantional: 0.0027,
       medianAgeAtDeath: {
       age2023: 68,
       age2024: 68,
@@ -1953,17 +2052,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.07
   },
         "2026": {
-          totalPopulation: 133843,
-          totalBirths: 373,
-          totalDeaths: 554,
-          tfr: 1.01,
-          sexRatio: 111,
-          populationGrowthRate: -0.14
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Pentapadu",
+        population2001: 71164,
+  population2011: 70458,
+  annualExponantional: -0.0010,
         ageDistribution: {
         age0To14: 15.27,
         age15To59: 69.74,
@@ -2015,17 +2117,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.07
   },
         "2026": {
-            totalPopulation: 69623,
-            totalBirths: 243,
-            totalDeaths: 298,
-            tfr: 1.05,
-            sexRatio: 98,
-            populationGrowthRate: -0.08
+            totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0,
         }
       }
     },
     {
       "mandalName": "Penugonda",
+        population2001: 68755,
+  population2011: 69317,
+  annualExponantional: 0.0008,
         ageDistribution: {
         age0To14: 16.03,
         age15To59: 70.25,
@@ -2077,18 +2182,21 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.21
   },
         "2026": {
-             totalPopulation: 70375,
-            totalBirths: 233,
-            totalDeaths: 286,
-            tfr: 1.20,
-            sexRatio: 97,
-            populationGrowthRate: -0.08
+             totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     
     {
       "mandalName": "Penumantra",
+        population2001: 62190,
+      population2011: 60153,
+      annualExponantional: -0.0033,
         ageDistribution: {
         age0To14: 15.24,
         age15To59: 68.47,
@@ -2140,17 +2248,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.05
   },
         "2026": {
-              totalPopulation: 58665,
-            totalBirths: 168,
-            totalDeaths: 264,
-            tfr: 1.09,
-            sexRatio: 86,
-            populationGrowthRate: -0.16
+              totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Poduru",
+        population2001: 66560,
+  population2011: 65706,
+  annualExponantional: -0.0013,
         ageDistribution: {
         age0To14: 15.61,
         age15To59: 67.95,
@@ -2202,17 +2313,20 @@ medianAgeAtDeath: {
     populationGrowthRate: 0.04
   },
         "2026": {
-          totalPopulation: 64858,
-          totalBirths: 195,
-          totalDeaths: 273,
-          tfr: 1.17,
-          sexRatio: 106,
-          populationGrowthRate: -0.12
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Tadepalligudem",
+        population2001: 183401,
+  population2011: 192162,
+  annualExponantional: 0.0047,
       medianAgeAtDeath: {
   age2023: 66,
   age2024: 66,
@@ -2264,17 +2378,20 @@ medianAgeAtDeath: {
     sexRatio: 108,
   },
         "2026": {
-          totalPopulation: 202905,
-          totalBirths: 580,
-          totalDeaths: 722,
-          tfr: 0.93,
-          sexRatio: 102,
-          populationGrowthRate: -0.07
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Tanuku",
+        population2001: 140181,
+  population2011: 148529,
+  annualExponantional: 0.0058,
       medianAgeAtDeath: {
   age2023: 68,
   age2024: 67,
@@ -2326,17 +2443,20 @@ medianAgeAtDeath: {
     sexRatio: 101,
   },
         "2026": {
-            totalPopulation: 159261,
-            totalBirths: 580,
-            totalDeaths: 597,
-            tfr: 0.97,
-            sexRatio: 95,
-            populationGrowthRate: -0.01
+            totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Undi",
+        population2001: 65898,
+  population2011: 66049,
+  annualExponantional: 0.0002,
         ageDistribution: {
   age0To14: 14.54,
   age15To59: 68.24,
@@ -2388,17 +2508,20 @@ medianAgeAtDeath: {
     sexRatio: 107,
   },
         "2026": {
-            totalPopulation: 66151,
-          totalBirths: 199,
-          totalDeaths: 273,
-          tfr: 1.01,
-          sexRatio: 122,
-          populationGrowthRate: -0.11
+            totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     },
     {
       "mandalName": "Veeravasaram",
+        population2001: 64142,
+  population2011: 64912,
+  annualExponantional: 0.0012,
       dependencyRatio: {
   childDependency: 15,
   oldAgeDependency: 16
@@ -2450,17 +2573,20 @@ medianAgeAtDeath: {
     sexRatio: 89,
   },
         "2026": {
-             totalPopulation: 66579,
-            totalBirths: 580,
-            totalDeaths: 246,
-            tfr: 1.18,
-            sexRatio: 96,
-            populationGrowthRate: 0.50
+             totalPopulation: 0,
+            totalBirths: 0,
+            totalDeaths: 0,
+            tfr: 0,
+            sexRatio: 0,
+            populationGrowthRate: 0,
         }
       }
     },
     {
       "mandalName": "Yelamanchili",
+        population2001: 74101,
+  population2011: 71890,
+  annualExponantional: -0.0030,
       dependencyRatio: {
   childDependency: 15,
   oldAgeDependency: 16
@@ -2513,12 +2639,12 @@ medianAgeAtDeath: {
 
   },
         "2026": {
-          totalPopulation: 71417,
-          totalBirths: 241,
-          totalDeaths: 259,
-          tfr: 1.12,
-          sexRatio: 235,
-          populationGrowthRate: -0.03
+          totalPopulation: 0,
+          totalBirths: 0,
+          totalDeaths: 0,
+          tfr: 0,
+          sexRatio: 0,
+          populationGrowthRate: 0
         }
       }
     }
@@ -2533,6 +2659,9 @@ medianAgeAtDeath: {
 
   {
     districtName: 'Vizianagaram',
+         population2001: 1845392,
+     population2011:1930811,
+     annualExponantional:0.0045,
     medianAgeAtDeath: {
   age2023: 68.56,
   age2024: 68.04,
@@ -2598,6 +2727,9 @@ dependencyRatio: {
 
      {
       "mandalName": "Badangi",
+        population2001: 48219,
+  population2011: 49384,
+  annualExponantional: 0.0024,
       medianAgeAtDeath: {
   age2023: 68,
   age2024: 69,
@@ -2661,6 +2793,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Bhogapuram",
+        population2001: 52572,
+  population2011: 54891,
+  annualExponantional: 0.0043,
         medianAgeAtDeath: {
         age2023: 64,
         age2024: 65,
@@ -2725,6 +2860,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Bobbili",
+        population2001: 116213,
+  population2011: 122964,
+  annualExponantional: 0.0056,
        medianAgeAtDeath: {
         age2023: 69,
         age2024: 69,
@@ -2788,6 +2926,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Bondapalle",
+        population2001: 50531,
+  population2011: 51146,
+  annualExponantional: 0.0012,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -2851,6 +2992,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Cheepurupalle",
+        population2001: 58968,
+  population2011: 63408,
+  annualExponantional: 0.0073,
         medianAgeAtDeath: {
         age2023: 67,
         age2024: 67,
@@ -2914,6 +3058,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Dattirajeru",
+        population2001: 54786,
+  population2011: 54499,
+  annualExponantional: -0.0005,
          medianAgeAtDeath: {
         age2023: 69,
         age2024: 70,
@@ -2977,6 +3124,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Denkada",
+        population2001: 52893,
+  population2011: 54382,
+  annualExponantional: 0.0028,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 70,
@@ -3012,6 +3162,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Gajapathinagaram",
+        population2001: 56094,
+  population2011: 57529,
+  annualExponantional: 0.0025,
         medianAgeAtDeath: {
         age2023: 69,
         age2024: 68,
@@ -3046,6 +3199,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Gantyada",
+        population2001: 67546,
+  population2011: 65579,
+  annualExponantional: -0.0030,
         medianAgeAtDeath: {
         age2023: 71,
         age2024: 69,
@@ -3080,6 +3236,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Garividi",
+        population2001: 64714,
+  population2011: 68289,
+  annualExponantional: 0.0054,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -3114,6 +3273,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Gurla",
+        population2001: 62251,
+  population2011: 64695,
+  annualExponantional: 0.0039,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -3148,6 +3310,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Jami",
+        population2001: 58191,
+  population2011: 58066,
+  annualExponantional: -0.0002,
         medianAgeAtDeath: {
         age2023: 69,
         age2024: 69,
@@ -3182,6 +3347,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Kothavalasa",
+        population2001: 62897,
+  population2011: 68579,
+  annualExponantional: 0.0086,
         medianAgeAtDeath: {
         age2023: 65,
         age2024: 66,
@@ -3216,6 +3384,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Lakkavarapukota",
+        population2001: 50673,
+  population2011: 53039,
+  annualExponantional: 0.0046,
         medianAgeAtDeath: {
         age2023: 71,
         age2024: 69,
@@ -3250,6 +3421,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Mentada",
+        population2001: 49153,
+  population2011: 46855,
+  annualExponantional: -0.0048,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -3284,6 +3458,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Merakamudidam",
+        population2001: 56996,
+  population2011: 57237,
+  annualExponantional: 0.0004,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -3318,6 +3495,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Nellimarla",
+        population2001: 73788,
+  population2011: 77031,
+  annualExponantional: 0.0043,
         medianAgeAtDeath: {
         age2023: 67,
         age2024: 67,
@@ -3379,6 +3559,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Pusapatirega",
+        population2001: 68945,
+  population2011: 71955,
+  annualExponantional: 0.0043,
           medianAgeAtDeath: {
         age2023: 67,
         age2024: 65,
@@ -3440,6 +3623,9 @@ ageDistribution: {
     },
     {
       "mandalName": "Rajam",
+        population2001: 81673,
+  population2011: 94039,
+  annualExponantional: 0.0141,
         medianAgeAtDeath: {
         age2023: 67,
         age2024: 67,
@@ -3491,16 +3677,19 @@ ageDistribution: {
     populationGrowthRate: 0.13
   },
         "2026": {
-          "totalPopulation": 111659,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 0.85,
+          "tfr": 0,
 		     "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Ramabhadrapuram",
+        population2001: 47723,
+  population2011: 50464,
+  annualExponantional: 0.0056,
         medianAgeAtDeath: {
         age2023: 67,
         age2024: 66,
@@ -3552,16 +3741,19 @@ ageDistribution: {
     populationGrowthRate: -0.15
   },
         "2026": {
-          "totalPopulation": 54138,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 0.91,
+          "tfr": 0,
 		      "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Regidi Amadalavalasa",
+        population2001: 68422,
+  population2011: 70493,
+  annualExponantional: 0.0030,
         medianAgeAtDeath: {
         age2023: 69,
         age2024: 70,
@@ -3613,16 +3805,19 @@ ageDistribution: {
     populationGrowthRate: 0.08
   },
         "2026": {
-          "totalPopulation": 73605,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 1.0,
+          "tfr": 0,
 		  "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Santhakaviti",
+        population2001: 66893,
+  population2011: 65419,
+  annualExponantional: -0.0022,
         medianAgeAtDeath: {
         age2023: 72,
         age2024: 71,
@@ -3674,16 +3869,19 @@ ageDistribution: {
     populationGrowthRate: 0.19
   },
         "2026": {
-          "totalPopulation": 64399,
+          "totalPopulation":  0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 1.11,
+          "tfr": 0,
 		  "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Srungavarapukota",
+        population2001: 74500,
+  population2011: 75917,
+  annualExponantional: 0.0019,
         medianAgeAtDeath: {
         age2023: 68,
         age2024: 67,
@@ -3735,16 +3933,19 @@ ageDistribution: {
     populationGrowthRate: -0.04
   },
         "2026": {
-          "totalPopulation": 78027,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 1.01,
+          "tfr": 0,
 		      "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Therlam",
+        population2001: 59691,
+  population2011: 59688,
+  annualExponantional: 0.0000,
         medianAgeAtDeath: {
         age2023: 72,
         age2024: 71,
@@ -3796,16 +3997,19 @@ ageDistribution: {
     populationGrowthRate: -0.02
   },
         "2026": {
-          "totalPopulation": 60122,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 1.05,
+          "tfr": 0,
 		      "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Vangara",
+        population2001: 47879,
+  population2011: 41133,
+  annualExponantional: -0.0152,
           medianAgeAtDeath: {
         age2023: 71,
         age2024: 69,
@@ -3857,16 +4061,19 @@ ageDistribution: {
     populationGrowthRate: 0.00
   },
         "2026": {
-          "totalPopulation": 34753,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 1.15,
+          "tfr": 0,
 		       "sexRatio": 0,
         }
       }
     },
     {
       "mandalName": "Vepada",
+        population2001: 50342,
+  population2011: 50580,
+  annualExponantional: 0.0005,
         medianAgeAtDeath: {
         age2023: 70,
         age2024: 69,
@@ -3918,16 +4125,19 @@ ageDistribution: {
     populationGrowthRate: -0.17
   },
         "2026": {
-          "totalPopulation": 51079,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 0.97,
+          "tfr": 0,
 		     "sexRatio": 0,
         }
       }
     },
       {
       "mandalName": "Vizianagaram",
+        population2001: 242839,
+  population2011: 283550,
+  annualExponantional: 0.0155,
           medianAgeAtDeath: {
         age2023: 66,
         age2024: 65,
@@ -3979,10 +4189,10 @@ ageDistribution: {
     populationGrowthRate: 0.94
   },
         "2026": {
-          "totalPopulation": 342053,
+          "totalPopulation": 0,
           "totalBirths": 0,
           "totalDeaths": 0,
-          "tfr": 0.97,
+          "tfr": 0,
 		     "sexRatio": 0,
         }
       }
@@ -3995,7 +4205,7 @@ ageDistribution: {
 
 
   currentYear: number = new Date().getFullYear();
-  selectedYear: number = this.currentYear;
+  selectedYear: number = 2025;
   yearList: number[] = [];
   selectedDistrictName: string = '';
   constructor(
@@ -4028,6 +4238,12 @@ ageDistribution: {
     this.districtDetails?.dependencyRatio?.childDependency || 0;
   this.dashboardSummary.oldAgeDependency =
     this.districtDetails?.dependencyRatio?.oldAgeDependency || 0;
+      this.dashboardSummary.population2001 =
+    this.districtDetails?.population2001 || 0;
+          this.dashboardSummary.population2011 =
+    this.districtDetails?.population2011 || 0;
+              this.dashboardSummary.annualExponantional =
+    this.districtDetails?.annualExponantional || 0;
     const ageDistribution = this.districtDetails?.ageDistribution || {};
     this.loadBarChart();
     this.loadLineChart();
@@ -4181,12 +4397,33 @@ loadDashboardSummary() {
   // ===================================
   if (!this.selectedMandal) {
 
-    this.dashboardSummary =
-      this.districtDetails?.districtYearWiseData?.[
-        this.selectedYear
-      ] || {};
+      const districtYearData =
+    this.districtDetails?.districtYearWiseData?.[
+      this.selectedYear
+    ] || {};
 
-    return;
+  this.dashboardSummary = {
+    ...districtYearData,
+
+    population2001:
+      this.districtDetails?.population2001 || 0,
+
+    population2011:
+      this.districtDetails?.population2011 || 0,
+
+    annualExponantional:
+      this.districtDetails?.annualExponantional || 0,
+  };
+
+  return;
+
+    // this.dashboardSummary =
+    //   this.districtDetails?.districtYearWiseData?.[
+    //     this.selectedYear
+    //   ] || {};
+
+    // return;
+
   }
 
   // ===================================
@@ -4984,6 +5221,12 @@ selectMandal(mandal: any) {
     mandal?.dependencyRatio?.childDependency || 0;
   this.dashboardSummary.oldAgeDependency =
     mandal?.dependencyRatio?.oldAgeDependency || 0;
+      this.dashboardSummary.population2001 =
+    mandal?.population2001 || 0;
+  this.dashboardSummary.population2011 =
+    mandal?.population2011 || 0;
+  this.dashboardSummary.annualExponantional =
+    mandal?.annualExponantional || 0;
     this.loadAgeWiseChart(
     mandal.ageDistribution.age0To14,
     mandal.ageDistribution.age15To59,
@@ -4996,7 +5239,7 @@ selectMandal(mandal: any) {
 
 years = [
   2030, 2029, 2028, 2027, 2026,
-  2025, 2024, 2023, 2022, 2021, 2020
+  2025, 2024, 2023
 ];
 
 onDistrictChange(event: any) {
@@ -5025,7 +5268,7 @@ loadAgeWiseChart(
     },
 
     title: {
-      text: 'Age Wise Structure'
+      text: ''
     },
 
     tooltip: {
@@ -5102,7 +5345,7 @@ loadSexRatioChart() {
     },
 
     title: {
-      text: 'Gender Ratio (Females per 1000 Males)'
+      text: ''
     },
 
     xAxis: {

@@ -46,7 +46,7 @@
 </div>
 
 <div class=" py-4 d-none">
-  <div class="row g-4 justify-content-center">
+  <div class="row g-4 justify-content-center ">
 
     <div class="col-lg-3 col-md-6">
       <div class="stat-card primary ">
@@ -447,13 +447,13 @@
 
 
 
-  <div class="container-fluid px-0">
+  <div class="container-fluid px-0 pb-5">
 
     <!-- TOP CARDS -->
-<div class="row g-3 mb-3">
+<div class="row g-3 mb-3 justify-content-center">
 
     <!-- Total Population -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card population-card">
             <div class="stats-title">Total Population</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -464,7 +464,7 @@
     </div>
 
     <!-- Population Growth Rate -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card success-card">
             <div class="stats-title">Population Growth Rate</div>
             <div class="stats-subtitle">Annual Growth (%)</div>
@@ -479,7 +479,7 @@
     </div>
 
     <!-- Total Births -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card births-card">
             <div class="stats-title">Total Births</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -490,7 +490,7 @@
     </div>
 
     <!-- Total Deaths -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card deaths-card">
             <div class="stats-title">Total Deaths</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -501,7 +501,7 @@
     </div>
 
     <!-- Crude Birth Rate -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card births-card">
             <div class="stats-title">Crude Birth Rate (CBR)</div>
             <div class="stats-subtitle">Per 1000 Population</div>
@@ -512,7 +512,7 @@
     </div>
 
     <!-- Crude Death Rate -->
-    <div class="col-xl col-lg-4 col-md-6">
+    <div class="col-lg-2 col-md-4">
         <div class="stats-card deaths-card">
             <div class="stats-title">Crude Death Rate (CDR)</div>
             <div class="stats-subtitle">Per 1000 Population</div>
@@ -523,8 +523,8 @@
     </div>
 
     <!-- Total Fertility Rate -->
-    <div class="col-xl col-lg-4 col-md-6">
-        <div class="stats-card success-card">
+    <div class="col-lg-2 col-md-4">
+        <div class="stats-card tfr-card">
             <div class="stats-title">Total Fertility Rate (TFR)</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
             <div class="stats-count">
@@ -534,9 +534,9 @@
     </div>
 
         <!-- Sex Ratio Fertility Rate -->
-    <div class="col-xl col-lg-4 col-md-6">
-        <div class="stats-card success-card">
-            <div class="stats-title">Sex Ratio</div>
+    <div class="col-lg-2 col-md-4">
+        <div class="stats-card sexratio-card">
+            <div class="stats-title">Gender Ratio</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
             <div class="stats-count">
                 {{ dashboardSummary?.sexRatio }}
@@ -544,13 +544,13 @@
         </div>
     </div>
 
-</div>
-<div class="row g-3 mb-3">
+
+
 
     <!-- Child Dependency  -->
-    <div class="col-xl col-lg-4 col-md-6">
-        <div class="stats-card population-card">
-            <div class="stats-title">Child Dependency</div>
+    <div class="col-lg-2 col-md-4">
+        <div class="stats-card childdep-card">
+            <div class="stats-title">Child Dependency % </div>
             <div class="stats-subtitle">0-14 vs Working Age</div>
             <div class="stats-count">
                 {{ dashboardSummary?.childDependency  }}
@@ -558,16 +558,47 @@
         </div>
     </div>
     <!-- Old-age Dependency  -->
-        <div class="col-xl col-lg-4 col-md-6">
-        <div class="stats-card population-card">
-            <div class="stats-title">Old-age Dependency</div>
+        <div class="col-lg-2 col-md-4">
+        <div class="stats-card oldage-card ">
+            <div class="stats-title">Old-age Dependency % </div>
             <div class="stats-subtitle">60+ vs Working Age</div>
             <div class="stats-count">
                 {{ dashboardSummary?.oldAgeDependency  }}
             </div>
         </div>
     </div>
+     <!-- Population 2001   -->
+        <div class="col-lg-2 col-md-4">
+        <div class="stats-card tfr-card ">
+            <div class="stats-title">Population</div>
+            <div class="stats-subtitle">2001, Census of India</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.population2001  }}
+            </div>
+        </div>
     </div>
+     <!-- Population 2011   -->
+            <div class="col-lg-2 col-md-4">
+        <div class="stats-card deaths-card ">
+            <div class="stats-title">Population</div>
+            <div class="stats-subtitle">2011, Census of India</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.population2011  }}
+            </div>
+        </div>
+    </div>
+     <!-- Annual Exponetilal   -->
+            <div class="col-lg-2 col-md-4">
+        <div class="stats-card sexratio-card ">
+            <div class="stats-title">Annual Exponetilal </div>
+            <div class="stats-subtitle growth-rate">Growth rate of Population 2001-11</div>
+            <div class="stats-count">
+                {{ dashboardSummary?.annualExponantional  }}
+            </div>
+        </div>
+    </div>
+    </div>
+
 
     <!-- CONTENT AREA -->
     <div class="row">
@@ -678,12 +709,12 @@
 </div>
                 <div class="row align-items-strech">
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
-    <div class="card h-100">
+    <div class="card custom-card h-100">
         
         <!-- Added flex classes -->
-        <div class="card-body d-flex align-items-center justify-content-center">
-            
-            <div id="chart" class="w-100">
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Age Wise Structure </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
                 <highcharts-chart
               [Highcharts]="Highcharts"
               [options]="ageWiseChartOptions"
@@ -695,16 +726,17 @@
     </div>
 </div>
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-                        <div class="card h-100">
+                        <div class="card custom-card h-100">
                             <div class="card-body">
-                                <div class="row">
+                              <h4 class="custom-title mb-3">Gender Ratio (Females per 1000 Males) </h4>
+                                
                                       <highcharts-chart
                                   [Highcharts]="Highcharts"
                                   [options]="sexRatioChartOptions"
                                   style="width:100%; height:550px; display:block;">
                                 </highcharts-chart>
                                   
-                </div>
+               
 
 
 </div>
