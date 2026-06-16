@@ -1299,35 +1299,35 @@ medianAgeAtDeath: {
     districtYearWiseData: {
 
   2023: {
-    totalPopulation: 1776023,
-    totalBirths: 18359,
-    totalDeaths: 16174,
+    totalPopulation: 1870061,
+    totalBirths: 19713,
+    totalDeaths: 16087,
     tfr: 1.07,
     sexRatio: 104,
-    birthRate: 10.37,
-    deathRate: 9.14,
+    birthRate: 11.27,
+    deathRate: 8.60,
     populationGrowthRate: 0
   },
 
   2024: {
-    totalPopulation: 1777164,
-    totalBirths: 16134,
-    totalDeaths: 15495,
+    totalPopulation: 1872360,
+    totalBirths: 17172,
+    totalDeaths: 16067,
     tfr: 1.07,
     sexRatio: 104,
-    birthRate: 9.11,
-    deathRate: 8.75,
+    birthRate: 9.81,
+    deathRate: 8.58,
     populationGrowthRate: -0.01
   },
 
   2025: {
-    totalPopulation: 1777418,
-    totalBirths: 13845,
-    totalDeaths: 14262,
+    totalPopulation: 1873726,
+    totalBirths: 15786,
+    totalDeaths: 15517,
     tfr: 1.07,
     sexRatio: 105,
-    birthRate: 7.83,
-    deathRate: 8.06,
+    birthRate: 9.01,
+    deathRate: 8.28,
      populationGrowthRate: -0.07
   },
   2026: {
@@ -2678,33 +2678,33 @@ dependencyRatio: {
 },
     districtYearWiseData: {
      2023: {
-    totalPopulation: 1879750.43,
-    totalBirths: 18461,
-    totalDeaths: 15148,
-    birthRate: 10.23,
-    deathRate: 8.06,
+    totalPopulation: 2040782,
+    totalBirths: 19374,
+    totalDeaths: 16183,
+    birthRate: 10.2,
+    deathRate: 7.9,
     tfr: 1.19,
     sexRatio: 107,
     populationGrowthRate: 0
   },
 
   2024: {
-    totalPopulation: 1881874.65,
-    totalBirths: 17233,
-    totalDeaths: 15764,
-    birthRate: 9.55,
-    deathRate: 8.38,
+    totalPopulation: 2043925,
+    totalBirths: 18652,
+    totalDeaths: 16806,
+    birthRate: 9.8,
+    deathRate: 8.2,
     tfr: 1.12,
     sexRatio: 105,
     populationGrowthRate: 0.11
   },
 
   2025: {
-    totalPopulation: 1885432.98,
-    totalBirths: 16008,
-    totalDeaths: 16291,
-    birthRate: 8.87,
-    deathRate: 8.65,
+    totalPopulation: 2046735,
+    totalBirths: 18690,
+    totalDeaths: 17179,
+    birthRate: 9.8,
+    deathRate: 8.4,
     tfr: 1.05,
     sexRatio: 107,
     populationGrowthRate: 0.19
