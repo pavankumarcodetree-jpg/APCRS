@@ -145,7 +145,7 @@
           <i class="mdi mdi-human-male-female"></i>
         </div>
         <div>
-          <p>Gender Ratio</p>
+          <p>Sex Ratio</p>
           <h3>{{ dashboardSummary?.sexRatio  }}</h3>
         </div>
       </div>
@@ -536,7 +536,7 @@
         <!-- Sex Ratio Fertility Rate -->
     <div class="col-lg-2 col-md-4">
         <div class="stats-card sexratio-card">
-            <div class="stats-title">Gender Ratio</div>
+            <div class="stats-title">Sex Ratio</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
             <div class="stats-count">
                 {{ dashboardSummary?.sexRatio }}
@@ -707,13 +707,13 @@
     </div>
 
 </div>
-                <div class="row align-items-strech">
+                <div class="row  align-items-strech">
                   <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
     <div class="card custom-card h-100">
         
         <!-- Added flex classes -->
         <div class="card-body ">
-             <h4 class="custom-title mb-3">Age Wise Structure </h4>
+             <h4 class="custom-title mb-3">Age Structure </h4>
             <div id="chart" class="w-100 align-items-center justify-content-center">
                 <highcharts-chart
               [Highcharts]="Highcharts"
@@ -728,7 +728,7 @@
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
                         <div class="card custom-card h-100">
                             <div class="card-body">
-                              <h4 class="custom-title mb-3">Gender Ratio (Females per 1000 Males) </h4>
+                              <h4 class="custom-title mb-3">Sex Ratio (Females per 1000 Males) </h4>
                                 
                                       <highcharts-chart
                                   [Highcharts]="Highcharts"
@@ -739,4 +739,150 @@
                
 
 
+</div>
+</div>
+</div>
+ <div class="row mt-4">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">CSR Sex Ratio at Birth (Males per 100 Females) </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="birthSexRatioChartOptions"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Share of Population vs Share of Births </h4>
+                                
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="populationBirthShareChartOptions"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+ <div class="row mt-4">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Place of Death </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="placeOfDeathChartOptions"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Death as Share of Births</h4>
+                                
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="deathShareBirthChartOptions"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="row mt-4">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Percentage of deaths before age 60 </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="deathsBefore60ChartOptions"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Percentage of deaths before age 70 </h4>
+                                
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="deathsBefore70ChartOptions"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="row mt-4">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Age-sex distribution of deaths in {{selectedDistrictName}} District, 2023-25 </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="ageSexDistributionChartOptions"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">TFR in Sub-districts of {{selectedDistrictName}} District</h4>
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="tfrChartOptions"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+ <div class="row mt-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Average annual exponential growth rate of population, 2001-11 (%)</h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="annualGrowthRateChartOptions"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
 </div>

@@ -189,6 +189,7 @@ showLoginDialog() {
         capthcheck: '',
         captchvalue: '',
     };
+    this.Get_captcha();
 }
     forgot_password() {
         this.show_forgot_password = true;

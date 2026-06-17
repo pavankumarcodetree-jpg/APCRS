@@ -50,6 +50,15 @@ export class DistrictPopulationDashboardComponent {
   medianAgeChartOptions: Highcharts.Options = {};
   ageWiseChartOptions: Highcharts.Options = {}
   sexRatioChartOptions: Highcharts.Options = {};
+  birthSexRatioChartOptions: Highcharts.Options = {};
+  populationBirthShareChartOptions:Highcharts.Options = {};
+  placeOfDeathChartOptions:Highcharts.Options = {};
+  deathsBefore60ChartOptions:Highcharts.Options = {};
+  deathsBefore70ChartOptions:Highcharts.Options = {};
+  deathShareBirthChartOptions:Highcharts.Options = {};
+  ageSexDistributionChartOptions:Highcharts.Options = {};
+  tfrChartOptions: Highcharts.Options = {};
+  annualGrowthRateChartOptions: Highcharts.Options = {};
   districtData = [
 
   // =====================================================
@@ -58,6 +67,25 @@ export class DistrictPopulationDashboardComponent {
 
   {
     districtName: 'East Godavari',
+    ageSexDistribution: [
+  { ageGroup: '0-4', female: 0.2, male: 0.2 },
+  { ageGroup: '5-9', female: 0.2, male: 0.2 },
+  { ageGroup: '10-14', female: 0.2, male: 0.2 },
+  { ageGroup: '15-19', female: 0.5, male: 0.7 },
+  { ageGroup: '20-24', female: 0.8, male: 1.6 },
+  { ageGroup: '25-29', female: 0.9, male: 2.0 },
+  { ageGroup: '30-34', female: 1.3, male: 3.1 },
+  { ageGroup: '35-39', female: 2.1, male: 5.0 },
+  { ageGroup: '40-44', female: 3.2, male: 6.0 },
+  { ageGroup: '45-49', female: 5.1, male: 7.1 },
+  { ageGroup: '50-54', female: 7.0, male: 8.3 },
+  { ageGroup: '55-59', female: 9.1, male: 9.1 },
+  { ageGroup: '60-64', female: 10.4, male: 10.3 },
+  { ageGroup: '65-69', female: 11.5, male: 9.7 },
+  { ageGroup: '70-74', female: 15.4, male: 11.8 },
+  { ageGroup: '75-79', female: 15.2, male: 12.4 },
+  { ageGroup: '80+', female: 17.0, male: 12.5 }
+],
          population2001: 1708018,
      population2011:1818849,
      annualExponantional:0.0063,
@@ -143,8 +171,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 68
 },
-sexRatio: { 2023: 1059, 2024: 1059, 2025: 1059 },
-
+sexRatio:  1059,
+  deathsBefore60Percentage:33.0,
+  deathsBefore70Percentage: 55.0,
+  placeOfDeath: {
+  hospital: 20.4,
+  other: 79.6
+},
+tfr: 1.3,
       "yearWiseData": {
          "2023": {
         "totalPopulation": 74873, //col 20
@@ -176,13 +210,13 @@ sexRatio: { 2023: 1059, 2024: 1059, 2025: 1059 },
         sexRatio: 92,
         "populationGrowthRate": 1.47
       },
-        // "2026": {
-        //   "totalPopulation": 75440,
-        //   "totalBirths": 134,
-        //   "totalDeaths": 223,
-        //   "tfr": 1.31,
-        //   "sexRatio": 0
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+          "sexRatio": 0
+        }
       }
     },
     {
@@ -204,7 +238,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 68
 },
-sexRatio: { 2023: 1034, 2024: 1034, 2025: 1034 },
+sexRatio:  1034,
+  deathsBefore60Percentage:35.3,
+  deathsBefore70Percentage: 57.2,
+  placeOfDeath: {
+  hospital: 19.8,
+  other: 80.2
+},
+tfr: 0.8,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 73499,
@@ -264,7 +305,14 @@ medianAgeAtDeath: {
   age2024: 66,
   age2025: 65
 },
-sexRatio: { 2023: 1049, 2024: 1049, 2025: 1049 },
+sexRatio:  1049,
+  deathsBefore60Percentage:37.5,
+  deathsBefore70Percentage: 56.0,
+  placeOfDeath: {
+  hospital: 14.5,
+  other: 85.5
+},
+tfr: 1.1,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 65381,
@@ -324,7 +372,14 @@ medianAgeAtDeath: {
   age2024: 65,
   age2025: 65
 },
-sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
+sexRatio:  1056,
+  deathsBefore60Percentage:38.8,
+  deathsBefore70Percentage: 58.7,
+  placeOfDeath: {
+  hospital: 16.3,
+  other: 83.7
+},
+tfr: 1.0,
       "yearWiseData": {
        "2023": {
         "totalPopulation": 85242,
@@ -385,7 +440,14 @@ medianAgeAtDeath: {
   age2024: 63,
   age2025: 65
 },
-sexRatio: { 2023: 1036, 2024: 1036, 2025: 1036 },
+sexRatio: 1036,
+  deathsBefore60Percentage:40.0,
+  deathsBefore70Percentage: 62.9,
+  placeOfDeath: {
+  hospital: 22.6,
+  other: 77.4
+},
+tfr: 1.3,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 72370,
@@ -445,7 +507,14 @@ medianAgeAtDeath: {
   age2024: 66,
   age2025: 64
 },
- sexRatio: { 2023: 1055, 2024: 1055, 2025: 1055 },
+ sexRatio: 1055,
+   deathsBefore60Percentage:37.2,
+  deathsBefore70Percentage: 56.8,
+  placeOfDeath: {
+  hospital: 17.5,
+  other: 82.5
+},
+ tfr: 1.0,
       "yearWiseData": {
        "2023": {
         "totalPopulation": 66097,
@@ -477,12 +546,12 @@ medianAgeAtDeath: {
         sexRatio: 81,
         "populationGrowthRate": 0.14
       },
-        // "2026": {
-        //   "totalPopulation": 67180,
-        //   "totalBirths": 107,
-        //   "totalDeaths": 173,
-        //   "tfr": 0.94
-        // }
+        "2026": {
+          "totalPopulation": 0,
+          "totalBirths": 0,
+          "totalDeaths": 0,
+          "tfr": 0,
+        }
       }
     },
     {
@@ -504,7 +573,14 @@ medianAgeAtDeath: {
   age2024: 63,
   age2025: 64
 },
-sexRatio: { 2023: 1029, 2024: 1029, 2025: 1029 },
+sexRatio:  1029,
+  deathsBefore60Percentage:41.0,
+  deathsBefore70Percentage: 62.9,
+  placeOfDeath: {
+  hospital: 22.9,
+  other: 77.1
+},
+tfr: 0.9,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 99369,
@@ -564,7 +640,14 @@ medianAgeAtDeath: {
   age2024: 64.5,
   age2025: 64.5
 },
-sexRatio: { 2023: 1017, 2024: 1017, 2025: 1017 },
+sexRatio: 1017,
+  deathsBefore60Percentage:38.3,
+  deathsBefore70Percentage: 58.9,
+  placeOfDeath: {
+  hospital: 19.9,
+  other: 80.1
+},
+tfr: 1.2,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 83281,
@@ -627,7 +710,14 @@ medianAgeAtDeath: {
   age2024: 65,
   age2025: 67
 },
-sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
+sexRatio:  1056,
+  deathsBefore60Percentage:37.1,
+  deathsBefore70Percentage: 56.0,
+  placeOfDeath: {
+  hospital: 19.1,
+  other: 80.9
+},
+tfr: 1.0,
       "yearWiseData": {
          "2023": {
         "totalPopulation": 108940,
@@ -687,7 +777,14 @@ medianAgeAtDeath: {
   age2024: 65,
   age2025: 64
 },
-sexRatio: { 2023: 1050, 2024: 1050, 2025: 1050 },
+sexRatio:  1050,
+  deathsBefore60Percentage:37.9,
+  deathsBefore70Percentage: 58.9,
+  placeOfDeath: {
+  hospital: 19.1,
+  other: 80.9
+},
+tfr: 1.0,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 87340,
@@ -747,7 +844,14 @@ medianAgeAtDeath: {
   age2024: 66,
   age2025: 66
 },
-sexRatio: { 2023: 1049, 2024: 1049, 2025: 1049 },
+sexRatio: 1049,
+  deathsBefore60Percentage:35.2,
+  deathsBefore70Percentage: 56.6,
+  placeOfDeath: {
+  hospital: 19.7,
+  other: 80.3
+},
+tfr: 1.1,
       "yearWiseData": {
        "2023": {
         "totalPopulation": 117448,
@@ -807,7 +911,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 69
 },
-sexRatio: { 2023: 1021, 2024: 1021, 2025: 1021 },
+sexRatio: 1021,
+  deathsBefore60Percentage:31.9,
+  deathsBefore70Percentage: 50.8,
+  placeOfDeath: {
+  hospital: 15.6,
+  other: 84.4
+},
+tfr: 1.1,
       "yearWiseData": {
        "2023": {
         "totalPopulation": 71309,
@@ -867,7 +978,14 @@ medianAgeAtDeath: {
   age2024: 63,
   age2025: 64
 },
-sexRatio: { 2023: 1056, 2024: 1056, 2025: 1056 },
+sexRatio:  1056,
+  deathsBefore60Percentage:40.8,
+  deathsBefore70Percentage: 50.7,
+  placeOfDeath: {
+  hospital: 22.2,
+  other: 77.8
+},
+tfr: 0.9,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 209779,
@@ -927,7 +1045,14 @@ medianAgeAtDeath: {
   age2024: 64,
   age2025: 64
 },
-sexRatio: { 2023: 1077, 2024: 1077, 2025: 1077 },
+sexRatio: 1077,
+  deathsBefore60Percentage:39.8,
+  deathsBefore70Percentage: 62.5,
+  placeOfDeath: {
+  hospital: 41.6,
+  other: 58.4
+},
+tfr: 1.0,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 377041,
@@ -978,7 +1103,14 @@ sexRatio: { 2023: 1077, 2024: 1077, 2025: 1077 },
   age15To59: 71.82,
   age60Plus: 12.02
 },
-sexRatio: { 2023: 1011, 2024: 1011, 2025: 1011 },
+sexRatio:1011,
+  deathsBefore60Percentage:42.2,
+  deathsBefore70Percentage: 63.5,
+  placeOfDeath: {
+  hospital: 24.9,
+  other: 75.1
+},
+tfr: 0.9,
 dependencyRatio: {
   childDependency: 16,
   oldAgeDependency: 12
@@ -1046,7 +1178,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 67.5
 },
-sexRatio: { 2023: 1001, 2024: 1001, 2025: 1001 },
+sexRatio:  1001,
+  deathsBefore60Percentage:35.8,
+  deathsBefore70Percentage: 55.4,
+  placeOfDeath: {
+  hospital: 22.3,
+  other: 77.7
+},
+tfr: 1.0,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 60222,
@@ -1097,7 +1236,14 @@ sexRatio: { 2023: 1001, 2024: 1001, 2025: 1001 },
   age15To59: 69.69,
   age60Plus: 15.31
 },
-sexRatio: { 2023: 1023, 2024: 1023, 2025: 1023 },
+sexRatio:  1023,
+  deathsBefore60Percentage:33.0,
+  deathsBefore70Percentage: 52.8,
+  placeOfDeath: {
+  hospital: 17.0,
+  other: 83.0
+},
+tfr: 1.2,
 dependencyRatio: {
   childDependency: 15,
   oldAgeDependency: 15
@@ -1166,7 +1312,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 67
 },
- sexRatio: { 2023: 1041, 2024: 1041, 2025: 1041 },
+ sexRatio:  1041,
+   deathsBefore60Percentage:37.0,
+  deathsBefore70Percentage: 55.2,
+  placeOfDeath: {
+  hospital: 16.8,
+  other: 83.2
+},
+ tfr: 1.4,
       "yearWiseData": {
        "2023": {
         "totalPopulation": 51490,
@@ -1225,7 +1378,14 @@ medianAgeAtDeath: {
   age2024: 70,
   age2025: 70
 },
- sexRatio: { 2023: 1046, 2024: 1046, 2025: 1046 },
+ sexRatio:  1046,
+   deathsBefore60Percentage:31.4,
+  deathsBefore70Percentage: 48.1,
+  placeOfDeath: {
+  hospital: 15.6,
+  other: 84.4
+},
+ tfr: 0.9,
       "yearWiseData": {
         "2023": {
         "totalPopulation": 82647,
@@ -1279,6 +1439,25 @@ medianAgeAtDeath: {
 
   {
     districtName: 'West Godavari',
+      ageSexDistribution: [
+    { ageGroup: '0-4', female: 0.15, male: 0.10 },
+    { ageGroup: '5-9', female: 0.15, male: 0.16 },
+    { ageGroup: '10-14', female: 0.18, male: 0.20 },
+    { ageGroup: '15-19', female: 0.35, male: 0.59 },
+    { ageGroup: '20-24', female: 0.60, male: 1.36 },
+    { ageGroup: '25-29', female: 0.75, male: 1.52 },
+    { ageGroup: '30-34', female: 1.13, male: 2.51 },
+    { ageGroup: '35-39', female: 1.56, male: 4.13 },
+    { ageGroup: '40-44', female: 2.70, male: 5.02 },
+    { ageGroup: '45-49', female: 4.49, male: 6.17 },
+    { ageGroup: '50-54', female: 6.27, male: 7.69 },
+    { ageGroup: '55-59', female: 8.30, male: 9.14 },
+    { ageGroup: '60-64', female: 9.56, male: 9.71 },
+    { ageGroup: '65-69', female: 10.59, male: 9.40 },
+    { ageGroup: '70-74', female: 14.52, male: 12.25 },
+    { ageGroup: '75-79', female: 16.39, male: 13.80 },
+    { ageGroup: '80+', female: 22.30, male: 16.26 }
+  ],
      population2001: 1827907,
      population2011:1844898,
      annualExponantional:0.0009,
@@ -1364,12 +1543,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 70
 },
-  sexRatio: {
-    2023: 1012,
-    2024: 1012,
-    2025: 1012
-  },
-
+  sexRatio: 1012,
+  deathsBefore60Percentage:30.4,
+  deathsBefore70Percentage: 50.7,
+  placeOfDeath: {
+  hospital: 14.63,
+  other: 85.37
+},
+tfr: 1.08,
       "yearWiseData": {
         2023: {
     totalPopulation: 57818,
@@ -1430,11 +1611,14 @@ medianAgeAtDeath: {
   age2024: 68,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1056,
-    2024: 1056,
-    2025: 1056
-  },
+  sexRatio:1056,
+  deathsBefore60Percentage:32.8,
+  deathsBefore70Percentage: 52.2,
+    placeOfDeath: {
+  hospital: 17.34,
+  other: 82.66
+},
+tfr: 1.05,
       "yearWiseData": {
          2023: {
     totalPopulation: 73084,
@@ -1495,11 +1679,14 @@ medianAgeAtDeath: {
   age2024: 67,
   age2025: 66
 },
-  sexRatio: {
-    2023: 1034,
-    2024: 1034,
-    2025: 1034
-  },
+  sexRatio:1034,
+  tfr: 1.10,
+  deathsBefore60Percentage:31.1,
+  deathsBefore70Percentage: 51.6,
+    placeOfDeath: {
+  hospital: 16.14,
+  other: 83.86,
+},
       "yearWiseData": {
        2023: {
     totalPopulation: 69811,
@@ -1560,11 +1747,14 @@ medianAgeAtDeath: {
   age2024: 67,
   age2025: 66
 },
-  sexRatio: {
-    2023: 1066,
-    2024: 1066,
-    2025: 1066
-  },
+  sexRatio: 1066,
+  tfr: 0.96,
+  deathsBefore60Percentage:35.1,
+  deathsBefore70Percentage: 55.2,
+      placeOfDeath: {
+  hospital: 25.28,
+  other: 74.72,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 236102,
@@ -1625,11 +1815,14 @@ medianAgeAtDeath: {
   childDependency: 15,
   oldAgeDependency: 16
 },
-  sexRatio: {
-    2023: 1024,
-    2024: 1024,
-    2025: 1024
-  },
+  sexRatio: 1024,
+  tfr: 0.88,
+  deathsBefore60Percentage:31.3,
+  deathsBefore70Percentage: 51.6,
+      placeOfDeath: {
+  hospital: 14.85,
+  other: 85.15,
+},
       "yearWiseData": {
          2023: {
     totalPopulation: 62912,
@@ -1690,11 +1883,14 @@ medianAgeAtDeath: {
   childDependency: 16,
   oldAgeDependency: 15
 },
-  sexRatio: {
-    2023: 1017,
-    2024: 1017,
-    2025: 1017
-  },
+  sexRatio: 1017,
+  tfr: 1.04,
+  deathsBefore60Percentage:29.8,
+  deathsBefore70Percentage: 48.2,
+        placeOfDeath: {
+  hospital: 13.74,
+  other: 86.26,
+},
       "yearWiseData": {
          2023: {
     totalPopulation: 66131,
@@ -1755,11 +1951,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1041,
-    2024: 1041,
-    2025: 1041
-  },
+  sexRatio:1041,
+  tfr: 1.17,
+  deathsBefore60Percentage:32.6,
+  deathsBefore70Percentage: 50.5,
+          placeOfDeath: {
+  hospital: 15.77,
+  other: 84.23,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 70528,
@@ -1820,11 +2019,14 @@ medianAgeAtDeath: {
   age2024: 70,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1022,
-    2024: 1022,
-    2025: 1022
-  },
+  sexRatio:1022,
+  tfr: 1.14,
+  deathsBefore60Percentage:32.0,
+  deathsBefore70Percentage: 49.2,
+            placeOfDeath: {
+  hospital: 16.1,
+  other: 83.9,
+},
       "yearWiseData": {
        2023: {
     totalPopulation: 76784,
@@ -1885,11 +2087,14 @@ medianAgeAtDeath: {
   childDependency: 16,
   oldAgeDependency: 15
 },
-  sexRatio: {
-    2023: 1003,
-    2024: 1003,
-    2025: 1003
-  },
+  sexRatio: 1003,
+  tfr: 1.12,
+  deathsBefore60Percentage:31.2,
+  deathsBefore70Percentage: 49.9,
+              placeOfDeath: {
+  hospital: 21.3,
+  other: 78.7,
+},
       "yearWiseData": {
        2023: {
     totalPopulation: 81162,
@@ -1950,11 +2155,14 @@ medianAgeAtDeath: {
   childDependency: 15,
   oldAgeDependency: 16
 },
-  sexRatio: {
-    2023: 1050,
-    2024: 1050,
-    2025: 1050
-  },
+  sexRatio: 1050,
+  tfr: 1.07,
+  deathsBefore60Percentage:32.2,
+  deathsBefore70Percentage: 51.0,
+                placeOfDeath: {
+  hospital: 15.02,
+  other: 84.98,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 67614,
@@ -2015,11 +2223,14 @@ medianAgeAtDeath: {
   childDependency: 15,
   oldAgeDependency: 16
 },
-  sexRatio: {
-    2023: 1054,
-    2024: 1054,
-    2025: 1054
-  },
+  sexRatio:1054,
+  tfr: 1.01,
+  deathsBefore60Percentage:33.9,
+  deathsBefore70Percentage: 53.8,
+    placeOfDeath: {
+  hospital: 21.55,
+  other: 78.45,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 131684,
@@ -2080,11 +2291,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1034,
-    2024: 1034,
-    2025: 1034
-  },
+  sexRatio: 1034,
+  tfr: 1.05,
+  deathsBefore60Percentage:33.0,
+  deathsBefore70Percentage: 53.2,
+      placeOfDeath: {
+  hospital: 16.28,
+  other: 83.72,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 69624,
@@ -2145,11 +2359,14 @@ medianAgeAtDeath: {
   age2024: 67,
   age2025: 66
 },
-  sexRatio: {
-    2023: 1048,
-    2024: 1048,
-    2025: 1048
-  },
+  sexRatio: 1048,
+  tfr: 1.20,
+  deathsBefore60Percentage:35.4,
+  deathsBefore70Percentage: 54.7,
+      placeOfDeath: {
+  hospital: 17.66,
+  other: 82.34,
+},
       "yearWiseData": {
        2023: {
     totalPopulation: 69842,
@@ -2211,11 +2428,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1032,
-    2024: 1032,
-    2025: 1032
-  },
+  sexRatio: 1032,
+  tfr: 1.09,
+  deathsBefore60Percentage:31.8,
+  deathsBefore70Percentage: 51.6,
+        placeOfDeath: {
+  hospital: 14.82,
+  other: 85.18,
+},
       "yearWiseData": {
          2023: {
     totalPopulation: 59624,
@@ -2276,11 +2496,14 @@ medianAgeAtDeath: {
   age2024: 70,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1006,
-    2024: 1006,
-    2025: 1006
-  },
+  sexRatio: 1006,
+  tfr: 1.17,
+  deathsBefore60Percentage:31.3,
+  deathsBefore70Percentage: 49.8,
+          placeOfDeath: {
+  hospital: 15.47,
+  other: 84.53,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 65548,
@@ -2341,11 +2564,14 @@ medianAgeAtDeath: {
   childDependency: 15,
   oldAgeDependency: 15
 },
-  sexRatio: {
-    2023: 1067,
-    2024: 1067,
-    2025: 1067
-  },
+  sexRatio: 1067,
+  tfr: 0.93,
+  deathsBefore60Percentage:36.4,
+  deathsBefore70Percentage: 55.7,
+  placeOfDeath: {
+  hospital: 26.13,
+  other: 73.87,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 203527,
@@ -2406,11 +2632,14 @@ medianAgeAtDeath: {
   childDependency: 14,
   oldAgeDependency: 15
 },
-  sexRatio: {
-    2023: 1079,
-    2024: 1079,
-    2025: 1079
-  },
+  sexRatio: 1079,
+  tfr: 0.97,
+  deathsBefore60Percentage:34.0,
+  deathsBefore70Percentage: 53.7,
+              placeOfDeath: {
+  hospital: 20.33,
+  other: 79.67,
+},
       "yearWiseData": {
         2023: {
     totalPopulation: 159755,
@@ -2471,11 +2700,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1043,
-    2024: 1043,
-    2025: 1043
-  },
+  sexRatio: 1043,
+  tfr: 1.01,
+  deathsBefore60Percentage:31.2,
+  deathsBefore70Percentage: 50.9,
+                placeOfDeath: {
+  hospital: 15.58,
+  other: 84.42,
+},
       "yearWiseData": {
          2023: {
     totalPopulation: 66290,
@@ -2536,11 +2768,14 @@ medianAgeAtDeath: {
   age2024: 69,
   age2025: 69
 },
-  sexRatio: {
-    2023: 1017,
-    2024: 1017,
-    2025: 1017
-  },
+  sexRatio: 1017,
+  tfr: 1.18,
+  deathsBefore60Percentage:31.2,
+  deathsBefore70Percentage: 51.2,
+      placeOfDeath: {
+  hospital: 14.58,
+  other: 85.42,
+},
       "yearWiseData": {
           2023: {
     totalPopulation: 66060,
@@ -2601,11 +2836,14 @@ medianAgeAtDeath: {
   age2024: 70,
   age2025: 70
 },
-  sexRatio: {
-    2023: 1010,
-    2024: 1010,
-    2025: 1010
-  },
+  sexRatio:1010,
+  tfr: 1.12,
+  deathsBefore60Percentage:29.5,
+  deathsBefore70Percentage: 49.7,
+        placeOfDeath: {
+  hospital: 13.21,
+  other: 86.79,
+},
       "yearWiseData": {
       2023: {
     totalPopulation: 71359,
@@ -2659,6 +2897,25 @@ medianAgeAtDeath: {
 
   {
     districtName: 'Vizianagaram',
+    ageSexDistribution: [
+  { ageGroup: '0-4', female: 0.25, male: 0.17 },
+  { ageGroup: '5-9', female: 0.25, male: 0.19 },
+  { ageGroup: '10-14', female: 0.29, male: 0.24 },
+  { ageGroup: '15-19', female: 0.50, male: 0.59 },
+  { ageGroup: '20-24', female: 0.71, male: 1.07 },
+  { ageGroup: '25-29', female: 0.83, male: 1.70 },
+  { ageGroup: '30-34', female: 1.21, male: 2.76 },
+  { ageGroup: '35-39', female: 1.83, male: 3.91 },
+  { ageGroup: '40-44', female: 2.65, male: 4.99 },
+  { ageGroup: '45-49', female: 4.42, male: 6.22 },
+  { ageGroup: '50-54', female: 6.22, male: 7.50 },
+  { ageGroup: '55-59', female: 8.51, male: 8.71 },
+  { ageGroup: '60-64', female: 10.92, male: 10.24 },
+  { ageGroup: '65-69', female: 13.61, male: 11.15 },
+  { ageGroup: '70-74', female: 17.28, male: 15.57 },
+  { ageGroup: '75-79', female: 16.89, male: 14.48 },
+  { ageGroup: '80+', female: 13.62, male: 10.51 }
+],
          population2001: 1845392,
      population2011:1930811,
      annualExponantional:0.0045,
@@ -2744,11 +3001,14 @@ ageDistribution: {
     childDependency: 14,
     oldAgeDependency: 19
   },
-    sexRatio: {
-    2023: 1017,
-    2024: 1017,
-    2025: 1017
-  },
+    sexRatio:1017,
+    deathsBefore60Percentage:28.96,
+  deathsBefore70Percentage: 53.2,
+  placeOfDeath: {
+  hospital: 16.57,
+  other: 83.43
+},
+tfr:1.3,
       "yearWiseData": {
         2023: {
       totalPopulation: 50846,
@@ -2801,11 +3061,14 @@ ageDistribution: {
         age2024: 65,
         age2025: 65
     },
-      sexRatio: {
-    2023: 1030,
-    2024: 1030,
-    2025: 1030
-  },
+      sexRatio:  1030,
+  deathsBefore60Percentage:37.83,
+  deathsBefore70Percentage: 62.5,
+  placeOfDeath: {
+  hospital: 8.3,
+  other: 91.7
+},
+tfr:1.2,
       ageDistribution: {
     age0To14: 18.10,
     age15To59: 69.87,
@@ -2868,11 +3131,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 68
     },
-      sexRatio: {
-    2023: 1035,
-    2024: 1035,
-    2025: 1035
-  },
+      sexRatio: 1035,
+  deathsBefore60Percentage:30.4,
+  deathsBefore70Percentage: 52.7,
+  placeOfDeath: {
+  hospital: 13.36,
+  other: 86.64
+},
+tfr:1.1,
       ageDistribution: {
     age0To14: 14.16,
     age15To59: 69.24,
@@ -2934,11 +3200,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1028,
-    2024: 1028,
-    2025: 1028
-  },
+      sexRatio: 1028,
+        deathsBefore60Percentage:32.55,
+  deathsBefore70Percentage: 55.4,
+  placeOfDeath: {
+  hospital: 10.99,
+  other: 89.01
+},
+tfr:1.0,
       ageDistribution: {
     age0To14: 14.67,
     age15To59: 68.27,
@@ -3000,11 +3269,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1001,
-    2024: 1001,
-    2025: 1001
-  },
+      sexRatio: 1001,
+        deathsBefore60Percentage:33.8,
+  deathsBefore70Percentage: 56.0,
+  placeOfDeath: {
+  hospital: 15.4,
+  other: 84.6
+},
+tfr:1.5,
       dependencyRatio: {
     childDependency: 16,
     oldAgeDependency: 15
@@ -3066,11 +3338,14 @@ ageDistribution: {
         age2024: 70,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1020,
-    2024: 1020,
-    2025: 1020
-  },
+      sexRatio:  1020,
+        deathsBefore60Percentage:28.52,
+  deathsBefore70Percentage: 49.4,
+  placeOfDeath: {
+  hospital: 11.23,
+  other: 88.77
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 18
@@ -3132,11 +3407,14 @@ ageDistribution: {
         age2024: 70,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1022,
-    2024: 1022,
-    2025: 1022
-  },
+      sexRatio: 1022,
+  deathsBefore60Percentage:31.19,
+  deathsBefore70Percentage: 54.4,
+  placeOfDeath: {
+  hospital: 12.03,
+  other: 87.97
+},
+tfr:1.0,
       ageDistribution: {
     age0To14: 14.26,
     age15To59: 68.45,
@@ -3170,11 +3448,14 @@ ageDistribution: {
         age2024: 68,
         age2025: 65
     },
-      sexRatio: {
-    2023: 1025,
-    2024: 1025,
-    2025: 1025
-  },
+      sexRatio:1025,
+    deathsBefore60Percentage:29.73,
+  deathsBefore70Percentage: 55.2,
+  placeOfDeath: {
+  hospital: 12.03,
+  other: 87.97
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 17
@@ -3207,11 +3488,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1047,
-    2024: 1047,
-    2025: 1047
-  },
+      sexRatio: 1047,
+  deathsBefore60Percentage:28.25,
+  deathsBefore70Percentage: 51.7,
+  placeOfDeath: {
+  hospital: 11.75,
+  other: 88.25
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 18
@@ -3244,11 +3528,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 67
     },
-      sexRatio: {
-    2023: 1008,
-    2024: 1008,
-    2025: 1008
-  },
+      sexRatio:1008,
+  deathsBefore60Percentage:32.09,
+  deathsBefore70Percentage: 55.8,
+  placeOfDeath: {
+  hospital: 12.47,
+  other: 87.53
+},
+tfr:0.9,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 16
@@ -3290,11 +3577,14 @@ ageDistribution: {
     age15To59: 69.06,
     age60Plus: 14.72
   },
-    sexRatio: {
-    2023: 998,
-    2024: 998,
-    2025: 998
-  },
+    sexRatio:  998,
+  deathsBefore60Percentage:32.09,
+  deathsBefore70Percentage: 55.8,
+  placeOfDeath: {
+  hospital: 11.56,
+  other: 88.44
+},
+tfr:1.1,
       "yearWiseData": {
       2023: { totalPopulation: 67860.58, totalBirths: 676, totalDeaths: 552, birthRate: 10.65, deathRate: 8.13, tfr: 1.23,sexRatio: 124 },
       2024: { totalPopulation: 67902.96, totalBirths: 624, totalDeaths: 625, birthRate: 9.83, deathRate: 9.20, tfr: 1.14,sexRatio: 115 },
@@ -3318,11 +3608,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 68
     },
-      sexRatio: {
-    2023: 1022,
-    2024: 1022,
-    2025: 1022
-  },
+      sexRatio:  1022,
+  deathsBefore60Percentage:32.09,
+  deathsBefore70Percentage: 55.8,
+  placeOfDeath: {
+  hospital: 12.47,
+  other: 87.53
+},
+tfr:0.9,
       ageDistribution: {
     age0To14: 13.94,
     age15To59: 69.71,
@@ -3355,11 +3648,14 @@ ageDistribution: {
         age2024: 66,
         age2025: 66
     },
-      sexRatio: {
-    2023: 1034,
-    2024: 1034,
-    2025: 1034
-  },
+      sexRatio:  1034,
+  deathsBefore60Percentage:34.38,
+  deathsBefore70Percentage: 57.7,
+  placeOfDeath: {
+  hospital: 7.72,
+  other: 92.28
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 14
@@ -3392,11 +3688,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1022,
-    2024: 1022,
-    2025: 1022
-  },
+      sexRatio:  1022,
+        deathsBefore60Percentage:28.76,
+  deathsBefore70Percentage: 51.1,
+  placeOfDeath: {
+  hospital: 7.62,
+  other: 92.38
+},
+tfr:0.9,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 17
@@ -3429,11 +3728,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 67
     },
-      sexRatio: {
-    2023: 1038,
-    2024: 1038,
-    2025: 1038
-  },
+      sexRatio:1038,
+  deathsBefore60Percentage:32.81,
+  deathsBefore70Percentage: 55.4,
+  placeOfDeath: {
+  hospital: 13.12,
+  other: 86.88
+},
+tfr:1.1,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 18
@@ -3466,11 +3768,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 68
     },
-      sexRatio: {
-    2023: 993,
-    2024: 993,
-    2025: 993
-  },
+      sexRatio:  993,
+        deathsBefore60Percentage:31.92,
+  deathsBefore70Percentage: 54.7,
+  placeOfDeath: {
+  hospital: 9.67,
+  other: 90.33
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 18
@@ -3503,11 +3808,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 65
     },
-      sexRatio: {
-    2023: 1020,
-    2024: 1020,
-    2025: 1020
-  },
+      sexRatio:  1020,
+  deathsBefore60Percentage:29.54,
+  deathsBefore70Percentage: 57.5,
+  placeOfDeath: {
+  hospital: 12.74,
+  other: 87.26
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 16,
     oldAgeDependency: 15
@@ -3567,11 +3875,14 @@ ageDistribution: {
         age2024: 65,
         age2025: 65
     },
-      sexRatio: {
-    2023: 999,
-    2024: 999,
-    2025: 999
-  },
+      sexRatio: 999,
+  deathsBefore60Percentage:36.37,
+  deathsBefore70Percentage: 59.8,
+  placeOfDeath: {
+  hospital: 10.4,
+  other: 89.6
+},
+tfr:1.2,
       dependencyRatio: {
     childDependency: 18,
     oldAgeDependency: 13
@@ -3631,11 +3942,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1013,
-    2024: 1013,
-    2025: 1013
-  },
+      sexRatio:  1013,
+    deathsBefore60Percentage:33.75,
+  deathsBefore70Percentage: 56.3,
+  placeOfDeath: {
+  hospital: 16.53,
+  other: 83.47
+},
+tfr:0.9,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 14
@@ -3695,11 +4009,14 @@ ageDistribution: {
         age2024: 66,
         age2025: 65
     },
-      sexRatio: {
-    2023: 1044,
-    2024: 1044,
-    2025: 1044
-  },
+      sexRatio:1044,
+  deathsBefore60Percentage:34.31,
+  deathsBefore70Percentage: 56.8,
+  placeOfDeath: {
+  hospital: 12.82,
+  other: 87.18
+},
+tfr:1.0,
       ageDistribution: {
     age0To14: 16.16,
     age15To59: 67.73,
@@ -3759,11 +4076,14 @@ ageDistribution: {
         age2024: 70,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1007,
-    2024: 1007,
-    2025: 1007
-  },
+      sexRatio:  1007,
+        deathsBefore60Percentage:29.65,
+  deathsBefore70Percentage: 49.0,
+  placeOfDeath: {
+  hospital: 12.83,
+  other: 87.17
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 17
@@ -3823,11 +4143,14 @@ ageDistribution: {
         age2024: 71,
         age2025: 73
     }, 
-      sexRatio: {
-    2023: 997,
-    2024: 997,
-    2025: 997
-  },
+      sexRatio:  997,
+  deathsBefore60Percentage:34.31,
+  deathsBefore70Percentage: 56.8,
+  placeOfDeath: {
+  hospital: 12.49,
+  other: 87.51
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 18
@@ -3887,11 +4210,14 @@ ageDistribution: {
         age2024: 67,
         age2025: 68
     },
-      sexRatio: {
-    2023: 1066,
-    2024: 1066,
-    2025: 1066
-  },
+      sexRatio: 1066,
+        deathsBefore60Percentage:32.93,
+  deathsBefore70Percentage: 56.2,
+  placeOfDeath: {
+  hospital: 12.54,
+  other: 87.46
+},
+tfr:1.1,
       dependencyRatio: {
     childDependency: 15,
     oldAgeDependency: 15
@@ -3951,11 +4277,14 @@ ageDistribution: {
         age2024: 71,
         age2025: 71
     },
-      sexRatio: {
-    2023: 1003,
-    2024: 1003,
-    2025: 1003
-  },
+      sexRatio:  1003,
+        deathsBefore60Percentage:25.66,
+  deathsBefore70Percentage: 46.4,
+  placeOfDeath: {
+  hospital: 10.9,
+  other: 89.1
+},
+tfr:1.1,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 20
@@ -4015,11 +4344,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 69
     },
-      sexRatio: {
-    2023: 1009,
-    2024: 1009,
-    2025: 1009
-  },
+      sexRatio: 1009,
+        deathsBefore60Percentage:30.43,
+  deathsBefore70Percentage: 51.5,
+  placeOfDeath: {
+  hospital: 9.87,
+  other: 90.13
+},
+tfr:1.2,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 19
@@ -4079,11 +4411,14 @@ ageDistribution: {
         age2024: 69,
         age2025: 69.5
     },
-      sexRatio: {
-    2023: 1042,
-    2024: 1042,
-    2025: 1042
-  },
+      sexRatio:  1042,
+        deathsBefore60Percentage:29.76,
+  deathsBefore70Percentage: 50.5,
+  placeOfDeath: {
+  hospital: 7.09,
+  other: 92.91
+},
+tfr:1.0,
       dependencyRatio: {
     childDependency: 14,
     oldAgeDependency: 17
@@ -4143,11 +4478,14 @@ ageDistribution: {
         age2024: 65,
         age2025: 65
     },
-      sexRatio: {
-    2023: 1028,
-    2024: 1028,
-    2025: 1028
-  },
+      sexRatio: 1028,
+  deathsBefore60Percentage:35.56,
+  deathsBefore70Percentage: 60.5,
+  placeOfDeath: {
+  hospital: 24.83,
+  other: 75.17
+},
+tfr:1.5,
   dependencyRatio: {
     childDependency: 16,
     oldAgeDependency: 14
@@ -4223,6 +4561,7 @@ ageDistribution: {
     this.route.queryParams.subscribe((params) => {
       const district = params['district'];
       this.selectedDistrictName = district;
+      this.selectedYear = 2025;
       this.loadDistrictData();
     });
   }
@@ -4249,12 +4588,22 @@ ageDistribution: {
     this.loadLineChart();
     this.loadMedianAgeAtDeathChart();
     this.loadSexRatioChart();
+    this.loadBirthSexRatioChart();
+    this.loadPopulationBirthShareChart();
+    this.loadPlaceOfDeathChart();
+    this.loadDeathsBefore60Chart();
+    this.loadDeathsBefore70Chart();
+    this.loadDeathShareBirthChart();
+    this.loadAgeSexDistributionChart();
+    this.loadAnnualGrowthRateChart();
+    this.loadTfrChart();
     this.loadAgeWiseChart(
     ageDistribution.age0To14 || 0,
     ageDistribution.age15To59 || 0,
     ageDistribution.age60Plus || 0
   );
   }
+
   onMandalChange(event: any, mandal: any) {
     if (event.target.checked) {
       this.selectedMandals.push(mandal.mandalName);
@@ -4269,127 +4618,6 @@ ageDistribution: {
   
   }
 
-
-// loadDashboardSummary() {
-//   // ===================================
-//   // DISTRICT MODE
-//   // ===================================
-
-//   if (this.selectedMandals.length === 0) {
-
-//     this.dashboardSummary =
-//       this.districtDetails
-//         .districtYearWiseData[
-//           this.selectedYear
-//         ];
-
-//     return;
-//   }
-//   // ===================================
-//   // MANDAL MODE
-//   // ===================================
-
-//   const selectedData =
-//     this.mandalList.filter(x =>
-//       this.selectedMandals.includes(x.mandalName)
-//     );
-
-
-
-//   const totalPopulation =
-//     selectedData.reduce((sum, mandal) => {
-
-//       return sum +
-//         mandal.yearWiseData[
-//           this.selectedYear
-//         ].totalPopulation;
-
-//     }, 0);
-
-
-
-//   const totalBirths =
-//     selectedData.reduce((sum, mandal) => {
-
-//       return sum +
-//         mandal.yearWiseData[
-//           this.selectedYear
-//         ].totalBirths;
-
-//     }, 0);
-
-
-
-//   const totalDeaths =
-//     selectedData.reduce((sum, mandal) => {
-
-//       return sum +
-//         mandal.yearWiseData[
-//           this.selectedYear
-//         ].totalDeaths;
-
-//     }, 0);
-
-
-
-//   const avgTfr =
-//     (
-//       selectedData.reduce((sum, mandal) => {
-
-//         return sum +
-//           mandal.yearWiseData[
-//             this.selectedYear
-//           ].tfr;
-
-//       }, 0)
-
-//       / selectedData.length
-
-//     ).toFixed(2);
-
-
-
-//   const avgSexRatio =
-//     (
-//       selectedData.reduce((sum, mandal) => {
-
-//         return sum +
-//           mandal.yearWiseData[
-//             this.selectedYear
-//           ].sexRatio;
-
-//       }, 0)
-
-//       / selectedData.length
-
-//     ).toFixed(0);
-// const birthRate =
-// (
-//   (totalBirths / totalPopulation) * 1000
-// ).toFixed(2);
-
-
-
-// const deathRate =
-// (
-//   (totalDeaths / totalPopulation) * 1000
-// ).toFixed(2);
-
-
-
-
-
-//   this.dashboardSummary = {
-//     totalPopulation,
-//     totalBirths,
-//     totalDeaths,
-//     birthRate,
-//     deathRate,
-//     tfr: avgTfr,
-//     sexRatio: avgSexRatio
-//   };
-
-// }
 loadDashboardSummary() {
 
   // ===================================
@@ -4416,14 +4644,6 @@ loadDashboardSummary() {
   };
 
   return;
-
-    // this.dashboardSummary =
-    //   this.districtDetails?.districtYearWiseData?.[
-    //     this.selectedYear
-    //   ] || {};
-
-    // return;
-
   }
 
   // ===================================
@@ -4578,287 +4798,6 @@ loadDashboardSummary() {
       },
     ],
   };
-
-
-// loadBarChart() {
-//   // =====================================
-//   // DISTRICT MODE
-//   // =====================================
-
-//   let chartData = [];
-//   if (this.selectedMandals.length === 0) {
-//     chartData = this.mandalList;
-//   }
-
-//   // =====================================
-//   // MANDAL MODE
-//   // =====================================
-
-//   else {
-
-//     chartData =
-//       this.mandalList.filter(x =>
-//         this.selectedMandals.includes(
-//           x.mandalName
-//         )
-//       );
-
-//   }
-
-
-
-//   // =====================================
-//   // DYNAMIC VALUES
-//   // =====================================
-
-//   const categories =
-//     chartData.map(x => x.mandalName);
-
-
-
-//   const birthsData =
-//     chartData.map(x =>
-//       x.yearWiseData?.[
-//         this.selectedYear
-//       ]?.totalBirths || 0
-
-//     );
-//   const deathsData =
-//     chartData.map(x =>
-//       x.yearWiseData?.[
-//         this.selectedYear
-//       ]?.totalDeaths || 0
-
-//     );
-//   // =====================================
-//   // CHART OPTIONS
-//   // =====================================
-
-//   this.barChartOptions = {
-
-//     chart: {
-//       type: 'column',
-//       backgroundColor: 'transparent'
-//     },
-
-//     title: {
-//       text: ''
-//     },
-
-
-
-//     xAxis: {
-
-//       categories,
-
-//       lineColor: '#e0e0e0'
-
-//     },
-
-
-
-//     yAxis: {
-
-//       title: {
-//         text: ''
-//       },
-
-//       gridLineColor: '#f1f3f5'
-
-//     },
-
-
-
-//     legend: {
-
-//       align: 'center',
-
-//       verticalAlign: 'bottom'
-
-//     },
-
-
-
-//     plotOptions: {
-
-//       column: {
-
-//         borderRadius: 6,
-
-//         pointPadding: 0.2
-
-//       },
-
-
-
-//       series: {
-
-//         animation: {
-
-//           duration: 1200
-
-//         }
-
-//       }
-
-//     },
-
-
-
-//     series: [
-
-//       {
-
-//         type: 'column',
-
-//         name: 'Births',
-
-//         data: birthsData,
-
-//         color: '#86efac'
-
-//       },
-
-
-
-//       {
-
-//         type: 'column',
-
-//         name: 'Deaths',
-
-//         data: deathsData,
-
-//         color: '#fca5a5'
-
-//       }
-
-//     ]
-
-//   };
-
-// }
-
-
-// loadLineChart() {
-
-
-
-//   // =====================================
-//   // YEARS
-//   // =====================================
-
-//   const years = [2023, 2024, 2025, 2026];
-
-
-
-//   // =====================================
-//   // DISTRICT MODE
-//   // =====================================
-
-//   if (this.selectedMandals.length === 0) {
-
-
-
-//     const birthsData =
-//       years.map(year =>
-
-//         this.districtDetails
-//           ?.districtYearWiseData?.[
-//             year
-//           ]?.totalBirths || 0
-
-//       );
-
-
-
-//     const deathsData =
-//       years.map(year =>
-
-//         this.districtDetails
-//           ?.districtYearWiseData?.[
-//             year
-//           ]?.totalDeaths || 0
-
-//       );
-
-
-
-//     this.updateLineChart(
-//       years,
-//       birthsData,
-//       deathsData
-//     );
-
-
-
-//     return;
-//   }
-
-
-
-//   // =====================================
-//   // MANDAL MODE
-//   // =====================================
-
-//   const selectedData =
-//     this.mandalList.filter(x =>
-//       this.selectedMandals.includes(
-//         x.mandalName
-//       )
-//     );
-
-
-
-//   const birthsData =
-//     years.map(year => {
-
-//       return selectedData.reduce(
-//         (sum, mandal) => {
-
-//           return sum +
-//             (
-//               mandal.yearWiseData?.[
-//                 year
-//               ]?.totalBirths || 0
-//             );
-
-//         },
-//         0
-//       );
-
-//     });
-
-
-
-//   const deathsData =
-//     years.map(year => {
-
-//       return selectedData.reduce(
-//         (sum, mandal) => {
-
-//           return sum +
-//             (
-//               mandal.yearWiseData?.[
-//                 year
-//               ]?.totalDeaths || 0
-//             );
-
-//         },
-//         0
-//       );
-
-//     });
-
-
-
-//   this.updateLineChart(
-//     years,
-//     birthsData,
-//     deathsData
-//   );
-
-// }
 
 loadBarChart() {
 
@@ -5214,7 +5153,7 @@ updateLineChart(
 selectMandal(mandal: any) {
   this.selectedMandal = mandal.mandalName;
     this.loadDashboardSummary();
-    this.loadBarChart();
+    //this.loadBarChart();
     this.loadLineChart();
     this.loadMedianAgeAtDeathChart();
       this.dashboardSummary.childDependency =
@@ -5322,52 +5261,82 @@ loadAgeWiseChart(
 
 loadSexRatioChart() {
 
-  const categories = this.mandalList.map(
-    (m: any) => m.mandalName
-  );
-
-  const sexRatio2023 = this.mandalList.map(
-    (m: any) => m.sexRatio?.['2023'] || 0
-  );
-
-  const sexRatio2024 = this.mandalList.map(
-    (m: any) => m.sexRatio?.['2024'] || 0
-  );
-
-  const sexRatio2025 = this.mandalList.map(
-    (m: any) => m.sexRatio?.['2025'] || 0
+  const sortedMandals = [...this.mandalList].sort(
+    (a, b) => a.sexRatio - b.sexRatio
   );
 
   this.sexRatioChartOptions = {
+    chart: {
+      type: 'column'
+    },
+
+    xAxis: {
+      categories: sortedMandals.map(m => m.mandalName)
+    },
+      title: {
+      text: 'Sex Ratio(FeMales per 1000 Males)'
+    },
+
+    series: [{
+      name: 'Sex Ratio',
+      type: 'column',
+      data: sortedMandals.map(m => m.sexRatio)
+    }]
+  };
+}
+
+loadBirthSexRatioChart() {
+
+  const sortedMandals = [...this.mandalList].sort(
+    (a, b) => a.yearWiseData[2023].sexRatio - b.yearWiseData[2023].sexRatio
+  );
+
+  const categories = sortedMandals.map(
+    m => m.mandalName
+  );
+
+  const sexRatio2023 = sortedMandals.map(
+    m => m.yearWiseData[2023].sexRatio
+  );
+
+  const sexRatio2024 = sortedMandals.map(
+    m => m.yearWiseData[2024].sexRatio
+  );
+
+  const sexRatio2025 = sortedMandals.map(
+    m => m.yearWiseData[2025].sexRatio
+  );
+
+  this.birthSexRatioChartOptions = {
 
     chart: {
       type: 'column'
     },
 
     title: {
-      text: ''
+      text: 'CSR Sex Ratio at Birth (Males per 100 Females)'
     },
 
     xAxis: {
-      categories: categories,
+      categories,
       labels: {
         rotation: -45
       }
     },
 
     yAxis: {
-      min: 950,
+      min: 0,
       title: {
-        text: 'Gender Ratio'
+        text: 'Males per 100 Females'
       }
-    },
-
-    tooltip: {
-      shared: true
     },
 
     credits: {
       enabled: false
+    },
+
+    tooltip: {
+      shared: true
     },
 
     plotOptions: {
@@ -5398,6 +5367,672 @@ loadSexRatioChart() {
   };
 }
 
+loadPopulationBirthShareChart() {
+
+  const districtPopulation =
+    this.districtDetails.districtYearWiseData[2025].totalPopulation;
+
+  const districtBirths =
+    this.districtDetails.districtYearWiseData[2023].totalBirths +
+    this.districtDetails.districtYearWiseData[2024].totalBirths +
+    this.districtDetails.districtYearWiseData[2025].totalBirths;
+
+  const chartData = this.mandalList.map((m: any) => {
+
+    const totalBirths =
+      (m.yearWiseData?.[2023]?.totalBirths || 0) +
+      (m.yearWiseData?.[2024]?.totalBirths || 0) +
+      (m.yearWiseData?.[2025]?.totalBirths || 0);
+
+    const population =
+      m.yearWiseData?.[2025]?.totalPopulation || 0;
+
+    return {
+      mandalName: m.mandalName,
+
+      populationShare: Number(
+        ((population / districtPopulation) * 100).toFixed(2)
+      ),
+
+      birthShare: Number(
+        ((totalBirths / districtBirths) * 100).toFixed(2)
+      )
+    };
+  });
+
+  // Sort by population share ascending
+  chartData.sort(
+    (a, b) => a.populationShare - b.populationShare
+  );
+
+  const categories =
+    chartData.map(x => x.mandalName);
+
+  const populationShareData =
+    chartData.map(x => x.populationShare);
+
+  const birthShareData =
+    chartData.map(x => x.birthShare);
+
+  this.populationBirthShareChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: ''
+    },
+
+    xAxis: {
+      categories: categories,
+      labels: {
+        rotation: -45,
+        style: {
+          fontSize: '10px'
+        }
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Percentage (%)'
+      }
+    },
+
+    tooltip: {
+      shared: true,
+      valueSuffix: '%'
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    legend: {
+      enabled: true
+    },
+
+    plotOptions: {
+      column: {
+        grouping: true,
+        dataLabels: {
+          enabled: true,
+          format: '{y:.1f}'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Share of population in sub-districts',
+        type: 'column',
+        data: populationShareData
+      },
+      {
+        name: 'Share of births among all sub-districts',
+        type: 'column',
+        data: birthShareData
+      }
+    ]
+  };
+}
+loadPlaceOfDeathChart() {
+
+  const chartData = this.mandalList
+    .map((m: any) => ({
+      mandalName: m.mandalName,
+      hospital: m.placeOfDeath?.hospital || 0,
+      other: m.placeOfDeath?.other || 0
+    }))
+    .sort((a, b) => a.hospital - b.hospital);
+
+  const categories =
+    chartData.map(x => x.mandalName);
+
+  const hospitalData =
+    chartData.map(x => x.hospital);
+
+  const otherData =
+    chartData.map(x => x.other);
+
+  this.placeOfDeathChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: 'Place of Death'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      max: 100,
+
+      title: {
+        text: 'Percentage'
+      },
+
+      stackLabels: {
+        enabled: false
+      }
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    tooltip: {
+      shared: true,
+      valueSuffix: '%'
+    },
+
+    plotOptions: {
+
+      column: {
+
+        stacking: 'percent',
+
+        dataLabels: {
+          enabled: false
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Hospital',
+        type: 'column',
+        data: hospitalData
+      },
+      {
+        name: 'Other',
+        type: 'column',
+        data: otherData
+      }
+    ]
+  };
+}
+
+loadDeathsBefore60Chart() {
+
+  const chartData = [...this.mandalList]
+    .map((m: any) => ({
+      mandalName: m.mandalName,
+      percentage: m.deathsBefore60Percentage || 0
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+  const categories =
+    chartData.map(x => x.mandalName);
+
+  const percentageData =
+    chartData.map(x => x.percentage);
+
+  this.deathsBefore60ChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: 'Percentage of deaths before age 60'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Percentage (%)'
+      }
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    tooltip: {
+      valueSuffix: '%'
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.1f}%'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Deaths Before Age 60',
+        type: 'column',
+        data: percentageData
+      }
+    ]
+  };
+}
+loadDeathsBefore70Chart() {
+
+  const chartData = [...this.mandalList]
+    .map((m: any) => ({
+      mandalName: m.mandalName,
+      percentage: m.deathsBefore70Percentage || 0
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+  const categories =
+    chartData.map(x => x.mandalName);
+
+  const percentageData =
+    chartData.map(x => x.percentage);
+
+  this.deathsBefore70ChartOptions = {
+    
+
+    chart: {
+      type: 'column',
+       scrollablePlotArea: {
+    minWidth: categories.length * 60,
+    scrollPositionX: 0
+  }
+    },
+
+    title: {
+      text: 'Percentage of deaths before age 70'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Percentage (%)'
+      }
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    tooltip: {
+      valueSuffix: '%'
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.1f}%'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Deaths Before Age 70',
+        type: 'column',
+        data: percentageData
+      }
+    ]
+  };
+}
+loadDeathShareBirthChart() {
+
+  const chartData = this.mandalList.map((m: any) => {
+
+    const totalBirths =
+      (m.yearWiseData?.[2023]?.totalBirths || 0) +
+      (m.yearWiseData?.[2024]?.totalBirths || 0) +
+      (m.yearWiseData?.[2025]?.totalBirths || 0);
+
+    const totalDeaths =
+      (m.yearWiseData?.[2023]?.totalDeaths || 0) +
+      (m.yearWiseData?.[2024]?.totalDeaths || 0) +
+      (m.yearWiseData?.[2025]?.totalDeaths || 0);
+
+    const deathShare =
+      totalBirths > 0
+        ? +(totalDeaths / totalBirths).toFixed(2)
+        : 0;
+
+    return {
+      mandalName: m.mandalName,
+      deathShare
+    };
+  });
+
+  // Sort ascending
+  chartData.sort(
+    (a, b) => a.deathShare - b.deathShare
+  );
+
+  const categories =
+    chartData.map(x => x.mandalName);
+
+  const deathShareData =
+    chartData.map(x => x.deathShare);
+
+  this.deathShareBirthChartOptions = {
+
+    chart: {
+      type: 'column',
+       scrollablePlotArea: {
+    minWidth: categories.length * 60,
+    scrollPositionX: 0
+  }
+    },
+
+    title: {
+      text: 'Death as Share of Births'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Death / Birth Ratio'
+      }
+    },
+
+    tooltip: {
+      pointFormat:
+        '<b>{point.y:.2f}</b>'
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.2f}'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Death as Share of Births',
+        type: 'column',
+        data: deathShareData
+      }
+    ]
+  };
+}
+loadAgeSexDistributionChart() {
+
+  const ageData =
+    this.districtDetails?.ageSexDistribution || [];
+
+  const categories =
+    ageData.map((x:any) => x.ageGroup);
+
+  const femaleData =
+    ageData.map((x:any) => x.female);
+
+  const maleData =
+    ageData.map((x:any) => x.male);
+
+  this.ageSexDistributionChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: `Age-sex distribution of deaths in ${this.selectedDistrictName} District (2023-25)`
+    },
+
+    xAxis: {
+      categories
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Percentage'
+      }
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    tooltip: {
+      shared: true,
+      valueSuffix: '%'
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.1f}'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Female',
+        type: 'column',
+        data: femaleData
+      },
+      {
+        name: 'Male',
+        type: 'column',
+        data: maleData
+      }
+    ]
+  };
+}
+
+loadTfrChart() {
+  const chartData = this.mandalList.map((m: any) => ({
+    mandalName: m.mandalName,
+    tfr: m.tfr || 0
+  }));
+
+  // Add District TFR
+  chartData.push({
+    mandalName: this.selectedDistrictName + ' District',
+    tfr: this.districtDetails?.districtTFR || 0
+  });
+
+  // Sort ascending
+  chartData.sort((a, b) => a.tfr - b.tfr);
+
+  const categories = chartData.map(x => x.mandalName);
+
+  const tfrData = chartData.map(x => {
+
+    const isDistrict =
+      x.mandalName ===
+      this.selectedDistrictName + ' District';
+
+    return {
+      y: x.tfr,
+
+      color: isDistrict
+        ? '#FFC000'   // Yellow for district
+        : '#4472C4'   // Blue for mandals
+    };
+  });
+
+  this.tfrChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: `TFR in Sub-districts of ${this.selectedDistrictName} District`
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'Estimated TFR'
+      }
+    },
+
+    tooltip: {
+      pointFormat: '<b>{point.y:.2f}</b>'
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.1f}'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'TFR',
+        type: 'column',
+        data: tfrData
+      }
+    ]
+  };
+}
+
+loadAnnualGrowthRateChart() {
+
+  const chartData = this.mandalList.map((m: any) => ({
+    mandalName: m.mandalName,
+    growthRate:
+      +((m.annualExponantional || 0) * 100).toFixed(2)
+  }));
+
+  // Add district value
+  chartData.push({
+    mandalName: this.selectedDistrictName,
+    growthRate:
+      +((this.districtDetails?.annualExponantional || 0) * 100).toFixed(2)
+  });
+
+  // Sort ascending
+  chartData.sort(
+    (a, b) => a.growthRate - b.growthRate
+  );
+
+  const categories =
+    chartData.map((x: any) => x.mandalName);
+
+  const growthData =
+    chartData.map((x: any) => {
+
+      const isDistrict =
+        x.mandalName === this.selectedDistrictName;
+
+      return {
+        y: x.growthRate,
+        color: isDistrict
+          ? '#FFC000'
+          : '#4472C4'
+      };
+    });
+
+  this.annualGrowthRateChartOptions = {
+
+    chart: {
+      type: 'column'
+    },
+
+    title: {
+      text: 'Average annual exponential growth rate of population, 2001-11 (%)'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      title: {
+        text: 'Percentage'
+      },
+      plotLines: [
+        {
+          value: 0,
+          width: 1,
+          color: '#999'
+        }
+      ]
+    },
+
+    tooltip: {
+      pointFormat: '<b>{point.y:.2f}%</b>'
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.2f}'
+        }
+      }
+    },
+
+    series: [
+      {
+        name: 'Growth Rate',
+        type: 'column',
+        data: growthData
+      }
+    ]
+  };
+}
 
 
 }
