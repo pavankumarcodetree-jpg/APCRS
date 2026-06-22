@@ -31,7 +31,7 @@ export class AuthserService {
     }
   }
 
-  async auth_utilities_rtgs(req: any): Promise<void> {
+  async auth_utilities_rtgs(req: any): Promise<any> {
     try {
       return await this.dataconnect.api_connect_rtgs(
         req,

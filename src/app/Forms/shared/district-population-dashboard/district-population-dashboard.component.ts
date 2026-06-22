@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Highcharts from 'highcharts';
+import { AuthserService } from 'src/app/services/api_lyr/private/authser.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { basemodel } from 'src/app/thirparty/model/apimodel';
 
 
 
@@ -59,6 +62,8 @@ export class DistrictPopulationDashboardComponent {
   ageSexDistributionChartOptions:Highcharts.Options = {};
   tfrChartOptions: Highcharts.Options = {};
   annualGrowthRateChartOptions: Highcharts.Options = {};
+  updateBirthChart = false;
+  csrMandalList: any[] = [];
   districtData = [
 
   // =====================================================
@@ -4546,9 +4551,14 @@ tfr:1.5,
   selectedYear: number = 2025;
   yearList: number[] = [];
   selectedDistrictName: string = '';
+  birthSexRatioData: any;
+  sexRatioData: any;
+  updateFlag = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
+     private auth: AuthserService,
+     private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -4563,6 +4573,7 @@ tfr:1.5,
       this.selectedDistrictName = district;
       this.selectedYear = 2025;
       this.loadDistrictData();
+      this.loadDistrictDashboardData();
     });
   }
   loadDistrictData() {
@@ -4570,33 +4581,18 @@ tfr:1.5,
       (x) => x.districtName === this.selectedDistrictName,
     );
     // LOAD MANDALS
-    this.mandalList = this.districtDetails?.mandals || [];
     // INITIAL DISTRICT SUMMARY
-    this.dashboardSummary = this.districtDetails ?.districtYearWiseData?.[ this.selectedYear ] || {};
       this.dashboardSummary.childDependency =
     this.districtDetails?.dependencyRatio?.childDependency || 0;
   this.dashboardSummary.oldAgeDependency =
     this.districtDetails?.dependencyRatio?.oldAgeDependency || 0;
-      this.dashboardSummary.population2001 =
-    this.districtDetails?.population2001 || 0;
-          this.dashboardSummary.population2011 =
-    this.districtDetails?.population2011 || 0;
-              this.dashboardSummary.annualExponantional =
-    this.districtDetails?.annualExponantional || 0;
+     // this.dashboardSummary.population2001 =
+    // this.districtDetails?.population2001 || 0;
+    //       this.dashboardSummary.population2011 =
+    // this.districtDetails?.population2011 || 0;
+    //           this.dashboardSummary.annualExponantional =
+    // this.districtDetails?.annualExponantional || 0;
     const ageDistribution = this.districtDetails?.ageDistribution || {};
-    this.loadBarChart();
-    this.loadLineChart();
-    this.loadMedianAgeAtDeathChart();
-    this.loadSexRatioChart();
-    this.loadBirthSexRatioChart();
-    this.loadPopulationBirthShareChart();
-    this.loadPlaceOfDeathChart();
-    this.loadDeathsBefore60Chart();
-    this.loadDeathsBefore70Chart();
-    this.loadDeathShareBirthChart();
-    this.loadAgeSexDistributionChart();
-    this.loadAnnualGrowthRateChart();
-    this.loadTfrChart();
     this.loadAgeWiseChart(
     ageDistribution.age0To14 || 0,
     ageDistribution.age15To59 || 0,
@@ -4685,11 +4681,11 @@ loadDashboardSummary() {
 
   onYearChange(year: number) {
     this.selectedYear = year;
-    this.loadDashboardSummary();
-      this.loadBarChart();
-     this.loadLineChart();
-     this.loadMedianAgeAtDeathChart();
-     this.loadSexRatioChart();
+    //this.loadDashboardSummary();
+    this.loadDistrictDashboardData();
+    //   this.loadBarChart();
+    //  this.loadLineChart();
+    //  this.loadMedianAgeAtDeathChart();
   }
 
 
@@ -5260,52 +5256,64 @@ loadAgeWiseChart(
 }
 
 loadSexRatioChart() {
-
-  const sortedMandals = [...this.mandalList].sort(
-    (a, b) => a.sexRatio - b.sexRatio
+  const sortedMandals = [...this.sexRatioData].sort(
+    (a, b) => a.SEX_RATIO - b.SEX_RATIO
   );
-
   this.sexRatioChartOptions = {
     chart: {
       type: 'column'
     },
-
+    title: {
+      text: 'Sex Ratio (Females per 1000 Males)'
+    },
     xAxis: {
-      categories: sortedMandals.map(m => m.mandalName)
+      categories: sortedMandals.map(x => x.MANDAL_NAME)
     },
-      title: {
-      text: 'Sex Ratio(FeMales per 1000 Males)'
-    },
-
     series: [{
       name: 'Sex Ratio',
       type: 'column',
-      data: sortedMandals.map(m => m.sexRatio)
+      data: sortedMandals.map(x => x.SEX_RATIO)
     }]
   };
+  this.updateFlag = false;
+  setTimeout(() => {
+    this.updateFlag = true;
+  }, 0);
 }
 
 loadBirthSexRatioChart() {
 
-  const sortedMandals = [...this.mandalList].sort(
-    (a, b) => a.yearWiseData[2023].sexRatio - b.yearWiseData[2023].sexRatio
+  const sortedMandals = [...(this.csrMandalList || [])].sort(
+    (a, b) =>
+      (a?.yearWiseData?.[2023]?.sexRatio || 0) -
+      (b?.yearWiseData?.[2023]?.sexRatio || 0)
   );
 
-  const categories = sortedMandals.map(
-    m => m.mandalName
-  );
+  const categories =
+    sortedMandals.length
+      ? sortedMandals.map(m => m.mandalName)
+      : ['No data'];
 
-  const sexRatio2023 = sortedMandals.map(
-    m => m.yearWiseData[2023].sexRatio
-  );
+  const sexRatio2023 =
+    sortedMandals.length
+      ? sortedMandals.map(
+          m => m?.yearWiseData?.[2023]?.sexRatio || 0
+        )
+      : [0];
 
-  const sexRatio2024 = sortedMandals.map(
-    m => m.yearWiseData[2024].sexRatio
-  );
+  const sexRatio2024 =
+    sortedMandals.length
+      ? sortedMandals.map(
+          m => m?.yearWiseData?.[2024]?.sexRatio || 0
+        )
+      : [0];
 
-  const sexRatio2025 = sortedMandals.map(
-    m => m.yearWiseData[2025].sexRatio
-  );
+  const sexRatio2025 =
+    sortedMandals.length
+      ? sortedMandals.map(
+          m => m?.yearWiseData?.[2025]?.sexRatio || 0
+        )
+      : [0];
 
   this.birthSexRatioChartOptions = {
 
@@ -5335,18 +5343,6 @@ loadBirthSexRatioChart() {
       enabled: false
     },
 
-    tooltip: {
-      shared: true
-    },
-
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true
-        }
-      }
-    },
-
     series: [
       {
         name: '2023',
@@ -5365,17 +5361,20 @@ loadBirthSexRatioChart() {
       }
     ]
   };
+    this.updateBirthChart = false;
+  setTimeout(() => {
+    this.updateBirthChart = true;
+  }, 0);
 }
 
 loadPopulationBirthShareChart() {
-
   const districtPopulation =
-    this.districtDetails.districtYearWiseData[2025].totalPopulation;
+    this.districtDetails?.districtYearWiseData[2025]?.totalPopulation;
 
   const districtBirths =
-    this.districtDetails.districtYearWiseData[2023].totalBirths +
-    this.districtDetails.districtYearWiseData[2024].totalBirths +
-    this.districtDetails.districtYearWiseData[2025].totalBirths;
+    this.districtDetails?.districtYearWiseData[2023]?.totalBirths +
+    this.districtDetails?.districtYearWiseData[2024]?.totalBirths +
+    this.districtDetails?.districtYearWiseData[2025]?.totalBirths;
 
   const chartData = this.mandalList.map((m: any) => {
 
@@ -6034,5 +6033,139 @@ loadAnnualGrowthRateChart() {
   };
 }
 
+async loadDistrictDashboardData() {
+  try {
+    this.spinner.show();
+
+    // API 1 - District Summary
+    const req1 = new basemodel();
+    req1.type = '1000';
+    req1.param1 = this.selectedDistrictName;
+    req1.param2=this.selectedYear
+
+    // API 2 - Sex Ratio at Birth
+    const req2 = new basemodel();
+    req2.type = '1001';
+    req2.param1 = this.selectedDistrictName;
+    req2.param2 = '2023';
+    req2.param3 = '2025';
+
+    // API 3 - GSWS Sex Ratio
+    const req3 = new basemodel();
+    req3.type = '1002';
+    req3.param1 = this.selectedDistrictName;
+
+    const [
+      districtResponse,
+      birthSexRatioResponse,
+      sexRatioResponse
+    ] = await Promise.all([
+      this.auth.auth_utilities_rtgs(req1),
+      this.auth.auth_utilities_rtgs(req2),
+      this.auth.auth_utilities_rtgs(req3)
+    ]);
+
+    // District Summary
+    if (districtResponse?.code) {
+      var district = districtResponse.Details?.[0] || {};
+      this.dashboardSummary = {
+  districtName: district.DISTRICT_NAME,
+  population2001: district.POP_2001_CEN_IND,
+  population2011: district.POP_2011_CEN_IND,
+  annualExponantional: district.ANNUAL_EXP_RET_POP_2001_11,
+  estimatedPopulation: district.EST_POP_31_DEC_2025,
+  totalPopulation: district.EST_POP_31_DEC,
+  totalBirths:district.CRS_BIR_IN,
+  totalDeaths:district.CRS_DEA_IN,
+  birthRate:district.EST_CBR_FOR,
+  deathRate:district.EST_CDR_FOR,
+  tfr:district.EST_TFR_FOR
+};
+}
+
+    // Table 2.2(a)
+    if (birthSexRatioResponse?.code) {
+      this.birthSexRatioData =
+        birthSexRatioResponse.Details || [];
+        this.updateSexRatioCard();
+
+         this.birthSexRatioData =
+    birthSexRatioResponse.Details || [];
+
+  const mandalMap: any = {};
+
+  this.birthSexRatioData.forEach((item: any) => {
+
+    if (!mandalMap[item.MANDAL_NAME]) {
+      mandalMap[item.MANDAL_NAME] = {
+        mandalName: item.MANDAL_NAME,
+        yearWiseData: {}
+      };
+    }
+
+    mandalMap[item.MANDAL_NAME].yearWiseData[item.YEAR_YR] = {
+      sexRatio: item.SEX_RATIO,
+      female: item.FEMALE,
+      male: item.MALE
+    };
+  });
+  this.csrMandalList = Object.values(mandalMap);
+  console.log('loadBirthSexRatioChart', this.csrMandalList);
+    }
+
+    // GSWS Sex Ratio
+    if (sexRatioResponse?.code) {
+      this.sexRatioData =
+        sexRatioResponse.Details || [];
+        this.mandalList = this.sexRatioData.map((item: any) => ({
+    mandalName: item.MANDAL_NAME,
+  }));
+
+    }
+    console.log('District Summary',district, this.dashboardSummary);
+    console.log('Birth Sex Ratio', this.birthSexRatioData);
+    console.log('GSWS Sex Ratio', this.sexRatioData);
+    // ALL 3 APIs COMPLETED HERE
+    this.loadAllCharts();
+    this.spinner.hide();
+  } catch (error) {
+    this.spinner.hide();
+    console.error(error);
+  }
+}
+updateSexRatioCard() {
+  const yearData = this.birthSexRatioData.filter(
+    (x: any) => +x.YEAR_YR === +this.selectedYear
+  );
+  const totalFemale = yearData.reduce(
+    (sum: number, item: any) => sum + (+item.FEMALE || 0),
+    0
+  );
+  const totalMale = yearData.reduce(
+    (sum: number, item: any) => sum + (+item.MALE || 0),
+    0
+  );
+
+  this.dashboardSummary.sexRatio =
+    totalMale > 0
+      ? Math.round(( totalMale / totalFemale) * 1000)
+      : 0;
+}
+loadAllCharts() {
+  this.loadBarChart();
+  this.loadLineChart();
+  this.loadMedianAgeAtDeathChart();
+  this.loadSexRatioChart();
+  this.loadBirthSexRatioChart();
+  this.loadPopulationBirthShareChart();
+  this.loadPlaceOfDeathChart();
+  this.loadDeathsBefore60Chart();
+  this.loadDeathsBefore70Chart();
+  this.loadDeathShareBirthChart();
+  this.loadAgeSexDistributionChart();
+  this.loadAnnualGrowthRateChart();
+  this.loadTfrChart();
+}
 
 }
+

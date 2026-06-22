@@ -730,11 +730,13 @@
                             <div class="card-body">
                               <h4 class="custom-title mb-3">Sex Ratio (Females per 1000 Males) </h4>
                                 
-                                      <highcharts-chart
-                                  [Highcharts]="Highcharts"
-                                  [options]="sexRatioChartOptions"
-                                  style="width:100%; height:550px; display:block;">
-                                </highcharts-chart>
+                                       <highcharts-chart
+                                    [Highcharts]="Highcharts"
+                                    [options]="sexRatioChartOptions"
+                                    [update]="updateFlag"
+                                    [oneToOne]="true"
+                                    style="width:100%; height:550px; display:block;">
+                                  </highcharts-chart>
                                   
                
 
@@ -753,6 +755,8 @@
             <highcharts-chart
               [Highcharts]="Highcharts"
               [options]="birthSexRatioChartOptions"
+              [update]="updateBirthChart"
+              [oneToOne]="true"
               style="width:100%; height:500px; display:block;">
             </highcharts-chart>
             </div>
