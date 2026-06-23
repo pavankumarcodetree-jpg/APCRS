@@ -58,6 +58,7 @@ export class DistrictPopulationDashboardComponent {
   placeOfDeathChartOptions:Highcharts.Options = {};
   deathsBefore60ChartOptions:Highcharts.Options = {};
   deathsBefore70ChartOptions:Highcharts.Options = {};
+  updatePopulationBirthShareChart = false;
   deathShareBirthChartOptions:Highcharts.Options = {};
   ageSexDistributionChartOptions:Highcharts.Options = {};
   tfrChartOptions: Highcharts.Options = {};
@@ -4551,9 +4552,33 @@ tfr:1.5,
   selectedYear: number = 2025;
   yearList: number[] = [];
   selectedDistrictName: string = '';
-  birthSexRatioData: any;
-  sexRatioData: any;
+  birthSexRatioData: any=[];
+  sexRatioData: any=[];
   updateFlag = false;
+  totalBirthsandDeaths: any=[];
+  shareOfpopulationandshareofBirth: any=[];
+  medianAgeofDeath: any=[];
+  updateMedianChart: boolean=false;
+  allMandalsbirthandDeaths: any=[];
+  barUpdateFlag: boolean=false;
+  updateLineChartFlag: boolean=false;
+  hasBarChartData = false;
+  hasLineChartData = false;
+  placeOfDeath: any=[];
+  placeOfDeathUpdateFlag: boolean=false;
+  birthShareofDeath: any=[];
+  deathShareUpdateFlag: boolean=false;
+  deathBeforeAge60: any=[];
+  deathBefore60UpdateFlag: boolean=false;
+  deathBeforeAge70: any=[];
+  deathsBefore70UpdateFlag: boolean=false;
+  tfrData: any=[];
+  tfrUpdateFlag: boolean=false;
+  annualExponentialData: any=[];
+  annualGrowthUpdateFlag: boolean=false;
+  ageDistributionData: any=[];
+  dependecyRatioData: any=[];
+  ageWiseUpdateFlag: boolean=false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -4572,7 +4597,6 @@ tfr:1.5,
       const district = params['district'];
       this.selectedDistrictName = district;
       this.selectedYear = 2025;
-      this.loadDistrictData();
       this.loadDistrictDashboardData();
     });
   }
@@ -4600,19 +4624,7 @@ tfr:1.5,
   );
   }
 
-  onMandalChange(event: any, mandal: any) {
-    if (event.target.checked) {
-      this.selectedMandals.push(mandal.mandalName);
-    } else {
-      this.selectedMandals = this.selectedMandals.filter(
-        (x) => x !== mandal.mandalName,
-      );
-    }
-    this.loadDashboardSummary();
-    this.loadBarChart();
-    this.loadLineChart();
   
-  }
 
 loadDashboardSummary() {
 
@@ -4681,11 +4693,8 @@ loadDashboardSummary() {
 
   onYearChange(year: number) {
     this.selectedYear = year;
-    //this.loadDashboardSummary();
+    this.selectedMandal = "";
     this.loadDistrictDashboardData();
-    //   this.loadBarChart();
-    //  this.loadLineChart();
-    //  this.loadMedianAgeAtDeathChart();
   }
 
 
@@ -4694,153 +4703,63 @@ loadDashboardSummary() {
   }
 
   Highcharts: typeof Highcharts = Highcharts;
-  lineChartOptions: Highcharts.Options = {
-    chart: {
-      type: 'line',
-      backgroundColor: 'transparent',
-    },
-    title: { text: '' },
-
-    xAxis: {
-      categories: ['2023', '2024', '2025', '2026'],
-      lineColor: '#e0e0e0',
-    },
-
-    yAxis: {
-      title: { text: '' },
-      gridLineColor: '#f1f3f5',
-    },
-
-    legend: {
-      align: 'center',
-      verticalAlign: 'bottom',
-    },
-
-    plotOptions: {
-      line: {
-        marker: {
-          radius: 4,
-        },
-        lineWidth: 3,
-      },
-      series: {
-        animation: {
-          duration: 1000,
-        },
-      },
-    },
-
-    series: [
-      {
-        type: 'line',
-        name: 'Births',
-        data: [18248, 16053, 13937, 3220],
-        color: '#86efac',
-      },
-      {
-        type: 'line',
-        name: 'Deaths',
-        data: [15918, 15414, 14240, 4592],
-        color: '#fca5a5',
-      },
-    ],
-  };
-  barChartOptions: Highcharts.Options = {
-    chart: {
-      type: 'column',
-      backgroundColor: 'transparent',
-    },
-    title: { text: '' },
-
-    xAxis: {
-      categories: ['Rajahmundry', 'Anaparthy', 'Kovvur', 'Kadiam'],
-      lineColor: '#e0e0e0',
-    },
-
-    yAxis: {
-      title: { text: '' },
-      gridLineColor: '#f1f3f5',
-    },
-
-    legend: {
-      align: 'center',
-      verticalAlign: 'bottom',
-    },
-
-    plotOptions: {
-      column: {
-        borderRadius: 6,
-        pointPadding: 0.2,
-      },
-      series: {
-        animation: {
-          duration: 1200,
-        },
-      },
-    },
-
-    series: [
-      {
-        type: 'column',
-        name: 'Births',
-        data: [3549, 1110, 1027, 860],
-        color: '#86efac',
-      },
-      {
-        type: 'column',
-        name: 'Deaths',
-        data: [2982, 980, 979, 760],
-        color: '#fca5a5',
-      },
-    ],
-  };
+  lineChartOptions: Highcharts.Options = {};
+  barChartOptions: Highcharts.Options = {};
 
 loadBarChart() {
-
-  let chartData: any[] = [];
-
-  // =====================================
-  // DISTRICT MODE
-  // =====================================
-  if (!this.selectedMandal) {
-    chartData = this.mandalList;
+  if (!this.allMandalsbirthandDeaths?.length) {
+    this.hasBarChartData = false;
+    this.barChartOptions = {
+      chart: {
+        type: 'column',
+        backgroundColor: 'transparent'
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.barUpdateFlag = false;
+    return;
   }
-
-  // =====================================
-  // MANDAL MODE
-  // =====================================
-  else {
-    const mandal = this.mandalList.find(
-      x => x.mandalName === this.selectedMandal
+  let chartData: any[] = [];
+    chartData = [...this.allMandalsbirthandDeaths];
+  const categories =
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
     );
 
-    chartData = mandal ? [mandal] : [];
-  }
+  const birthsData =
+    chartData.map(
+      (x: any) =>
+        Number(x.CRS_BIR_IN || 0)
+    );
 
-  // =====================================
-  // DYNAMIC VALUES
-  // =====================================
-
-  const categories = chartData.map(x => x.mandalName);
-
-  const birthsData = chartData.map(
-    x => x.yearWiseData?.[this.selectedYear]?.totalBirths || 0
-  );
-
-  const deathsData = chartData.map(
-    x => x.yearWiseData?.[this.selectedYear]?.totalDeaths || 0
-  );
-
-  // =====================================
-  // CHART OPTIONS
-  // =====================================
+  const deathsData =
+    chartData.map(
+      (x: any) =>
+        Number(x.CRS_DEA_IN || 0)
+    );
 
   this.barChartOptions = {
+
     chart: {
       type: 'column',
-    scrollablePlotArea: {
-    minWidth: 1100
-  },
+      scrollablePlotArea: {
+        minWidth: 1100
+      },
       backgroundColor: 'transparent'
     },
 
@@ -4851,16 +4770,17 @@ loadBarChart() {
     xAxis: {
       categories,
       lineColor: '#e0e0e0',
-       labels: {
-    rotation: -45,
-    step: 1,
-    style: {
-      fontSize: '10px'
-    }
-  }
+      labels: {
+        rotation: -45,
+        step: 1,
+        style: {
+          fontSize: '10px'
+        }
+      }
     },
 
     yAxis: {
+      min: 0,
       title: {
         text: ''
       },
@@ -4876,11 +4796,6 @@ loadBarChart() {
       column: {
         borderRadius: 6,
         pointPadding: 0.2
-      },
-      series: {
-        animation: {
-          duration: 1200
-        }
       }
     },
 
@@ -4897,91 +4812,137 @@ loadBarChart() {
         data: deathsData,
         color: '#fca5a5'
       }
-    ]
+    ] as any,
+
+    credits: {
+      enabled: false
+    }
   };
+  this.barUpdateFlag = false;
+  this.hasBarChartData = true;
+
+  setTimeout(() => {
+    this.barUpdateFlag = true;
+  }, 0);
 }
 
 loadLineChart() {
 
-  const years = [2023, 2024, 2025, 2026];
-
-  // =====================================
-  // DISTRICT MODE
-  // =====================================
-  if (!this.selectedMandal) {
-
-    const birthsData = years.map(
-      year =>
-        this.districtDetails
-          ?.districtYearWiseData?.[year]
-          ?.totalBirths || 0
-    );
-
-    const deathsData = years.map(
-      year =>
-        this.districtDetails
-          ?.districtYearWiseData?.[year]
-          ?.totalDeaths || 0
-    );
-
-    this.updateLineChart(
-      years,
-      birthsData,
-      deathsData
-    );
-
+  if (!this.totalBirthsandDeaths?.length) {
+    this.hasLineChartData = false;
+    this.updateLineChartFlag = false;
+    this.lineChartOptions = {
+      chart: {
+        type: 'line',
+        backgroundColor: 'transparent'
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
     return;
   }
 
-  // =====================================
-  // MANDAL MODE
-  // =====================================
+  const years = [...new Set(
+    this.totalBirthsandDeaths.map(
+      (x: any) => x.YEAR_YR
+    )
+  )].sort();
 
-  const mandal = this.mandalList.find(
-    x => x.mandalName === this.selectedMandal
-  );
+  const birthsData = years.map(year => {
 
-  if (!mandal) {
-    return;
-  }
+    const record =
+      this.totalBirthsandDeaths.find(
+        (x: any) => x.YEAR_YR === year
+      );
 
-  const birthsData = years.map(
-    year =>
-      mandal.yearWiseData?.[year]
-        ?.totalBirths || 0
-  );
+    return record?.CRS_BIR_IN || 0;
+  });
 
-  const deathsData = years.map(
-    year =>
-      mandal.yearWiseData?.[year]
-        ?.totalDeaths || 0
-  );
+  const deathsData = years.map(year => {
 
+    const record =
+      this.totalBirthsandDeaths.find(
+        (x: any) => x.YEAR_YR === year
+      );
+
+    return record?.CRS_DEA_IN || 0; //CRS_DEA_IN
+  });
   this.updateLineChart(
     years,
     birthsData,
     deathsData
   );
+  this.hasLineChartData = true;
+  this.updateLineChartFlag = false;
+  setTimeout(() => {
+    this.updateLineChartFlag = true;
+  }, 0);
 }
 
 loadMedianAgeAtDeathChart() {
-  const categories = this.mandalList.map(
-    (m: any) => m.mandalName
+
+  if (!this.medianAgeofDeath?.length) {
+    this.medianAgeChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: ''
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.updateMedianChart = false;
+    return;
+  }
+
+  const sortedData = [...this.medianAgeofDeath].sort(
+    (a, b) => (a.MEDIAN_23 || 0) - (b.MEDIAN_23 || 0)
   );
 
-  const data2023 = this.mandalList.map(
-    (m: any) => m.medianAgeAtDeath?.age2023 || 0
+  const categories = sortedData.map(
+    (x: any) => x.MANDAL_NAME
   );
 
-  const data2024 = this.mandalList.map(
-    (m: any) => m.medianAgeAtDeath?.age2024 || 0
+  const data2023 = sortedData.map(
+    (x: any) => Number(x.MEDIAN_23 || 0)
   );
 
-  const data2025 = this.mandalList.map(
-    (m: any) => m.medianAgeAtDeath?.age2025 || 0
+  const data2024 = sortedData.map(
+    (x: any) => Number(x.MEDIAN_24 || 0)
+  );
+
+  const data2025 = sortedData.map(
+    (x: any) => Number(x.MEDIAN_25 || 0)
   );
 
   this.medianAgeChartOptions = {
+
     chart: {
       type: 'column'
     },
@@ -4991,14 +4952,14 @@ loadMedianAgeAtDeathChart() {
     },
 
     xAxis: {
-      categories: categories,
+      categories,
       labels: {
         rotation: -45
       }
     },
 
     yAxis: {
-      min: 60,
+      min: 0,
       title: {
         text: 'Median Age'
       }
@@ -5032,16 +4993,21 @@ loadMedianAgeAtDeathChart() {
         type: 'column',
         data: data2025
       }
-    ],
+    ] as any,
 
     credits: {
       enabled: false
     }
   };
+   this.updateMedianChart = false;
+
+  setTimeout(() => {
+    this.updateMedianChart = true;
+  }, 0);
 }
 
 updateLineChart(
-  years: number[],
+  years: any[],
   birthsData: number[],
   deathsData: number[]
 ) {
@@ -5148,26 +5114,7 @@ updateLineChart(
 
 selectMandal(mandal: any) {
   this.selectedMandal = mandal.mandalName;
-    this.loadDashboardSummary();
-    //this.loadBarChart();
-    this.loadLineChart();
-    this.loadMedianAgeAtDeathChart();
-      this.dashboardSummary.childDependency =
-    mandal?.dependencyRatio?.childDependency || 0;
-  this.dashboardSummary.oldAgeDependency =
-    mandal?.dependencyRatio?.oldAgeDependency || 0;
-      this.dashboardSummary.population2001 =
-    mandal?.population2001 || 0;
-  this.dashboardSummary.population2011 =
-    mandal?.population2011 || 0;
-  this.dashboardSummary.annualExponantional =
-    mandal?.annualExponantional || 0;
-    this.loadAgeWiseChart(
-    mandal.ageDistribution.age0To14,
-    mandal.ageDistribution.age15To59,
-    mandal.ageDistribution.age60Plus
-  );
-
+    this.loadDistrictDashboardData();
 }
 
 
@@ -5196,6 +5143,24 @@ loadAgeWiseChart(
   age15To59: number,
   age60Plus: number
 ) {
+
+  if (
+    !Number.isFinite(age0To14) &&
+    !Number.isFinite(age15To59) &&
+    !Number.isFinite(age60Plus)
+  ) {
+    this.resetAgeWiseChart();
+    return;
+  }
+
+  if (
+    age0To14 <= 0 &&
+    age15To59 <= 0 &&
+    age60Plus <= 0
+  ) {
+    this.resetAgeWiseChart();
+    return;
+  }
 
   this.ageWiseChartOptions = {
     chart: {
@@ -5253,9 +5218,55 @@ loadAgeWiseChart(
       }
     ]
   };
+    this.ageWiseUpdateFlag = false;
+
+  setTimeout(() => {
+    this.ageWiseUpdateFlag = true;
+  });
+}
+
+resetAgeWiseChart() {
+  this.ageWiseChartOptions = {
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: ''
+    },
+    tooltip: {
+      pointFormat: '<b>{point.y:.2f}%</b>'
+    },
+    plotOptions: {
+      pie: {
+        innerSize: '65%',
+        allowPointSelect: true,
+        cursor: 'pointer',
+        dataLabels: {
+          enabled: true,
+          format: '{point.name}: {point.y:.2f}%'
+        },
+        showInLegend: true
+      }
+    },
+    credits: {
+      enabled: false
+    },
+    series: [] as any
+  };
+  this.ageWiseUpdateFlag = false;
+  setTimeout(() => {
+    this.ageWiseUpdateFlag = true;
+  });
 }
 
 loadSexRatioChart() {
+      if (!Array.isArray(this.sexRatioData)) {
+    console.error(
+      'sexRatioData is not an array',
+      this.sexRatioData
+    );
+    return;
+  }
   const sortedMandals = [...this.sexRatioData].sort(
     (a, b) => a.SEX_RATIO - b.SEX_RATIO
   );
@@ -5282,7 +5293,6 @@ loadSexRatioChart() {
 }
 
 loadBirthSexRatioChart() {
-
   const sortedMandals = [...(this.csrMandalList || [])].sort(
     (a, b) =>
       (a?.yearWiseData?.[2023]?.sexRatio || 0) -
@@ -5368,50 +5378,58 @@ loadBirthSexRatioChart() {
 }
 
 loadPopulationBirthShareChart() {
-  const districtPopulation =
-    this.districtDetails?.districtYearWiseData[2025]?.totalPopulation;
 
-  const districtBirths =
-    this.districtDetails?.districtYearWiseData[2023]?.totalBirths +
-    this.districtDetails?.districtYearWiseData[2024]?.totalBirths +
-    this.districtDetails?.districtYearWiseData[2025]?.totalBirths;
-
-  const chartData = this.mandalList.map((m: any) => {
-
-    const totalBirths =
-      (m.yearWiseData?.[2023]?.totalBirths || 0) +
-      (m.yearWiseData?.[2024]?.totalBirths || 0) +
-      (m.yearWiseData?.[2025]?.totalBirths || 0);
-
-    const population =
-      m.yearWiseData?.[2025]?.totalPopulation || 0;
-
-    return {
-      mandalName: m.mandalName,
-
-      populationShare: Number(
-        ((population / districtPopulation) * 100).toFixed(2)
-      ),
-
-      birthShare: Number(
-        ((totalBirths / districtBirths) * 100).toFixed(2)
-      )
+  if (!this.shareOfpopulationandshareofBirth?.length) {
+    this.populationBirthShareChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: ''
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Percentage (%)'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
     };
-  });
+    this.updatePopulationBirthShareChart = false;
+    return;
+  }
 
-  // Sort by population share ascending
+  const chartData =
+    [...this.shareOfpopulationandshareofBirth];
+
   chartData.sort(
-    (a, b) => a.populationShare - b.populationShare
+    (a, b) =>
+      a.SHARE_OF_POPULATION_SUB -
+      b.SHARE_OF_POPULATION_SUB
   );
 
   const categories =
-    chartData.map(x => x.mandalName);
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
 
   const populationShareData =
-    chartData.map(x => x.populationShare);
+    chartData.map(
+      (x: any) =>
+        Number(x.SHARE_OF_POPULATION_SUB || 0)
+    );
 
   const birthShareData =
-    chartData.map(x => x.birthShare);
+    chartData.map(
+      (x: any) =>
+        Number(x.SHARE_OF_BIRTHS_ALL_SUB || 0)
+    );
 
   this.populationBirthShareChartOptions = {
 
@@ -5424,7 +5442,7 @@ loadPopulationBirthShareChart() {
     },
 
     xAxis: {
-      categories: categories,
+      categories,
       labels: {
         rotation: -45,
         style: {
@@ -5458,43 +5476,77 @@ loadPopulationBirthShareChart() {
         grouping: true,
         dataLabels: {
           enabled: true,
-          format: '{y:.1f}'
+          format: '{y:.1f}%'
         }
       }
     },
 
-    series: [
-      {
-        name: 'Share of population in sub-districts',
-        type: 'column',
-        data: populationShareData
-      },
-      {
-        name: 'Share of births among all sub-districts',
-        type: 'column',
-        data: birthShareData
-      }
-    ]
+    series: [{
+      type: 'column',
+      name: 'Share of population in sub-districts',
+      data: populationShareData
+    },
+    {
+      type: 'column',
+      name: 'Share of births among all sub-districts',
+      data: birthShareData
+    }] as any
   };
+
+  this.updatePopulationBirthShareChart = false;
+  setTimeout(() => {
+    this.updatePopulationBirthShareChart = true;
+  }, 0);
 }
+
 loadPlaceOfDeathChart() {
 
-  const chartData = this.mandalList
-    .map((m: any) => ({
-      mandalName: m.mandalName,
-      hospital: m.placeOfDeath?.hospital || 0,
-      other: m.placeOfDeath?.other || 0
-    }))
-    .sort((a, b) => a.hospital - b.hospital);
+  if (!this.placeOfDeath?.length) {
+    this.placeOfDeathChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Place of Death'
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        max: 100,
+        title: {
+          text: 'Percentage (%)'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.placeOfDeathUpdateFlag = false;
+    return;
+  }
+
+  const chartData =
+    [...this.placeOfDeath].sort(
+      (a, b) => a.HOSPITAL - b.HOSPITAL
+    );
 
   const categories =
-    chartData.map(x => x.mandalName);
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
 
   const hospitalData =
-    chartData.map(x => x.hospital);
+    chartData.map(
+      (x: any) => Number(x.HOSPITAL || 0)
+    );
 
   const otherData =
-    chartData.map(x => x.other);
+    chartData.map(
+      (x: any) => Number(x.OTHER || 0)
+    );
 
   this.placeOfDeathChartOptions = {
 
@@ -5518,11 +5570,7 @@ loadPlaceOfDeathChart() {
       max: 100,
 
       title: {
-        text: 'Percentage'
-      },
-
-      stackLabels: {
-        enabled: false
+        text: 'Percentage (%)'
       }
     },
 
@@ -5536,55 +5584,92 @@ loadPlaceOfDeathChart() {
     },
 
     plotOptions: {
-
       column: {
-
         stacking: 'percent',
-
         dataLabels: {
-          enabled: false
+          enabled: true,
+          format: '{y:.1f}%'
         }
       }
     },
 
     series: [
       {
-        name: 'Hospital',
         type: 'column',
+        name: 'Hospital',
         data: hospitalData
       },
       {
-        name: 'Other',
         type: 'column',
+        name: 'Other',
         data: otherData
       }
-    ]
+    ] as any
   };
+  this.placeOfDeathUpdateFlag = false;
+
+setTimeout(() => {
+  this.placeOfDeathUpdateFlag = true;
+});
 }
 
 loadDeathsBefore60Chart() {
 
-  const chartData = [...this.mandalList]
-    .map((m: any) => ({
-      mandalName: m.mandalName,
-      percentage: m.deathsBefore60Percentage || 0
-    }))
-    .sort((a, b) => a.percentage - b.percentage);
+  if (!this.deathBeforeAge60?.length) {
+    this.deathsBefore60ChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Percentage of Deaths Before Age 60'
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Percentage (%)'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.deathBefore60UpdateFlag = false;
+    return;
+  }
+
+  const chartData =
+    [...this.deathBeforeAge60].sort(
+      (a, b) =>
+        Number(a.PERCENT || 0) -
+        Number(b.PERCENT || 0)
+    );
 
   const categories =
-    chartData.map(x => x.mandalName);
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
 
   const percentageData =
-    chartData.map(x => x.percentage);
+    chartData.map(
+      (x: any) => Number(x.PERCENT || 0)
+    );
 
   this.deathsBefore60ChartOptions = {
 
     chart: {
-      type: 'column'
+      type: 'column',
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
     },
 
     title: {
-      text: 'Percentage of deaths before age 60'
+      text: 'Percentage of Deaths Before Age 60'
     },
 
     xAxis: {
@@ -5618,43 +5703,75 @@ loadDeathsBefore60Chart() {
       }
     },
 
-    series: [
-      {
-        name: 'Deaths Before Age 60',
-        type: 'column',
-        data: percentageData
-      }
-    ]
+    series: [{
+      type: 'column',
+      name: 'Deaths Before Age 60',
+      data: percentageData
+    }] as any
   };
+this.deathBefore60UpdateFlag = false;
+
+setTimeout(() => {
+  this.deathBefore60UpdateFlag = true;
+});
 }
 loadDeathsBefore70Chart() {
 
-  const chartData = [...this.mandalList]
-    .map((m: any) => ({
-      mandalName: m.mandalName,
-      percentage: m.deathsBefore70Percentage || 0
-    }))
-    .sort((a, b) => a.percentage - b.percentage);
+  if (!this.deathBeforeAge70?.length) {
+    this.deathsBefore70ChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Percentage of Deaths Before Age 70'
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Percentage (%)'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.deathsBefore70UpdateFlag = false;
+    return;
+  }
+
+  const chartData =
+    [...this.deathBeforeAge70].sort(
+      (a, b) =>
+        Number(a.PERCENT || 0) -
+        Number(b.PERCENT || 0)
+    );
 
   const categories =
-    chartData.map(x => x.mandalName);
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
 
   const percentageData =
-    chartData.map(x => x.percentage);
+    chartData.map(
+      (x: any) => Number(x.PERCENT || 0)
+    );
 
   this.deathsBefore70ChartOptions = {
-    
 
     chart: {
       type: 'column',
-       scrollablePlotArea: {
-    minWidth: categories.length * 60,
-    scrollPositionX: 0
-  }
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
     },
 
     title: {
-      text: 'Percentage of deaths before age 70'
+      text: 'Percentage of Deaths Before Age 70'
     },
 
     xAxis: {
@@ -5688,59 +5805,74 @@ loadDeathsBefore70Chart() {
       }
     },
 
-    series: [
-      {
-        name: 'Deaths Before Age 70',
-        type: 'column',
-        data: percentageData
-      }
-    ]
+    series: [{
+      type: 'column',
+      name: 'Deaths Before Age 70',
+      data: percentageData
+    }] as any
   };
+
+this.deathsBefore70UpdateFlag = false;
+
+setTimeout(() => {
+  this.deathsBefore70UpdateFlag = true;
+});
 }
+
 loadDeathShareBirthChart() {
 
-  const chartData = this.mandalList.map((m: any) => {
-
-    const totalBirths =
-      (m.yearWiseData?.[2023]?.totalBirths || 0) +
-      (m.yearWiseData?.[2024]?.totalBirths || 0) +
-      (m.yearWiseData?.[2025]?.totalBirths || 0);
-
-    const totalDeaths =
-      (m.yearWiseData?.[2023]?.totalDeaths || 0) +
-      (m.yearWiseData?.[2024]?.totalDeaths || 0) +
-      (m.yearWiseData?.[2025]?.totalDeaths || 0);
-
-    const deathShare =
-      totalBirths > 0
-        ? +(totalDeaths / totalBirths).toFixed(2)
-        : 0;
-
-    return {
-      mandalName: m.mandalName,
-      deathShare
+  if (!this.birthShareofDeath?.length) {
+    this.deathShareBirthChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Death as Share of Births'
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Death / Birth Ratio'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
     };
-  });
+    this.deathShareUpdateFlag = false;
+    return;
+  }
 
-  // Sort ascending
-  chartData.sort(
-    (a, b) => a.deathShare - b.deathShare
-  );
+  const chartData =
+    [...this.birthShareofDeath].sort(
+      (a, b) =>
+        Number(a.DEATH_AS_SHARE_OF_BIRTHS || 0) -
+        Number(b.DEATH_AS_SHARE_OF_BIRTHS || 0)
+    );
 
   const categories =
-    chartData.map(x => x.mandalName);
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
 
   const deathShareData =
-    chartData.map(x => x.deathShare);
+    chartData.map(
+      (x: any) =>
+        Number(x.DEATH_AS_SHARE_OF_BIRTHS || 0)
+    );
 
   this.deathShareBirthChartOptions = {
 
     chart: {
       type: 'column',
-       scrollablePlotArea: {
-    minWidth: categories.length * 60,
-    scrollPositionX: 0
-  }
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
     },
 
     title: {
@@ -5763,7 +5895,7 @@ loadDeathShareBirthChart() {
 
     tooltip: {
       pointFormat:
-        '<b>{point.y:.2f}</b>'
+        '<b>{point.y:.3f}</b>'
     },
 
     credits: {
@@ -5774,19 +5906,22 @@ loadDeathShareBirthChart() {
       column: {
         dataLabels: {
           enabled: true,
-          format: '{y:.2f}'
+          format: '{y:.3f}'
         }
       }
     },
 
-    series: [
-      {
-        name: 'Death as Share of Births',
-        type: 'column',
-        data: deathShareData
-      }
-    ]
+    series: [{
+      type: 'column',
+      name: 'Death as Share of Births',
+      data: deathShareData
+    }] as any
   };
+this.deathShareUpdateFlag = false;
+
+setTimeout(() => {
+  this.deathShareUpdateFlag = true;
+});
 }
 loadAgeSexDistributionChart() {
 
@@ -5857,45 +5992,65 @@ loadAgeSexDistributionChart() {
 }
 
 loadTfrChart() {
-  const chartData = this.mandalList.map((m: any) => ({
-    mandalName: m.mandalName,
-    tfr: m.tfr || 0
-  }));
 
-  // Add District TFR
-  chartData.push({
-    mandalName: this.selectedDistrictName + ' District',
-    tfr: this.districtDetails?.districtTFR || 0
-  });
-
-  // Sort ascending
-  chartData.sort((a, b) => a.tfr - b.tfr);
-
-  const categories = chartData.map(x => x.mandalName);
-
-  const tfrData = chartData.map(x => {
-
-    const isDistrict =
-      x.mandalName ===
-      this.selectedDistrictName + ' District';
-
-    return {
-      y: x.tfr,
-
-      color: isDistrict
-        ? '#FFC000'   // Yellow for district
-        : '#4472C4'   // Blue for mandals
+  if (!this.tfrData?.length) {
+    this.tfrChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: `TFR in Sub-districts of ${this.selectedDistrictName}`
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: 'Estimated TFR'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
     };
-  });
+    this.tfrUpdateFlag = false;
+    return;
+  }
+
+  const chartData = [...this.tfrData]
+    .sort(
+      (a, b) =>
+        Number(a.ESTIMATED_TFR || 0) -
+        Number(b.ESTIMATED_TFR || 0)
+    );
+
+  const categories =
+    chartData.map(
+      (x: any) => x.MANDAL_NAME
+    );
+
+  const tfrData =
+    chartData.map(
+      (x: any) => ({
+        y: Number(x.ESTIMATED_TFR || 0)
+      })
+    );
 
   this.tfrChartOptions = {
 
     chart: {
-      type: 'column'
+      type: 'column',
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
     },
 
     title: {
-      text: `TFR in Sub-districts of ${this.selectedDistrictName} District`
+      text:
+        `TFR in Sub-districts of ${this.selectedDistrictName}`
     },
 
     xAxis: {
@@ -5913,101 +6068,8 @@ loadTfrChart() {
     },
 
     tooltip: {
-      pointFormat: '<b>{point.y:.2f}</b>'
-    },
-
-    credits: {
-      enabled: false
-    },
-
-    plotOptions: {
-      column: {
-        dataLabels: {
-          enabled: true,
-          format: '{y:.1f}'
-        }
-      }
-    },
-
-    series: [
-      {
-        name: 'TFR',
-        type: 'column',
-        data: tfrData
-      }
-    ]
-  };
-}
-
-loadAnnualGrowthRateChart() {
-
-  const chartData = this.mandalList.map((m: any) => ({
-    mandalName: m.mandalName,
-    growthRate:
-      +((m.annualExponantional || 0) * 100).toFixed(2)
-  }));
-
-  // Add district value
-  chartData.push({
-    mandalName: this.selectedDistrictName,
-    growthRate:
-      +((this.districtDetails?.annualExponantional || 0) * 100).toFixed(2)
-  });
-
-  // Sort ascending
-  chartData.sort(
-    (a, b) => a.growthRate - b.growthRate
-  );
-
-  const categories =
-    chartData.map((x: any) => x.mandalName);
-
-  const growthData =
-    chartData.map((x: any) => {
-
-      const isDistrict =
-        x.mandalName === this.selectedDistrictName;
-
-      return {
-        y: x.growthRate,
-        color: isDistrict
-          ? '#FFC000'
-          : '#4472C4'
-      };
-    });
-
-  this.annualGrowthRateChartOptions = {
-
-    chart: {
-      type: 'column'
-    },
-
-    title: {
-      text: 'Average annual exponential growth rate of population, 2001-11 (%)'
-    },
-
-    xAxis: {
-      categories,
-      labels: {
-        rotation: -45
-      }
-    },
-
-    yAxis: {
-      title: {
-        text: 'Percentage'
-      },
-      plotLines: [
-        {
-          value: 0,
-          width: 1,
-          color: '#999'
-        }
-      ]
-    },
-
-    tooltip: {
-      pointFormat: '<b>{point.y:.2f}%</b>'
+      pointFormat:
+        '<b>{point.y:.2f}</b>'
     },
 
     credits: {
@@ -6023,14 +6085,126 @@ loadAnnualGrowthRateChart() {
       }
     },
 
-    series: [
-      {
-        name: 'Growth Rate',
-        type: 'column',
-        data: growthData
-      }
-    ]
+    series: [{
+      name: 'Estimated TFR',
+      type: 'column',
+      data: tfrData
+    }]
   };
+
+this.tfrUpdateFlag = false;
+
+setTimeout(() => {
+  this.tfrUpdateFlag = true;
+});
+}
+
+loadAnnualGrowthRateChart() {
+  if (!this.annualExponentialData?.length) {
+    this.annualGrowthRateChartOptions = {
+      chart: {
+        type: 'column'
+      },
+      title: {
+        text: 'Average Annual Exponential Growth Rate (%)'
+      },
+      xAxis: {
+        categories: []
+      },
+      yAxis: {
+        title: {
+          text: 'Percentage (%)'
+        }
+      },
+      series: [] as any,
+      credits: {
+        enabled: false
+      }
+    };
+    this.annualGrowthUpdateFlag = false;
+    return;
+  }
+  const chartData = this.annualExponentialData.map(
+    (item: any) => ({
+      mandalName: item.MANDAL_NAME,
+      growthRate: Number(
+        ((item.ANNUAL_EXPENTIAL || 0) * 100).toFixed(2)
+      )
+    })
+  );
+
+  // Sort ascending
+  chartData.sort(
+    (a:any, b:any) => a.growthRate - b.growthRate
+  );
+
+  const categories =
+    chartData.map((x:any) => x.mandalName);
+
+  const growthData =
+    chartData.map((x:any) => x.growthRate);
+
+  this.annualGrowthRateChartOptions = {
+
+    chart: {
+      type: 'column',
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
+    },
+
+    title: {
+      text: 'Average Annual Exponential Growth Rate (%)'
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      title: {
+        text: 'Percentage (%)'
+      },
+      plotLines: [{
+        value: 0,
+        width: 1,
+        color: '#999'
+      }]
+    },
+
+    tooltip: {
+      pointFormat: '<b>{point.y:.2f}%</b>'
+    },
+
+    credits: {
+      enabled: false
+    },
+
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y:.2f}%'
+        }
+      }
+    },
+
+    series: [{
+      name: 'Growth Rate',
+      type: 'column',
+      data: growthData
+    }]
+  };
+
+this.annualGrowthUpdateFlag = false;
+
+setTimeout(() => {
+  this.annualGrowthUpdateFlag = true;
+});
 }
 
 async loadDistrictDashboardData() {
@@ -6045,24 +6219,121 @@ async loadDistrictDashboardData() {
 
     // API 2 - Sex Ratio at Birth
     const req2 = new basemodel();
-    req2.type = '1001';
-    req2.param1 = this.selectedDistrictName;
-    req2.param2 = '2023';
-    req2.param3 = '2025';
-
+        req2.type = '1001';
+        req2.param1 = this.selectedDistrictName;
+        req2.param2 = '2023';
+        req2.param3 = '2025';
     // API 3 - GSWS Sex Ratio
     const req3 = new basemodel();
     req3.type = '1002';
     req3.param1 = this.selectedDistrictName;
 
+    // API 4 - Total Briths and Total Deaths (district-level)
+    const req4 = new basemodel();
+    req4.type = '1003';
+    req4.param1 = this.selectedDistrictName;
+    req4.param2 = 0; // keep year-wise line chart district-level even when a mandal is selected
+    req4.param3 = 0;
+    req4.param4 = 0;
+
+    // API 5 - mandal-wise data
+    const req5 = new basemodel();
+    req5.type = '100001';
+    req5.param1 = this.selectedDistrictName;
+    req5.param2=this.selectedYear
+    req5.param3=this.selectedMandal ? this.selectedMandal : 0;
+    // API 6 - Total Briths and Total Deaths
+    const req6 = new basemodel();
+    req6.type = '127';
+    req6.param1=this.selectedDistrictName;
+
+    // API 7 - Meadin Age Death
+    const req7 = new basemodel();
+    req7.type = '131';
+    req7.param1=this.selectedDistrictName;
+
+    // API 8 - All Mandals Biths and Deaths
+    const req8 = new basemodel();
+    req8.type = '100301';
+    req8.param1=this.selectedDistrictName;
+    req8.param2=this.selectedYear;
+
+    // API 9 - Place of Death
+    const req9 = new basemodel();
+    req9.type = '128';
+    req9.param1=this.selectedDistrictName;
+
+    // API 10 - birthShareofBirth
+    const req10 = new basemodel();
+    req10.type = '132';
+    req10.param1=this.selectedDistrictName;
+
+    // API 11 -Percentage of deaths before age 60 
+    const req11 = new basemodel();
+    req11.type = '129';
+    req11.param1=this.selectedDistrictName;
+
+    // API 12 -Percentage of deaths before age 70 
+    const req12 = new basemodel();
+    req12.type = '130';
+    req12.param1=this.selectedDistrictName;
+
+    // API 13 -tfr response 
+    const req13 = new basemodel();
+    req13.type = '133';
+    req13.param1=this.selectedDistrictName;
+
+    // API 14 -exponential growth rate of population Response 
+    const req14 = new basemodel();
+    req14.type = '134';
+    req14.param1=this.selectedDistrictName;
+
+    // API 15 -Age distribution Response 
+    const req15 = new basemodel();
+    req15.type = '135';
+    req15.param1=this.selectedDistrictName;
+    req15.param2=this.selectedMandal
+
+    // API 16 -dependecyRatio Response 
+    const req16 = new basemodel();
+    req16.type = '136';
+    req16.param1=this.selectedDistrictName;
+    req16.param2=this.selectedMandal
+
     const [
       districtResponse,
       birthSexRatioResponse,
-      sexRatioResponse
+      sexRatioResponse,
+      totalBirthandDeathResponse,
+      mandalsResponse,
+      shareOfpopulationandshareofBirth,
+      medianAgeofDeathResponse,
+      allMandaltotalBirthandtotalDeathResponse,
+      placeofDeathResponse,
+      birthShareofDeathResponse,
+      deathbeforeage60Response,
+      deathbeforeage70Response,
+      tfrResponse,
+      annualexponentialResponse,
+      ageDistributionResponse,
+      dependencyRatioResponse
     ] = await Promise.all([
       this.auth.auth_utilities_rtgs(req1),
       this.auth.auth_utilities_rtgs(req2),
-      this.auth.auth_utilities_rtgs(req3)
+      this.auth.auth_utilities_rtgs(req3),
+      this.auth.auth_utilities_rtgs(req4),
+      this.auth.auth_utilities_rtgs(req5),
+      this.auth.auth_utilities_rtgs(req6),
+      this.auth.auth_utilities_rtgs(req7),
+      this.auth.auth_utilities_rtgs(req8),
+      this.auth.auth_utilities_rtgs(req9),
+      this.auth.auth_utilities_rtgs(req10),
+      this.auth.auth_utilities_rtgs(req11),
+      this.auth.auth_utilities_rtgs(req12),
+      this.auth.auth_utilities_rtgs(req13),
+      this.auth.auth_utilities_rtgs(req14),
+      this.auth.auth_utilities_rtgs(req15),
+      this.auth.auth_utilities_rtgs(req16),
     ]);
 
     // District Summary
@@ -6079,8 +6350,24 @@ async loadDistrictDashboardData() {
   totalDeaths:district.CRS_DEA_IN,
   birthRate:district.EST_CBR_FOR,
   deathRate:district.EST_CDR_FOR,
-  tfr:district.EST_TFR_FOR
+  tfr:district.EST_TFR_FOR,
+    populationGrowthRate:district.POP_GROW_RATE || 0
 };
+}else {
+  this.dashboardSummary = {
+    ...this.dashboardSummary,
+    population2001: 0,
+    population2011: 0,
+    annualExponantional: 0,
+    estimatedPopulation: 0,
+    totalPopulation: 0,
+    totalBirths: 0,
+    totalDeaths: 0,
+    birthRate: 0,
+    deathRate: 0,
+    tfr: 0,
+    populationGrowthRate: 0
+  };
 }
 
     // Table 2.2(a)
@@ -6088,14 +6375,8 @@ async loadDistrictDashboardData() {
       this.birthSexRatioData =
         birthSexRatioResponse.Details || [];
         this.updateSexRatioCard();
-
-         this.birthSexRatioData =
-    birthSexRatioResponse.Details || [];
-
-  const mandalMap: any = {};
-
+      const mandalMap: any = {};
   this.birthSexRatioData.forEach((item: any) => {
-
     if (!mandalMap[item.MANDAL_NAME]) {
       mandalMap[item.MANDAL_NAME] = {
         mandalName: item.MANDAL_NAME,
@@ -6110,7 +6391,10 @@ async loadDistrictDashboardData() {
     };
   });
   this.csrMandalList = Object.values(mandalMap);
-  console.log('loadBirthSexRatioChart', this.csrMandalList);
+    }else {
+       this.birthSexRatioData = [];
+        this.csrMandalList = [];
+  this.dashboardSummary.sexRatio = 0;
     }
 
     // GSWS Sex Ratio
@@ -6121,10 +6405,141 @@ async loadDistrictDashboardData() {
     mandalName: item.MANDAL_NAME,
   }));
 
+    }else {
+      this.sexRatioData=[];
+      this.mandalList=[];
     }
-    console.log('District Summary',district, this.dashboardSummary);
-    console.log('Birth Sex Ratio', this.birthSexRatioData);
-    console.log('GSWS Sex Ratio', this.sexRatioData);
+   //Total Births and Total Deaths
+     if (totalBirthandDeathResponse?.code) {
+       this.totalBirthsandDeaths =totalBirthandDeathResponse.Details || [];
+  }else {
+    this.totalBirthsandDeaths=[];
+  }
+  //Mandal-wise data 
+if (mandalsResponse?.code) {
+
+  const mandalLists =
+    mandalsResponse.Details || [];
+
+  if (mandalLists.length > 0) {
+    this.dashboardSummary = {
+      districtName: mandalLists[0].DISTRICT_NAME,
+      population2001: mandalLists[0].POP_2001_CEN_IND,
+      population2011: mandalLists[0].POP_2011_CEN_IND,
+      annualExponantional: mandalLists[0].ANNUAL_EXP_RET_POP_2001_11,
+      estimatedPopulation: mandalLists[0].EST_POP_31_DEC_2025,
+      totalPopulation: mandalLists[0].EST_POP_31_DEC,
+      totalBirths: mandalLists[0].CRS_BIR_IN,
+      totalDeaths: mandalLists[0].CRS_DEA_IN,
+      birthRate: mandalLists[0].EST_CBR_FOR,
+      deathRate: mandalLists[0].EST_CDR_FOR,
+      tfr: mandalLists[0].EST_TFR_FOR,
+      sexRatio:
+        mandalLists[0].SEX_RATIO || mandalLists[0].sexRatio || this.dashboardSummary.sexRatio || 0,
+      populationGrowthRate:
+        mandalLists[0].POP_GROW_RATE || 0
+    };
+  }
+} else {
+  // Keep district values already loaded
+  this.dashboardSummary = {
+    ...this.dashboardSummary
+  };
+}
+  //shareOfpopulationandshareofBirth
+   if (shareOfpopulationandshareofBirth?.code) {
+      this.shareOfpopulationandshareofBirth =shareOfpopulationandshareofBirth.Details || [];
+  }else {
+     this.shareOfpopulationandshareofBirth=[];
+  }
+  //MedianAgeof Death Response
+     if (medianAgeofDeathResponse?.code) {
+      this.medianAgeofDeath =medianAgeofDeathResponse.Details || [];
+  }else {
+    this.medianAgeofDeath=[];
+  }
+
+   //All MandalsTotalbirthandtotalDeath Response
+     if (allMandaltotalBirthandtotalDeathResponse?.code) {
+      this.allMandalsbirthandDeaths =allMandaltotalBirthandtotalDeathResponse.Details || [];
+  }else {
+    this.allMandalsbirthandDeaths=[];
+  }
+   //Place of Death Response
+     if (placeofDeathResponse?.code) {
+      this.placeOfDeath =placeofDeathResponse.Details || [];
+  }else {
+     this.placeOfDeath =[];
+  }
+     //birthShareofDeathResponse Response
+     if (birthShareofDeathResponse?.code) {
+      this.birthShareofDeath =birthShareofDeathResponse.Details || [];
+  }else {
+    this.birthShareofDeath=[];
+  }
+  //deathbeforeage60Response
+    if (deathbeforeage60Response?.code) {
+      this.deathBeforeAge60 =deathbeforeage60Response.Details || [];
+  }else {
+    this.deathBeforeAge60=[];
+  }
+    //deathbeforeage70Response
+    if (deathbeforeage70Response?.code) {
+      this.deathBeforeAge70 =deathbeforeage70Response.Details || [];
+  }else {
+    this.deathBeforeAge70=[];
+  }
+  //tfrResponse
+    if (tfrResponse?.code) {
+      this.tfrData =tfrResponse.Details || [];
+  }else {
+    this.tfrData=[];
+  }
+    //annualexponentialResponseResponse
+  if (annualexponentialResponse?.code) {
+      this.annualExponentialData =annualexponentialResponse.Details || [];
+  }else {
+    this.annualExponentialData=[];
+  }
+
+  //ageDistributionResponse
+if (ageDistributionResponse?.code) {
+  this.ageDistributionData =
+    ageDistributionResponse.Details || [];
+
+  if (this.selectedMandal) {
+    const selectedMandalData =
+      this.ageDistributionData.find(
+        (x: any) =>
+          x.MANDAL_NAME?.trim() ===
+          this.selectedMandal?.trim()
+      );
+    if (selectedMandalData) {
+      this.loadAgeWiseChart(
+        Number(selectedMandalData.POPULATION_0_14 || 0),
+        Number(selectedMandalData.POPULATION_15_59 || 0),
+        Number(selectedMandalData.POPULATION_60_PLUS || 0)
+      );
+    } else {
+      this.resetAgeWiseChart();
+    }
+
+  } else {
+    this.loadPieAgeSexDistributionChart();
+  }
+}else {
+  this.ageDistributionData=[];
+  this.resetAgeWiseChart();
+}
+    //depedencyRation Response
+  if (dependencyRatioResponse?.code) {
+      this.dependecyRatioData =dependencyRatioResponse.Details || [];
+      this.updateDependencyCards();
+  }else {
+    this.dependecyRatioData=[];
+    this.updateDependencyCards();
+  }
+
     // ALL 3 APIs COMPLETED HERE
     this.loadAllCharts();
     this.spinner.hide();
@@ -6137,18 +6552,46 @@ updateSexRatioCard() {
   const yearData = this.birthSexRatioData.filter(
     (x: any) => +x.YEAR_YR === +this.selectedYear
   );
+
+  // ==========================
+  // MANDAL MODE
+  // ==========================
+  if (this.selectedMandal) {
+
+    const mandalData = yearData.find(
+      (x: any) =>
+        x.MANDAL_NAME?.trim() ===
+        this.selectedMandal?.trim()
+    );
+
+    if (mandalData) {
+      this.dashboardSummary.sexRatio =
+        mandalData.SEX_RATIO || 0;
+      return;
+    }
+  }
+
+  // ==========================
+  // DISTRICT MODE
+  // ==========================
+
   const totalFemale = yearData.reduce(
-    (sum: number, item: any) => sum + (+item.FEMALE || 0),
+    (sum: number, item: any) =>
+      sum + Number(item.FEMALE || 0),
     0
   );
+
   const totalMale = yearData.reduce(
-    (sum: number, item: any) => sum + (+item.MALE || 0),
+    (sum: number, item: any) =>
+      sum + Number(item.MALE || 0),
     0
   );
 
   this.dashboardSummary.sexRatio =
-    totalMale > 0
-      ? Math.round(( totalMale / totalFemale) * 1000)
+    totalFemale > 0
+      ? Math.round(
+          (totalMale / totalFemale) * 100
+        )
       : 0;
 }
 loadAllCharts() {
@@ -6162,9 +6605,127 @@ loadAllCharts() {
   this.loadDeathsBefore60Chart();
   this.loadDeathsBefore70Chart();
   this.loadDeathShareBirthChart();
-  this.loadAgeSexDistributionChart();
+  //this.loadAgeSexDistributionChart();
   this.loadAnnualGrowthRateChart();
   this.loadTfrChart();
+}
+
+loadPieAgeSexDistributionChart() {
+
+  if (!this.ageDistributionData?.length) {
+    this.resetAgeWiseChart();
+    return;
+  }
+
+  const totalAge0to14 =
+    this.ageDistributionData.reduce(
+      (sum: number, x: any) =>
+        sum + Number(x.POPULATION_0_14 || 0),
+      0
+    );
+
+  const totalAge15to59 =
+    this.ageDistributionData.reduce(
+      (sum: number, x: any) =>
+        sum + Number(x.POPULATION_15_59 || 0),
+      0
+    );
+
+  const totalAge60Plus =
+    this.ageDistributionData.reduce(
+      (sum: number, x: any) =>
+        sum + Number(x.POPULATION_60_PLUS || 0),
+      0
+    );
+
+  const count =
+    this.ageDistributionData.length;
+
+  this.loadAgeWiseChart(
+    totalAge0to14 / count,
+    totalAge15to59 / count,
+    totalAge60Plus / count
+  );
+}
+updateDependencyCards() {
+
+  if (!this.dependecyRatioData?.length) {
+     this.dashboardSummary.childDependency =0;
+     this.dashboardSummary.oldAgeDependency=0;
+    return;
+  }
+
+  // ==========================
+  // MANDAL MODE
+  // ==========================
+  if (this.selectedMandal) {
+
+    const mandalData =
+      this.dependecyRatioData.find(
+        (x: any) =>
+          x.MANDAL_NAME?.trim() ===
+          this.selectedMandal?.trim()
+      );
+
+    if (mandalData) {
+
+      this.dashboardSummary.childDependency =
+        Number(
+          mandalData.YOUNG_DEPENDENCY_RATIO || 0
+        ).toFixed(2);
+
+      this.dashboardSummary.oldAgeDependency =
+        Number(
+          mandalData.OLD_DEPENDENCY_RATIO || 0
+        ).toFixed(2);
+    }
+
+    return;
+  }
+
+  // ==========================
+  // DISTRICT MODE
+  // ==========================
+
+  const totalChildren =
+    this.dependecyRatioData.reduce(
+      (sum: number, x: any) =>
+        sum +
+        Number(x.NUMBER_OF_CHILDREN_0_14 || 0),
+      0
+    );
+
+  const totalWorking =
+    this.dependecyRatioData.reduce(
+      (sum: number, x: any) =>
+        sum +
+        Number(x.POPULATION_AGED_15_59 || 0),
+      0
+    );
+
+  const totalOldAge =
+    this.dependecyRatioData.reduce(
+      (sum: number, x: any) =>
+        sum +
+        Number(x.POPULATION_AGED_60_PLUS || 0),
+      0
+    );
+
+  this.dashboardSummary.childDependency =
+    totalWorking > 0
+      ? (
+          (totalChildren / totalWorking) *
+          100
+        ).toFixed(2)
+      : 0;
+
+  this.dashboardSummary.oldAgeDependency =
+    totalWorking > 0
+      ? (
+          (totalOldAge / totalWorking) *
+          100
+        ).toFixed(2)
+      : 0;
 }
 
 }
