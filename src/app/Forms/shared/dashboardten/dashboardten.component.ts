@@ -191,8 +191,8 @@ districtNames = [
   },
 
   {
-    districtName: 'Alluri Sitharama Raju',
-    displayName: 'Alluri Sitharama Raju',
+    districtName: 'Alluri Seetha Rama Raju',
+    displayName: 'Alluri Seetha Rama Raju',
     x: 712,
     y: 158
   },
@@ -1680,7 +1680,7 @@ goToDistrict(district: any) {
           s4-8.1,2-10s-2.6-8.7,5-5c7.6,3.7,8-2.1,10-5c2-2.9,6-5.4,9-6s4-5.4,7-9c3-3.6,3-9,3-9S948.4,113,945.4,111.4z`
         }, {
             id: '745',
-            name: 'Alluri Sitharama Raju',
+            name: 'Alluri Seetha Rama Raju',
             population: 4170468, // Example data
             area: '15,152 km²',
             path: `M945.4,111.4c-3-1.6-13.3,0.3-14.4-3.6s-4-4.2-2-7.8l19.2,9.8c0-1.4-2.9-4.3-5.3-9.8s-10.9-8.6-14.4-12.2

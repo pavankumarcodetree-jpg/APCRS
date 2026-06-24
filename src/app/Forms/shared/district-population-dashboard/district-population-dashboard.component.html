@@ -578,7 +578,7 @@
             <div class="stats-title">Population</div>
             <div class="stats-subtitle">2001, Census of India</div>
             <div class="stats-count">
-                {{ dashboardSummary?.population2001  }}
+                {{ dashboardSummary?.population2001 | number }}
             </div>
         </div>
     </div>
@@ -588,14 +588,14 @@
             <div class="stats-title">Population</div>
             <div class="stats-subtitle">2011, Census of India</div>
             <div class="stats-count">
-                {{ dashboardSummary?.population2011  }}
+                {{ dashboardSummary?.population2011 | number }}
             </div>
         </div>
     </div>
      <!-- Annual Exponetilal   -->
             <div class="col-lg-2 col-md-4">
         <div class="stats-card sexratio-card ">
-            <div class="stats-title">Annual Exponetilal </div>
+            <div class="stats-title">Annual Exponential </div>
             <div class="stats-subtitle growth-rate">Growth rate of Population 2001-11</div>
             <div class="stats-count">
                 {{ dashboardSummary?.annualExponantional  }}
