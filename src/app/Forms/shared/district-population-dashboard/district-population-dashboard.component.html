@@ -14,8 +14,8 @@
         <option value="">Select District</option>
         <option
           *ngFor="let district of districts"
-          [value]="district">
-          {{ district }}
+          [value]="district.name">
+          {{ district.name }}
         </option>
       </select>
       

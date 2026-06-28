@@ -16,34 +16,7 @@ import { basemodel } from 'src/app/thirparty/model/apimodel';
   styleUrl: './district-population-dashboard.component.css',
 })
 export class DistrictPopulationDashboardComponent {
-  districts: string[] = [
-  'Anakapalli',
-  'Ananthapuramu',
-  'Annamayya',
-  'Alluri Seetha Rama Raju',
-  'Bapatla',
-  'Chittoor',
-  'East Godavari',
-  'Eluru',
-  'Guntur',
-  'Kakinada',
-  'Konaseema',
-  'Krishna',
-  'Kurnool',
-  'Nandyal',
-  'NTR',
-  'Palnadu',
-  'Parvathipuram Manyam',
-  'Prakasam',
-  'Srikakulam',
-  'Sri Potti Sriramulu Nellore',
-  'Sri Sathya Sai',
-  'Tirupati',
-  'Visakhapatnam',
-  'Vizianagaram',
-  'West Godavari',
-  'YSR Kadapa'
-];
+  districts: any[] = [];
 
   districtDetails: any;
   mandalList: any[] = [];
@@ -104,15 +77,43 @@ export class DistrictPopulationDashboardComponent {
      private spinner: NgxSpinnerService
   ) {}
 
+  private normalizeDistrictName(value: any): string {
+    if (!value && value !== 0) {
+      return '';
+    }
+
+    if (typeof value === 'string') {
+      return value.trim();
+    }
+
+    if (typeof value === 'object') {
+      return this.normalizeDistrictName(
+        value.DISTRICT_NAME || value.districtName || value.district || value.name
+      );
+    }
+
+    return value.toString().trim();
+  }
+
   ngOnInit(): void {
     for (let i = this.currentYear; i >= 2023; i--) {
       this.yearList.push(i);
     }
+    this.loadDistrictsList();
     this.getDistrictFromQuery();
   }
   getDistrictFromQuery() {
     this.route.queryParams.subscribe((params) => {
-      const district = params['district'];
+      const district = this.normalizeDistrictName(params['district']);
+      if (district && district === this.selectedDistrictName && Object.keys(this.dashboardSummary).length) {
+        return;
+      }
+
+      if (!district) {
+        this.selectedDistrictName = '';
+        return;
+      }
+
       this.selectedDistrictName = district;
       this.selectedYear = 2025;
       this.loadDistrictDashboardData();
@@ -553,17 +554,27 @@ years = [
 ];
 
 onDistrictChange(event: any) {
-  const districtName = event.target.value;
-  if (districtName) {
-    this.router.navigate(
-      ['/shared/district-population'],
-      {
-        queryParams: {
-          district: districtName
-        }
-      }
-    );
+  const districtName = event?.target?.value?.toString().trim() || '';
+
+  if (!districtName) {
+    this.selectedDistrictName = '';
+    return;
   }
+
+  this.selectedDistrictName = districtName;
+  this.selectedMandal = '';
+  this.selectedYear = 2025;
+  this.loadDistrictDashboardData();
+
+  this.router.navigate(
+    ['/shared/district-population'],
+    {
+      queryParams: {
+        district: districtName
+      },
+      replaceUrl: true
+    }
+  );
 }
 
 loadAgeWiseChart(
@@ -708,10 +719,26 @@ loadSexRatioChart() {
     xAxis: {
       categories: sortedMandals.map(x => x.MANDAL_NAME)
     },
+    yAxis: {
+      title: {
+        text: 'Females per 1000 Males'
+      }
+    },
+    tooltip: {
+      pointFormat: '<b>{point.y}</b>'
+    },
+    plotOptions: {
+      column: {
+        dataLabels: {
+          enabled: true,
+          format: '{y}'
+        }
+      }
+    },
     series: [{
       name: 'Sex Ratio',
       type: 'column',
-      data: sortedMandals.map(x => x.SEX_RATIO)
+      data: sortedMandals.map(x => Number(x.SEX_RATIO) || 0)
     }]
   };
   this.updateFlag = false;
@@ -1556,7 +1583,7 @@ loadAnnualGrowthRateChart() {
     (item: any) => ({
       mandalName: item.MANDAL_NAME,
       growthRate: Number(
-        ((item.ANNUAL_EXPENTIAL || 0) * 100).toFixed(2)
+        ((item.ANNUAL_EXP_GROWTH_2001_11 || 0) * 100).toFixed(2)
       )
     })
   );
@@ -1634,11 +1661,38 @@ setTimeout(() => {
   this.annualGrowthUpdateFlag = true;
 });
 }
+async loadDistrictsList() {
+  try {
+    this.spinner.show();
+        // API 1 -DistictNames
+    const req1 = new basemodel();
+    req1.type = '138';
+
+    const [
+      districtListResponse
+    ] = await Promise.all([
+      this.auth.auth_utilities_rtgs(req1),
+    ]);
+  //DistrictList
+   if (districtListResponse?.code) {
+      this.districts = (districtListResponse.Details || [])
+        .map((item: any) => ({
+          name: this.normalizeDistrictName(item.DISTRICT_NAME || item.districtName || item.district || item.name)
+        }))
+        .filter((item: any) => item.name);
+  }else {
+     this.districts=[];
+  }
+    this.spinner.hide();
+  } catch (error) {
+    this.spinner.hide();
+    console.error(error);
+  }
+}
 
 async loadDistrictDashboardData() {
   try {
     this.spinner.show();
-
     // API 1 - District Summary
     const req1 = new basemodel();
     req1.type = '1000';
@@ -1744,7 +1798,7 @@ async loadDistrictDashboardData() {
       tfrResponse,
       annualexponentialResponse,
       ageDistributionResponse,
-      dependencyRatioResponse
+      dependencyRatioResponse,
     ] = await Promise.all([
       this.auth.auth_utilities_rtgs(req1),
       this.auth.auth_utilities_rtgs(req2),
@@ -1763,6 +1817,8 @@ async loadDistrictDashboardData() {
       this.auth.auth_utilities_rtgs(req15),
       this.auth.auth_utilities_rtgs(req16),
     ]);
+    
+    
 
     // District Summary
     if (districtResponse?.code) {
@@ -1797,7 +1853,6 @@ async loadDistrictDashboardData() {
     populationGrowthRate: 0
   };
 }
-
     // Table 2.2(a)
     if (birthSexRatioResponse?.code) {
       this.birthSexRatioData =
