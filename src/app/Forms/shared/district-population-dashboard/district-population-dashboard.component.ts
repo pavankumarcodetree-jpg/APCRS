@@ -37,6 +37,7 @@ export class DistrictPopulationDashboardComponent {
   ageSexDistributionChartOptions:Highcharts.Options = {};
   tfrChartOptions: Highcharts.Options = {};
   annualGrowthRateChartOptions: Highcharts.Options = {};
+    cbrCdrChartOptions: Highcharts.Options = {};
   updateBirthChart = false;
   csrMandalList: any[] = [];
 
@@ -71,6 +72,8 @@ export class DistrictPopulationDashboardComponent {
   ageDistributionData: any=[];
   dependecyRatioData: any=[];
   ageWiseUpdateFlag: boolean=false;
+  totalCBRandCDRData: any=[];
+  updateCBRCDRChart: boolean=false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -181,6 +184,9 @@ loadBarChart() {
   }
   let chartData: any[] = [];
     chartData = [...this.allMandalsbirthandDeaths];
+    chartData.sort((a: any, b: any) =>
+  Number(a.CRS_BIR_IN || 0) - Number(b.CRS_BIR_IN || 0)
+);
   const categories =
     chartData.map(
       (x: any) => x.MANDAL_NAME
@@ -238,10 +244,17 @@ loadBarChart() {
     },
 
     plotOptions: {
-      column: {
-        borderRadius: 6,
-        pointPadding: 0.2
-      }
+       column: {
+    grouping: true,
+    borderWidth: 0,
+          borderRadius: 6,
+        pointPadding: 0.2,
+    groupPadding: 0.15,
+    dataLabels: {
+      enabled: true,
+      format: '{y}'
+    }
+  },
     },
 
     series: [
@@ -278,7 +291,7 @@ loadLineChart() {
     this.updateLineChartFlag = false;
     this.lineChartOptions = {
       chart: {
-        type: 'line',
+        type: 'column',
         backgroundColor: 'transparent'
       },
       title: {
@@ -366,10 +379,7 @@ loadMedianAgeAtDeathChart() {
     return;
   }
 
-  const sortedData = [...this.medianAgeofDeath].sort(
-    (a, b) => (a.MEDIAN_23 || 0) - (b.MEDIAN_23 || 0)
-  );
-
+  const sortedData = [...this.medianAgeofDeath]
   const categories = sortedData.map(
     (x: any) => x.MANDAL_NAME
   );
@@ -389,7 +399,11 @@ loadMedianAgeAtDeathChart() {
   this.medianAgeChartOptions = {
 
     chart: {
-      type: 'column'
+      type: 'column',
+          scrollablePlotArea: {
+      minWidth: categories.length * 40, // Adjust width per category
+      scrollPositionX: 0
+    }
     },
 
     title: {
@@ -416,6 +430,9 @@ loadMedianAgeAtDeathChart() {
 
     plotOptions: {
       column: {
+            pointPadding: 0.05,
+    groupPadding: 0.2,
+    borderRadius: 4,
         dataLabels: {
           enabled: true
         }
@@ -423,21 +440,30 @@ loadMedianAgeAtDeathChart() {
     },
 
     series: [
-      {
-        name: '2023',
-        type: 'column',
-        data: data2023
-      },
-      {
-        name: '2024',
-        type: 'column',
-        data: data2024
-      },
-      {
-        name: '2025',
-        type: 'column',
-        data: data2025
-      }
+       {
+    name: '2023',
+    type: 'column',
+    data: data2023,
+    index: 0,
+    zIndex: 3,
+
+  },
+  {
+    name: '2024',
+    type: 'column',
+    data: data2024,
+    index: 1,
+    zIndex: 2,
+    color: '#F59E0B'
+  },
+  {
+    name: '2025',
+    type: 'column',
+    data: data2025,
+    index: 2,
+    zIndex: 1,
+    color: '#e0e0e0'
+  }
     ] as any,
 
     credits: {
@@ -456,104 +482,71 @@ updateLineChart(
   birthsData: number[],
   deathsData: number[]
 ) {
-
   this.lineChartOptions = {
-
     chart: {
-
-      type: 'line',
-
+      type: 'column',
       backgroundColor: 'transparent'
-
     },
-
-
 
     title: {
-
       text: ''
-
     },
+
     xAxis: {
-
       categories: years.map(String),
-
       lineColor: '#e0e0e0'
-
     },
+
     yAxis: {
+      min: 0,
       title: {
         text: ''
       },
       gridLineColor: '#f1f3f5'
     },
+
     legend: {
       align: 'center',
       verticalAlign: 'bottom'
-
     },
+
     plotOptions: {
-
-      line: {
-
-        marker: {
-
-          radius: 4
-
-        },
-
-        lineWidth: 3
-
-      },
-
-
-
+      column: {
+    grouping: true,
+    borderWidth: 0,
+    pointPadding: 0.1,
+    groupPadding: 0.15,
+    dataLabels: {
+      enabled: true,
+      format: '{y}'
+    }
+  },
       series: {
-
         animation: {
-
           duration: 1000
-
         }
-
       }
-
     },
-
-
 
     series: [
-
       {
-
-        type: 'line',
-
+        type: 'column',
         name: 'Births',
-
         data: birthsData,
-
         color: '#86efac'
-
       },
-
-
-
       {
-
-        type: 'line',
-
+        type: 'column',
         name: 'Deaths',
-
         data: deathsData,
-
         color: '#fca5a5'
-
       }
+    ],
 
-    ]
-
+    credits: {
+      enabled: false
+    }
   };
-
 }
 
 
@@ -825,6 +818,18 @@ loadBirthSexRatioChart() {
     credits: {
       enabled: false
     },
+    plotOptions: {
+     column: {
+    grouping: true,
+    borderWidth: 0,
+    pointPadding: 0.1,
+    groupPadding: 0.15,
+    dataLabels: {
+      enabled: true,
+      format: '{y}'
+    }
+  }
+},
 
     series: [
       {
@@ -835,12 +840,15 @@ loadBirthSexRatioChart() {
       {
         name: '2024',
         type: 'column',
-        data: sexRatio2024
+        data: sexRatio2024,
+        color: '#F59E0B'
       },
       {
         name: '2025',
         type: 'column',
-        data: sexRatio2025
+        data: sexRatio2025,
+        color: '#cdc8bf'
+
       }
     ]
   };
@@ -962,7 +970,8 @@ loadPopulationBirthShareChart() {
     {
       type: 'column',
       name: 'Share of births among all sub-districts',
-      data: birthShareData
+      data: birthShareData,
+      color: '#F59E0B' 
     }] as any
   };
 
@@ -1075,7 +1084,8 @@ loadPlaceOfDeathChart() {
       {
         type: 'column',
         name: 'Other',
-        data: otherData
+        data: otherData,
+        color: '#F59E0B' 
       }
     ] as any
   };
@@ -1571,6 +1581,98 @@ setTimeout(() => {
   this.tfrUpdateFlag = true;
 });
 }
+loadCBRCDRChart() {
+
+  if (!this.totalCBRandCDRData?.length) {
+    this.updateCBRCDRChart = false;
+    return;
+  }
+
+  // Sort by 2023 CBR (Low → High)
+  const sortedData = [...this.totalCBRandCDRData].sort(
+    (a, b) => Number(a.EST_CBR_FOR_2023 || 0) - Number(b.EST_CBR_FOR_2023 || 0)
+  );
+
+  const categories = sortedData.map(x => x.DISTRICT_NAME);
+
+  const cbr2023 = sortedData.map(x => Number(x.EST_CBR_FOR_2023 || 0));
+  const cbr2024 = sortedData.map(x => Number(x.EST_CBR_FOR_2024 || 0));
+  const cbr2025 = sortedData.map(x => Number(x.EST_CBR_FOR_2025 || 0));
+
+  this.cbrCdrChartOptions = {
+
+    chart: {
+      type: 'column',
+      scrollablePlotArea: {
+        minWidth: categories.length * 60,
+        scrollPositionX: 0
+      }
+    },
+
+    title: {
+      text: ''
+    },
+
+    xAxis: {
+      categories,
+      labels: {
+        rotation: -45
+      }
+    },
+
+    yAxis: {
+      min: 0,
+      title: {
+        text: 'CBR'
+      }
+    },
+
+    tooltip: {
+      shared: true
+    },
+
+    plotOptions: {
+      column: {
+        pointPadding: 0,
+        groupPadding: 0.05,
+        borderRadius: 4,
+        dataLabels: {
+          enabled: true
+        }
+      }
+    },
+
+    series: [
+      {
+        type: 'column',
+        name: '2023',
+        data: cbr2023,
+      },
+      {
+        type: 'column',
+        name: '2024',
+        data: cbr2024,
+        color: '#F59E0B'
+      },
+      {
+        type: 'column',
+        name: '2025',
+        data: cbr2025,
+        color: '#22C55E'
+      }
+    ],
+
+    credits: {
+      enabled: false
+    }
+  };
+
+  this.updateCBRCDRChart = false;
+
+  setTimeout(() => {
+    this.updateCBRCDRChart = true;
+  }, 0);
+}
 
 loadAnnualGrowthRateChart() {
   if (!this.annualExponentialData?.length) {
@@ -1800,6 +1902,12 @@ async loadDistrictDashboardData() {
     req16.param1=this.selectedDistrictName;
     req16.param2=this.selectedMandal
 
+        // API 17 Year-wise CBR AND CDR  Response 
+    const req17 = new basemodel();
+    req17.type = '140';
+    req17.param1=this.selectedDistrictName,
+    req17.param2=this.selectedMandal ? this.selectedMandal : 0
+
     const [
       districtResponse,
       birthSexRatioResponse,
@@ -1817,6 +1925,7 @@ async loadDistrictDashboardData() {
       annualexponentialResponse,
       ageDistributionResponse,
       dependencyRatioResponse,
+      yearwiseTotalcbrandcdrResponse
     ] = await Promise.all([
       this.auth.auth_utilities_rtgs(req1),
       this.auth.auth_utilities_rtgs(req2),
@@ -1834,6 +1943,7 @@ async loadDistrictDashboardData() {
       this.auth.auth_utilities_rtgs(req14),
       this.auth.auth_utilities_rtgs(req15),
       this.auth.auth_utilities_rtgs(req16),
+      this.auth.auth_utilities_rtgs(req17),
     ]);
     
     
@@ -2042,6 +2152,13 @@ if (ageDistributionResponse?.code) {
     this.dependecyRatioData=[];
     this.updateDependencyCards();
   }
+  //year-wise total CBR AND CRD 
+  if (yearwiseTotalcbrandcdrResponse?.code) {
+      this.totalCBRandCDRData =yearwiseTotalcbrandcdrResponse.Details || [];
+  }else {
+    this.totalCBRandCDRData=[];
+  }
+
 
     // ALL 3 APIs COMPLETED HERE
     this.loadAllCharts();
@@ -2100,6 +2217,7 @@ updateSexRatioCard() {
 loadAllCharts() {
   this.loadBarChart();
   this.loadLineChart();
+  this.loadCBRCDRChart();
   this.loadMedianAgeAtDeathChart();
   this.loadSexRatioChart();
   this.loadBirthSexRatioChart();
