@@ -393,7 +393,11 @@ backToLogin() {
 
 
                                 // this.router.navigate(['/shared/dashboardsix']);
-                                this.router.navigate(['/shared/dashboard']);
+                                //this.router.navigate(['/shared/dashboard']);
+                                const encryptedDistrict = this.encdc.enccall('Anakapalli');
+                                this.router.navigate(['/shared/district-population'], {
+                                  queryParams: { dst: encryptedDistrict },
+                                });
 
                                 this.spinner.hide();
                             }

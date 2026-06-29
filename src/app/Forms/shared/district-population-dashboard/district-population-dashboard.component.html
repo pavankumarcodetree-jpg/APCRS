@@ -595,10 +595,10 @@
      <!-- Annual Exponetilal   -->
             <div class="col-lg-2 col-md-4">
         <div class="stats-card sexratio-card ">
-            <div class="stats-title">Annual Exponential </div>
+            <div class="stats-title">Annual Exponential % </div>
             <div class="stats-subtitle growth-rate">Growth rate of Population 2001-11</div>
             <div class="stats-count">
-                {{ dashboardSummary?.annualExponantional  }}
+                {{ dashboardSummary?.annualExponantional * 100 | number:'1.2-2'  }}
             </div>
         </div>
     </div>

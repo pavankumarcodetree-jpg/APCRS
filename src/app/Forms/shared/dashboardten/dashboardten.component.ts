@@ -228,7 +228,8 @@ districtNames = [
 ];
 
 goToDistrict(district: any) { 
-    this.router.navigate( ['/shared/district-population'], { queryParams: { district: district.districtName } } );
+    const encryptedDistrict = this.encdc.enccall(district.districtName);
+    this.router.navigate( ['/shared/district-population'], { queryParams: { dst:encryptedDistrict } } );
  }
 
     chartOptions2: Highcharts.Options = {

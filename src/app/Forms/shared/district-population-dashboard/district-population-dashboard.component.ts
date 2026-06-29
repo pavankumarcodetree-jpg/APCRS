@@ -4,6 +4,7 @@ import * as Highcharts from 'highcharts';
 import { AuthserService } from 'src/app/services/api_lyr/private/authser.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { basemodel } from 'src/app/thirparty/model/apimodel';
+import { EncDecService } from 'src/app/services/enc_dec_lyr/enc-dec.service';
 
 
 
@@ -74,7 +75,8 @@ export class DistrictPopulationDashboardComponent {
     private route: ActivatedRoute,
     private router: Router,
      private auth: AuthserService,
-     private spinner: NgxSpinnerService
+     private spinner: NgxSpinnerService,
+     private encDec: EncDecService
   ) {}
 
   private normalizeDistrictName(value: any): string {
@@ -95,6 +97,20 @@ export class DistrictPopulationDashboardComponent {
     return value.toString().trim();
   }
 
+  private resolveDistrictName(rawDistrict: any): string {
+    if (!rawDistrict && rawDistrict !== 0) {
+      return '';
+    }
+
+    if (typeof rawDistrict === 'string' && rawDistrict.trim()) {
+      const decryptedDistrict = this.encDec.decrypt(rawDistrict);
+      const candidate = decryptedDistrict && decryptedDistrict !== 'invalid' ? decryptedDistrict : rawDistrict;
+      return this.normalizeDistrictName(candidate);
+    }
+
+    return this.normalizeDistrictName(rawDistrict);
+  }
+
   ngOnInit(): void {
     for (let i = this.currentYear; i >= 2023; i--) {
       this.yearList.push(i);
@@ -104,7 +120,7 @@ export class DistrictPopulationDashboardComponent {
   }
   getDistrictFromQuery() {
     this.route.queryParams.subscribe((params) => {
-      const district = this.normalizeDistrictName(params['district']);
+      const district = this.resolveDistrictName(params['dst']);
       if (district && district === this.selectedDistrictName && Object.keys(this.dashboardSummary).length) {
         return;
       }
@@ -566,11 +582,13 @@ onDistrictChange(event: any) {
   this.selectedYear = 2025;
   this.loadDistrictDashboardData();
 
+  const encryptedDistrict = this.encDec.enccall(districtName);
+
   this.router.navigate(
     ['/shared/district-population'],
     {
       queryParams: {
-        district: districtName
+        dst: encryptedDistrict
       },
       replaceUrl: true
     }
@@ -1714,7 +1732,7 @@ async loadDistrictDashboardData() {
     const req4 = new basemodel();
     req4.type = '1003';
     req4.param1 = this.selectedDistrictName;
-    req4.param2 = 0; // keep year-wise line chart district-level even when a mandal is selected
+    req4.param2 = this.selectedMandal ? this.selectedMandal : 0; // keep year-wise line chart district-level even when a mandal is selected
     req4.param3 = 0;
     req4.param4 = 0;
 
