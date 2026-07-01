@@ -283,6 +283,24 @@
 }
 
 /* CARD COLORS */
+.population-card-2023 {
+  background: #1d5d8f;
+  color: #fff;
+}
+
+.population-card-2024 {
+  background: #f59e0b;
+  color: #fff;
+}
+
+.population-card-2025 {
+  background: #6b7280;
+  color: #fff;
+}
+.population-card-2026 {
+  background: #16a34a; /* Green */
+  color: #fff;
+}
 
 .population-card {
     background: #1d5d8f;
@@ -498,4 +516,7 @@
   background: #f48a00;
     border-color: #f48a00;
     color: #fff;
+}
+.d-none{
+  display: none !important;
 }

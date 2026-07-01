@@ -40,6 +40,7 @@ export class DistrictPopulationDashboardComponent {
     cbrCdrChartOptions: Highcharts.Options = {};
   updateBirthChart = false;
   csrMandalList: any[] = [];
+  populationCards: any[] = [];
 
   currentYear: number = new Date().getFullYear();
   selectedYear: number = 2025;
@@ -350,7 +351,6 @@ loadLineChart() {
     this.updateLineChartFlag = true;
   }, 0);
 }
-
 loadMedianAgeAtDeathChart() {
 
   if (!this.medianAgeofDeath?.length) {
@@ -370,52 +370,47 @@ loadMedianAgeAtDeathChart() {
           text: ''
         }
       },
-      series: [] as any,
+      series: [],
       credits: {
         enabled: false
       }
     };
+
     this.updateMedianChart = false;
     return;
   }
 
-  const sortedData = [...this.medianAgeofDeath]
-  const categories = sortedData.map(
-    (x: any) => x.MANDAL_NAME
-  );
+  const categories = this.medianAgeofDeath.map((x: any) => x.MANDAL_NAME);
 
-  const data2023 = sortedData.map(
-    (x: any) => Number(x.MEDIAN_23 || 0)
-  );
+  const data2023 = this.medianAgeofDeath.map((x: any) => Number(x.MEDIAN_23 ?? 0));
+  const data2024 = this.medianAgeofDeath.map((x: any) => Number(x.MEDIAN_24 ?? 0));
+  const data2025 = this.medianAgeofDeath.map((x: any) => Number(x.MEDIAN_25 ?? 0));
 
-  const data2024 = sortedData.map(
-    (x: any) => Number(x.MEDIAN_24 || 0)
-  );
-
-  const data2025 = sortedData.map(
-    (x: any) => Number(x.MEDIAN_25 || 0)
-  );
+  console.log(this.medianAgeofDeath);
 
   this.medianAgeChartOptions = {
 
     chart: {
       type: 'column',
-          scrollablePlotArea: {
-      minWidth: categories.length * 40, // Adjust width per category
-      scrollPositionX: 0
-    }
+      scrollablePlotArea: {
+        minWidth: categories.length * 80,
+        scrollPositionX: 0
+      }
     },
 
     title: {
       text: ''
     },
 
-    xAxis: {
-      categories,
-      labels: {
-        rotation: -45
-      }
-    },
+xAxis: {
+  categories,
+  tickmarkPlacement: 'on',
+  labels: {
+    rotation: -45,
+    step: 1,          // Show every label
+    reserveSpace: true
+  }
+},
 
     yAxis: {
       min: 0,
@@ -430,51 +425,46 @@ loadMedianAgeAtDeathChart() {
 
     plotOptions: {
       column: {
-            pointPadding: 0.05,
-    groupPadding: 0.2,
-    borderRadius: 4,
+        grouping: true,
+        pointWidth: 12,
+        pointPadding: 0.1,
+        groupPadding: 0.1,
+        borderRadius: 0,
         dataLabels: {
-          enabled: true
+          enabled: true,
+          formatter: function () {
+            return this.y;
+          }
         }
       }
     },
 
     series: [
-       {
-    name: '2023',
-    type: 'column',
-    data: data2023,
-    index: 0,
-    zIndex: 3,
-
-  },
-  {
-    name: '2024',
-    type: 'column',
-    data: data2024,
-    index: 1,
-    zIndex: 2,
-    color: '#F59E0B'
-  },
-  {
-    name: '2025',
-    type: 'column',
-    data: data2025,
-    index: 2,
-    zIndex: 1,
-    color: '#e0e0e0'
-  }
-    ] as any,
+      {
+        type: 'column',
+        name: '2023',
+        data: data2023
+      },
+      {
+        type: 'column',
+        name: '2024',
+        data: data2024,
+        color: '#F59E0B'
+      },
+      {
+        type: 'column',
+        name: '2025',
+        data: data2025,
+        color: '#e0e0e0'
+      }
+    ],
 
     credits: {
       enabled: false
     }
   };
-   this.updateMedianChart = false;
 
-  setTimeout(() => {
-    this.updateMedianChart = true;
-  }, 0);
+  this.updateMedianChart = true;
 }
 
 updateLineChart(
@@ -759,52 +749,50 @@ loadSexRatioChart() {
 }
 
 loadBirthSexRatioChart() {
+
   const sortedMandals = [...(this.csrMandalList || [])].sort(
     (a, b) =>
       (a?.yearWiseData?.[2023]?.sexRatio || 0) -
       (b?.yearWiseData?.[2023]?.sexRatio || 0)
   );
 
-  const categories =
-    sortedMandals.length
-      ? sortedMandals.map(m => m.mandalName)
-      : ['No data'];
+  const categories = sortedMandals.length
+    ? sortedMandals.map(m => m.mandalName)
+    : ['No data'];
 
-  const sexRatio2023 =
-    sortedMandals.length
-      ? sortedMandals.map(
-          m => m?.yearWiseData?.[2023]?.sexRatio || 0
-        )
-      : [0];
+  const sexRatio2023 = sortedMandals.length
+    ? sortedMandals.map(m => Number(m?.yearWiseData?.[2023]?.sexRatio ?? 0))
+    : [0];
 
-  const sexRatio2024 =
-    sortedMandals.length
-      ? sortedMandals.map(
-          m => m?.yearWiseData?.[2024]?.sexRatio || 0
-        )
-      : [0];
+  const sexRatio2024 = sortedMandals.length
+    ? sortedMandals.map(m => Number(m?.yearWiseData?.[2024]?.sexRatio ?? 0))
+    : [0];
 
-  const sexRatio2025 =
-    sortedMandals.length
-      ? sortedMandals.map(
-          m => m?.yearWiseData?.[2025]?.sexRatio || 0
-        )
-      : [0];
+  const sexRatio2025 = sortedMandals.length
+    ? sortedMandals.map(m => Number(m?.yearWiseData?.[2025]?.sexRatio ?? 0))
+    : [0];
 
   this.birthSexRatioChartOptions = {
 
     chart: {
-      type: 'column'
+      type: 'column',
+      animation: false,
+        scrollablePlotArea: {
+    minWidth: categories.length * 70, // Increase width
+    scrollPositionX: 0
+  },
     },
 
     title: {
-      text: 'CSR Sex Ratio at Birth (Males per 100 Females)'
+      text: 'CRS Sex Ratio at Birth (Males per 100 Females)'
     },
 
     xAxis: {
       categories,
       labels: {
-        rotation: -45
+        rotation: -45,
+        step: 1,
+        reserveSpace: true
       }
     },
 
@@ -815,44 +803,69 @@ loadBirthSexRatioChart() {
       }
     },
 
-    credits: {
-      enabled: false
+    tooltip: {
+      shared: true
     },
-    plotOptions: {
-     column: {
+
+plotOptions: {
+  column: {
     grouping: true,
+    pointWidth: 12,
+    pointPadding: 0.02,
+    groupPadding: 0.05,
     borderWidth: 0,
-    pointPadding: 0.1,
-    groupPadding: 0.15,
+    borderRadius: 0,
     dataLabels: {
       enabled: true,
-      format: '{y}'
+      allowOverlap: false,
+      crop: false,
+      overflow: 'allow',
+      style: {
+        fontSize: '9px',
+        fontWeight: 'bold',
+        textOutline: 'none'
+      }
     }
   }
 },
 
-    series: [
-      {
-        name: '2023',
-        type: 'column',
-        data: sexRatio2023
-      },
-      {
-        name: '2024',
-        type: 'column',
-        data: sexRatio2024,
-        color: '#F59E0B'
-      },
-      {
-        name: '2025',
-        type: 'column',
-        data: sexRatio2025,
-        color: '#cdc8bf'
+series: [
+  {
+    name: '2023',
+    type: 'column',
+    data: sexRatio2023,
+    color: '#36A2EB',
+    dataLabels: {
+      y: -5
+    }
+  },
+  {
+    name: '2024',
+    type: 'column',
+    data: sexRatio2024,
+    color: '#F59E0B',
+    dataLabels: {
+      y: -18
+    }
+  },
+  {
+    name: '2025',
+    type: 'column',
+    data: sexRatio2025,
+    color: '#cdc8bf',
+    dataLabels: {
+      y: -31
+    }
+  }
+],
 
-      }
-    ]
+    credits: {
+      enabled: false
+    }
   };
-    this.updateBirthChart = false;
+
+  this.updateBirthChart = false;
+
   setTimeout(() => {
     this.updateBirthChart = true;
   }, 0);
@@ -1958,13 +1971,34 @@ async loadDistrictDashboardData() {
   annualExponantional: district.ANNUAL_EXP_RET_POP_2001_11,
   estimatedPopulation: district.EST_POP_31_DEC_2025,
   totalPopulation: district.EST_POP_31_DEC,
+  totalPopulation_2023: district.EST_POP_31_DEC_2023,
+   totalPopulation_2024: district.EST_POP_31_DEC_2024,
+   totalPopulation_2025: district.EST_POP_31_DEC_2025,
   totalBirths:district.CRS_BIR_IN,
   totalDeaths:district.CRS_DEA_IN,
   birthRate:district.EST_CBR_FOR,
   deathRate:district.EST_CDR_FOR,
   tfr:district.EST_TFR_FOR,
-    populationGrowthRate:district.POP_GROW_RATE || 0
+  populationGrowthRate:district.POP_GROW_RATE || 0
 };
+this.populationCards = [
+  {
+    year: 2023,
+    population: this.dashboardSummary.totalPopulation_2023
+  },
+  {
+    year: 2024,
+    population: this.dashboardSummary.totalPopulation_2024
+  },
+  {
+    year: 2025,
+    population: this.dashboardSummary.totalPopulation_2025
+  },
+  //     {
+  //   year: 2026,
+  //   population: this.dashboardSummary.totalPopulation_2026
+  // }
+];
 }else {
   this.dashboardSummary = {
     ...this.dashboardSummary,
@@ -2042,6 +2076,9 @@ if (mandalsResponse?.code) {
       annualExponantional: mandalLists[0].ANNUAL_EXP_RET_POP_2001_11,
       estimatedPopulation: mandalLists[0].EST_POP_31_DEC_2025,
       totalPopulation: mandalLists[0].EST_POP_31_DEC,
+    totalPopulation_2023: district.EST_POP_31_DEC_2023,
+     totalPopulation_2024: district.EST_POP_31_DEC_2024,
+     totalPopulation_2025: district.EST_POP_31_DEC_2025,
       totalBirths: mandalLists[0].CRS_BIR_IN,
       totalDeaths: mandalLists[0].CRS_DEA_IN,
       birthRate: mandalLists[0].EST_CBR_FOR,
@@ -2053,6 +2090,24 @@ if (mandalsResponse?.code) {
         mandalLists[0].POP_GROW_RATE || 0
     };
   }
+  this.populationCards = [
+  {
+    year: 2023,
+    population: this.dashboardSummary.totalPopulation_2023
+  },
+  {
+    year: 2024,
+    population: this.dashboardSummary.totalPopulation_2024
+  },
+  {
+    year: 2025,
+    population: this.dashboardSummary.totalPopulation_2025
+  },
+  //   {
+  //   year: 2026,
+  //   population: this.dashboardSummary.totalPopulation_2026
+  // }
+];
 } else {
   // Keep district values already loaded
   this.dashboardSummary = {

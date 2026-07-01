@@ -478,16 +478,24 @@
     </div>
 
     <!-- Total Population -->
-    <div class="col-lg-2 col-md-4">
-        <div class="stats-card population-card">
-            <div class="stats-title">Total Population</div>
-            <div class="stats-subtitle">Year {{ selectedYear }}</div>
-            <div class="stats-count">
-                {{ dashboardSummary?.totalPopulation | number }}
-            </div>
-        </div>
+<div class="col-lg-2 col-md-4" *ngFor="let card of populationCards">
+  <div
+    class="stats-card"
+    [ngClass]="{
+      'population-card-2023': card.year === 2023,
+      'population-card-2024': card.year === 2024,
+      'population-card-2025': card.year === 2025,
+      'population-card-2026': card.year === 2026
+    }">
+
+    <div class="stats-title">Total Population</div>
+    <div class="stats-subtitle">Year {{ card.year }}</div>
+    <div class="stats-count">
+      {{ card.population | number }}
     </div>
 
+  </div>
+</div>
     <!-- Population Growth Rate -->
     <div class="col-lg-2 col-md-4">
         <div class="stats-card success-card">
@@ -775,12 +783,12 @@
 </div>
 </div>
  <div class="row mt-4">
-                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
     <div class="card custom-card h-100">
         
         <!-- Added flex classes -->
         <div class="card-body ">
-             <h4 class="custom-title mb-3">CSR Sex Ratio at Birth (Males per 100 Females) </h4>
+             <h4 class="custom-title mb-3">CRS Sex Ratio at Birth (Males per 100 Females) </h4>
             <div id="chart" class="w-100 align-items-center justify-content-center">
             <highcharts-chart
               [Highcharts]="Highcharts"
