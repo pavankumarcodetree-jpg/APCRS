@@ -26,7 +26,7 @@
 
 
 
-    .stat-card {
+    /* .stat-card {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -53,7 +53,7 @@
   margin: 5px 0 0;
   font-weight: 700;
   font-size: 22px;
-}
+} */
 
 /* Icon styling */
 .card-icon {
@@ -94,18 +94,18 @@
 .info .card-icon { background: #0dcaf0; color: #000; }
 
 /* Optional subtle left border */
-.stat-card.primary { border-left: 4px solid #0d6efd; }
+/* .stat-card.primary { border-left: 4px solid #0d6efd; }
 .stat-card.success { border-left: 4px solid #198754; }
 .stat-card.danger { border-left: 4px solid #dc3545; }
 .stat-card.warning { border-left: 4px solid #ffc107; }
-.stat-card.info { border-left: 4px solid #0dcaf0; }
+.stat-card.info { border-left: 4px solid #0dcaf0; } */
 
 
-.stat-card {
+/* .stat-card {
   opacity: 0;
   transform: translateY(30px) scale(0.98);
   animation: fadeSlideUp 0.6s ease forwards;
-}
+} */
 
 /* Keyframes */
 @keyframes fadeSlideUp {
@@ -116,13 +116,13 @@
 }
 
 
-.row .col-lg-3:nth-child(1) .stat-card { animation-delay: 0.2s; }
+/* .row .col-lg-3:nth-child(1) .stat-card { animation-delay: 0.2s; }
 .row .col-lg-3:nth-child(2) .stat-card { animation-delay: 0.4s; }
 .row .col-lg-3:nth-child(3) .stat-card { animation-delay: 0.6s; }
 .row .col-lg-3:nth-child(4) .stat-card { animation-delay: 0.8s; }
 .row .col-lg-3:nth-child(5) .stat-card { animation-delay: 1.0s; }
 .row .col-lg-3:nth-child(6) .stat-card { animation-delay: 1.2s; }
-.row .col-lg-3:nth-child(7) .stat-card { animation-delay: 1.4s; }
+.row .col-lg-3:nth-child(7) .stat-card { animation-delay: 1.4s; } */
 
 
 
@@ -519,4 +519,231 @@
 }
 .d-none{
   display: none !important;
+}
+
+
+.stats-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    height:100%;
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    border:1px solid #eef2f7;
+}
+
+.stats-card:hover{
+
+    transform:translateY(-8px);
+cursor: pointer;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.12);
+}
+
+/* Top */
+
+.card-header-custom{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+.icon-box{
+
+    width:58px;
+
+    height:58px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#6C63FF,#4F46E5);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+    box-shadow:0 8px 18px rgba(108,99,255,.25);
+}
+
+.icon-box i{
+
+    font-size:24px;
+
+    color:#fff;
+}
+
+.title-section h6{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#2c3e50;
+}
+
+.title-section span{
+
+    font-size:13px;
+
+    color:#8b95a7;
+}
+
+/* Count */
+
+.card-body-custom{
+
+    margin-top:28px;
+}
+
+.count{
+    margin:0;
+    font-size:35px;
+    font-weight:800;
+    color:#27374D;
+    letter-spacing:1px;
+}
+
+.label{
+
+    margin-top:10px;
+
+    color:#6c757d;
+
+    font-size:14px;
+
+    font-weight:500;
+}
+
+/* Bottom Wave */
+
+.wave{
+
+    position:absolute;
+
+    bottom:0;
+
+    left:0;
+
+    width:100%;
+
+    line-height:0;
+}
+
+.wave svg{
+
+    display:block;
+
+    width:100%;
+
+    height:65px;
+}
+
+.wave path{
+
+    fill:#6C63FF;
+
+    opacity:.12;
+}
+
+/* Hover Effect */
+
+.stats-card:hover .icon-box{
+
+    transform:rotate(-8deg) scale(1.08);
+
+    transition:.35s;
+}
+
+.stats-card:hover .wave path{
+
+    fill:#6C63FF;
+
+    opacity:.22;
+
+    transition:.35s;
+}
+/* Wave Colors */
+.primary-wave path {
+    fill: #4F46E5;
+    opacity: .12;
+}
+
+.success-wave path {
+    fill: #16A34A;
+    opacity: .12;
+}
+
+.info-wave path {
+    fill: #0EA5E9;
+    opacity: .12;
+}
+
+.warning-wave path {
+    fill: #F59E0B;
+    opacity: .12;
+}
+
+.danger-wave path {
+    fill: #EF4444;
+    opacity: .12;
+}
+
+/* Icon backgrounds */
+.bg-primary {
+    background: linear-gradient(135deg, #6366F1, #4338CA);
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #22C55E, #15803D);
+}
+
+.bg-info {
+    background: linear-gradient(135deg, #38BDF8, #0284C7);
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #FBBF24, #D97706);
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, #F87171, #DC2626);
+}
+
+.bg-secondary{
+    background:linear-gradient(135deg,#64748B,#475569);
+}
+
+.bg-purple{
+    background:linear-gradient(135deg,#8B5CF6,#6D28D9);
+}
+
+.secondary-wave path{
+    fill:#64748B;
+    opacity:.12;
+}
+
+.purple-wave path{
+    fill:#8B5CF6;
+    opacity:.12;
 }

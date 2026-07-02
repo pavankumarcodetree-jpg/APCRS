@@ -457,7 +457,46 @@
     <!-- TOP CARDS -->
 <div class="row g-3 mb-3 justify-content-center">
        <!-- Population 2001   -->
-        <div class="col-lg-2 col-md-4">
+        <div class="col-lg-2 col-md-4 mb-2">
+
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+
+            <div class="icon-box">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Population</h6>
+                <span>2001,Census of India</span>
+            </div>
+
+        </div>
+
+        <div class="card-body-custom">
+
+            <h2 class="count">
+                {{ dashboardSummary?.population2001 | number }}
+            </h2>
+
+            <p class="label">
+                Total Population
+            </p>
+
+        </div>
+
+        <!-- Bottom Wave -->
+        <div class="wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+
+</div>
+        <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card tfr-card ">
             <div class="stats-title">Population</div>
             <div class="stats-subtitle">2001, Census of India</div>
@@ -465,9 +504,39 @@
                 {{ dashboardSummary?.population2001 | number }}
             </div>
         </div>
-    </div>
+    </div> -->
      <!-- Population 2011   -->
-            <div class="col-lg-2 col-md-4">
+      <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-primary">
+                <i class="fas fa-users"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Population</h6>
+                <span>2011, Census of India</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.population2011 | number }}
+            </h2>
+
+            <p class="label">Total Population</p>
+        </div>
+
+        <div class="wave primary-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+            <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card deaths-card ">
             <div class="stats-title">Population</div>
             <div class="stats-subtitle">2011, Census of India</div>
@@ -475,10 +544,66 @@
                 {{ dashboardSummary?.population2011 | number }}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Total Population -->
-<div class="col-lg-2 col-md-4" *ngFor="let card of populationCards">
+     <div class="col-lg-2 col-md-4 mb-2" *ngFor="let card of populationCards">
+
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+
+            <div
+                class="icon-box"
+                [ngClass]="{
+                  'bg-primary': card.year===2023,
+                  'bg-success': card.year===2024,
+                  'bg-warning': card.year===2025,
+                  'bg-danger': card.year===2026
+                }">
+
+                <i class="fas fa-users"></i>
+
+            </div>
+
+            <div class="title-section">
+                <h6>Total Population</h6>
+                <span>Year {{card.year}}</span>
+            </div>
+
+        </div>
+
+        <div class="card-body-custom">
+
+            <h2 class="count">
+                {{card.population | number}}
+            </h2>
+
+            <p class="label">
+                Estimated Population
+            </p>
+
+        </div>
+
+        <div
+            class="wave"
+            [ngClass]="{
+              'primary-wave': card.year===2023,
+              'success-wave': card.year===2024,
+              'warning-wave': card.year===2025,
+              'danger-wave': card.year===2026
+            }">
+
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- <div class="col-lg-2 col-md-4" *ngFor="let card of populationCards">
   <div
     class="stats-card"
     [ngClass]="{
@@ -495,9 +620,51 @@
     </div>
 
   </div>
-</div>
+</div> -->
     <!-- Population Growth Rate -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+
+            <div class="icon-box bg-success">
+                <i class="fas fa-chart-line"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Population Growth Rate</h6>
+                <span>Annual Growth (%)</span>
+            </div>
+
+        </div>
+
+        <div class="card-body-custom">
+
+            <h2 class="count growth-rate">
+                {{
+                  dashboardSummary?.populationGrowthRate != null
+                  ? (dashboardSummary.populationGrowthRate | number:'1.2-2') + '%'
+                  : '--'
+                }}
+            </h2>
+
+            <p class="label">
+                 Growth Rate
+            </p>
+
+        </div>
+
+        <div class="wave success-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card success-card">
             <div class="stats-title">Population Growth Rate</div>
             <div class="stats-subtitle">Annual Growth (%)</div>
@@ -509,10 +676,48 @@
               }}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Total Births -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+
+            <div class="icon-box bg-info">
+                <i class="fas fa-baby"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Total Births</h6>
+                <span>Year {{selectedYear}}</span>
+            </div>
+
+        </div>
+
+        <div class="card-body-custom">
+
+            <h2 class="count">
+                {{dashboardSummary?.totalBirths | number}}
+            </h2>
+
+            <p class="label">
+                Registered Births
+            </p>
+
+        </div>
+
+        <div class="wave info-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card births-card">
             <div class="stats-title">Total Births</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -520,10 +725,48 @@
                 {{ dashboardSummary?.totalBirths | number }}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Total Deaths -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+
+            <div class="icon-box bg-danger">
+                <i class="fas fa-cross"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Total Deaths</h6>
+                <span>Year {{selectedYear}}</span>
+            </div>
+
+        </div>
+
+        <div class="card-body-custom">
+
+            <h2 class="count">
+                {{dashboardSummary?.totalDeaths | number}}
+            </h2>
+
+            <p class="label">
+                Registered Deaths
+            </p>
+
+        </div>
+
+        <div class="wave danger-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card deaths-card">
             <div class="stats-title">Total Deaths</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -531,10 +774,40 @@
                 {{ dashboardSummary?.totalDeaths | number }}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Crude Birth Rate -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-info">
+                <i class="fas fa-baby"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Crude Birth Rate</h6>
+                <span>Per 1000 Population</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.birthRate | number:'1.0-0' }}
+            </h2>
+
+            <p class="label">CBR</p>
+        </div>
+
+        <div class="wave info-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card births-card">
             <div class="stats-title">Crude Birth Rate (CBR)</div>
             <div class="stats-subtitle">Per 1000 Population</div>
@@ -542,10 +815,41 @@
                 {{ dashboardSummary?.birthRate | number:'1.0-0'  }}
             </div>
         </div>
-    </div>
+    </div> -->
+
 
     <!-- Crude Death Rate -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-danger">
+                <i class="fas fa-heart-broken"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Crude Death Rate</h6>
+                <span>Per 1000 Population</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.deathRate | number:'1.0-0' }}
+            </h2>
+
+            <p class="label">CDR</p>
+        </div>
+
+        <div class="wave danger-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card deaths-card">
             <div class="stats-title">Crude Death Rate (CDR)</div>
             <div class="stats-subtitle">Per 1000 Population</div>
@@ -553,10 +857,40 @@
                 {{ dashboardSummary?.deathRate |  number:'1.0-0'  }}
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Total Fertility Rate -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-warning">
+                <i class="fas fa-seedling"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Total Fertility Rate</h6>
+                <span>Year {{ selectedYear }}</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.tfr }}
+            </h2>
+
+            <p class="label">TFR</p>
+        </div>
+
+        <div class="wave warning-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card tfr-card">
             <div class="stats-title">Total Fertility Rate (TFR)</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -564,10 +898,40 @@
                 {{ dashboardSummary?.tfr }}
             </div>
         </div>
-    </div>
+    </div> -->
 
         <!-- Sex Ratio Fertility Rate -->
-    <div class="col-lg-2 col-md-4">
+         <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-primary">
+                <i class="fas fa-venus-mars"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Sex Ratio</h6>
+                <span>Year {{ selectedYear }}</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.sexRatio }}
+            </h2>
+
+            <p class="label">Females / 1000 Males</p>
+        </div>
+
+        <div class="wave primary-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card sexratio-card">
             <div class="stats-title">Sex Ratio</div>
             <div class="stats-subtitle">Year {{ selectedYear }}</div>
@@ -575,13 +939,43 @@
                 {{ dashboardSummary?.sexRatio }}
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
 
     <!-- Child Dependency  -->
-    <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-success">
+                <i class="fas fa-child"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Child Dependency</h6>
+                <span>0-14 vs Working Age</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.childDependency }}
+            </h2>
+
+            <p class="label">Percentage</p>
+        </div>
+
+        <div class="wave success-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+    <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card childdep-card">
             <div class="stats-title">Child Dependency % </div>
             <div class="stats-subtitle">0-14 vs Working Age</div>
@@ -589,9 +983,39 @@
                 {{ dashboardSummary?.childDependency  }}
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Old-age Dependency  -->
-        <div class="col-lg-2 col-md-4">
+     <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-secondary">
+                <i class="fas fa-user-clock"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Old-age Dependency </h6>
+                <span>60+ vs Working Age</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.oldAgeDependency }}
+            </h2>
+
+            <p class="label">Percentage</p>
+        </div>
+
+        <div class="wave secondary-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+        <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card oldage-card ">
             <div class="stats-title">Old-age Dependency % </div>
             <div class="stats-subtitle">60+ vs Working Age</div>
@@ -599,10 +1023,40 @@
                 {{ dashboardSummary?.oldAgeDependency  }}
             </div>
         </div>
-    </div>
+    </div> -->
 
      <!-- Annual Exponetilal   -->
-            <div class="col-lg-2 col-md-4">
+      <div class="col-lg-2 col-md-4 mb-2">
+    <div class="stats-card">
+
+        <div class="card-header-custom">
+            <div class="icon-box bg-purple">
+                <i class="fas fa-chart-line"></i>
+            </div>
+
+            <div class="title-section">
+                <h6>Annual Growth</h6>
+                <span>Population 2001–11</span>
+            </div>
+        </div>
+
+        <div class="card-body-custom">
+            <h2 class="count">
+                {{ dashboardSummary?.annualExponantional * 100 | number:'1.2-2' }}%
+            </h2>
+
+            <p class="label">Exponential Rate</p>
+        </div>
+
+        <div class="wave purple-wave">
+            <svg viewBox="0 0 500 70" preserveAspectRatio="none">
+                <path d="M0,35 C150,80 350,-10 500,35 L500,70 L0,70 Z"></path>
+            </svg>
+        </div>
+
+    </div>
+</div>
+            <!-- <div class="col-lg-2 col-md-4">
         <div class="stats-card sexratio-card ">
             <div class="stats-title">Annual Exponential % </div>
             <div class="stats-subtitle growth-rate">Growth rate of Population 2001-11</div>
@@ -610,7 +1064,7 @@
                 {{ dashboardSummary?.annualExponantional * 100 | number:'1.2-2'  }}
             </div>
         </div>
-    </div>
+    </div> -->
     </div>
 
 
