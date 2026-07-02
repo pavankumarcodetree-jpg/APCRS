@@ -1617,7 +1617,7 @@ loadCBRCDRChart() {
     chart: {
       type: 'column',
       scrollablePlotArea: {
-        minWidth: categories.length * 60,
+        minWidth: categories.length * 100,
         scrollPositionX: 0
       }
     },
@@ -1644,16 +1644,23 @@ loadCBRCDRChart() {
       shared: true
     },
 
-    plotOptions: {
-      column: {
-        pointPadding: 0,
-        groupPadding: 0.05,
-        borderRadius: 4,
-        dataLabels: {
-          enabled: true
-        }
+plotOptions: {
+  column: {
+    pointWidth: 18,
+    pointPadding: 0.05,
+    groupPadding: 0.05,
+    dataLabels: {
+      enabled: true,
+      allowOverlap: true,
+      crop: false,
+      overflow: 'allow',
+      style: {
+        fontSize: '10px',
+        textOutline: 'none'
       }
-    },
+    }
+  }
+},
 
     series: [
       {
@@ -1974,6 +1981,7 @@ async loadDistrictDashboardData() {
   totalPopulation_2023: district.EST_POP_31_DEC_2023,
    totalPopulation_2024: district.EST_POP_31_DEC_2024,
    totalPopulation_2025: district.EST_POP_31_DEC_2025,
+   totalPopulation_2026: district.EST_POP_31_DEC_2026,
   totalBirths:district.CRS_BIR_IN,
   totalDeaths:district.CRS_DEA_IN,
   birthRate:district.EST_CBR_FOR,
@@ -1994,10 +2002,10 @@ this.populationCards = [
     year: 2025,
     population: this.dashboardSummary.totalPopulation_2025
   },
-  //     {
-  //   year: 2026,
-  //   population: this.dashboardSummary.totalPopulation_2026
-  // }
+      {
+    year: 2026,
+    population: this.dashboardSummary.totalPopulation_2026
+  }
 ];
 }else {
   this.dashboardSummary = {
@@ -2076,9 +2084,10 @@ if (mandalsResponse?.code) {
       annualExponantional: mandalLists[0].ANNUAL_EXP_RET_POP_2001_11,
       estimatedPopulation: mandalLists[0].EST_POP_31_DEC_2025,
       totalPopulation: mandalLists[0].EST_POP_31_DEC,
-    totalPopulation_2023: district.EST_POP_31_DEC_2023,
-     totalPopulation_2024: district.EST_POP_31_DEC_2024,
-     totalPopulation_2025: district.EST_POP_31_DEC_2025,
+    totalPopulation_2023: mandalLists[0].EST_POP_31_DEC_2023,
+     totalPopulation_2024: mandalLists[0].EST_POP_31_DEC_2024,
+     totalPopulation_2025: mandalLists[0].EST_POP_31_DEC_2025,
+     totalPopulation_2026: mandalLists[0].EST_POP_31_DEC_2026,
       totalBirths: mandalLists[0].CRS_BIR_IN,
       totalDeaths: mandalLists[0].CRS_DEA_IN,
       birthRate: mandalLists[0].EST_CBR_FOR,
@@ -2103,10 +2112,10 @@ if (mandalsResponse?.code) {
     year: 2025,
     population: this.dashboardSummary.totalPopulation_2025
   },
-  //   {
-  //   year: 2026,
-  //   population: this.dashboardSummary.totalPopulation_2026
-  // }
+    {
+    year: 2026,
+    population: this.dashboardSummary.totalPopulation_2026
+  }
 ];
 } else {
   // Keep district values already loaded
