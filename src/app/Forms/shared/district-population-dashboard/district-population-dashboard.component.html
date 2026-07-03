@@ -6,7 +6,8 @@
 
   <!-- Center District Name -->
   <div class="header-title text-white">
-    {{selectedDistrictName}} Population Dashboard
+    {{selectedDistrictName}}   <span *ngIf="selectedMandal" class="mandal_col"> {{ selectedMandal }}</span>
+  <span *ngIf="selectedYear"> {{ selectedYear }}</span> Population Dashboard
   </div>
 
     <div class="ms-auto">
