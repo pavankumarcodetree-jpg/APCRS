@@ -562,6 +562,20 @@ cursor: pointer;
 
     gap:15px;
 }
+.custom-single-line{
+    gap:10px !important;
+}
+.population-2026{
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.population-2026 span{
+    font-size: 14px;
+    font-weight: 600;
+    color: #8b95a7;
+}
 
 .icon-box{
 
@@ -600,6 +614,10 @@ cursor: pointer;
     font-weight:700;
 
     color:#2c3e50;
+    
+}
+.single-line{
+    white-space: nowrap;
 }
 
 .title-section span{

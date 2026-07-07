@@ -462,20 +462,20 @@
 
     <div class="stats-card">
 
-        <div class="card-header-custom">
+        <div class="card-header-custom custom-single-line">
 
             <div class="icon-box">
                 <i class="fas fa-users"></i>
             </div>
 
-            <div class="title-section">
-                <h6>Population</h6>
-                <span>2001,Census of India</span>
+            <div class="title-section single-line">
+                <h6>Population 2001</h6>
+                <span>Census of India</span>
             </div>
 
         </div>
 
-        <div class="card-body-custom">
+        <div class="card-body-custom ">
 
             <h2 class="count">
                 {{ dashboardSummary?.population2001 | number }}
@@ -497,27 +497,18 @@
     </div>
 
 </div>
-        <!-- <div class="col-lg-2 col-md-4">
-        <div class="stats-card tfr-card ">
-            <div class="stats-title">Population</div>
-            <div class="stats-subtitle">2001, Census of India</div>
-            <div class="stats-count">
-                {{ dashboardSummary?.population2001 | number }}
-            </div>
-        </div>
-    </div> -->
      <!-- Population 2011   -->
       <div class="col-lg-2 col-md-4 mb-2">
     <div class="stats-card">
 
-        <div class="card-header-custom">
+        <div class="card-header-custom custom-single-line">
             <div class="icon-box bg-primary">
                 <i class="fas fa-users"></i>
             </div>
 
-            <div class="title-section">
-                <h6>Population</h6>
-                <span>2011, Census of India</span>
+            <div class="title-section single-line">
+                <h6>Population 2011</h6>
+                <span>Census of India</span>
             </div>
         </div>
 
@@ -537,22 +528,13 @@
 
     </div>
 </div>
-            <!-- <div class="col-lg-2 col-md-4">
-        <div class="stats-card deaths-card ">
-            <div class="stats-title">Population</div>
-            <div class="stats-subtitle">2011, Census of India</div>
-            <div class="stats-count">
-                {{ dashboardSummary?.population2011 | number }}
-            </div>
-        </div>
-    </div> -->
-
+        
     <!-- Total Population -->
      <div class="col-lg-2 col-md-4 mb-2" *ngFor="let card of populationCards">
 
     <div class="stats-card">
 
-        <div class="card-header-custom">
+        <div class="card-header-custom custom-single-line">
 
             <div
                 class="icon-box"
@@ -567,9 +549,15 @@
 
             </div>
 
-            <div class="title-section">
-                <h6>Total Population</h6>
-                <span>Year {{card.year}}</span>
+            <div class="title-section single-line">
+                <h6 *ngIf="card.year !== 2026">
+        Population {{ card.year }}
+    </h6>
+
+    <h6 *ngIf="card.year === 2026" class="population-2026">
+        Population
+        <span>June 2026</span>
+    </h6>
             </div>
 
         </div>
