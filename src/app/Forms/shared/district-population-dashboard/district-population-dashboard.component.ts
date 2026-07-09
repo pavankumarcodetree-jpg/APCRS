@@ -183,11 +183,11 @@ loadBarChart() {
     this.barUpdateFlag = false;
     return;
   }
-  let chartData: any[] = [];
-    chartData = [...this.allMandalsbirthandDeaths];
-    chartData.sort((a: any, b: any) =>
-  Number(a.CRS_BIR_IN || 0) - Number(b.CRS_BIR_IN || 0)
-);
+let chartData: any[] = [...this.allMandalsbirthandDeaths]
+  .filter((item: any) =>
+    item.MANDAL_NAME != null &&
+    item.MANDAL_NAME.toString().trim() !== ''
+  );
   const categories =
     chartData.map(
       (x: any) => x.MANDAL_NAME
@@ -1602,7 +1602,9 @@ loadCBRCDRChart() {
   }
 
   // Sort by 2023 CBR (Low → High)
-  const sortedData = [...this.totalCBRandCDRData].sort(
+const sortedData = [...this.totalCBRandCDRData]
+  .filter(item => item.DISTRICT_NAME != null && item.DISTRICT_NAME.toString().trim() !== '')
+  .sort(
     (a, b) => Number(a.EST_CBR_FOR_2023 || 0) - Number(b.EST_CBR_FOR_2023 || 0)
   );
 
@@ -1719,14 +1721,14 @@ loadAnnualGrowthRateChart() {
     this.annualGrowthUpdateFlag = false;
     return;
   }
-  const chartData = this.annualExponentialData.map(
-    (item: any) => ({
-      mandalName: item.MANDAL_NAME,
-      growthRate: Number(
-        ((item.ANNUAL_EXP_GROWTH_2001_11 || 0) * 100).toFixed(2)
-      )
-    })
-  );
+const chartData = this.annualExponentialData
+  .filter((item: any) => item.MANDAL_NAME != null && item.MANDAL_NAME !== '')
+  .map((item: any) => ({
+    mandalName: item.MANDAL_NAME.trim(),
+    growthRate: Number(
+      ((item.ANNUAL_EXP_GROWTH_2001_11 || 0) * 100).toFixed(2)
+    )
+  }))
 
   // Sort ascending
   chartData.sort(
