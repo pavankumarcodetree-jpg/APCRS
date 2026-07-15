@@ -1,10 +1,10 @@
-<div class="container-fluid px-0">
+<!-- <div class="container-fluid px-0">
     <div class="header d-flex align-items-center p-2 ">
   
-  <!-- Left Image -->
+
   <img src="assets/images/f-logo.svg" alt="Logo">
 
-  <!-- Center District Name -->
+  
   <div class="header-title text-white">
     {{selectedDistrictName}}   <span *ngIf="selectedMandal" class="mandal_col"> {{ selectedMandal }}</span>
   <span *ngIf="selectedYear"> {{ selectedYear }}</span> Population Dashboard
@@ -20,24 +20,967 @@
         </option>
       </select>
       
-        <!-- <select
-          class="form-select district-select"
-          [(ngModel)]="selectedYear"
-          (change)="onYearChange($event)">
-          <option *ngFor="let year of yearList" [value]="year">
-            {{ year }}
-          </option>
-        </select> -->
+       
   </div>
 
 </div>
-</div>
+</div> -->
+<header class="app-header fixed-top">
+  <div class="container-fluid px-4">
+    <div class="row align-items-center">
+
+      <!-- Logo Section -->
+      <div class="col-lg-6 col-md-5 col-8">
+        <div class="d-flex align-items-center">
+          <img
+            src="assets/images/logo-sm.png"
+            alt="AP Government Logo"
+            class="logo-img"
+          />
+
+          <div class="ms-3">
+            <h1 class="app-title mb-0">APPD</h1>
+            <p class="app-subtitle mb-0">
+              Andhra Pradesh Population Dashboard
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="col-lg-6 col-md-7 col-4">
+        <nav class="navbar navbar-expand-lg justify-content-end p-0">
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarMenu"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarMenu"
+          >
+            <ul class="navbar-nav align-items-lg-center">
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/home">Home</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/about-us">About Us</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/rules">
+                  RBD Act and Model Rules
+                </a>
+              </li>
+
+              <li class="nav-item ms-lg-3" (click)="logout()">
+                <button class="btn logout-btn">
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+
+        </nav>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+
+
+
+<!-- Spacer for fixed header -->
+<div class="header-spacer"></div>
+
+
+
+<section class="announcement-bar">
+  <div class="d-flex align-items-center">
+    <i class="bi bi-megaphone fs-4 mx-3"></i>
+
+    <marquee behavior="scroll" direction="left">
+      ANNOUNCEMENT AREA &nbsp;&nbsp;&nbsp;
+      ANNOUNCEMENT AREA &nbsp;&nbsp;&nbsp;
+      ANNOUNCEMENT AREA &nbsp;&nbsp;&nbsp;
+      ANNOUNCEMENT AREA &nbsp;&nbsp;&nbsp;
+      ANNOUNCEMENT AREA
+    </marquee>
+
+    <i class="bi bi-megaphone fs-4 mx-3"></i>
+  </div>
+</section>
+
+<section class="population-section"   style="
+    background-image: url('assets/images/population.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  ">
+
+  <div class="container-fluid py-5">
+
+    <div class="row">
+
+      <!-- LEFT SIDE -->
+      <div class="col-lg-7">
+
+        <div class="population-heading mb-5">
+          <h1>
+            <span class="green-dot"></span>
+            Live AP Population
+          </h1>
+
+          <p>Estimated, updates in real time</p>
+        </div>
+
+        <!-- Population Counter -->
+        <div class="counter-wrapper mb-5">
+
+          <div class="digit-box">8</div>
+          <div class="digit-box">9</div>
+          <div class="digit-box">1</div>
+          <div class="digit-box">2</div>
+          <div class="digit-box">5</div>
+          <div class="digit-box">6</div>
+          <div class="digit-box">7</div>
+
+        </div>
+
+        <!-- Statistics -->
+        <div class="row g-4">
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <h4>PGR</h4>
+              <h2>0.23%</h2>
+              <p>Annual Growth (%)</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <h4>CBR</h4>
+              <h2>9</h2>
+              <p>Per 1000 Population</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <h4>CDR</h4>
+              <h2>7</h2>
+              <p>Per 1000 Population</p>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-6">
+            <div class="stat-card">
+              <h4>TFR</h4>
+              <h2>1.4</h2>
+              <p>Year 2025</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="col-lg-5 mt-5 mt-lg-0">
+
+        <h2 class="district-title mb-4">
+          Top districts by population
+        </h2>
+
+        <div class="table-card">
+<table class="table mb-0">
+    <thead>
+      <tr>
+        <th>DISTRICT</th>
+        <th>POPULATION</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let district of districtwisePopulationData">
+        <td>{{ district.DISTRICT_NAME }}</td>
+        <td>{{ district.TOTAL_POPULATION_COUNT | number }}</td>
+      </tr>
+
+      <tr *ngIf="districtwisePopulationData.length === 0">
+        <td colspan="2" class="text-center">No data available</td>
+      </tr>
+    </tbody>
+  </table>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<section class="district-map-section pb-2">
+
+    <div class="container-fluid px-lg-5">
+
+        <!-- Header Row -->
+        <div class="row align-items-end mb-4">
+
+            <div class="col-lg-6 mb-4 mb-lg-0">
+
+                <h2 class="section-title">
+                    District population map
+                </h2>
+
+                <p class="section-subtitle">
+                    Shaded by total population, current filter selection
+                </p>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label class="form-label">District</label>
+        <select [(ngModel)]="selectedDistrictName" class="form-select district-select"  (change)="onDistrictChange($event)">
+        <!-- <option value="">Select District</option> -->
+        <option
+          *ngFor="let district of districts"
+          [value]="district.name">
+          {{ district.name }}
+        </option>
+      </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Year</label>
+                        <select
+                            class="form-select custom-select"
+                            [(ngModel)]="selectedYear"
+                            (change)="onYearChange(selectedYear)">
+                            <option *ngFor="let year of years" [ngValue]="year">
+                                {{ year }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-5">
+
+                        <div class="d-flex gap-2">
+
+                            <button class="btn btn-apply flex-fill" (click)="loadDistrictDashboardData()">
+                                Apply
+                            </button>
+
+                            <button class="d-none btn btn-reset flex-fill" (click)="resetFilters()">
+                                Reset
+                            </button>
+
+                            <button class="d-none btn btn-export flex-fill">
+                                Export CSV
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Main Content -->
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- MAP CARD -->
+
+            <div class="col-lg-6">
+
+                <div class="map-card">
+                                              <svg version="1.1" id="andhrapradeshMap" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1500 900"
+                                                xml:space="preserve" style="enable-background: new 0 0 1500 900;">
+                                                <style type="text/css">
+                                                    #andhrapradeshMap {
+                                                        transform: scale(1);
+                                                        width: 131%;
+                                                        z-index: 9;
+                                                        position: relative;
+                                                        margin-top: 37px;
+                                                        margin-left: -56px;
+                                                    }
+
+                                                    text {
+                                                        font-family: 'Inter', 'sans-serif';
+                                                        font-size: 14px;
+                                                        cursor: pointer;
+                                                    }
+
+                                                    .st0 {
+                                                        enable-background: new;
+                                                    }
+
+                                                    .st1 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st2 {
+                                                        fill: none;
+                                                        stroke: #FDFDFF;
+                                                        stroke-miterlimit: 2;
+                                                    }
+
+                                                    .st3 {
+                                                        fill: #85B135;
+                                                    }
+
+                                                    .st1:hover,
+                                                    .st2:hover,
+                                                    .st3:hover,
+                                                    .st4:hover,
+                                                    .st5:hover,
+                                                    .st6:hover,
+                                                    .st7:hover,
+                                                    .st8:hover,
+                                                    .st9:hover,
+                                                    .st10:hover,
+                                                    .st11:hover,
+                                                    .st12:hover,
+                                                    .st13:hover,
+                                                    .st14:hover,
+                                                    .st15:hover,
+                                                    .st16:hover,
+                                                    .st17:hover,
+                                                    .st18:hover,
+                                                    .st19:hover,
+                                                    .st20:hover,
+                                                    .st21:hover,
+                                                    .st22:hover,
+                                                    .st23:hover,
+                                                    .st24:hover,
+                                                    .st25:hover,
+                                                    .st26:hover,
+                                                    .st27:hover,
+                                                    .st28:hover,
+                                                    .st29:hover,
+                                                    .st30:hover {
+                                                        fill: #eabb0c;
+                                                        filter: drop-shadow(10px 10px 0px rgba(0, 0, 0, 0.8));
+                                                    }
+
+                                                    .st4 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st5 {
+                                                        fill: none;
+                                                        stroke: #FFFFFF;
+                                                        stroke-miterlimit: 2;
+                                                    }
+
+                                                    .st6 {
+                                                        fill: #B6CB32;
+                                                    }
+
+                                                    .st7 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st8 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st9 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st10 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st11 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st12 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st13 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st14 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st15 {
+                                                        fill: #7DAE38;
+                                                    }
+
+                                                    .st16 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st17 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st18 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st19 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st20 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st21 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st22 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st23 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st24 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st25 {
+                                                        fill: #eabb0c;
+                                                    }
+
+                                                    .st26 {
+                                                        fill: #abc439;
+                                                    }
+
+                                                    .st27 {
+                                                        fill: #f72621;
+                                                    }
+
+                                                    .st28 {
+                                                        fill: #B7CB38;
+                                                    }
+
+                                                    .st29 {
+                                                        font-family: 'Inter';
+                                                    }
+
+                                                    .st30 {
+                                                        fill: #FFFFFF;
+                                                        font-size: 18px;
+                                                        font-weight: 700;
+                                                        font-family: "Inter", sans-serif !important;
+                                                    }
+
+                                                    .st30:hover {
+                                                        text-decoration: none;
+                                                    }
+
+                                                    text {
+                                                        font-family: "Inter", sans-serif !important;
+                                                        font-size: 18px;
+                                                        fill: #000 !important;
+                                                        /* <-- black color and force override */
+                                                    }
+
+
+
+                                                    title {
+                                                        fill: #fff !important;
+                                                        color: #fff;
+                                                    }
+                                                </style>
+                                                <!-- <g id="Layer_1_xA0_Image_1_">
+                                                                <image width="1200" height="900" id="Layer_1_xA0_Image"
+                                                                    xlink:href="72C3C8B1.png"
+                                                                    transform="matrix(1 0 0 1 3.4693 1143.3256)"
+                                                                    style="overflow: visible;"></image>
+                                                            </g> -->
+                                                <path *ngFor="let district of districtspath" [attr.id]="district.id" [attr.d]="district.path"
+                                                    [style.fill]="district.area >1000 ? '#eabb0c' : '#abc439' && district.area >3000 ? '#f72621' : '#abc439'"
+                                                    [attr.title]="district.name" (mouseover)="onHover(district)" (mouseleave)="onLeave()"
+                                                    (click)="onSelect(district)"
+                                                    style="cursor: pointer; stroke: #000; stroke-width: 0.5px;">
+                                                </path>
+                                                 <g id="guntur_1_" class="st0">
+                                                    <a *ngFor="let district of districtNames" href="javascript:void(0)" [attr.title]="district.displayName"> <text [attr.x]="district.x" [attr.y]="district.y" class="st29 st30"> {{ district.displayName }} </text> </a>
+                                            
+                                                        </g>
+
+                                            </svg>
+
+                </div>
+
+            </div>
+
+            <!-- DETAILS CARD -->
+
+            <div class="col-lg-6">
+
+                <div class="district-panel">
+
+                    <div>
+
+                        <h3 class="district-title">
+                            {{selectedDistrictNameMandalwise}} — mandals
+                        </h3>
+
+                        <p class="district-meta">
+                            {{ mandalwiseHighLowAvgData[0].TOTAL_MANDALS_COUNT }} mandals · total population {{ mandalwiseHighLowAvgData[0].TOTAL_POPULATION_COUNT | number }}
+                        </p>
+
+                    </div>
+
+                    <!-- Summary Cards -->
+
+                    <div class="row g-3 mb-4">
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card">
+
+                                <div class="summary-label">
+                                    HIGHEST MANDAL
+                                </div>
+
+                                <h5>{{ mandalwiseHighLowAvgData[0].MAX_POPULATION_MANDAL_NAME }}</h5>
+
+                                <p>{{ mandalwiseHighLowAvgData[0].MAX_POPULATION_MANDAL_COUNT | number }} people</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card">
+
+                                <div class="summary-label">
+                                    LOWEST MANDAL
+                                </div>
+
+                                <h5>{{ mandalwiseHighLowAvgData[0].LOWEST_POPULATION_MANDAL_NAME }}</h5>
+
+                                <p>{{ mandalwiseHighLowAvgData[0].LOWEST_POPULATION_MANDAL_COUNT | number }} people</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-4">
+
+                            <div class="summary-card">
+
+                                <div class="summary-label">
+                                    AVERAGE
+                                </div>
+
+                                <h5>{{ mandalwiseHighLowAvgData[0].AVG_POPULATION_MANDALS_COUNT | number }}</h5>
+
+                                <p>Per mandal</p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Scrollable Table -->
+
+                    <div class="table-scroll">
+                <table class="table district-table mb-0">
+                    <thead>
+                        <tr>
+                            <th>MANDAL</th>
+                            <th class="text-end">POPULATION</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr *ngFor="let mandal of mandalwisePopulationData">
+                            <td>{{ mandal.MANDAL_NAME }}</td>
+                            <td class="text-end">
+                                {{ mandal.TOTAL_POPULATION_COUNT | number }}
+                            </td>
+                        </tr>
+
+                        <tr *ngIf="mandalwisePopulationData.length === 0">
+                            <td colspan="2" class="text-center">No data available</td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
 
 <div class="container-fluid">
+<div class="row mt-2">
+    <div class="card custom-card">
+        <div class="card-body">
+              <h4 class="custom-title mb-3">Year-wise Births & Deaths</h4>
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="lineChartOptions"
+                [update]="updateLineChartFlag"
+                [oneToOne]="true"
+                style="width: 100%; height: 320px; display: block;">
+              </highcharts-chart>
+        </div>
+        </div>
+</div>
+
+    <div class="row mt-2">
+    <div class="col-lg-12">
+        <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Year-wise Total CBR and CDR </h4>
+
+                <highcharts-chart
+                  [Highcharts]="Highcharts"
+                  [options]="cbrCdrChartOptions"
+                  [(update)]="updateCBRCDRChart"
+                  [oneToOne]="true"
+                  style="width:100%; height:350px; display:block;">
+                </highcharts-chart>
+        </div>
+    </div>
+    </div>
+        
+    </div>
+
+      <div class="row mt-2">
+    <div class="col-lg-6">
+        <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Mandal-wise Total Births and Deaths </h4>
+
+                <highcharts-chart
+                  [Highcharts]="Highcharts"
+                  [options]="barChartOptions"
+                  [(update)]="barUpdateFlag"
+                  [oneToOne]="true"
+                  style="width:100%; height:350px; display:block;">
+                </highcharts-chart>
+        </div>
+    </div>
+    </div>
+        <div class="col-lg-6">
+        <div class="card custom-card">
+        <div class="card-body">
+             <h4 class="custom-title mb-3">Median age at death</h4>
+
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="medianAgeChartOptions"
+              [update]="updateMedianChart"
+              [oneToOne]="true"
+              style="width: 100%; height: 350px; display: block;">
+            </highcharts-chart>
+        </div>
+    </div>
+    </div>
+    </div>
+      <div class="row  align-items-strech  mt-2">
+                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Age Structure </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+                <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="ageWiseChartOptions"
+              [(update)]="ageWiseUpdateFlag"
+              [oneToOne]="true"
+              style="width:100%; height:450px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Sex Ratio (Females per 1000 Males) </h4>
+                                
+                                       <highcharts-chart
+                                    [Highcharts]="Highcharts"
+                                    [options]="sexRatioChartOptions"
+                                    [update]="updateFlag"
+                                    [oneToOne]="true"
+                                    style="width:100%; height:550px; display:block;">
+                                  </highcharts-chart>
+                                  
+               
+
+
+</div>
+</div>
+</div>
+</div>
+
+ <div class="row mt-4">
+                  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+    <div class="card custom-card h-100">
+        
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">CRS Sex Ratio at Birth (Males per 100 Females) </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="birthSexRatioChartOptions"
+              [update]="updateBirthChart"
+              [oneToOne]="true"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Share of Population vs Share of Births </h4>
+                                
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="populationBirthShareChartOptions"
+                            [update]="updatePopulationBirthShareChart"
+                            [oneToOne]="true"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="row mt-4">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Place of Death </h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="placeOfDeathChartOptions"
+               [(update)]="placeOfDeathUpdateFlag"
+               [oneToOne]="true"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card custom-card h-100">
+                            <div class="card-body">
+                              <h4 class="custom-title mb-3">Death as Share of Births</h4>
+                                
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="deathShareBirthChartOptions"
+                            [(update)]="deathShareUpdateFlag"
+                            [oneToOne]="true"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+</div>
+</div>
+</div>
+
+ <div class="row mt-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card custom-card h-100">
+                          <div class="card-body">
+                              <h4 class="custom-title mb-3">TFR in Sub-districts of {{selectedDistrictName}} District</h4>
+                              <highcharts-chart
+                            [Highcharts]="Highcharts"
+                            [options]="tfrChartOptions"
+                            [(update)]="tfrUpdateFlag"
+                            [oneToOne]="true"
+                            style="width:100%;height:500px;display:block;">
+                          </highcharts-chart>
+</div>
+    </div>
+</div>
+</div>
+ <div class="row mt-4">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="card custom-card h-100"> 
+        <!-- Added flex classes -->
+        <div class="card-body ">
+             <h4 class="custom-title mb-3">Average annual exponential growth rate of population, 2001-11 (%)</h4>
+            <div id="chart" class="w-100 align-items-center justify-content-center">
+            <highcharts-chart
+              [Highcharts]="Highcharts"
+              [options]="annualGrowthRateChartOptions"
+               [(update)]="annualGrowthUpdateFlag"
+                [oneToOne]="true"
+              style="width:100%; height:500px; display:block;">
+            </highcharts-chart>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+</div>
+
+    <section class="footer-section mt-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-5 col-12 px-lg-4">
+                    <div class="footer-imgblk d-flex justify-content-start align-items-center mb-2">
+                        <span class="logo-lg">
+                            <img src="assets/images/logo-sm.png" alt="logo">
+                        </span>
+                        <div class="text ps-2">
+                            <h3 class="mb-0 text-white">APPD</h3>
+                            <p class="mb-0 text-white">Andhra Pradesh Population Dashboard</p>
+                        </div>
+                    </div>
+                    <p class="text-white mb-0">Commissioner of Health & Family Welfare, 5th Floor, APIIC Building, Mangalagiri, Guntur Dt., Andhra Pradesh.
+                    </p>
+                </div>
+                <div class="col-xl-3 col-12">
+                    <div class="footer-quicklinks">
+                        <h4 class="text-white">Quick Links</h4>
+                        <ul class="list-style ps-0">
+                            <li class="text-white pb-1">Home</li>
+                            <li class="text-white pb-1">About us</li>
+                            <li class="text-white pb-1">Sitemap</li>
+                            <li class="text-white pb-1">Help</li>
+                            <li class="text-white pb-1">Contact Us</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <h4 class="text-white">Get In Touch</h4>
+                    <div class="d-flex align-items-center">
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-facebook-f"></i></p>
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-youtube"></i></p>
+                        <p class="mb-0 text-white me-3"><i class="fa-brands fa-twitter"></i></p>
+                        <p class="mb-0 text-white"><i class="fa-brands fa-instagram"></i></p>
+                    </div>
+                    <p class="mb-0 text-white"><span class="fs-6">Support :</span> 08632441111</p>
+                    <p class="mb-0 text-white fs-6">Email : drg-crs.rgi&#64;gov.in & srocrs.rgi&#64;nic.in</p>
+                </div>
+            </div>
+            <hr class="mb-2 mt-3 text-secondary">
+            <div class="row align-items-center">
+                <div class="col-xl-12 footer-links">
+                    <ul class="list-style ps-0 d-flex justify-content-center align-items-center">
+                        <li class="text-white pb-1">Website Policy</li>
+                        <li class="text-white pb-1">Terms & Conditions</li>
+                        <li class="text-white pb-1">Mobile App Privacy Policy</li>
+                        <li class="text-white pb-1">Accessibility Statement</li>
+                        <li class="text-white pb-1">Web Information Manager</li>
+                    </ul>
+                </div>
+                <!-- <hr class="mb-1 mt-1 text-secondary">
+                <div class="col-xl-6 col-12">
+                    <div class="copy-text">
+                        <p class="mb-0 text-white fs-6">©2024 Govt of Andhra Pradesh (Civil Resgistration System) . All Rights Reserved</p>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-12">
+                    <div class="realtime-img">
+                        <div class="d-flex align-items-center justify-content-end">
+                            <p class="mb-0 text-white me-2 fs-6">Design and Developed by</p>
+                            <img src="assets/images/realtime-logo.png" class="img-fluid" alt="Images">
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- end Footer -->
+
+    <footer>
+        <div class="footer-bt  mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12 col-12">
+                        <p class="mb-0 text-dark">©2026 Govt of Andhra Pradesh Population Dashboard . All Rights
+                            Reserved</p>
+                    </div>
+                    <!-- <div class="col-xl-4 col-12">
+                        <p class="mb-0 text-dark">Design and Developed by</p>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- old code -->
+
+
+<div class="container-fluid d-none">
 <div class="row mt-2 mb-2">
   <div class="col-12 d-flex justify-content-end">
     
-    <button class="btn btn-sm btn-primary d-flex align-items-center gap-2 rounded-pill" (click)="goBack()">
+    <button class="d-none btn btn-sm btn-primary d-flex align-items-center gap-2 rounded-pill" (click)="goBack()">
       <i class="pi pi-arrow-left"></i>
       Back
     </button>
@@ -453,7 +1396,7 @@
 
 
 
-  <div class="container-fluid px-0 pb-5">
+  <div class="container-fluid px-0 pb-5 d-none">
 
     <!-- TOP CARDS -->
 <div class="row g-3 mb-3 justify-content-center">
@@ -1367,5 +2310,7 @@
 
         </div>
     </div>
+</div>
+</div>
 </div>
 </div>

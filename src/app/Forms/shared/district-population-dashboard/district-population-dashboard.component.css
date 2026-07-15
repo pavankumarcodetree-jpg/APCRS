@@ -234,7 +234,7 @@
 }
 
 .custom-title {
-  color:#036;
+  color:#1b2d57;
   font-size: 23px;
   font-weight: 600;
 }
@@ -767,4 +767,605 @@ cursor: pointer;
 }
 .mandal_col{
     color: #F59E0B
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* new styles */
+
+
+/* Fixed Header */
+.app-header {
+  background: #b7cee7;
+  height: 100px;
+  z-index: 1050;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Spacer to avoid content hiding */
+.header-spacer {
+  height: 105px;
+}
+
+/* Logo */
+.logo-img {
+  width: 90px;
+  height: auto;
+}
+
+/* APPD Text */
+.app-title {
+  font-size: 4rem;
+  font-weight: 800;
+  color: #003b78;
+  line-height: 1;
+  margin: 0;
+}
+
+.app-subtitle {
+  font-size: 0.95rem;
+  color: #003b78;
+  font-weight: 600;
+}
+
+/* Navigation */
+.nav-link {
+  color: #003b78 !important;
+  font-weight: 600;
+  margin: 0 12px;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: #002b5c !important;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #003b78;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background: #002b5c;
+  color: #fff;
+}
+
+.nav-link {
+  position: relative;
+  color: #003b78 !important;
+  font-weight: 600;
+  margin: 0 12px;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 3px;
+  background-color: #003b78;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+.nav-link:hover {
+  color: #001f4d !important;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #001f4d !important;
+}
+/* Responsive */
+@media (max-width: 991px) {
+  .app-header {
+    height: auto;
+    padding: 15px 0;
+  }
+
+  .header-spacer {
+    height: 120px;
+  }
+
+  .app-title {
+    font-size: 2.5rem;
+  }
+
+  .logo-img {
+    width: 70px;
+  }
+
+  .navbar-collapse {
+    background: #b7cee7;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .nav-link {
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 576px) {
+  .app-title {
+    font-size: 2rem;
+  }
+
+  .app-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .logo-img {
+    width: 60px;
+  }
+}
+
+/* Announcement Bar */
+
+.announcement-bar {
+  background: #003b78;
+  color: #fff;
+  padding: 12px 0;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.announcement-bar marquee {
+  flex: 1;
+}
+
+/* Main Section */
+
+
+
+.population-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(245, 248, 251, 0.88);
+}
+
+.population-section .container-fluid {
+  position: relative;
+  z-index: 2;
+}
+
+/* Heading */
+
+.population-heading h1 {
+  font-size: 3.3rem;
+  font-weight: 700;
+  color: #003b78;
+}
+
+.population-heading p {
+  color: #64748b;
+  font-size: 1.2rem;
+  margin-left:45px;
+}
+
+.green-dot {
+  width: 16px;
+  height: 16px;
+  background: #2dbb0f;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Counter */
+
+.counter-wrapper {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.digit-box {
+  width: 100px;
+  height: 160px;
+  background: #182d59;
+  color: white;
+  font-size: 5rem;
+  font-weight: 700;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Stats Cards */
+
+.stat-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 16px;
+  padding: 20px;
+  min-height: 140px;
+}
+
+.stat-card h4 {
+  color: #003b78;
+  font-weight: 700;
+}
+
+.stat-card h2 {
+  color: #1e293b;
+  font-size: 2.2rem;
+  font-weight: 700;
+}
+
+.stat-card p {
+  color: #003b78;
+  margin-bottom: 0;
+}
+
+/* District Table */
+
+.district-title {
+  color: #003b78;
+  font-weight: 700;
+}
+
+.table-card {
+  background: rgba(255,255,255,0.9);
+  border: 1px solid #3b82f6;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.table thead {
+  background: #f7f7f7;
+}
+
+.table th {
+  color: #003b78;
+  font-weight: 700;
+  padding: 18px 24px;
+}
+
+.table td {
+  padding: 18px 24px;
+  color: #475569;
+}
+
+.table tbody tr:hover {
+  background: rgba(59,130,246,0.05);
+}
+
+/* Responsive */
+
+@media(max-width: 992px) {
+
+  .population-heading h1 {
+    font-size: 2.4rem;
+  }
+
+  .digit-box {
+    width: 70px;
+    height: 110px;
+    font-size: 3.5rem;
+  }
+
+  .counter-wrapper {
+    justify-content: center;
+  }
+}
+
+@media(max-width:768px) {
+
+  .population-heading {
+    text-align: center;
+  }
+
+  .digit-box {
+    width: 60px;
+    height: 90px;
+    font-size: 3rem;
+  }
+
+  .district-title {
+    text-align: center;
+  }
+}
+
+
+/* ==========================
+   SECTION
+========================== */
+
+.district-map-section {
+    background: #f8fafc;
+}
+
+/* ==========================
+   TITLES
+========================== */
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #1b2d57;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: #64748b;
+    font-size: 1.2rem;
+}
+
+/* ==========================
+   FORM CONTROLS
+========================== */
+
+.form-label {
+    font-weight: 600;
+    color: #334155;
+}
+
+.custom-select {
+    height: 54px;
+    border-radius: 12px;
+    border: 1px solid #dbe2ea;
+    font-size: 1rem;
+}
+
+/* ==========================
+   BUTTONS
+========================== */
+
+.btn-apply {
+    background: #1b2d57;
+    color: white;
+    height: 54px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-apply:hover {
+    background: #102041;
+    color: white;
+}
+
+.btn-reset {
+    background: #e2e8f0;
+    color: #475569;
+    height: 54px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-export {
+    background: #1f9d5a;
+    color: white;
+    height: 54px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-export:hover {
+    background: #16824a;
+    color: white;
+}
+
+/* ==========================
+   EQUAL HEIGHT CARDS
+========================== */
+
+.map-card,
+.district-panel {
+    height: 750px;
+}
+
+/* ==========================
+   MAP CARD
+========================== */
+
+.map-card {
+    background: #eef2f7;
+    border: 1px dashed #d8dee8;
+    border-radius: 18px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.map-image {
+    max-height: 680px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* ==========================
+   RIGHT PANEL
+========================== */
+
+.district-panel {
+    background: white;
+    border: 1px solid #2f80ed;
+    border-radius: 18px;
+    padding: 30px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.district-title {
+    color: #003b78;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.district-meta {
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+/* ==========================
+   SUMMARY CARDS
+========================== */
+
+.summary-card {
+    background: #eef3f8;
+    border-radius: 12px;
+    padding: 18px;
+    height: 100%;
+}
+
+.summary-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.summary-card h5 {
+    color: #003b78;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.summary-card p {
+    color: #64748b;
+    margin-bottom: 0;
+}
+
+/* ==========================
+   TABLE
+========================== */
+
+.table-scroll {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 5px;
+}
+
+.district-table {
+    width: 100%;
+}
+
+.district-table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+
+    background: white;
+
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 700;
+
+    padding: 14px 0;
+}
+
+.district-table tbody td {
+    padding: 14px 0;
+    color: #475569;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 1rem;
+}
+
+.district-table tbody tr:hover {
+    background: rgba(47, 128, 237, 0.05);
+}
+
+/* ==========================
+   CUSTOM SCROLLBAR
+========================== */
+
+.table-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+    background: #edf2f7;
+    border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+    background: #003b78;
+    border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+    background: #002654;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 1200px) {
+    .map-card,
+    .district-panel {
+        height: 650px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .section-title {
+        font-size: 2.3rem;
+    }
+
+    .map-card,
+    .district-panel {
+        height: auto;
+    }
+
+    .table-scroll {
+        max-height: 450px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .btn-export,
+    .btn-reset,
+    .btn-apply {
+        width: 100%;
+    }
+}
+
+
+::ng-deep .footer {
+    position: relative !important;
+    height: auto !important;
+    display: block !important;
 }
