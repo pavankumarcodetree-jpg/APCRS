@@ -782,6 +782,11 @@ cursor: pointer;
 
 /* new styles */
 
+.district-selected-path {
+  fill: #f48a00 !important;
+  stroke: #f48a00 !important;
+  stroke-width: 2.5 !important;
+}
 
 /* Fixed Header */
 .app-header {
@@ -1019,6 +1024,7 @@ cursor: pointer;
 .stat-card p {
   color: #003b78;
   margin-bottom: 0;
+  font-size: 15px;
 }
 
 /* District Table */
@@ -1033,6 +1039,7 @@ cursor: pointer;
   border: 1px solid #3b82f6;
   border-radius: 20px;
   overflow: hidden;
+  height: 550px;
 }
 
 .table thead {
@@ -1186,7 +1193,7 @@ cursor: pointer;
 ========================== */
 
 .map-card {
-    background: #eef2f7;
+    background: #afbfd2;
     border: 1px dashed #d8dee8;
     border-radius: 18px;
     padding: 20px;
@@ -1247,7 +1254,7 @@ cursor: pointer;
 
 .summary-card h5 {
     color: #003b78;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 5px;
 }
@@ -1276,7 +1283,6 @@ cursor: pointer;
     position: sticky;
     top: 0;
     z-index: 5;
-
     background: white;
 
     color: #94a3b8;
@@ -1369,3 +1375,80 @@ cursor: pointer;
     height: auto !important;
     display: block !important;
 }
+
+
+.st1, .st3, .st4, .st6, .st7, .st8,
+.st9, .st10, .st11, .st12, .st13,
+.st14, .st15, .st16, .st17, .st18,
+.st19, .st20, .st21, .st22, .st23,
+.st24, .st25, .st26, .st27, .st28 {
+    fill: #ffffff;
+    stroke: #1f3d8f;
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
+}
+
+
+.counts {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    text-align: center;
+}
+
+.counts ul {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.counts ul li {
+    border: 1px solid #363636;
+    padding: 5px 5px;
+    line-height: 1.2;
+    color: #dadada;
+}
+
+
+.table-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.district-table thead th{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#f7f7f7;
+    color:#003b78;
+    font-weight:700;
+    box-shadow:0 2px 2px rgba(0,0,0,.08);
+}
+.table-card thead th{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:#f7f7f7;
+    color:#003b78;
+    font-weight:700;
+    box-shadow:0 2px 2px rgba(0,0,0,.08);
+}
+.table-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #eef2f7;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #003b78;
+  border-radius: 10px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #002a57;
+}
+
+

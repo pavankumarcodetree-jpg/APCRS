@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as Highcharts from 'highcharts';
 import { AuthserService } from 'src/app/services/api_lyr/private/authser.service';
@@ -16,8 +16,11 @@ import { EncDecService } from 'src/app/services/enc_dec_lyr/enc-dec.service';
   templateUrl: './district-population-dashboard.component.html',
   styleUrl: './district-population-dashboard.component.css',
 })
-export class DistrictPopulationDashboardComponent {
+export class DistrictPopulationDashboardComponent implements AfterViewInit {
   districts: any[] = [];
+
+  @ViewChild('andhrapradeshMap') andhrapradeshMap?: ElementRef<SVGSVGElement>;
+  private selectedDistrictAnchor: SVGElement | null = null;
 
   districtDetails: any;
   mandalList: any[] = [];
@@ -652,6 +655,119 @@ export class DistrictPopulationDashboardComponent {
     return this.normalizeDistrictName(rawDistrict);
   }
 
+  private normalizeDistrictKey(value: string): string {
+    const normalized = (value || '').toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+    const withSpellingFixes = normalized
+      .replace(/sitha/g, 'seetha')
+      .replace(/seeta/g, 'seetha')
+      .replace(/sithar/g, 'seethar')
+      .replace(/seetar/g, 'seethar')
+      .replace(/godavai/g, 'godavari');
+
+    const canonicalAliases: Record<string, string> = {
+      alluriseetaramaraju: 'alluriseetharamaraju',
+      allurisitharamaraju: 'alluriseetharamaraju',
+      alluriseetharamaraju: 'alluriseetharamaraju',
+      eastgodavai: 'eastgodavari',
+      eastgodavari: 'eastgodavari'
+    };
+
+    return canonicalAliases[withSpellingFixes] || withSpellingFixes;
+  }
+
+  private matchesDistrictName(title: string, districtName: string): boolean {
+    const target = this.normalizeDistrictKey(districtName);
+    const candidate = this.normalizeDistrictKey(title);
+
+    if (!target || !candidate) {
+      return false;
+    }
+
+    const aliasPairs: Record<string, string> = {
+      chittor: 'chittoor',
+      chittoor: 'chittoor',
+      ysrkadapa: 'ysrkadapa',
+      ysr: 'ysrkadapa',
+      ysrr: 'ysrkadapa'
+    };
+
+    return candidate === target || candidate === aliasPairs[target] || target === aliasPairs[candidate];
+  }
+
+  private findPolygonAnchorForDistrict(districtName: string): SVGElement | null {
+    const svg = this.andhrapradeshMap?.nativeElement;
+    if (!svg) {
+      return null;
+    }
+
+    return Array.from(svg.querySelectorAll('a')).find((anchor) => {
+      const title = anchor.getAttribute('title')?.trim() || '';
+      const dataDistrictName = anchor.getAttribute('data-district-name')?.trim() || '';
+      const titleText = anchor.querySelector('title')?.textContent?.trim() || '';
+      const hasPath = anchor.querySelectorAll('path').length > 0;
+      const candidates = [title, dataDistrictName, titleText].filter(Boolean);
+
+      return hasPath && candidates.some((candidateTitle) => this.matchesDistrictName(candidateTitle, districtName));
+    }) as unknown as SVGElement | null;
+  }
+
+  private selectDistrictAndLoad(districtName: string): void {
+    const safeName = (districtName || '').trim();
+    if (!safeName) {
+      return;
+    }
+
+    const polygonAnchor = this.findPolygonAnchorForDistrict(safeName);
+
+    if (this.selectedDistrictAnchor) {
+      this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+        path.classList.remove('district-selected-path');
+        path.style.fill = '';
+        path.style.stroke = '';
+      });
+    }
+
+    if (polygonAnchor) {
+      this.selectedDistrictAnchor = polygonAnchor;
+      this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+        path.classList.add('district-selected-path');
+        path.style.fill = '#f48a00';
+        path.style.stroke = '#f48a00';
+      });
+    }
+
+    this.selectedDistrictName = safeName;
+    this.selectedMandal = '';
+    this.loadDistrictDashboardData();
+  }
+
+  ngAfterViewInit(): void {
+    const svg = this.andhrapradeshMap?.nativeElement;
+    if (!svg) {
+      return;
+    }
+
+    svg.addEventListener('click', (event: Event) => {
+      const target = event.target as Element | null;
+      const clickedAnchor = target?.closest('a') as SVGElement | null;
+      const districtName = clickedAnchor?.getAttribute('title')?.trim()
+        || clickedAnchor?.getAttribute('data-district-name')?.trim()
+        || clickedAnchor?.querySelector('title')?.textContent?.trim();
+
+      if (!districtName) {
+        return;
+      }
+
+      event.preventDefault();
+      event.stopPropagation();
+      this.selectDistrictAndLoad(districtName);
+    });
+      setTimeout(() => {
+    this.selectDistrictAndLoad('Anakapalli');
+  }, 0);
+  }
+
   ngOnInit(): void {
     for (let i = this.currentYear; i >= 2023; i--) {
       this.yearList.push(i);
@@ -923,7 +1039,7 @@ loadMedianAgeAtDeathChart() {
   const data2024 = this.medianAgeofDeath.map((x: any) => Number(x.MEDIAN_24 ?? 0));
   const data2025 = this.medianAgeofDeath.map((x: any) => Number(x.MEDIAN_25 ?? 0));
 
-  console.log(this.medianAgeofDeath);
+  
 
   this.medianAgeChartOptions = {
 
@@ -1097,22 +1213,7 @@ onDistrictChange(event: any) {
     return;
   }
 
-  this.selectedDistrictName = districtName;
-  this.selectedMandal = '';
-  this.selectedYear = 2025;
- // this.loadDistrictDashboardData();
-
-  // const encryptedDistrict = this.encDec.enccall(districtName);
-
-  // this.router.navigate(
-  //   ['/shared/district-population'],
-  //   {
-  //     queryParams: {
-  //       dst: encryptedDistrict
-  //     },
-  //     replaceUrl: true
-  //   }
-  // );
+  this.selectDistrictAndLoad(districtName);
 }
 
 loadAgeWiseChart(
@@ -2369,10 +2470,6 @@ async loadDistrictsList() {
   }
 }
 
-resetFilters(){
-
-}
-
 async loadDistrictDashboardData() {
   try {
     this.spinner.show();
@@ -2641,9 +2738,6 @@ if (mandalsResponse?.code) {
 
   const mandalLists =
     mandalsResponse.Details || [];
-    console.log("mandalLists",mandalLists);
-    
-
   if (mandalLists.length > 0) {
     this.dashboardSummary = {
       districtName: mandalLists[0].DISTRICT_NAME,

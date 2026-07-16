@@ -20,4 +20,11 @@ describe('DistrictPopulationDashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should match Alluri district names with Seeta/Seetha spelling variants', () => {
+    const matchesDistrictName = (component as any).matchesDistrictName.bind(component);
+
+    expect(matchesDistrictName('Alluri Seeta Rama Raju', 'Alluri Seetha Rama Raju')).toBeTrue();
+    expect(matchesDistrictName('Alluri Sitharama Raju', 'Alluri Seetha Rama Raju')).toBeTrue();
+  });
 });
