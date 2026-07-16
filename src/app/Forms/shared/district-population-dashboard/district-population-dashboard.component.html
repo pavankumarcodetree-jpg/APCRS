@@ -143,14 +143,11 @@
 
         <!-- Population Counter -->
         <div class="counter-wrapper mb-5">
-
-          <div class="digit-box">8</div>
-          <div class="digit-box">9</div>
-          <div class="digit-box">1</div>
-          <div class="digit-box">2</div>
-          <div class="digit-box">5</div>
-          <div class="digit-box">6</div>
-          <div class="digit-box">7</div>
+          <div
+    class="digit-box"
+    *ngFor="let digit of (apwisePopulationData[0]?.TOTAL_POPULATION || 0).toString().split('')">
+    {{ digit }}
+  </div>
 
         </div>
 
@@ -160,7 +157,7 @@
           <div class="col-md-3 col-6">
             <div class="stat-card">
               <h4>PGR</h4>
-              <h2>0.23%</h2>
+              <h2>{{ apwisePopulationData[0]?.PGR }}</h2>
               <p>Annual Growth (%)</p>
             </div>
           </div>
@@ -168,7 +165,7 @@
           <div class="col-md-3 col-6">
             <div class="stat-card">
               <h4>CBR</h4>
-              <h2>9</h2>
+              <h2>{{ apwisePopulationData[0]?.CBR }}</h2>
               <p>Per 1000 Population</p>
             </div>
           </div>
@@ -176,7 +173,7 @@
           <div class="col-md-3 col-6">
             <div class="stat-card">
               <h4>CDR</h4>
-              <h2>7</h2>
+              <h2>{{ apwisePopulationData[0]?.CDR }}</h2>
               <p>Per 1000 Population</p>
             </div>
           </div>
@@ -184,7 +181,7 @@
           <div class="col-md-3 col-6">
             <div class="stat-card">
               <h4>TFR</h4>
-              <h2>1.4</h2>
+              <h2>{{ apwisePopulationData[0]?.TFR }}</h2>
               <p>Year 2025</p>
             </div>
           </div>
@@ -628,7 +625,7 @@
                                c-0.7-3.3-1-4-1-4s-7.6-6.4-7,1c0.6,7.4-4.6,3.3-5,6c-0.4,2.7-4,7.9-5,3c-1-4.9-7.3-7.1-6,0c1.3,7.1,3,13.3,0,13s-3-2.7-7-6
                                c-4-3.3-9,0.9-9,4c0,3.1-2,3.3,4,8c6,4.7,11,5.6,5,8c-6,2.4-10.3,6.9-13,9c-2.7,2.1-6.3,2.6-11,3c-4.7,0.4-14.3-0.1-10,5
                                c4.3,5.1,4,5,4,5s12.9,2.6,7.5,4l9.4,11.7c2-3.6,0.2-9.1,4.9-9.4s-2-1.7,9.2-0.4c11.3,1.4,11-1.7,11,3c0,4.7-1.3,11.9,3,6
-                               c4.3-5.9,6-1.1,3-10s-3.6-15.1,3-6c6.6,9.1,10,11.9,15,12c5,0.1,4.4-8.7,9-4C994.6,93.7,1008,100.3,1002,91z" class="st5"></path></g></g></a><title >Parvathipuram Manyam</title></g><g  id="parvathipiuram-manym_1_" class="st0"><a  title="Parvathipuram Manyam"><g  id="parvathipiuram-manym"><g ><path  d="M945.4,111.4c-3-1.6-13.3,0.3-14.4-3.6s-4-4.2-2-7.8l19.2,9.8c0-1.4-2.9-4.3-5.3-9.8s-10.9-8.6-14.4-12.2
+                               c4.3-5.9,6-1.1,3-10s-3.6-15.1,3-6c6.6,9.1,10,11.9,15,12c5,0.1,4.4-8.7,9-4C994.6,93.7,1008,100.3,1002,91z" class="st5"></path></g></g></a><title >Parvathipuram Manyam</title></g><g  id="parvathipiuram-manym_1_" class="st0"><a  title="Alluri Seetha Rama Raju"><g  id="parvathipiuram-manym"><g ><path  d="M945.4,111.4c-3-1.6-13.3,0.3-14.4-3.6s-4-4.2-2-7.8l19.2,9.8c0-1.4-2.9-4.3-5.3-9.8s-10.9-8.6-14.4-12.2
                             c-3.5-3.6-7.7-13-17.3-14.5C901.5,71.7,908,96,908,96c2.3,6.1,1,1.9-1,8c-2,6.1-0.3,6.3,2,9c2.3,2.7,5.7,8.3,1,9
                             c-4.7,0.7-4,0.9-10,1c-6,0.1-7.6,2.3-11-4c-3.4-6.3-8.3-10.4-10-5c-1.7,5.4,1,10.6-5,13c-6,2.4-10.6,9.6-14,11
                             c-3.4,1.4-5.3-0.1-5-9c0.3-8.9-9-9.4-5-12c4-2.6-1-5.1-2-10c-1-4.9-11-6.4-15,1c-4,7.4-1.6,14.9-5,18c-3.4,3.1-2.3,4.3,1,6
@@ -696,7 +693,7 @@
                                c5-5,6-10,5-16C543,519,541,520,540,520z" class="st9"></path></g><g ><path  d="M540,520c-4-8-10-20-18-22c-8-2-15,4-18,10c-3,6-2,14,1,20c3,6,8,11,15,13c7,2,14,0,19-5
                                c5-5,6-10,5-16C543,519,541,520,540,520z" class="st5"></path></g></g></a><title >Markapuram</title></g><g  id="polavaram_1_" class="st0"><a  title="Polavaram"><g  id="polavaram"><g ><path  d="M700,295c-5-6-12-14-21-15c-9-1-17,5-20,13c-3,8-1,17,4,23c5,6,13,9,21,8c8-1,15-6,18-14
                                c3-8,2-12,0-15C701,295,700,295,700,295z" class="st18"></path></g><g ><path  d="M700,295c-5-6-12-14-21-15c-9-1-17,5-20,13c-3,8-1,17,4,23c5,6,13,9,21,8c8-1,15-6,18-14
-                               c3-8,2-12,0-15C701,295,700,295,700,295z" class="st5"></path></g></g></a><title >Polavaram</title></g><g  id="guntur_1_" class="st0"><a  title="Annamayya"><text  transform="matrix(1 0 0 1 302.0426 737.5057)" class="st29 st30">Annamayya</text></a><a  title="Sri Sathya Sai"><text  transform="matrix(1 0 0 1 278.0512 671.4259)" class="st29 st30">Satyasai</text></a><a  title="Ananthapuramu"><text  transform="matrix(1 0 0 1 220.5831 581.5536)" class="st29 st30">Ananthpuramu</text></a><a  title="Kurnool"><text  transform="matrix(1 0 0 1 234.9448 491.9276)" class="st29 st30">Kurnool</text></a><a  title="Nandyal"><text  transform="matrix(1 0 0 1 339.9661 514.4595)" class="st29 st30">Nandyal</text></a><a  title="Prakasam"><text  transform="matrix(1 0 0 1 439.6124 484.8422)" class="st29 st30">Prakasam</text></a><a  title="Palnadu"><text  transform="matrix(1 0 0 1 491.0925 376.111)" class="st29 st30">Palnadu</text></a><a  title="Bapatla"><text  transform="matrix(1 0 0 1 569.4443 467.3029)" class="st29 st30">Bapatla</text></a><a  title="Guntur"><text  transform="matrix(1 0 0 1 604.6271 392.3386)" class="st29 st30">Guntur</text></a><a  title="Krishna"><text  transform="matrix(1 0 0 1 677.7847 407.4884)" class="st29 st30">Krishna</text></a><a  title="NTR"><text  transform="matrix(1 0 0 1 572.5151 327.3701)" class="st29 st30">NTR</text></a><a  title="Eluru"><text  transform="matrix(1 0 0 1 658.2053 283.8774)" class="st29 st30">Eluru</text></a><a  title="West Godavari"  target="_blank"><text  transform="matrix(1 0 0 1 732.503 376.1109)" class="st29 st30">West Godavari</text></a><a  title="Dr. B.R.Ambedkar Konaseema"><text  transform="matrix(1 0 0 1 803.0947 346.4739)" class="st29 st30">Konaseema</text></a><a  title="East Godavari" href="https://eastgodavari.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 726.6307 302.0483)" class="st29 st30">East Godavari</text></a><a  title="Kakinada"><text  transform="matrix(1 0 0 1 812.2289 283.8773)" class="st29 st30">Kakinada</text></a><a  title="Anakapalli"><text  transform="matrix(1 0 0 1 873.9338 229.7954)" class="st29 st30">Anakapalli</text></a><a  title="Visakhapatnam" ><text  transform="matrix(1 0 0 1 935.2104 190.2209)" class="st29 st30">Visakhapatnam</text></a><a  title="Vizianagaram"><text  transform="matrix(1 0 0 1 956.7194 147.3274)" class="st29 st30">Vizianagaram</text></a><a  title="Srikakulam" href="https://srikakulam.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 1024.8148 99.121)" class="st29 st30">Srikakulam</text></a><a  title="Parvathipuram Manyam"><text  transform="matrix(1 0 0 1 807.1726 64.605)" class="st29 st30">Parvathipuram Manyam</text></a><a  title="Alluri Seetha Rama Raju"><text  transform="matrix(1 0 0 1 712.9728 158.5615)" class="st29 st30">Alluri Seetha Rama Raju</text></a><a  title="Y.S.R. Kadapa"><text  transform="matrix(1 0 0 1 375.5831 608.1068)" class="st29 st30">Y.S.R</text></a><a  title="Tirupati"><text  transform="matrix(1 0 0 1 532.115 699.903)" class="st29 st30">Tirupati</text></a><a  title="SRI Potti Sriramulu Nellore" href="https://spsnellore.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 500.8115 595.2191)" class="st29 st30">SRI Potti Sriramulu Nellore</text></a><a  title="Chittoor"><text  transform="matrix(1 0 0 1 446.5532 798.4251)" class="st29 st30">Chittor</text></a><a  title="Markapuram" href="https://prakasam.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 480.0 530.0)" class="st29 st30">Markapuram</text></a><a  title="Polavaram" href="https://westgodavari.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 643.0 300.0)" class="st29 st30">Polavaram</text></a></g></svg>
+                               c3-8,2-12,0-15C701,295,700,295,700,295z" class="st5"></path></g></g></a><title >Polavaram</title></g><g  id="guntur_1_" class="st0"><a  title="Annamayya"><text  transform="matrix(1 0 0 1 302.0426 737.5057)" class="st29 st30">Annamayya</text></a><a  title="Sri Sathya Sai"><text  transform="matrix(1 0 0 1 278.0512 671.4259)" class="st29 st30">Satyasai</text></a><a  title="Ananthapuramu"><text  transform="matrix(1 0 0 1 220.5831 581.5536)" class="st29 st30">Ananthpuramu</text></a><a  title="Kurnool"><text  transform="matrix(1 0 0 1 234.9448 491.9276)" class="st29 st30">Kurnool</text></a><a  title="Nandyal"><text  transform="matrix(1 0 0 1 339.9661 514.4595)" class="st29 st30">Nandyal</text></a><a  title="Prakasam"><text  transform="matrix(1 0 0 1 439.6124 484.8422)" class="st29 st30">Prakasam</text></a><a  title="Palnadu"><text  transform="matrix(1 0 0 1 491.0925 376.111)" class="st29 st30">Palnadu</text></a><a  title="Bapatla"><text  transform="matrix(1 0 0 1 569.4443 467.3029)" class="st29 st30">Bapatla</text></a><a  title="Guntur"><text  transform="matrix(1 0 0 1 604.6271 392.3386)" class="st29 st30">Guntur</text></a><a  title="Krishna"><text  transform="matrix(1 0 0 1 677.7847 407.4884)" class="st29 st30">Krishna</text></a><a  title="NTR"><text  transform="matrix(1 0 0 1 572.5151 327.3701)" class="st29 st30">NTR</text></a><a  title="Eluru"><text  transform="matrix(1 0 0 1 658.2053 283.8774)" class="st29 st30">Eluru</text></a><a  title="West Godavari"  target="_blank"><text  transform="matrix(1 0 0 1 732.503 376.1109)" class="st29 st30">West Godavari</text></a><a  title="Dr. B.R.Ambedkar Konaseema"><text  transform="matrix(1 0 0 1 803.0947 346.4739)" class="st29 st30">Konaseema</text></a><a id="eastGodavariLabel"  title="East Godavari" href="https://eastgodavari.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 726.6307 302.0483)" class="st29 st30">East Godavari</text></a><a  title="Kakinada"><text  transform="matrix(1 0 0 1 812.2289 283.8773)" class="st29 st30">Kakinada</text></a><a  title="Anakapalli"><text  transform="matrix(1 0 0 1 873.9338 229.7954)" class="st29 st30">Anakapalli</text></a><a  title="Visakhapatnam" ><text  transform="matrix(1 0 0 1 935.2104 190.2209)" class="st29 st30">Visakhapatnam</text></a><a  title="Vizianagaram"><text  transform="matrix(1 0 0 1 956.7194 147.3274)" class="st29 st30">Vizianagaram</text></a><a  title="Srikakulam" href="https://srikakulam.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 1024.8148 99.121)" class="st29 st30">Srikakulam</text></a><a  title="Parvathipuram Manyam"><text  transform="matrix(1 0 0 1 807.1726 64.605)" class="st29 st30">Parvathipuram Manyam</text></a><a  title="Alluri Seetha Rama Raju"><text  transform="matrix(1 0 0 1 712.9728 158.5615)" class="st29 st30">Alluri Seetha Rama Raju</text></a><a  title="Y.S.R. Kadapa"><text  transform="matrix(1 0 0 1 375.5831 608.1068)" class="st29 st30">Y.S.R</text></a><a  title="Tirupati"><text  transform="matrix(1 0 0 1 532.115 699.903)" class="st29 st30">Tirupati</text></a><a  title="SRI Potti Sriramulu Nellore" href="https://spsnellore.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 500.8115 595.2191)" class="st29 st30">SRI Potti Sriramulu Nellore</text></a><a  title="Chittoor"><text  transform="matrix(1 0 0 1 446.5532 798.4251)" class="st29 st30">Chittor</text></a><a  title="Markapuram" href="https://prakasam.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 480.0 530.0)" class="st29 st30">Markapuram</text></a><a  title="Polavaram" href="https://westgodavari.ap.gov.in/" target="_blank"><text  transform="matrix(1 0 0 1 643.0 300.0)" class="st29 st30">Polavaram</text></a></g></svg>
 
 
                                 <div class="counts">

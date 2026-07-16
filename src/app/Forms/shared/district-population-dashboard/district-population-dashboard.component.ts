@@ -20,7 +20,8 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
   districts: any[] = [];
 
   @ViewChild('andhrapradeshMap') andhrapradeshMap?: ElementRef<SVGSVGElement>;
-  private selectedDistrictAnchor: SVGElement | null = null;
+ // private selectedDistrictAnchor: SVGElement | null = null;
+ selectedDistrictAnchor: Element | null = null;
 
   districtDetails: any;
   mandalList: any[] = [];
@@ -614,6 +615,7 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
   mandalwiseHighLowAvgData: any;
   mandalwisePopulationData: any;
   selectedDistrictNameMandalwise: string="";
+  apwisePopulationData: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -679,6 +681,12 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
   private matchesDistrictName(title: string, districtName: string): boolean {
     const target = this.normalizeDistrictKey(districtName);
     const candidate = this.normalizeDistrictKey(title);
+      console.log({
+      originalTitle: title,
+      originalDistrict: districtName,
+      candidate,
+      target
+  });
 
     if (!target || !candidate) {
       return false;
@@ -691,56 +699,126 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
       ysr: 'ysrkadapa',
       ysrr: 'ysrkadapa'
     };
-
+  
     return candidate === target || candidate === aliasPairs[target] || target === aliasPairs[candidate];
   }
 
-  private findPolygonAnchorForDistrict(districtName: string): SVGElement | null {
-    const svg = this.andhrapradeshMap?.nativeElement;
-    if (!svg) {
-      return null;
-    }
+//   private findPolygonAnchorForDistrict(districtName: string): SVGElement | null {
+//     const svg = this.andhrapradeshMap?.nativeElement;
+//     if (!svg) {
+//       return null;
+//     }
 
-    return Array.from(svg.querySelectorAll('a')).find((anchor) => {
-      const title = anchor.getAttribute('title')?.trim() || '';
-      const dataDistrictName = anchor.getAttribute('data-district-name')?.trim() || '';
-      const titleText = anchor.querySelector('title')?.textContent?.trim() || '';
-      const hasPath = anchor.querySelectorAll('path').length > 0;
-      const candidates = [title, dataDistrictName, titleText].filter(Boolean);
+//     return Array.from(svg.querySelectorAll('a')).find((anchor) => {
+//       const title = anchor.getAttribute('title')?.trim() || '';
+//       const dataDistrictName = anchor.getAttribute('data-district-name')?.trim() || '';
+//       const titleText = anchor.querySelector('title')?.textContent?.trim() || '';
+//       const hasPath = anchor.querySelectorAll('path').length > 0;
+//       const candidates = [title, dataDistrictName, titleText].filter(Boolean);
+//       console.log('Searching:', districtName);
+// console.log('Anchor title:', title);
+// console.log('Data District:', dataDistrictName);
+// console.log('Title Text:', titleText);
+//       return hasPath && candidates.some((candidateTitle) => this.matchesDistrictName(candidateTitle, districtName));
+//     }) as unknown as SVGElement | null;
+//   }
 
-      return hasPath && candidates.some((candidateTitle) => this.matchesDistrictName(candidateTitle, districtName));
-    }) as unknown as SVGElement | null;
+  // private selectDistrictAndLoad(districtName: string): void {
+  //   const safeName = (districtName || '').trim();
+  //   if (!safeName) {
+  //     return;
+  //   }
+
+  //   const polygonAnchor = this.findPolygonAnchorForDistrict(safeName);
+
+  //   if (this.selectedDistrictAnchor) {
+  //     this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+  //       path.classList.remove('district-selected-path');
+  //       path.style.fill = '';
+  //       path.style.stroke = '';
+  //     });
+  //   }
+
+  //   if (polygonAnchor) {
+  //     this.selectedDistrictAnchor = polygonAnchor;
+  //     this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+  //       path.classList.add('district-selected-path');
+  //       path.style.fill = '#f48a00';
+  //       path.style.stroke = '#f48a00';
+  //     });
+  //   }
+
+  //   this.selectedDistrictName = safeName;
+  //   this.selectedMandal = '';
+  //   this.loadDistrictDashboardData();
+  // }
+
+private findPolygonAnchorForDistrict(districtName: string): Element | null {
+
+  const svg = this.andhrapradeshMap?.nativeElement;
+  if (!svg) {
+    return null;
   }
 
+  return Array.from(svg.querySelectorAll('a')).find(anchor => {
+
+    const title = anchor.getAttribute('title')?.trim() || '';
+    const dataDistrictName = anchor.getAttribute('data-district-name')?.trim() || '';
+    const titleText = anchor.querySelector('title')?.textContent?.trim() || '';
+
+    const paths = anchor.querySelectorAll('path');
+
+    const candidates = [title, dataDistrictName, titleText].filter(Boolean);
+
+    const matched = candidates.some(candidate =>
+      this.matchesDistrictName(candidate, districtName)
+    );
+
+    console.log({
+      title,
+      pathCount: paths.length,
+      matched
+    });
+
+    return paths.length > 0 && matched;
+
+  }) ?? null;
+}
+  
   private selectDistrictAndLoad(districtName: string): void {
-    const safeName = (districtName || '').trim();
-    if (!safeName) {
-      return;
-    }
-
-    const polygonAnchor = this.findPolygonAnchorForDistrict(safeName);
-
-    if (this.selectedDistrictAnchor) {
-      this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
-        path.classList.remove('district-selected-path');
-        path.style.fill = '';
-        path.style.stroke = '';
-      });
-    }
-
-    if (polygonAnchor) {
-      this.selectedDistrictAnchor = polygonAnchor;
-      this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
-        path.classList.add('district-selected-path');
-        path.style.fill = '#f48a00';
-        path.style.stroke = '#f48a00';
-      });
-    }
-
-    this.selectedDistrictName = safeName;
-    this.selectedMandal = '';
-    this.loadDistrictDashboardData();
+  const safeName = (districtName || '').trim();
+  if (!safeName) {
+    return;
   }
+
+  const polygonAnchor = this.findPolygonAnchorForDistrict(safeName);
+
+  // 👇 Add these lines
+  console.log('District:', safeName);
+  console.log('Polygon Anchor:', polygonAnchor);
+  console.log('No. of paths:', polygonAnchor?.querySelectorAll('path').length);
+
+  if (this.selectedDistrictAnchor) {
+    this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+      path.classList.remove('district-selected-path');
+      path.style.fill = '';
+      path.style.stroke = '';
+    });
+  }
+
+  if (polygonAnchor) {
+    this.selectedDistrictAnchor = polygonAnchor;
+    this.selectedDistrictAnchor.querySelectorAll('path').forEach((path) => {
+      path.classList.add('district-selected-path');
+      path.style.fill = '#f48a00';
+      path.style.stroke = '#f48a00';
+    });
+  }
+
+  this.selectedDistrictName = safeName;
+  this.selectedMandal = '';
+  this.loadDistrictDashboardData();
+}
 
   ngAfterViewInit(): void {
     const svg = this.andhrapradeshMap?.nativeElement;
@@ -1353,7 +1431,7 @@ loadSexRatioChart() {
       type: 'column'
     },
     title: {
-      text: 'Sex Ratio (Females per 1000 Males)'
+      text: ''
     },
     xAxis: {
       categories: sortedMandals.map(x => x.MANDAL_NAME)
@@ -1422,7 +1500,7 @@ loadBirthSexRatioChart() {
     },
 
     title: {
-      text: 'CRS Sex Ratio at Birth (Males per 100 Females)'
+      text: ''
     },
 
     xAxis: {
@@ -1640,7 +1718,7 @@ loadPlaceOfDeathChart() {
         type: 'column'
       },
       title: {
-        text: 'Place of Death'
+        text: ''
       },
       xAxis: {
         categories: []
@@ -1688,7 +1766,7 @@ loadPlaceOfDeathChart() {
     },
 
     title: {
-      text: 'Place of Death'
+      text: ''
     },
 
     xAxis: {
@@ -1961,7 +2039,7 @@ loadDeathShareBirthChart() {
         type: 'column'
       },
       title: {
-        text: 'Death as Share of Births'
+        text: ''
       },
       xAxis: {
         categories: []
@@ -2010,7 +2088,7 @@ loadDeathShareBirthChart() {
     },
 
     title: {
-      text: 'Death as Share of Births'
+      text: ''
     },
 
     xAxis: {
@@ -2133,7 +2211,7 @@ loadTfrChart() {
         type: 'column'
       },
       title: {
-        text: `TFR in Sub-districts of ${this.selectedDistrictName}`
+        text: ``
       },
       xAxis: {
         categories: []
@@ -2184,7 +2262,7 @@ loadTfrChart() {
 
     title: {
       text:
-        `TFR in Sub-districts of ${this.selectedDistrictName}`
+        ``
     },
 
     xAxis: {
@@ -2341,7 +2419,7 @@ loadAnnualGrowthRateChart() {
         type: 'column'
       },
       title: {
-        text: 'Average Annual Exponential Growth Rate (%)'
+        text: ''
       },
       xAxis: {
         categories: []
@@ -2390,7 +2468,7 @@ const chartData = this.annualExponentialData
     },
 
     title: {
-      text: 'Average Annual Exponential Growth Rate (%)'
+      text: ''
     },
 
     xAxis: {
@@ -2585,6 +2663,12 @@ async loadDistrictDashboardData() {
     req20.type = '143';
     req20.param1=this.selectedYear
     req20.param2=this.selectedDistrictName
+
+    // API 21 AP-WISE  Response 
+    const req21 = new basemodel();
+    req21.type = '144';
+    req21.param1=this.selectedYear
+    
    
     
     const [
@@ -2607,7 +2691,8 @@ async loadDistrictDashboardData() {
       yearwiseTotalcbrandcdrResponse,
       DistrictwisePopulationResponse,
       mandalwiseHighLowAvgResponse,
-      mandalwisePopulationResponse
+      mandalwisePopulationResponse,
+      apwisePopulationResponse
     ] = await Promise.all([
       this.auth.auth_utilities_rtgs(req1),
       this.auth.auth_utilities_rtgs(req2),
@@ -2629,6 +2714,7 @@ async loadDistrictDashboardData() {
       this.auth.auth_utilities_rtgs(req18),
       this.auth.auth_utilities_rtgs(req19),
       this.auth.auth_utilities_rtgs(req20),
+      this.auth.auth_utilities_rtgs(req21),
     ]);
     
     
@@ -2905,6 +2991,12 @@ if (ageDistributionResponse?.code) {
       this.mandalwisePopulationData =mandalwisePopulationResponse.Details || [];
   }else {
     this.mandalwisePopulationData=[];
+  }
+
+  if(apwisePopulationResponse?.code) {
+    this.apwisePopulationData = apwisePopulationResponse.Details || [];
+  }else {
+    this.apwisePopulationData=[];
   }
 
     // ALL 3 APIs COMPLETED HERE

@@ -988,11 +988,11 @@ cursor: pointer;
 }
 
 .digit-box {
-  width: 100px;
-  height: 160px;
+  width: 90px;
+  height: 150px;
   background: #182d59;
   color: white;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 700;
   border-radius: 12px;
   display: flex;
@@ -1389,6 +1389,11 @@ cursor: pointer;
 }
 
 
+#eastGodavariLabel {
+    transform: translate(35px, 4px) !important;
+    transform-box: fill-box;
+}
+
 .counts {
     position: absolute;
     bottom: 10px;
@@ -1452,3 +1457,15 @@ cursor: pointer;
 }
 
 
+
+@media (max-width: 1399.98px) { 
+  .digit-box {
+    width:80px;
+  }
+  .stat-card p {
+    font-size: 10px;
+  }
+  .summary-card h5 {
+    font-size: 1rem;
+  }
+}
