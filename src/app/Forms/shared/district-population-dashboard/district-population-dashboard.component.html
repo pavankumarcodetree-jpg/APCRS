@@ -151,12 +151,14 @@
             <span class="green-dot"></span>
             Live AP Population
           </h1>
-
-          <p>Estimated, updates in real time</p>
+          <p>Estimated
+            <span *ngIf="selectedYear == 2026">June </span>
+             {{ selectedYear }}
+             updates in real time</p>
         </div>
 
         <!-- Population Counter -->
-        <div class="counter-wrapper mb-5">
+        <div class="counter-wrapper mb-5" *ngIf="apwisePopulationData?.length && apwisePopulationData[0]?.TOTAL_POPULATION">
           <div
     class="digit-box"
     *ngFor="let digit of (apwisePopulationData[0]?.TOTAL_POPULATION || 0).toString().split('')">
@@ -196,7 +198,7 @@
             <div class="stat-card">
               <h4>TFR</h4>
               <h2>{{ apwisePopulationData[0]?.TFR }}</h2>
-              <p>Year 2025</p>
+              <p>Year {{ selectedYear }}</p>
             </div>
           </div>
 
@@ -748,7 +750,7 @@
                         </h3>
 
                         <p class="district-meta">
-                            {{ mandalwiseHighLowAvgData[0].TOTAL_MANDALS_COUNT }} mandals · total population {{ mandalwiseHighLowAvgData[0].TOTAL_POPULATION_COUNT | number }}
+                            {{ mandalwiseHighLowAvgData[0]?.TOTAL_MANDALS_COUNT }} mandals · total population {{ mandalwiseHighLowAvgData[0]?.TOTAL_POPULATION_COUNT | number }}
                         </p>
 
                     </div>
@@ -765,9 +767,9 @@
                                     HIGHEST MANDAL
                                 </div>
 
-                                <h5>{{ mandalwiseHighLowAvgData[0].MAX_POPULATION_MANDAL_NAME }}</h5>
+                                <h5>{{ mandalwiseHighLowAvgData[0]?.MAX_POPULATION_MANDAL_NAME }}</h5>
 
-                                <p>{{ mandalwiseHighLowAvgData[0].MAX_POPULATION_MANDAL_COUNT | number }} people</p>
+                                <p>{{ mandalwiseHighLowAvgData[0]?.MAX_POPULATION_MANDAL_COUNT | number }} people</p>
 
                             </div>
 
@@ -781,9 +783,9 @@
                                     LOWEST MANDAL
                                 </div>
 
-                                <h5>{{ mandalwiseHighLowAvgData[0].LOWEST_POPULATION_MANDAL_NAME }}</h5>
+                                <h5>{{ mandalwiseHighLowAvgData[0]?.LOWEST_POPULATION_MANDAL_NAME }}</h5>
 
-                                <p>{{ mandalwiseHighLowAvgData[0].LOWEST_POPULATION_MANDAL_COUNT | number }} people</p>
+                                <p>{{ mandalwiseHighLowAvgData[0]?.LOWEST_POPULATION_MANDAL_COUNT | number }} people</p>
 
                             </div>
 
@@ -797,7 +799,7 @@
                                     AVERAGE
                                 </div>
 
-                                <h5>{{ mandalwiseHighLowAvgData[0].AVG_POPULATION_MANDALS_COUNT | number }}</h5>
+                                <h5>{{ mandalwiseHighLowAvgData[0]?.AVG_POPULATION_MANDALS_COUNT | number }}</h5>
 
                                 <p>Per mandal</p>
 

@@ -612,8 +612,8 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
         // Add other districts similarly
     ];
   districtwisePopulationData: any;
-  mandalwiseHighLowAvgData: any;
-  mandalwisePopulationData: any;
+  mandalwiseHighLowAvgData: any[]=[];
+  mandalwisePopulationData: any[]=[];
   selectedDistrictNameMandalwise: string="";
   apwisePopulationData: any;
 
@@ -1279,8 +1279,8 @@ selectMandal(mandal: any) {
 
 
 years = [
-  2030, 2029, 2028, 2027, 2026,
-  2025, 2024, 2023
+   2026,
+  2025, 2024, 2023,2022,2011,2001
 ];
 
 onDistrictChange(event: any) {
