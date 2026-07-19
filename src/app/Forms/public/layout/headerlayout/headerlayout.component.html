@@ -8,15 +8,15 @@
                             <img src="assets/images/logo-sm.png" class="img-fluid" height="80px">
                         </div>
                         <div class="text ps-2">
-                            <h3 class="mb-0">APCRS</h3>
-                            <p class="mb-0">Andhra Pradesh Civil Registration System</p>
+                            <h2 class="mb-0">APPD</h2>
+                            <p class="mb-0">Andhra Pradesh Population Dashboard</p>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-3 col-md-3 col-sm-3 col-12 text-end">
                         <div class="d-flex justify-content-end">
 
      <button type="button"
-        class="btn top-login-btn"
+        class="btn logout-btn rounded-pill "
         (click)="showLoginDialog()">
         Login <i class="mdi mdi-login"></i>
     </button>
@@ -33,7 +33,7 @@
                     <nav class="nav main-menu">
                         <ul class="navigation">
                             <li class="current"><a routerLink="/home/index">Home</a></li>
-                            <li><a href="javascript:void()" routerLink="/home/about"> About CRS</a></li>
+                            <li><a href="javascript:void()" routerLink="/home/about"> About APPD</a></li>
                             <li class="dropdown"><a href="javascript:void()" routerLink=""> RBD Act and Model Rules</a>
                                 <ul>
                                     <li><a href="assets/downloads/rbd_act_1969.pdf" target="_blank">RBD Act, 1969</a></li>
@@ -114,8 +114,8 @@
                             <a href="javascript:void(0)"><img src="assets/images/logo-sm.png" alt="Logo" title=""></a>
                         </div>
                         <div class="text ps-2">
-                            <h3 class="mb-0">APCRS</h3>
-                            <p class="mb-0">Andhra Pradesh Civil Registration System</p>
+                            <h3 class="mb-0">APPD</h3>
+                            <p class="mb-0">Andhra Pradesh Population Dashboard</p>
                         </div>
                     </div>
                     <div class="nav-outer">
@@ -143,13 +143,13 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-5 col-12 px-lg-4">
-                    <div class="footer-imgblk d-flex justify-content-center align-items-center mb-2">
+                    <div class="footer-imgblk d-flex  align-items-center mb-2">
                         <span class="logo-lg">
                             <img src="assets/images/logo-sm.png" alt="logo">
                         </span>
                         <div class="text ps-2">
-                            <h3 class="mb-0 text-white">APCRS</h3>
-                            <p class="mb-0 text-white">Andhra Pradesh Civil Registration System</p>
+                            <h3 class="mb-0 text-white">APPPD</h3>
+                            <p class="mb-0 text-white">Andhra Pradesh Population Dashboard</p>
                         </div>
                     </div>
                     <p class="text-white mb-0">Commissioner of Health & Family Welfare, 5th Floor, APIIC Building, Mangalagiri, Guntur Dt., Andhra Pradesh.
@@ -213,13 +213,13 @@
         <div class="footer-bt">
             <div class="container">
                 <div class="row">
-                    <div class="col-xl-8 col-12">
-                        <p class="mb-0 text-dark">©2024 Govt of Andhra Pradesh (Civil Resgistration System) . All Rights
+                    <div class="col-xl-12 col-12">
+                        <p class="mb-0 text-dark">©2026 Govt of Andhra Pradesh (Andhra Pradesh Population Dashboard) . All Rights
                             Reserved</p>
                     </div>
-                    <div class="col-xl-4 col-12">
+                    <!-- <div class="col-xl-4 col-12">
                         <p class="mb-0 text-dark">Design and Developed by</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -233,11 +233,19 @@
     [closable]="true"
     [draggable]="false"
     [resizable]="false"
-    [style]="{width: '40rem'}"
+    styleClass="login-dialog"
+    [style]="{width: '70rem'}"
    >
 
-    <div class="mt-2">
-        
+    <div class=" p-0">
+        <div class="row">
+            <div class="col-lg-6">
+ <div class="login-image">
+                    <img src="assets/images/Login-image.png" alt="Login">
+                </div>
+            </div>
+   
+        <div class="col-lg-6  d-flex align-items-center justify-content-center">
         <div class="card login-card custom-modal-popup">
                         <div class="card-body px-4 py-2">
                             <div class="my-auto">
@@ -245,7 +253,7 @@
                                  <form #loginfrmref="ngForm">
                                   
                                      <div class="mb-2 form-group">
-                                        <label for="Username" class="form-label">Username</label>
+                                        <label for="Username" class="form-label mdi mdi-account-outline"> Username</label>
                                          <!-- <input
             class="form-control"
             type="text"
@@ -270,7 +278,7 @@
                                     </div> 
                                     <!-- </div> -->
                                     <div class="mb-2">
-                                        <label for="password" class="form-label">Password</label>
+                                        <label for="password" class="form-label mdi mdi-lock-outline"> Password</label>
                                         <div class="form-group mb-0 position-relative">
                                              <span class="toggle-password eye">
                 <i class="uil-eye-slash"></i>
@@ -307,7 +315,9 @@
                                                 </div>
                                             </div>
                                         </div>
-                                         <a (click)="openForgotPassword()"  href="javascript:void(0);">Forgot password</a>
+                                        <div class="text-end forget">
+                                         <a (click)="openForgotPassword()"   href="javascript:void(0);">Forgot password</a>
+                                    </div>
                                     </div>
                                     <div class="mb-2 form-group">
                                          <div class="row">
@@ -357,6 +367,8 @@
                             <p>If you've forgotten your password, click <a class="forgot" href="javascript:void(0);"
                                     (click)="openForgotPassword()" >'Forgot Password!'</a></p>
 
+                        </div>
+                        </div>
                         </div>
                         </div>
                         </div>

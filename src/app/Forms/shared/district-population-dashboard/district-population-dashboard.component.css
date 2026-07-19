@@ -809,7 +809,7 @@ cursor: pointer;
 
 /* APPD Text */
 .app-title {
-  font-size: 4rem;
+ 
   font-weight: 800;
   color: #003b78;
   line-height: 1;
@@ -959,7 +959,7 @@ cursor: pointer;
 /* Heading */
 
 .population-heading h1 {
-  font-size: 3.3rem;
+  font-size: 3rem;
   font-weight: 700;
   color: #003b78;
 }
@@ -988,7 +988,7 @@ cursor: pointer;
 }
 
 .digit-box {
-  width: 90px;
+  width: 80px;
   height: 150px;
   background: #182d59;
   color: white;
@@ -1039,7 +1039,7 @@ cursor: pointer;
   border: 1px solid #3b82f6;
   border-radius: 20px;
   overflow: hidden;
-  height: 550px;
+  height: 500px;
 }
 
 .table thead {
@@ -1111,7 +1111,7 @@ cursor: pointer;
 ========================== */
 
 .section-title {
-    font-size: 3rem;
+    font-size: 2.5rem;
     font-weight: 700;
     color: #1b2d57;
     margin-bottom: 10px;
@@ -1275,6 +1275,15 @@ cursor: pointer;
     padding-right: 5px;
 }
 
+
+.table thead th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f7f7f7 !important; /* Your header color */
+    color: #003b78;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.08); /* Optional */
+}
 .district-table {
     width: 100%;
 }
@@ -1430,7 +1439,7 @@ cursor: pointer;
     font-weight:700;
     box-shadow:0 2px 2px rgba(0,0,0,.08);
 }
-.table-card thead th{
+/* .table-card thead th{
     position:sticky;
     top:0;
     z-index:1000;
@@ -1438,7 +1447,7 @@ cursor: pointer;
     color:#003b78;
     font-weight:700;
     box-shadow:0 2px 2px rgba(0,0,0,.08);
-}
+} */
 .table-scroll::-webkit-scrollbar {
   width: 8px;
 }
@@ -1468,4 +1477,43 @@ cursor: pointer;
   .summary-card h5 {
     font-size: 1rem;
   }
+}
+
+
+.custom-dropdown {
+    position: relative;
+}
+
+.custom-dropdown .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 0;
+    border-radius: 8px;
+    min-width: 240px;
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,.15);
+}
+
+.custom-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 10px 18px;
+}
+
+.dropdown-item:hover {
+    background: #0d6efd;
+    color: #fff;
+}
+
+.down-icon {
+  font-weight: 600;
+  font-size: 18px ;
+  color:#003b78;
 }

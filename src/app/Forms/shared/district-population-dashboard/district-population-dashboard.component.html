@@ -39,7 +39,7 @@
           />
 
           <div class="ms-3">
-            <h1 class="app-title mb-0">APPD</h1>
+            <h2 class="app-title mb-0">APPD</h2>
             <p class="app-subtitle mb-0">
               Andhra Pradesh Population Dashboard
             </p>
@@ -72,12 +72,26 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/about-us">About Us</a>
               </li>
+                            <li class="nav-item dropdown custom-dropdown">
+                <a class=" nav-link dropdown-toggle" routerLink="/rules">
+                  RBD Act and Model Rules  <i class="mdi mdi-chevron-down ms-1 down-icon"></i>
+                </a>
+           
+               <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="assets/downloads/rbd_act_1969.pdf" target="_blank">RBD Act, 1969</a></li>
+                                    <li><a class="dropdown-item"  href="assets/downloads/Births_and_Deaths_Rules_2024.pdf" target="_blank">RBD (Amendment) Act, 2023</a></li>
+                                    <li><a class="dropdown-item"  href="assets/downloads/Births_and_Deaths_Rules_1999.pdf" target="_blank">Model RBD Rules, 1999</a></li>
+                                    <li><a class="dropdown-item"  href="assets/downloads/rbd_act_2024.pdf" target="_blank">Model RBD (Amendment) Rules, 2024</a></li>
+               </ul>
+               </li>
 
+
+<!--               
               <li class="nav-item">
                 <a class="nav-link" routerLink="/rules">
                   RBD Act and Model Rules
                 </a>
-              </li>
+              </li> -->
 
               <li class="nav-item ms-lg-3" (click)="logout()">
                 <button class="btn logout-btn">
@@ -280,17 +294,17 @@
 
                         <div class="d-flex gap-2">
 
-                            <button class="btn btn-apply flex-fill" (click)="loadDistrictDashboardData()">
+                            <button class="btn btn-apply  btm-sm" (click)="loadDistrictDashboardData()">
                                 Apply
                             </button>
 
-                            <button class="d-none btn btn-reset flex-fill">
+                            <!-- <button class="d-none btn btn-reset flex-fill">
                                 Reset
                             </button>
 
                             <button class="d-none btn btn-export flex-fill">
                                 Export CSV
-                            </button>
+                            </button> -->
 
                         </div>
 

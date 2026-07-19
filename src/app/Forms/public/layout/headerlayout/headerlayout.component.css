@@ -54,7 +54,7 @@
 }
 
 .captcha-text{
-    font-size: clamp(10px, 2vw, 13px) !important;
+    font-size: clamp(10px, 2vw, 16px) !important;
 }
 
 
@@ -93,4 +93,51 @@
 }
 .error-message {
    color: #e52c1d;  
+}
+
+
+.login-image {
+    height: 600px;
+    overflow: hidden;
+    position: relative;
+  
+    border-top-right-radius:14px ;
+    border-bottom-right-radius:14px ;
+}
+
+.login-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+}
+
+/* Optional Overlay */
+.login-image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::ng-deep .login-dialog .p-dialog-content {
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+   
+}
+
+.forget a {
+    font-size: 14px;
+}
+
+.logout-btn {
+  background: #003b78;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 24px;
+  font-weight: 600;
+}
+
+.logout-btn:hover {
+  background: #002b5c;
+  color: #fff;
 }

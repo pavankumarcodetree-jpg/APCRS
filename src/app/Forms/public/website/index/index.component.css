@@ -207,3 +207,15 @@ path:hover {
     transition: fill .8s ease-out;
     transition: stroke .2s ease-out;
 }
+
+
+.banner-image {
+    width: 100%;
+}
+
+.banner-image img {
+    width: 100%;
+    height: auto;   /* Adjust as needed */
+    object-fit: cover;
+    display: block;
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="340" viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .loading-text { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-weight: 600; fill: #3D4B66; }
+      .brand-text   { font-family: 'Inter', 'Segoe UI', Arial, sans-serif; font-weight: 800; fill: #1B2A4A; }
+
+      /* exact icon fills, colors cycled while shape stays identical */
+      .badge-base { fill: #158FA3; animation: colorcycle 4.8s ease-in-out infinite; }
+      .badge-tint { fill: #158FA3; opacity: 0.5; animation: colorcycle 4.8s ease-in-out infinite; }
+
+      @keyframes colorcycle {
+        0%   { fill: #158FA3; } /* teal   */
+        25%  { fill: #FDCA65; } /* gold   */
+        50%  { fill: #B2705B; } /* brown  */
+        75%  { fill: #2A76BC; } /* blue   */
+        100% { fill: #158FA3; } /* loop back to teal */
+      }
+
+      @keyframes ring-spin {
+        from { transform: rotate(0deg); }
+        to   { transform: rotate(360deg); }
+      }
+      #track-ring { transform-origin: 150px 130px; animation: ring-spin 2.2s linear infinite; }
+
+      @keyframes dot-blink {
+        0%, 80%, 100% { opacity: 0.25; }
+        40%           { opacity: 1; }
+      }
+      #dot-1 { animation: dot-blink 1.4s ease-in-out infinite; animation-delay: 0s; }
+      #dot-2 { animation: dot-blink 1.4s ease-in-out infinite; animation-delay: 0.2s; }
+      #dot-3 { animation: dot-blink 1.4s ease-in-out infinite; animation-delay: 0.4s; }
+    </style>
+  </defs>
+
+  <rect width="300" height="340" fill="#F4F7FB"/>
+
+  <!-- progress ring behind the badge -->
+  <circle cx="150" cy="130" r="66" fill="none" stroke="#E6EAF0" stroke-width="5"/>
+  <circle id="track-ring" cx="150" cy="130" r="66"
+          fill="none" stroke="#1B2A4A" stroke-width="5"
+          stroke-linecap="round" stroke-dasharray="55 360" opacity="0.35"/>
+
+  <!-- ===== exact icon shape from APPD_preloader.svg, original path data unchanged ===== -->
+  <g transform="translate(80 62) scale(2.05)">
+    <path class="badge-base" d="M16.07,33.93c0,10.19,8.06,18.44,18,18.44c9.94,0,18-8.26,18-18.44c0-10.18-8.06-18.44-18-18.44
+      C24.14,15.49,16.07,23.75,16.07,33.93z"/>
+    <path fill="#FFFFFF" d="M31.08,25.11c0,1.9,1.5,3.44,3.36,3.44c1.86,0,3.36-1.54,3.36-3.44c0-1.9-1.5-3.44-3.36-3.44
+      C32.58,21.67,31.08,23.21,31.08,25.11z"/>
+    <path opacity="0.5" fill="#FFFFFF" d="M33.11,21.96c-0.25,0.48-0.4,1.02-0.4,1.59c0,1.9,1.5,3.44,3.36,3.44c0.47,0,0.92-0.1,1.33-0.28
+      c-0.56,1.1-1.67,1.85-2.96,1.85c-1.85,0-3.36-1.54-3.36-3.44C31.08,23.7,31.92,22.48,33.11,21.96z"/>
+    <path fill="#FFFFFF" d="M34.09,29.7c3.39,0,6.15,2.82,6.15,6.29v15.27c-1.92,0.72-4,1.11-6.17,1.11c-2.15,0-4.21-0.39-6.12-1.1V35.99
+      C27.95,32.52,30.7,29.7,34.09,29.7z"/>
+    <path fill="#FFFFFF" d="M48.08,27.1c0.75-0.77,0.75-2.02,0-2.79l0,0c-0.75-0.77-1.97-0.77-2.73,0l-9.75,9.99
+      c-0.75,0.77-0.75,2.02,0,2.79l0,0c0.75,0.77,1.98,0.77,2.73,0L48.08,27.1z"/>
+    <path fill="#FFFFFF" d="M20.07,27.1c-0.75-0.77-0.75-2.02,0-2.79l0,0c0.75-0.77,1.97-0.77,2.73,0l9.75,9.99
+      c0.75,0.77,0.75,2.02,0,2.79l0,0c-0.75,0.77-1.97,0.77-2.73,0L20.07,27.1z"/>
+    <path class="badge-tint" d="M23.9,18.71c-1.64,2.78-2.58,6.04-2.58,9.52c0,10.18,8.06,18.44,18,18.44c3.78,0,7.28-1.19,10.17-3.23
+      c-3.15,5.34-8.88,8.92-15.42,8.92c-9.94,0-18-8.26-18-18.44C16.07,27.61,19.18,22.04,23.9,18.71z"/>
+    <path opacity="0.2" fill="#FFFFFF" d="M24.22,24.28c-1.91,5.11,1.89,11.35,8.49,13.95c6.6,2.59,13.51,0.55,15.42-4.55
+      c1.91-5.11-1.89-11.35-8.5-13.94C33.03,17.13,26.13,19.17,24.22,24.28z"/>
+  </g>
+  <!-- ===== end exact icon shape ===== -->
+
+  <text x="150" y="242" text-anchor="middle" class="brand-text" font-size="19">APPD</text>
+  <text x="150" y="266" text-anchor="middle" class="loading-text" font-size="14">Loading population data</text>
+
+  <g transform="translate(150 286)">
+    <circle id="dot-1" cx="-14" cy="0" r="4" fill="#1B2A4A"/>
+    <circle id="dot-2" cx="0"   cy="0" r="4" fill="#1B2A4A"/>
+    <circle id="dot-3" cx="14"  cy="0" r="4" fill="#1B2A4A"/>
+  </g>
+</svg>
