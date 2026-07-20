@@ -1046,11 +1046,13 @@ loadLineChart() {
     return;
   }
 
-  const years = [...new Set(
-    this.totalBirthsandDeaths.map(
-      (x: any) => x.YEAR_YR
-    )
-  )].sort();
+const filteredData = this.totalBirthsandDeaths.filter((x: any) =>
+  (x.CRS_BIR_IN || 0) > 0 || (x.CRS_DEA_IN || 0) > 0
+);
+
+const years = [...new Set(
+  filteredData.map((x: any) => x.YEAR_YR)
+)].sort();
 
   const birthsData = years.map(year => {
 
