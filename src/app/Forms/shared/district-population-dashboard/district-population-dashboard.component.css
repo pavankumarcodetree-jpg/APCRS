@@ -1517,3 +1517,8 @@ cursor: pointer;
   font-size: 18px ;
   color:#003b78;
 }
+@media (max-width: 1399.98px) { 
+  .digit-box {
+    width:65px;
+  }
+}

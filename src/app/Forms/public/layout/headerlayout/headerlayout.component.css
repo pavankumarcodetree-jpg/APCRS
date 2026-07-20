@@ -141,3 +141,6 @@
   background: #002b5c;
   color: #fff;
 }
+.captcha-text{
+    font-size: clamp(10px, 2vw, 12px) !important;
+}
