@@ -66,14 +66,14 @@
           >
             <ul class="navbar-nav align-items-lg-center">
               <li class="nav-item">
-                <a class="nav-link" routerLink="/home">Home</a>
+                <a class="nav-link" routerLink="/home/index">Home</a>
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" routerLink="/about-us">About Us</a>
+                <a class="nav-link" routerLink="/home/about">About Us</a>
               </li>
                             <li class="nav-item dropdown custom-dropdown">
-                <a class=" nav-link dropdown-toggle" routerLink="/rules">
+                <a class=" nav-link dropdown-toggle">
                   RBD Act and Model Rules  <i class="mdi mdi-chevron-down ms-1 down-icon"></i>
                 </a>
            
@@ -198,7 +198,7 @@
             <div class="stat-card">
               <h4>TFR</h4>
               <h2>{{ apwisePopulationData[0]?.TFR }}</h2>
-              <p>Year {{ selectedYear }}</p>
+              <p>Year {{ selectedApYear }}</p>
             </div>
           </div>
 
@@ -271,7 +271,6 @@
                     <div class="col-md-4">
                         <label class="form-label">District</label>
         <select [(ngModel)]="selectedDistrictName" class="form-select custom-select"  (change)="onDistrictChange($event)">
-        <!-- <option value="">Select District</option> -->
         <option
           *ngFor="let district of districts"
           [value]="district.name">
@@ -300,13 +299,13 @@
                                 Apply
                             </button>
 
-                            <!-- <button class="d-none btn btn-reset flex-fill">
+                            <button class="btn btn-reset btm-sm" (click)="reset()">
                                 Reset
-                            </button>
+                            </button> 
 
-                            <button class="d-none btn btn-export flex-fill">
+                            <!-- <button class="d-none btn btn-export flex-fill">
                                 Export CSV
-                            </button> -->
+                            </button>  -->
 
                         </div>
 
@@ -325,8 +324,12 @@
             <!-- MAP CARD -->
 
             <div class="col-lg-6">
-
                 <div class="map-card position-relative">
+                  <div class="row mb-5">
+                      <div class="text-center">
+              <h2 class="district-name" *ngIf="selectedDistrictNameMandalwise">{{selectedDistrictNameMandalwise}} district</h2>
+              </div>
+              </div>
                                            <svg  #andhrapradeshMap version="1.1" id="andhrapradeshMap" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 1300 900" xml:space="preserve" style="enable-background: new 0 0 1300 900;"><style  type="text/css"> #andhrapradeshMap { transform: scale(1.3); width: 100%; } text {  font-size: 14px; cursor: pointer; } .st0 { enable-background: new; } .st1 { fill: #fff; } .st2 { fill: none; stroke: #fff; stroke-miterlimit: 10; } .st3 { fill: #fff; } .st4 { fill: #fff; } .st5 { fill: none; stroke: #fff; stroke-miterlimit: 10; } .st6 { fill: #fff; } .st7 { fill: #fff; } .st8 { fill: #fff; } .st9 { fill: #fff; } .st10 { fill: #fff; } .st11 { fill: #fff; } .st12 { fill: #fff; } .st13 { fill: #fff; } .st14 { fill: #fff; } .st15 { fill: #fff; } .st16 { fill: #fff; } .st17 { fill: #fff; } .st18 { fill: #fff; } .st19 { fill: #fff; } .st20 { fill: #fff; } .st21 { fill: #fff; } .st22 { fill: #fff; } .st23 { fill: #fff; } .st24 { fill: #fff; } .st25 { fill: #fff; } .st26 { fill: #fff; } .st27 { fill: #fff; } .st28 { fill: #fff; } .st29 { fill: #111; } .st30 { fill: #111; font-size: 24px; } .st30:hover { text-decoration: none; } </style><g  id="Layer_1_xA0_Image_1_"><image  width="1200" height="900" id="Layer_1_xA0_Image" xlink:href="72C3C8B1.png" transform="matrix(1 0 0 1 3.4693 1143.3256)" style="overflow: visible;"></image></g><g  id="chittor_1_" class="st0"><a  title="Chittor" href="https://chittoor.ap.gov.in" target="_blank"><g  id="chittor"><g ><path  d="M530.7,784.3c-0.4-0.2-0.8-0.6-1-1c-1.8-3.5-6.6-16.4-6.6-18.3c-0.4,0.2-4.6,11.9-14,8
                                c-0.9-0.8-6.3,0.4-3-12c-0.1-0.7-5.2-6.9-2-13c-1.7,0.6-4.6,8.7-12-3c-0.7-0.1-18.9,2.6-22-4c-0.6-1.1-5-8.8-3-14
                                c-0.5-0.6-1.8-14.6-16-14c-0.3,0.1-14.4-4.4-8,5c0.5,1.2,5.7,4.2,7,10c0,1.3,4.1,4.1-1,12c-0.2,0.9-2,6.4,11,6
@@ -745,8 +748,8 @@
 
                     <div>
 
-                        <h3 class="district-title">
-                            {{selectedDistrictNameMandalwise}} — mandals
+                        <h3 class="district-title" *ngIf="selectedDistrictNameMandalwise">
+                            {{selectedDistrictNameMandalwise}} district— mandals
                         </h3>
 
                         <p class="district-meta">
@@ -813,10 +816,10 @@
 
                     <div class="table-scroll">
                 <table class="table district-table mb-0">
-                    <thead>
+                    <thead class="">
                         <tr>
-                            <th>MANDAL</th>
-                            <th class="text-end">POPULATION</th>
+                            <th class="ps-2">MANDAL</th>
+                            <th class="text-end pe-2">POPULATION</th>
                         </tr>
                     </thead>
 

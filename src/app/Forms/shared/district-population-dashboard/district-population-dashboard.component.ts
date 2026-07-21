@@ -47,7 +47,7 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
   populationCards: any[] = [];
 
   currentYear: number = new Date().getFullYear();
-  selectedYear: number = 2025;
+  selectedYear: number = 2026;
   yearList: number[] = [];
   selectedDistrictName: string = '';
   birthSexRatioData: any=[];
@@ -616,6 +616,7 @@ export class DistrictPopulationDashboardComponent implements AfterViewInit {
   mandalwisePopulationData: any[]=[];
   selectedDistrictNameMandalwise: string="";
   apwisePopulationData: any;
+  selectedApYear: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -866,7 +867,7 @@ private findPolygonAnchorForDistrict(districtName: string): Element | null {
       }
 
       this.selectedDistrictName = district;
-      this.selectedYear = 2025;
+      this.selectedYear = 2026;
       this.loadDistrictDashboardData();
     });
   }
@@ -2997,6 +2998,7 @@ if (ageDistributionResponse?.code) {
 
   if(apwisePopulationResponse?.code) {
     this.apwisePopulationData = apwisePopulationResponse.Details || [];
+     this.selectedApYear=this.selectedYear
   }else {
     this.apwisePopulationData=[];
   }
@@ -3191,6 +3193,11 @@ updateDependencyCards() {
 }
 logout() {
   this.router.navigate(['/home/index']);
+}
+reset(){
+  this.selectedYear=2026;
+  this.selectedDistrictName="Anakapalli";
+  this.loadDistrictDashboardData();
 }
 
 }
