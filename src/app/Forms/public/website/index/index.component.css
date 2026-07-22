@@ -219,3 +219,6 @@ path:hover {
     object-fit: cover;
     display: block;
 }
+.d-none{
+    display: none;
+}
