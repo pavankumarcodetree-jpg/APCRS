@@ -942,7 +942,8 @@ let chartData: any[] = [...this.allMandalsbirthandDeaths]
     chart: {
       type: 'column',
       scrollablePlotArea: {
-        minWidth: 1100
+        minWidth: categories.length * 80,
+        scrollPositionX: 0
       },
       backgroundColor: 'transparent'
     },
@@ -981,11 +982,20 @@ let chartData: any[] = [...this.allMandalsbirthandDeaths]
     grouping: true,
     borderWidth: 0,
           borderRadius: 6,
-        pointPadding: 0.2,
-    groupPadding: 0.15,
+                  pointWidth: 12,
+        pointPadding: 0.3,
+        groupPadding: 0.3,
     dataLabels: {
-      enabled: true,
-      format: '{y}'
+ enabled: true,
+      inside: false,
+      allowOverlap: true,
+      crop: false,
+      overflow: 'allow',
+      style: {
+        fontSize: '11px',
+        fontWeight: 'bold',
+        textOutline: 'none'
+      }
     }
   },
     },
@@ -995,13 +1005,33 @@ let chartData: any[] = [...this.allMandalsbirthandDeaths]
         type: 'column',
         name: 'Births',
         data: birthsData,
-        color: '#86efac'
+        color: '#86efac',
+          dataLabels: {
+      enabled: true,
+      x: -8,      // Move Birth label left
+      y: -10, 
+      style: {
+        fontSize: '11px',
+        fontWeight: 'bold',
+        textOutline: 'none'
+      }
+    }
       },
       {
         type: 'column',
         name: 'Deaths',
         data: deathsData,
-        color: '#fca5a5'
+        color: '#fca5a5',
+            dataLabels: {
+      enabled: true,
+      x: 8,       // Move Death label right
+      y: 10,
+      style: {
+        fontSize: '11px',
+        fontWeight: 'bold',
+        textOutline: 'none'
+      }
+    }
       }
     ] as any,
 
@@ -1647,7 +1677,11 @@ loadPopulationBirthShareChart() {
   this.populationBirthShareChartOptions = {
 
     chart: {
-      type: 'column'
+      type: 'column',
+        scrollablePlotArea: {
+    minWidth: categories.length * 45,
+    scrollPositionX: 0
+  }
     },
 
     title: {
@@ -1684,27 +1718,73 @@ loadPopulationBirthShareChart() {
       enabled: true
     },
 
-    plotOptions: {
-      column: {
-        grouping: true,
-        dataLabels: {
-          enabled: true,
-          format: '{y:.1f}%'
-        }
+plotOptions: {
+  column: {
+    grouping: true,
+    pointWidth: 12,      // Reduce bar width
+    pointPadding: 0.15,
+    groupPadding: 0.15,
+    borderWidth: 0,
+    dataLabels: {
+      enabled: true,
+      allowOverlap: true,
+      crop: false,
+      overflow: 'allow',
+      style: {
+        fontSize: '10px',
+        fontWeight: 'bold',
+        textOutline: 'none'
       }
-    },
+    }
+  }
+},
 
-    series: [{
-      type: 'column',
-      name: 'Share of population in sub-districts',
-      data: populationShareData
-    },
-    {
-      type: 'column',
-      name: 'Share of births among all sub-districts',
-      data: birthShareData,
-      color: '#F59E0B' 
-    }] as any
+    // series: [{
+    //   type: 'column',
+    //   name: 'Share of population in sub-districts',
+    //   data: populationShareData
+    // },
+    // {
+    //   type: 'column',
+    //   name: 'Share of births among all sub-districts',
+    //   data: birthShareData,
+    //   color: '#F59E0B' 
+    // }] as any
+    series: [
+{
+  type: 'column',
+  name: 'Share of population in sub-districts',
+  data: populationShareData,
+  dataLabels: {
+    enabled: true,
+    y: -12,
+    x: -6,
+    format: '{y:.1f}%',
+    style: {
+      fontSize: '10px',
+      fontWeight: 'bold',
+      textOutline: 'none'
+    }
+  }
+},
+{
+  type: 'column',
+  name: 'Share of births among all sub-districts',
+  data: birthShareData,
+  color: '#F59E0B',
+  dataLabels: {
+    enabled: true,
+    y: 12,
+    x: 6,
+    format: '{y:.1f}%',
+    style: {
+      fontSize: '10px',
+      fontWeight: 'bold',
+      textOutline: 'none'
+    }
+  }
+}
+] as any
   };
 
   this.updatePopulationBirthShareChart = false;
@@ -1763,21 +1843,30 @@ loadPlaceOfDeathChart() {
     );
 
   this.placeOfDeathChartOptions = {
-
-    chart: {
-      type: 'column'
-    },
+chart: {
+  type: 'column',
+  scrollablePlotArea: {
+    minWidth: categories.length * 45,
+    scrollPositionX: 0
+  }
+},
 
     title: {
       text: ''
     },
 
-    xAxis: {
-      categories,
-      labels: {
-        rotation: -45
-      }
-    },
+xAxis: {
+  categories,
+  tickmarkPlacement: 'on',
+  labels: {
+    rotation: -45,
+    step: 1,
+    reserveSpace: true,
+    style: {
+      fontSize: '10px'
+    }
+  }
+},
 
     yAxis: {
       min: 0,
@@ -1798,15 +1887,18 @@ loadPlaceOfDeathChart() {
     },
 
     plotOptions: {
-      column: {
-        stacking: 'percent',
-        dataLabels: {
-          enabled: true,
-          format: '{y:.1f}%'
-        }
-      }
+  column: {
+    stacking: 'percent',
+    pointWidth: 24,      // Increase bar width
+    groupPadding: 0.02,  // Reduce gap between bars
+    pointPadding: 0,     // No extra padding
+    borderWidth: 0,
+    dataLabels: {
+      enabled: true,
+      format: '{y:.1f}%'
     },
-
+  },
+},
     series: [
       {
         type: 'column',
@@ -2586,7 +2678,8 @@ async loadDistrictDashboardData() {
     req5.param1 = this.selectedDistrictName;
     req5.param2=this.selectedYear
     req5.param3=this.selectedMandal ? this.selectedMandal : 0;
-    // API 6 - Total Briths and Total Deaths
+
+    // API 6 - Share of Population vs Share of Births
     const req6 = new basemodel();
     req6.type = '127';
     req6.param1=this.selectedDistrictName;
@@ -2970,6 +3063,7 @@ if (ageDistributionResponse?.code) {
   //year-wise total CBR AND CRD 
   if (yearwiseTotalcbrandcdrResponse?.code) {
       this.totalCBRandCDRData =yearwiseTotalcbrandcdrResponse.Details || [];
+  
   }else {
     this.totalCBRandCDRData=[];
   }
