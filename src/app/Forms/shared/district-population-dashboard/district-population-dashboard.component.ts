@@ -1674,12 +1674,21 @@ loadPopulationBirthShareChart() {
         Number(x.SHARE_OF_BIRTHS_ALL_SUB || 0)
     );
 
+    const deathShareData =
+  chartData.map(
+    (x: any) => ({
+      y: Number(x.DEATH_AS_SHARE_OF_BIRTHS || 0) * 100,
+      actualValue: Number(x.DEATH_AS_SHARE_OF_BIRTHS || 0)
+    })
+  );
+
   this.populationBirthShareChartOptions = {
 
     chart: {
       type: 'column',
+      spacingTop: 40,
         scrollablePlotArea: {
-    minWidth: categories.length * 45,
+    minWidth: categories.length * 80,
     scrollPositionX: 0
   }
     },
@@ -1721,15 +1730,20 @@ loadPopulationBirthShareChart() {
 plotOptions: {
   column: {
     grouping: true,
-    pointWidth: 12,      // Reduce bar width
-    pointPadding: 0.15,
-    groupPadding: 0.15,
+    pointWidth: 14,
+    pointPadding: 0.08,
+    groupPadding: 0.12,
     borderWidth: 0,
     dataLabels: {
       enabled: true,
+      inside: false,
       allowOverlap: true,
       crop: false,
       overflow: 'allow',
+      useHTML: false,
+      formatter: function () {
+        return Highcharts.numberFormat(this.y as number, 1) + '%';
+      },
       style: {
         fontSize: '10px',
         fontWeight: 'bold',
@@ -1739,17 +1753,7 @@ plotOptions: {
   }
 },
 
-    // series: [{
-    //   type: 'column',
-    //   name: 'Share of population in sub-districts',
-    //   data: populationShareData
-    // },
-    // {
-    //   type: 'column',
-    //   name: 'Share of births among all sub-districts',
-    //   data: birthShareData,
-    //   color: '#F59E0B' 
-    // }] as any
+
     series: [
 {
   type: 'column',
